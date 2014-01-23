@@ -1,12 +1,14 @@
-#include <iostream>
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "Entity.h"
 
-using namespace std;
-
-class Player: public Entity{
-	public: //Constructors
+class Player: public Entity {
+	public: 
+		//Constructors
 		Player();
 
 	private:
 
 };
+#endif

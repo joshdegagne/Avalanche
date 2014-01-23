@@ -1,16 +1,12 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <DirectXMath.h>
-#include <string>
-
-using namespace std;
-using namespace DirectX;
-
+#include "DirectXHelper.h"
 
 class Entity {
 	public:
-		Entity();
+		//Constructors
+		Entity(float = 0, float = 0);
 
 	private:
 		XMFLOAT2 pos;
