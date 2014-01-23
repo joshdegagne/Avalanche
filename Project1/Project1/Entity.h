@@ -2,7 +2,7 @@
 #define ENTITY_H
 // test comment
 class Entity {
-public:
+public: //Constructors
 	Entity();
 };
 
