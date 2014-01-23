@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entity.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A33E0E23-887D-4840-BDB2-DE706EC27BB0}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>
