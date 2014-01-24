@@ -1,8 +1,8 @@
 #include "Entity.h"
 
-Entity::Entity(){
-	pos.x = 0;
-	pos.y = 0;
+Entity::Entity(float x, float y)
+{
+	setPos(x,y);
 }
 
 float Entity::getX() { return pos.x; }
