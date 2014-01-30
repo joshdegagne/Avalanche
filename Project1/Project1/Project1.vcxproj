@@ -12,6 +12,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Graphics\ColorShader.cpp" />
+    <ClCompile Include="Graphics\D3D.cpp" />
+    <ClCompile Include="Graphics\Graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -20,7 +23,14 @@
     <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graphics\ColorShader.h" />
+    <ClInclude Include="Graphics\D3D.h" />
+    <ClInclude Include="Graphics\Graphics.h" />
     <ClInclude Include="Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Graphics\color.ps" />
+    <None Include="Graphics\color.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A33E0E23-887D-4840-BDB2-DE706EC27BB0}</ProjectGuid>
