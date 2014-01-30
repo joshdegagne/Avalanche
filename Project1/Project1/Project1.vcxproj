@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Graphics\Camera.cpp" />
+    <ClCompile Include="Graphics\CineCamera.cpp" />
     <ClCompile Include="Graphics\ColorShader.cpp" />
     <ClCompile Include="Graphics\D3D.cpp" />
     <ClCompile Include="Graphics\Graphics.cpp" />
@@ -23,6 +25,8 @@
     <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graphics\Camera.h" />
+    <ClInclude Include="Graphics\CineCamera.h" />
     <ClInclude Include="Graphics\ColorShader.h" />
     <ClInclude Include="Graphics\D3D.h" />
     <ClInclude Include="Graphics\Graphics.h" />

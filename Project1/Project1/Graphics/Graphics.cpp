@@ -15,17 +15,7 @@ Graphics::Graphics()
 	//Set all member pointers to zero for safety
 	m_D3D = 0;
 	m_Camera = 0;
-
-	m_axis = 0;
-    m_AxisModel = 0;
-
 	m_ColorShader = 0;
-
-	m_GameWorldModels = 0;
-
-
-
-
 }
 
 
@@ -38,9 +28,10 @@ Graphics::~Graphics()
 {
 }
 
-
-
-bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCameraClass* camera, ArrayList<GameModel>* gameModels)
+//////////////////////////////////////////////////////////////////
+// To-Do: Replace error'd parameter with our own list of entities
+//////////////////////////////////////////////////////////////////
+bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCamera* camera, ArrayList<GameModel>* gameModels)
 {
 	bool result;
 
@@ -58,7 +49,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 	result = m_D3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
 	if(!result)
 	{
-		MessageBox(hwnd, L"Could not initialize Direct3D.", L"Error", MB_OK);
+		//MessageBox(hwnd, L"Could not initialize Direct3D.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -72,28 +63,17 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 		return false;
 	}
 
-	m_axis = new XYZaxis; //create orgin axis object to display co-ord system (mostly for debug)
-	if(!m_axis)
-	{
-		return false;
-	}
-	m_axis->Initialize();
 
 	// Set the initial position of the camera.
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f); 
 	
 
 
-
-    // Create A model for the axis
-	m_AxisModel = new ModelClass(m_axis->GetVertices(), 
-										m_axis->GetVertexCount(), 
-										m_axis->GetIndices(), 
-										m_axis->GetIndexCount(), 
-										D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
-
-
-
+	/////////////////////////////
+	//Initializes Game Models
+	/////////////////////////////
+	/*
+	
 	m_GameWorldModels = gameModels;
 
 	if(m_GameWorldModels && !m_GameWorldModels->isEmpty()){
@@ -102,21 +82,14 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 			result = gameModel->GetVertexModel()->Initialize(m_D3D->GetDevice());
 	        if(!result)
 	        {
-		       MessageBox(hwnd, L"Could not initialize the game model object.", L"Error", MB_OK);
+		       //MessageBox(hwnd, L"Could not initialize the game model object.", L"Error", MB_OK);
 		       return false;
 	        }
 
 		}
 	}
-
-
-
-	result = m_AxisModel->Initialize(m_D3D->GetDevice());
-	if(!result)
-	{
-		MessageBox(hwnd, L"Could not initialize the axis model object.", L"Error", MB_OK);
-		return false;
-	}
+	*/
+	
 
 	// Create the color shader object.
 	m_ColorShader = new ColorShader;
@@ -129,7 +102,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 	result = m_ColorShader->Initialize(m_D3D->GetDevice(), hwnd);
 	if(!result)
 	{
-		MessageBox(hwnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
+		//MessageBox(hwnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -146,17 +119,6 @@ void Graphics::Shutdown()
 		delete m_ColorShader;
 		m_ColorShader = 0;
 	}
-
-
-
-	// Release the axis object.
-	if(m_axis)
-	{
-		m_axis->Shutdown();
-		delete m_axis;
-		m_axis = 0;
-	}
-
 
 	// Release the D3D object.
 	if(m_D3D)
@@ -210,9 +172,11 @@ bool Graphics::Render()
 
 
 		//Write Framestats on Window title caption
+		/*
 		std::wostringstream captionStrm;
 		captionStrm << L"FPS: " << (int)(1.0f/averageFramePeriod) << L" ";
         SetWindowText( m_hwnd, captionStrm.str().c_str() ); //use FPS stats as title caption to windows window.
+		*/
 
 	}
 	else{
@@ -242,6 +206,11 @@ bool Graphics::Render()
 	m_D3D->GetWorldMatrix(axisWorld); //set to identity matrix
 
 
+
+	//////////////////////////////////////////////////////////////////
+	// Game Model render process. Use as reference
+	//////////////////////////////////////////////////////////////////
+	/*
 	if(m_GameWorldModels && !m_GameWorldModels->isEmpty()){
 		for(int i=0; i< m_GameWorldModels->size(); i++){
 			GameModel* gameModel = m_GameWorldModels->elementAt(i);
@@ -261,18 +230,7 @@ bool Graphics::Render()
 
 		}
 	}
-
-
-	// Set up the model for axis scale
-
-	m_AxisModel->Render(m_D3D->GetDeviceContext());
-	result = m_ColorShader->Render(m_D3D->GetDeviceContext(), m_AxisModel->GetIndexCount(), axisWorld, viewMatrix, projectionMatrix);
-	
-	if(!result)
-	{
-		return false;
-	}
-
+	*/
 
     // Present the rendered scene to the screen.
 	m_D3D->EndScene();

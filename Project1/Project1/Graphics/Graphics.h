@@ -12,11 +12,10 @@
 
 
 #include "D3D.h"
-//#include "CineCamera.h"
+#include "CineCamera.h"
 //#include "modelclass.h"
 //#include "arraylist.h"
 //#include "gamemodel.h"
-//#include "XYZaxis.h"
 
 
 
