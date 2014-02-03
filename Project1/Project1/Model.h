@@ -2,7 +2,7 @@
 
 #include <DirectXMath.h>
 #include "vertextype.h"
-#include "ModelHelper.h"
+#include "ModelUtil.h"
 
 #include <string>
 

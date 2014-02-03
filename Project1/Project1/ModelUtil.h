@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: ModelHelper.h
+// Filename: ModelUtil.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _MODELHELPER_H_
-#define _MODELHELPER_H_
+#ifndef _MODELUTIL_H_
+#define _MODELUTIL_H_
 
 
 //////////////
@@ -16,16 +16,16 @@
 using namespace DirectX;
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class name: ModelHelper
+// Class name: ModelUtil
 ////////////////////////////////////////////////////////////////////////////////
-class ModelHelper
+class ModelUtil
 {
 public:
-	ModelHelper();
-	ModelHelper(const ModelHelper&);
-	ModelHelper(ColorVertexType*, int, unsigned long*, int, D3D_PRIMITIVE_TOPOLOGY = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	ModelHelper(TextureVertexType*, int, unsigned long*, int, D3D_PRIMITIVE_TOPOLOGY = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	~ModelHelper();
+	ModelUtil();
+	ModelUtil(const ModelUtil&);
+	ModelUtil(ColorVertexType*, int, unsigned long*, int, D3D_PRIMITIVE_TOPOLOGY = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	ModelUtil(TextureVertexType*, int, unsigned long*, int, D3D_PRIMITIVE_TOPOLOGY = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	~ModelUtil();
 
 	bool Initialize(ID3D11Device*);
 	void Shutdown();

@@ -50,7 +50,10 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelHelper.cpp">
+    <ClCompile Include="quadModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,10 +88,13 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelHelper.h">
+    <ClInclude Include="vertextypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vertextypes.h">
+    <ClInclude Include="quadModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

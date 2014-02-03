@@ -1,16 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: modelclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
-#include "ModelHelper.h"
+#include "ModelUtil.h"
 
 
-ModelHelper::ModelHelper()
+ModelUtil::ModelUtil()
 {
 	m_vertexBuffer = 0;
 	m_indexBuffer = 0;
 }
 
-ModelHelper::ModelHelper(ColorVertexType* vertices, int numvertices, unsigned long* indices, int numindices, D3D_PRIMITIVE_TOPOLOGY topology)
+ModelUtil::ModelUtil(ColorVertexType* vertices, int numvertices, unsigned long* indices, int numindices, D3D_PRIMITIVE_TOPOLOGY topology)
 {
 	//initialize model as colored vertices
 	m_vertexBuffer = 0;
@@ -22,7 +22,7 @@ ModelHelper::ModelHelper(ColorVertexType* vertices, int numvertices, unsigned lo
 	m_indexCount = numindices;
 	m_primitive_topology = topology;
 }
-ModelHelper::ModelHelper(TextureVertexType* vertices, int numvertices, unsigned long* indices, int numindices, D3D_PRIMITIVE_TOPOLOGY topology)
+ModelUtil::ModelUtil(TextureVertexType* vertices, int numvertices, unsigned long* indices, int numindices, D3D_PRIMITIVE_TOPOLOGY topology)
 {
 	//initialize model as textured vertices
 	m_vertexBuffer = 0;
@@ -36,12 +36,12 @@ ModelHelper::ModelHelper(TextureVertexType* vertices, int numvertices, unsigned 
 }
 
 
-ModelHelper::ModelHelper(const ModelHelper& other)
+ModelUtil::ModelUtil(const ModelUtil& other)
 {
 }
 
 
-ModelHelper::~ModelHelper()
+ModelUtil::~ModelUtil()
 {
     m_vertexBuffer = 0;
 	m_indexBuffer = 0;
@@ -53,7 +53,7 @@ ModelHelper::~ModelHelper()
 
 }
 
-bool ModelHelper::Initialize(ID3D11Device* device)
+bool ModelUtil::Initialize(ID3D11Device* device)
 {
 	bool result;
 
@@ -69,7 +69,7 @@ bool ModelHelper::Initialize(ID3D11Device* device)
 }
 
 
-void ModelHelper::Shutdown()
+void ModelUtil::Shutdown()
 {
 	// Shutdown the vertex and index buffers.
 	ShutdownBuffers();
@@ -78,7 +78,7 @@ void ModelHelper::Shutdown()
 }
 
 
-void ModelHelper::Render(ID3D11DeviceContext* deviceContext)
+void ModelUtil::Render(ID3D11DeviceContext* deviceContext)
 {
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
@@ -87,13 +87,13 @@ void ModelHelper::Render(ID3D11DeviceContext* deviceContext)
 }
 
 
-int ModelHelper::GetIndexCount()
+int ModelUtil::GetIndexCount()
 {
 	return m_indexCount;
 }
 
 
-bool ModelHelper::InitializeBuffers(ID3D11Device* device)
+bool ModelUtil::InitializeBuffers(ID3D11Device* device)
 {
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc; // d`escriptions of our buffers
     D3D11_SUBRESOURCE_DATA vertexData, indexData; // buffer data

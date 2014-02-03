@@ -1,5 +1,5 @@
 #include "Model.h"
-#include "ModelHelper.h"
+#include "ModelUtil.h"
 
 Model::Model()
 {
