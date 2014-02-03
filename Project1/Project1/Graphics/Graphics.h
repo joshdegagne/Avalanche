@@ -42,7 +42,7 @@ public:
 	Graphics(const Graphics&);
 	~Graphics();
 
-	bool Initialize(int, int, HWND, CineCamera*, ArrayList<GameModel> * gameModels);
+	bool Initialize(int, int, HWND, CineCamera*, ArrayList<Model> * gameModels);
 	void Shutdown();
 	bool Frame(); 
 
