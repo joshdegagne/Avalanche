@@ -9,6 +9,8 @@ static void writeToDebugConsole(const wchar_t* theString){
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
+	
+
 	/*
      HINSTANCE hInstance  : handle of the applications current instance
 	 HINSTANCE hPrevInstance : handle of the applications previous instance (should be NULL according to MSDN) 
@@ -48,4 +50,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	mainGame = 0;     //set system pointer to 0 so it is no longer valid
 
 	return 0;
+	
+	
 }
