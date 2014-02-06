@@ -74,19 +74,31 @@ bool ControllerInputManager::getButtonBack(int controllerNum)
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_BACK);
 }
 
-short ControllerInputManager::getLS_X(int controllerNum)
+float ControllerInputManager::getLS_X(int controllerNum)
+{
+	short thumbValue = getState(controllerNum).Gamepad.sThumbLX;
+	if (thumbValue >= 0)
+		thumbValue -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE; //Changes range to 0 - 24576
+	else
+		thumbValue += XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE; //Changes range to -24576 - 0
+		
+	return (float)(thumbValue/24576);
+}
+float ControllerInputManager::getLS_Y(int controllerNum)
+{
+	short thumbValue = getState(controllerNum).Gamepad.sThumbLY;
+	if (thumbValue >= 0)
+		thumbValue -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE; //Changes range to 0 - 24576
+	else
+		thumbValue += XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE; //Changes range to -24576 - 0
+		
+	return (float)(thumbValue/24576);
+}
+float ControllerInputManager::getRS_X(int controllerNum)
 {
 	return 0;
 }
-short ControllerInputManager::getLS_Y(int controllerNum)
-{
-	return 0;
-}
-short ControllerInputManager::getRS_X(int controllerNum)
-{
-	return 0;
-}
-short ControllerInputManager::getRS_Y(int controllerNum)
+float ControllerInputManager::getRS_Y(int controllerNum)
 {
 	return 0;
 }
