@@ -182,6 +182,11 @@ void Game::Run()
 		{
 			done = true;
 		}
+		// This code makes it so you can exit the program by pressing the "Back" button on P1's controller.
+		else if (input->getButtonBack(0))
+		{
+			done = true;
+		}
 		else
 		{
 			// Otherwise do the frame processing.
