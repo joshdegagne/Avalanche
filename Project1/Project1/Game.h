@@ -33,7 +33,7 @@ class Game {
 		void ShutdownWindows();
 
 	private:
-		LPCWSTR applicationName;
+		LPCSTR applicationName;
 		HINSTANCE hinstance;
 		HWND hwnd;  //handle to the Windows window (client window for the application)
 

@@ -64,7 +64,7 @@ void QuadTexturedModel::InitializeModel(float lengthX, float lengthY, WCHAR* aTe
 
 
 	//Create the ModelClass object that will be used to deliver these vertices to the graphics pipeline
-	m_VertexModel = new Model(GetTextureVertices(), GetVertexCount(), GetIndices(), GetIndexCount(), D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	m_VertexModel = new ModelUtil(GetTextureVertices(), GetVertexCount(), GetIndices(), GetIndexCount(), D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 }
 
