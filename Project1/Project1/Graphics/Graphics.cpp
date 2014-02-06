@@ -8,7 +8,6 @@
 #include "Graphics.h"
 
 
-
 Graphics::Graphics()
 {
 
@@ -160,7 +159,8 @@ bool Graphics::Render()
     static DWORD dwTimeStart = 0;
 
     DWORD dwTimeCur = GetTickCount();
-    if( dwTimeStart == 0 ) dwTimeStart = dwTimeCur;
+
+	if( dwTimeStart == 0 ) dwTimeStart = dwTimeCur;
 	previous_t = t;
 	t = ( dwTimeCur - dwTimeStart ) / 1000.0f; //elapsed time in seconds
 	if(t -sampleStartTime > 1.0){

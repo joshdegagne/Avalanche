@@ -32,16 +32,16 @@ void QuadModel::InitializeModel(float lengthX, float lengthY, XMFLOAT4 * pColor)
 	if(pColor) vertexColor = *pColor;
 
 	//Quad Face
-	m_colorVertices[0].position = XMFLOAT3(-lengthX/2, -lengthY/2, 0.0f); // Bottom left.
+	m_colorVertices[0].position = XMFLOAT3(-lengthX/2, -lengthY/2, 0.0f); // Top left.
 	m_colorVertices[0].color = vertexColor;
 	
-	m_colorVertices[1].position = XMFLOAT3(-lengthX/2, lengthY/2, 0.0f);  // Top left.
+	m_colorVertices[1].position = XMFLOAT3(-lengthX/2, lengthY/2, 0.0f);  // Bottom left.
 	m_colorVertices[1].color = vertexColor;
 
-	m_colorVertices[2].position = XMFLOAT3(lengthX/2, -lengthY/2, 0.0f);  // Bottom right.
+	m_colorVertices[2].position = XMFLOAT3(lengthX/2, -lengthY/2, 0.0f);  // Top right.
 	m_colorVertices[2].color = vertexColor;
 	
-	m_colorVertices[3].position = XMFLOAT3(lengthX/2, lengthY/2, 0.0f);   // Top right.
+	m_colorVertices[3].position = XMFLOAT3(lengthX/2, lengthY/2, 0.0f);   // Bottom right.
 	m_colorVertices[3].color = vertexColor;
 
 
@@ -52,12 +52,12 @@ void QuadModel::InitializeModel(float lengthX, float lengthY, XMFLOAT4 * pColor)
 	// With back-face culling in a left-hand co-ordinate system.
 
 	//Quad Face
-	m_indices[0] = 0;  // Bottom left.
-	m_indices[1] = 1;  // Top left.
-	m_indices[2] = 2;  // Bottom right.
-	m_indices[3] = 1;  // Top left.
-	m_indices[4] = 3;  // Top right.  
-	m_indices[5] = 2;  // Bottom right.
+	m_indices[0] = 0;  // Top left.
+	m_indices[1] = 2;  // Top right.
+	m_indices[2] = 1;  // Bottom left.
+	m_indices[3] = 1;  // Bottom left.
+	m_indices[4] = 2;  // Top right.  
+	m_indices[5] = 3;  // Bottom right.
 
 
 	//Create the ModelClass object that will be used to deliver these vertices to the graphics pipeline

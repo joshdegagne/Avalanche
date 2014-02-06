@@ -7,6 +7,7 @@
 #include <string>
 
 #include "Graphics/Graphics.h"
+#include "quadModel.h"
 #include "Entity.h"
 #include "Player.h"
 #include "DirectXHelper.h"
@@ -31,17 +32,23 @@ class Game {
 		bool Frame();
 		void InitializeWindows(int&, int&);
 		void ShutdownWindows();
+		float getElapsedTime();
 
 	private:
 		LPCWSTR applicationName;
 		HINSTANCE hinstance;
 		HWND hwnd;  //handle to the Windows window (client window for the application)
+		float previousTime;
 
 		//InputClass* m_Input; //out input class object from which to obtain user inputs
 		Graphics* graphics; //our graphics class object that encapsulates the graphics pipeline
 		CineCamera* camera; //our encapsulation of where the camera is looking at our world
 
 		ArrayList<Model>* gameModels; //container to hold all our game world models
+		
+		//Object Variables
+		QuadModel* playField;
+
 };
 
 /////////////////////////
