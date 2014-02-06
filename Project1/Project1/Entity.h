@@ -20,7 +20,7 @@ class Entity {
 		void setPos(float, float);
 		
 		XMFLOAT2 getPos();
-		//virtual void Update(float);
+		virtual void update(float) = 0;
 };
 
 #endif

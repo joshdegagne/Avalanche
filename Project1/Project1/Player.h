@@ -7,6 +7,8 @@ class Player: public Entity {
 	public: 
 		//Constructors
 		Player();
+		
+		void update(float);
 
 	private:
 

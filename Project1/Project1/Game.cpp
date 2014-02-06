@@ -169,7 +169,7 @@ void Game::Run()
 	// Initialize the message structure.
 	ZeroMemory(&msg, sizeof(MSG));
 
-	previousTime = GetTickCount();
+	previousTime = (float) GetTickCount();
 
 	
 	// Loop until there is a quit message from the window or the user.
@@ -206,7 +206,7 @@ void Game::Run()
 
 bool Game::Frame()
 {
-	float elapsedTime = ElapseTime();
+	float elapsedTime = getElapsedTime();
 
 	// Do the frame processing for the graphics object.
 	bool result = graphics->Frame();
@@ -218,10 +218,10 @@ bool Game::Frame()
 	return true;
 }
 
-float Game::ElapseTime()
+float Game::getElapsedTime()
 {
 	
-	float currentTime = GetTickCount();
+	float currentTime = (float) GetTickCount();
 	float elapsedTime = currentTime - previousTime;
 	previousTime = currentTime;
 	return elapsedTime;
