@@ -4,6 +4,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <XInput.h>
+#include "DirectXHelper.h"
 //#pragma comment(lib, "XInput.lib")
 
 #define XINPUT_GAMEPAD_THUMB_DEADZONE 8192 //25% deadzone
@@ -27,12 +28,15 @@ class ControllerInputManager
 		bool  getButtonRS(int);
 		bool  getButtonStart(int);
 		bool  getButtonBack(int);
+		float getLT(int);
+		float getRT(int);
 		float getLS_X(int);
 		float getLS_Y(int);
 		float getRS_X(int);
 		float getRS_Y(int);
-		float getLT(int);
-		float getRT(int);
+		XMFLOAT2 getLS(int);
+		XMFLOAT2 getRS(int);
+		
 
 	private:
 		XINPUT_STATE _controllerState[4];

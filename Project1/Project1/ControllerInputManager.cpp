@@ -1,4 +1,4 @@
-#include "../Project1/ControllerInputManager.h"
+#include "ControllerInputManager.h"
 
 bool ControllerInputManager::isConnected(int controllerNum)
 {
@@ -145,6 +145,21 @@ float ControllerInputManager::getRS_Y(int controllerNum)
 	}
 	else
 		return 0;
+}
+
+XMFLOAT2 ControllerInputManager::getLS(int controllerNum)
+{
+	XMFLOAT2 temp;
+	temp.x = getLS_X(controllerNum);
+	temp.y = getLS_Y(controllerNum);
+	return temp;
+}
+XMFLOAT2 ControllerInputManager::getRS(int controllerNum)
+{
+	XMFLOAT2 temp;
+	temp.x = getRS_X(controllerNum);
+	temp.y = getRS_Y(controllerNum);
+	return temp;
 }
 
 ///////////////////////////////////////
