@@ -71,7 +71,7 @@
     <ClCompile Include="quadTexturedModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ControllerInput.cpp">
+    <ClCompile Include="ControllerInputManager.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="XYZaxis.cpp">
@@ -130,7 +130,7 @@
     <ClInclude Include="arraylist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ControllerInput.h">
+    <ClInclude Include="ControllerInputManager.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="XYZaxis.h">
