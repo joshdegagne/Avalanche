@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 
+#include "ControllerInputManager.h"
 #include "Graphics/Graphics.h"
 #include "quadModel.h"
 #include "Entity.h"
@@ -40,7 +41,7 @@ class Game {
 		HWND hwnd;  //handle to the Windows window (client window for the application)
 		float previousTime;
 
-		//InputClass* m_Input; //out input class object from which to obtain user inputs
+		ControllerInputManager* input;
 		Graphics* graphics; //our graphics class object that encapsulates the graphics pipeline
 		CineCamera* camera; //our encapsulation of where the camera is looking at our world
 

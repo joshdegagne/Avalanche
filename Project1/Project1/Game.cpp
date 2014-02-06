@@ -43,16 +43,7 @@ bool Game::Initialize()
 	// Create the actual window. This screenWidth and screenHeight variables will get set
 	InitializeWindows(screenWidth, screenHeight);
 
-	/*
-	// Create the input object.  This object will be used to handle reading the keyboard input from the user.
-	m_Input = new InputClass;
-	if(!m_Input)
-	{
-		return false;
-	}
-		// Initialize the input object.
-	m_Input->Initialize();
-	*/
+	input = new ControllerInputManager;
 
 	// Create the Camera object.
 	camera = new CineCamera(screenWidth,screenHeight);
@@ -130,14 +121,10 @@ void Game::Shutdown()
 		graphics = 0;
 	}
 
-	/*
-	// Release the input object's memory.
-	if(m_Input)
+	if (input)
 	{
-		delete m_Input;
-		m_Input = 0;
+		delete input;
 	}
-	*/
 
     // Release the camera object's memory.
 	if(camera)
