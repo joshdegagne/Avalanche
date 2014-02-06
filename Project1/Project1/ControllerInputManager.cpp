@@ -88,7 +88,7 @@ float ControllerInputManager::getLS_X(int controllerNum)
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
 	{
 		if (thumbValue >= 0)
-			thumbValue -= XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to 0 - 24576  (NO DEADZONE)
+			thumbValue -= (XINPUT_GAMEPAD_THUMB_DEADZONE-1); //Changes range to 0 - 24576  (NO DEADZONE)
 		else
 			thumbValue += XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to -24576 - 0 (NO DEADZONE)
 
@@ -105,7 +105,7 @@ float ControllerInputManager::getLS_Y(int controllerNum)
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
 	{
 		if (thumbValue >= 0)
-			thumbValue -= XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to 0 - 24576  (NO DEADZONE)
+			thumbValue -= (XINPUT_GAMEPAD_THUMB_DEADZONE-1); //Changes range to 0 - 24576  (NO DEADZONE)
 		else
 			thumbValue += XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to -24576 - 0 (NO DEADZONE)
 		
@@ -121,7 +121,7 @@ float ControllerInputManager::getRS_X(int controllerNum)
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
 	{
 		if (thumbValue >= 0)
-			thumbValue -= XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to 0 - 24576  (NO DEADZONE)
+			thumbValue -= (XINPUT_GAMEPAD_THUMB_DEADZONE-1); //Changes range to 0 - 24576  (NO DEADZONE)
 		else
 			thumbValue += XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to -24576 - 0 (NO DEADZONE)
 		
@@ -137,7 +137,7 @@ float ControllerInputManager::getRS_Y(int controllerNum)
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
 	{
 		if (thumbValue >= 0)
-			thumbValue -= XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to 0 - 24576  (NO DEADZONE)
+			thumbValue -= (XINPUT_GAMEPAD_THUMB_DEADZONE-1); //Changes range to 0 - 24576  (NO DEADZONE)
 		else
 			thumbValue += XINPUT_GAMEPAD_THUMB_DEADZONE; //Changes range to -24576 - 0 (NO DEADZONE)
 		
