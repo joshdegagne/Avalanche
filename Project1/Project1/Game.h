@@ -20,20 +20,42 @@ class Game {
 		Game(const Game&);
 		~Game();
 
+		bool Initialize();
+		void Shutdown();
+		void Run();
+
 		//This method is used to intercept the windows messages
 		//This is how windows messages or events get into out application
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
+	private:
+		bool Frame();
+		void InitializeWindows(int&, int&);
+		void ShutdownWindows();
 
 	private:
-		LPCWSTR m_applicationName;
-		HINSTANCE m_hinstance;
-		HWND m_hwnd;  //handle to the Windows window (client window for the application)
+		LPCWSTR applicationName;
+		HINSTANCE hinstance;
+		HWND hwnd;  //handle to the Windows window (client window for the application)
 
-		Graphics* m_Graphics; //our graphics class object that encapsulates the graphics pipeline
-		//CineCamera* m_Camera; //our encapsulation of where the camera is looking at our world
+		//InputClass* m_Input; //out input class object from which to obtain user inputs
+		Graphics* graphics; //our graphics class object that encapsulates the graphics pipeline
+		CineCamera* camera; //our encapsulation of where the camera is looking at our world
+
+		ArrayList<Model>* gameModels; //container to hold all our game world models
 };
 
+/////////////////////////
+// FUNCTION PROTOTYPES //
+/////////////////////////
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+
+/////////////
+// GLOBALS //
+/////////////
+
+//This is where windows will direct messages to.
+//This will get set to our Game object when 
+//Game intialize is called.
 static Game* ApplicationHandle = 0;
 
 

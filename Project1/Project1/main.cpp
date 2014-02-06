@@ -37,7 +37,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 
 
 	// Initialize our system object, which returns true if the initialization completed successfully
-	//result = mainGame->Initialize(); 
+	result = mainGame->Initialize(); 
 
 	if(result)
 	{
