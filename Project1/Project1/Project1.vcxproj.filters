@@ -18,6 +18,12 @@
     <Filter Include="zShader Files">
       <UniqueIdentifier>{2e88c5d7-ed84-4015-a4a1-53f0017d0ab0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{c9cd766b-e21d-4332-9ab7-ad780ae9a3f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{766f5f37-d83e-4606-9e4d-cc555cb19f50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -64,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="quadTexturedModel.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerInput.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +126,9 @@
     </ClInclude>
     <ClInclude Include="arraylist.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerInput.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
