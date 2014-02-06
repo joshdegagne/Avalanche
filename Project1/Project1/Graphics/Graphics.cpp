@@ -7,9 +7,6 @@
 
 #include "Graphics.h"
 
-#using <mscorlib.dll>
-using namespace System;
-
 
 Graphics::Graphics()
 {
