@@ -164,10 +164,13 @@ void Game::Run()
 	*/
 	MSG msg;
 	bool done, result;
-
+	
 
 	// Initialize the message structure.
 	ZeroMemory(&msg, sizeof(MSG));
+
+	previousTime = GetTickCount();
+
 	
 	// Loop until there is a quit message from the window or the user.
 	done = false;
@@ -203,176 +206,25 @@ void Game::Run()
 
 bool Game::Frame()
 {
-	/*
-	The following Frame function is where all the processing for our application is done. 
-	So far it is fairly simple, we check the input object to see if the user has pressed escape and wants to quit. 
-	If they don't want to quit then we call the graphics object to do its frame processing 
-	which will render the graphics for that frame. 
-	As the application grows we'll place more code here. 
-	*/
-	
-	/*
-	Apply transformations to the game objects
-	*/
-
-	//Handle user inputs
-	bool result;
-
-	const int ascii_A = 65;
-	const int ascii_B = 66;
-	const int ascii_C = 67;
-	const int ascii_D = 68;
-	const int ascii_E = 69;
-	const int ascii_P = 80;
-	const int ascii_R = 82;
-	const int ascii_W = 87;
-	const int ascii_X = 88;
-	const int ascii_Y = 89;
-	const int ascii_Z = 90;
-
-	/*
-	// Check if the user pressed escape and wants to exit the application.
-	if(m_Input->IsKeyDown(VK_ESCAPE))
-	{
-		return false;
-	}
-
-	
-	//Move camera or models based on input
-	
-
-	
-	We will combinations for a key + arrow keys to control the camera
-	
-	if ( m_Input->IsKeyDown(VK_SHIFT) ){
-
-	   if ( m_Input->IsKeyDown(VK_LEFT) ) //Move Camera Left
-	      m_Camera->StrafeLeft();
-
-	   if ( m_Input->IsKeyDown(VK_RIGHT) ) //Move Camera Right
-	      m_Camera->StrafeRight();
-
-	   if ( m_Input->IsKeyDown(VK_UP) ) //Camera Move Forward
-		  m_Camera->MoveForward();
-
-	   if ( m_Input->IsKeyDown(VK_DOWN) ) //Camera Pull Back
-		  m_Camera->MoveBackward();
-
-	
-	}
-	else if ( m_Input->IsKeyDown(VK_CONTROL) ){
-
-	   if ( m_Input->IsKeyDown(VK_LEFT) ) //Pan Camera Left
-	      m_Camera->PanLeft();
-
-	   if ( m_Input->IsKeyDown(VK_RIGHT) ) //Pan Camera Right
-	      m_Camera->PanRight();
-
-	   if ( m_Input->IsKeyDown(VK_UP) ) //Tilt Camera Downward
-		  m_Camera->TiltDown();
-
-	   if ( m_Input->IsKeyDown(VK_DOWN) ) //Tilt Camera Upward
-		  m_Camera->TiltUp();
-
-	
-	}
-	else if ( m_Input->IsKeyDown(ascii_C) ){
-
-
-	   if ( m_Input->IsKeyDown(VK_UP) ) //Crane Up
-		  m_Camera->CraneUp();
-
-	   if ( m_Input->IsKeyDown(VK_DOWN) ) //Crane Down
-		  m_Camera->CraneDown();
-
-	
-	}
-	else if ( m_Input->IsKeyDown(ascii_R) ){
-
-
-	   if ( m_Input->IsKeyDown(VK_LEFT) ) //Roll Left
-		  m_Camera->RollLeft();
-
-	   if ( m_Input->IsKeyDown(VK_RIGHT) ) //Roll Right
-		  m_Camera->RollRight();	
-	}
-
-		else if ( m_Input->IsKeyDown(ascii_Z) ){
-
-
-	   if ( m_Input->IsKeyDown(VK_UP) ) //Zoom In
-		  m_Camera->ZoomIn();
-
-	   if ( m_Input->IsKeyDown(VK_DOWN) ) //Zoom Out
-		  m_Camera->ZoomOut();
-
-	
-	}
-
-    //MOVE GAME OBJECTS
-
-	else if ( m_Input->IsKeyDown(ascii_B) ){
-	   
-		//Rotate m_backDrop background object about Y or X axis
-	   //Just Arrow Keys
-	   if ( m_Input->IsKeyDown(VK_LEFT))
-		   m_backDrop->orientRotateY(XM_PIDIV2/70);
-
-	   if ( m_Input->IsKeyDown(VK_RIGHT))
-		   m_backDrop->orientRotateY(-XM_PIDIV2/70);
-
-	   if ( m_Input->IsKeyDown(VK_UP))
-		   m_backDrop->orientRotateX(XM_PIDIV2/70);
-
-	   if ( m_Input->IsKeyDown(VK_DOWN))
-		   m_backDrop->orientRotateX(-XM_PIDIV2/70);
-	
-	}
-
-   else if ( m_Input->IsKeyDown(ascii_E) ){
-	   
-		//Move m_Enemy prism object
-	   if ( m_Input->IsKeyDown(VK_LEFT))
-		   m_Enemy->MoveLeft();
-
-	   if ( m_Input->IsKeyDown(VK_RIGHT))
-		   m_Enemy->MoveRight();
-
-	   if ( m_Input->IsKeyDown(VK_UP))
-		   m_Enemy->MoveUp();
-
-	   if ( m_Input->IsKeyDown(VK_DOWN))
-		   m_Enemy->MoveDown();
-	
-	}
-      else {
-	   
-		//Just the arrow keys alone
-
-	   if ( m_Input->IsKeyDown(VK_LEFT))
-		   m_AirPlane->TurnLeft();
-
-	   if ( m_Input->IsKeyDown(VK_RIGHT))
-		   m_AirPlane->TurnRight();
-
-	   if ( m_Input->IsKeyDown(VK_UP))
-		   m_AirPlane->MoveForward();
-
-	   if ( m_Input->IsKeyDown(VK_DOWN))
-		   m_Player->MoveDown();
-	
-	}
-	*/
-
+	float elapsedTime = ElapseTime();
 
 	// Do the frame processing for the graphics object.
-	result = graphics->Frame();
+	bool result = graphics->Frame();
 	if(!result)
 	{
 		return false;
 	}
 
 	return true;
+}
+
+float Game::ElapseTime()
+{
+	
+	float currentTime = GetTickCount();
+	float elapsedTime = currentTime - previousTime;
+	previousTime = currentTime;
+	return elapsedTime;
 }
 
 

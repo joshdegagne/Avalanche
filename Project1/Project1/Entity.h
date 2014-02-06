@@ -18,6 +18,9 @@ class Entity {
 		void setY(float);
 
 		void setPos(float, float);
+		
+		XMFLOAT2 getPos();
+		virtual void Update(float);
 };
 
 #endif
