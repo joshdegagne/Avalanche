@@ -11,6 +11,7 @@ class Player: public Entity {
 		void update(float);
 
 	private:
+		int playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 
 };
 #endif
