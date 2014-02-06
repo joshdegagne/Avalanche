@@ -48,7 +48,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 	result = m_D3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
 	if(!result)
 	{
-		//MessageBox(hwnd, L"Could not initialize Direct3D.", L"Error", MB_OK);
+		MessageBox(hwnd, L"Could not initialize Direct3D.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -101,7 +101,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 	result = m_ColorShader->Initialize(m_D3D->GetDevice(), hwnd);
 	if(!result)
 	{
-		//MessageBox(hwnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
+		MessageBox(hwnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
 		return false;
 	}
 
