@@ -66,7 +66,24 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 	// Set the initial position of the camera.
 	m_Camera->SetPosition(0.0f, 0.0f, -10.0f); 
 	
-
+	axis = new XYZaxis; //create orgin axis object to display co-ord system (mostly for debug)
+	if(!axis)
+	{
+		return false;
+	}
+	axis->Initialize();
+	// Create A model for the axis
+	axisModel = new ModelUtil(axis->GetVertices(), 
+										axis->GetVertexCount(), 
+										axis->GetIndices(), 
+										axis->GetIndexCount(), 
+										D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+	result = axisModel->Initialize(m_D3D->GetDevice());
+	if(!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the axis model object.", L"Error", MB_OK);
+		return false;
+	}
 
 	/////////////////////////////
 	//Initializes Game Models
@@ -125,6 +142,21 @@ void Graphics::Shutdown()
 		m_D3D->Shutdown();
 		delete m_D3D;
 		m_D3D = 0;
+	}
+
+	// Release the axis object.
+	if(axis)
+	{
+		axis->Shutdown();
+		delete axis;
+		axis = 0;
+	}
+
+	if(axisModel){
+	    axisModel->Shutdown();
+		delete axisModel;
+		axisModel = 0;
+
 	}
 
 	return;
@@ -213,7 +245,7 @@ bool Graphics::Render()
 	/*
 	if(m_GameWorldModels && !m_GameWorldModels->isEmpty()){
 		for(int i=0; i< m_GameWorldModels->size(); i++){
-			GameModel* gameModel = m_GameWorldModels->elementAt(i);
+			Model* gameModel = m_GameWorldModels->elementAt(i);
 
 		   // Put the cube model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	       gameModel->GetVertexModel()->Render(m_D3D->GetDeviceContext());
