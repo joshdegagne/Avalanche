@@ -98,7 +98,7 @@ int Model::GetIndexCount() {
 }
 
 
-ModelClass* Model::GetVertexModel() {return m_VertexModel; }
+ModelUtil* Model::GetVertexModel() {return m_VertexModel; }
 
 XMFLOAT4X4 Model::GetWorldMatrix(){
     

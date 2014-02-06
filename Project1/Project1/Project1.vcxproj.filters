@@ -56,6 +56,15 @@
     <ClCompile Include="ModelUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Texture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\TextureShader.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="quadTexturedModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -97,12 +106,30 @@
     <ClInclude Include="ModelUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Texture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\TextureShader.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="quadTexturedModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="arraylist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphics\color.ps">
       <Filter>zShader Files</Filter>
     </None>
     <None Include="Graphics\color.vs">
+      <Filter>zShader Files</Filter>
+    </None>
+    <None Include="Graphics\texture.ps">
+      <Filter>zShader Files</Filter>
+    </None>
+    <None Include="Graphics\texture.vs">
       <Filter>zShader Files</Filter>
     </None>
   </ItemGroup>

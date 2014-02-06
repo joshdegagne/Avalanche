@@ -13,9 +13,9 @@
 
 #include "D3D.h"
 #include "CineCamera.h"
-//#include "modelclass.h"
-//#include "arraylist.h"
-//#include "gamemodel.h"
+#include "../modelUtil.h"
+#include "../arraylist.h"
+#include "../Model.h"
 
 
 

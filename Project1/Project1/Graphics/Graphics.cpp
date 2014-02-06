@@ -31,7 +31,7 @@ Graphics::~Graphics()
 //////////////////////////////////////////////////////////////////
 // To-Do: Replace error'd parameter with our own list of entities
 //////////////////////////////////////////////////////////////////
-bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCamera* camera, ArrayList<GameModel>* gameModels)
+bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCamera* camera, ArrayList<Model>* gameModels)
 {
 	bool result;
 

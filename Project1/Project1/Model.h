@@ -1,7 +1,7 @@
 #pragma once
 
 #include <DirectXMath.h>
-#include "vertextype.h"
+#include "vertextypes.h"
 #include "ModelUtil.h"
 
 #include <string>
@@ -48,7 +48,7 @@ public:
 	virtual void worldTranslate(float deltaX, float deltaY, float deltaZ);
 
 
-	virtual ModelClass*   GetVertexModel();
+	virtual ModelUtil*   GetVertexModel();
 	virtual bool isColorVertexModel();
 	virtual bool isTextureVertexModel();
 	virtual bool initializeTextures(ID3D11Device* device);
@@ -77,7 +77,7 @@ protected:
 	int				m_vertexCount;
 	int				m_indexCount;
 
-	ModelClass*     m_VertexModel; //vertices to put on graphics pipeline for rendering
+	ModelUtil*     m_VertexModel; //vertices to put on graphics pipeline for rendering
 
 	//Construction translate and orient matrices
     XMFLOAT4X4 m_orientRotateMatrix; //matrix to orient object in model co-ord system

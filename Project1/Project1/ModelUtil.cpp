@@ -150,7 +150,7 @@ bool ModelUtil::InitializeBuffers(ID3D11Device* device)
 }
 
 
-void ModelClass::ShutdownBuffers()
+void ModelUtil::ShutdownBuffers()
 {
 	// Release the index buffer.
 	if(m_indexBuffer)
@@ -170,7 +170,7 @@ void ModelClass::ShutdownBuffers()
 }
 
 
-void ModelClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
+void ModelUtil::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
 	unsigned int stride;
 	unsigned int offset;
