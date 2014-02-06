@@ -6,7 +6,7 @@
 #include <XInput.h>
 //#pragma comment(lib, "XInput.lib")
 
-#define XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE 8192 //25% deadzone
+#define XINPUT_GAMEPAD_THUMB_DEADZONE 8192 //25% deadzone
 
 // XBOX Controller Class Definition
 class ControllerInputManager
@@ -31,6 +31,8 @@ class ControllerInputManager
 		float getLS_Y(int);
 		float getRS_X(int);
 		float getRS_Y(int);
+		float getLT(int);
+		float getRT(int);
 
 	private:
 		XINPUT_STATE _controllerState[4];
