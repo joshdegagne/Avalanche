@@ -62,8 +62,8 @@ bool Game::Initialize()
 	}
 
 	// Set the initial position of the camera.
-	camera->SetPosition(0.0f, 0.0f, -20.0f); //10 units along Z in front of origin
-	camera->SetDirection(0.0f, 0.0f, 1.0f); //look in positive Z direction
+	camera->SetPosition(0.0f, 0.0f, 20.0f); //10 units along Z in front of origin
+	camera->SetDirection(0.0f, 0.0f, -1.0f); //look in positive Z direction
 	camera->SetUpDirection(0.0f, 1.0f, 0.0f); //up points in positive Y direction
 	/*IMPORTANT:  note camera direction and up must be orthogonal */
 
@@ -71,10 +71,13 @@ bool Game::Initialize()
 
 	
 	//Create the game objects for our game
+	XMFLOAT4 playFieldColor = XMFLOAT4(255.0f/255,255.0f/255,255.0f/255,1.0f);
+	playField = new QuadModel(10.0f,10.0f,&playFieldColor);
 
-	
+	//Add the  gameModel objects to the GameModels collection
+	//that will be rendered by the graphics system
 
-
+	gameModels->add(playField);
 
 	// Create the graphics object.  This object will handle rendering all the graphics for this application.
 	graphics = new Graphics;
@@ -94,6 +97,8 @@ bool Game::Initialize()
 	}
 	
 	return true;
+
+
 }
 
 
@@ -101,7 +106,11 @@ void Game::Shutdown()
 {
 	//Shut down our game objects and release their memory
 
-	
+	if(playField)
+	{
+		delete playField;
+		playField = 0;
+	}
 
 	//release the memory for the m_GameModels collection
 	//all objects in it should have been released my the code immediately above
