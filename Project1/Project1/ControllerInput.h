@@ -13,11 +13,12 @@ class ControllerInput
 	public:
 		ControllerInput(int playerNumber);
 		XINPUT_STATE getState();
-		bool isConnected(int);
+		bool isConnected();
 		void vibrate(int leftVal = 0, int rightVal = 0);
 
 	private:
-		XINPUT_STATE _controllerState[4];	//4 controllers' state
+		XINPUT_STATE _controllerState;
+		int _controllerNum;
 };
 
 #endif
