@@ -20,6 +20,9 @@ bool ControllerInputManager::isConnected(int controllerNum)
 ///////////////////////////////////////
 void ControllerInputManager::vibrate(int controllerNum, int leftVal, int rightVal)
 {
+	if (!controllerIsValid(controllerNum))
+		return;
+
     // Create a Vibraton State
     XINPUT_VIBRATION Vibration;
 
@@ -39,42 +42,72 @@ void ControllerInputManager::vibrate(int controllerNum, int leftVal, int rightVa
 ///////////////////////////////////////
 bool ControllerInputManager::getButtonA(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_A);
 }
 bool ControllerInputManager::getButtonB(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_B);
 }
 bool ControllerInputManager::getButtonX(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_X);
 }
 bool ControllerInputManager::getButtonY(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_Y);
 }
 bool ControllerInputManager::getButtonLB(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER);
 }
 bool ControllerInputManager::getButtonRB(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER);
 }
 bool ControllerInputManager::getButtonLS(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB);
 }
 bool ControllerInputManager::getButtonRS(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB);
 }
 bool ControllerInputManager::getButtonStart(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_START);
 }
 bool ControllerInputManager::getButtonBack(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return false;
+
 	return !!(getState(controllerNum).Gamepad.wButtons & XINPUT_GAMEPAD_BACK);
 }
 
@@ -83,6 +116,9 @@ bool ControllerInputManager::getButtonBack(int controllerNum)
 ///////////////////////////////////////
 float ControllerInputManager::getLS_X(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return -2;
+
 	short thumbValue = getState(controllerNum).Gamepad.sThumbLX;
 
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
@@ -100,6 +136,9 @@ float ControllerInputManager::getLS_X(int controllerNum)
 }
 float ControllerInputManager::getLS_Y(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return -2;
+
 	short thumbValue = getState(controllerNum).Gamepad.sThumbLY;
 
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
@@ -116,6 +155,9 @@ float ControllerInputManager::getLS_Y(int controllerNum)
 }
 float ControllerInputManager::getRS_X(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return -2;
+
 	short thumbValue = getState(controllerNum).Gamepad.sThumbRX;
 
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
@@ -132,6 +174,9 @@ float ControllerInputManager::getRS_X(int controllerNum)
 }
 float ControllerInputManager::getRS_Y(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return -2;
+
 	short thumbValue = getState(controllerNum).Gamepad.sThumbRY;
 
 	if (thumbValue > XINPUT_GAMEPAD_THUMB_DEADZONE || thumbValue < (0-XINPUT_GAMEPAD_THUMB_DEADZONE))
@@ -167,6 +212,9 @@ XMFLOAT2 ControllerInputManager::getRS(int controllerNum)
 ///////////////////////////////////////
 float ControllerInputManager::getLT(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return -2;
+
 	short triggerValue = getState(controllerNum).Gamepad.bLeftTrigger - XINPUT_GAMEPAD_TRIGGER_THRESHOLD; //Changes range to 0 - 225 (NO DEADZONE)
 	
 	if (triggerValue < 0)
@@ -176,6 +224,9 @@ float ControllerInputManager::getLT(int controllerNum)
 }
 float ControllerInputManager::getRT(int controllerNum)
 {
+	if (!controllerIsValid(controllerNum))
+		return -2;
+
 	short triggerValue = getState(controllerNum).Gamepad.bRightTrigger - XINPUT_GAMEPAD_TRIGGER_THRESHOLD; //Changes range to 0 - 225 (NO DEADZONE)
 	
 	if (triggerValue < 0)
@@ -197,4 +248,9 @@ XINPUT_STATE ControllerInputManager::getState(int controllerNum)
     XInputGetState(controllerNum, &_controllerState[controllerNum]);
 
     return _controllerState[controllerNum];
+}
+
+bool ControllerInputManager::controllerIsValid(int controllerNum)
+{
+	return (controllerNum >=0 && controllerNum < 4);
 }

@@ -41,6 +41,7 @@ class ControllerInputManager
 	private:
 		XINPUT_STATE _controllerState[4];
 		XINPUT_STATE getState(int);
+		bool		 controllerIsValid(int);
 };
 
 #endif

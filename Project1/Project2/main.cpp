@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
         }
         else
         {
-            std::cout << "\n\tERROR! PLAYER 1 - XBOX 360 Controller Not Found!\n";
+            std::cout << "\nERROR! XBOX 360 Controller \""<< playerNumber << "\" Not Found!\n";
             std::cout << "Press Any Key To Exit.";
             std::cin.get();
             break;
