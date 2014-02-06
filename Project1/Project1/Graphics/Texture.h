@@ -9,7 +9,7 @@
 // INCLUDES //
 //////////////
 #include <d3d11.h>
-#include "../../../DirectXTK/Inc/DDSTextureLoader.h"
+#include "DDSTextureLoader.h"
 
 using namespace DirectX;
 

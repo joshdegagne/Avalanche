@@ -442,7 +442,7 @@ void Game::InitializeWindows(int& screenWidth, int& screenHeight)
 	hinstance = GetModuleHandle(NULL);
 
 	// Give the application a name.
-	applicationName = "Engine"; //Long-character, or wchar, string
+	applicationName = L"Engine"; //Long-character, or wchar, string
 
 	// Setup the windows class with default settings.
 	wc.style         = CS_HREDRAW | CS_VREDRAW | CS_OWNDC; //http://msdn.microsoft.com/en-us/library/windows/desktop/ff729176(v=vs.85).aspx
