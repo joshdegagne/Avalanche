@@ -32,11 +32,13 @@ class Game {
 		bool Frame();
 		void InitializeWindows(int&, int&);
 		void ShutdownWindows();
+		float ElapseTime();
 
 	private:
 		LPCWSTR applicationName;
 		HINSTANCE hinstance;
 		HWND hwnd;  //handle to the Windows window (client window for the application)
+		float previousTime;
 
 		//InputClass* m_Input; //out input class object from which to obtain user inputs
 		Graphics* graphics; //our graphics class object that encapsulates the graphics pipeline
