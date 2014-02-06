@@ -73,6 +73,7 @@ bool Game::Initialize()
 	//Create the game objects for our game
 	XMFLOAT4 playFieldColor = XMFLOAT4(255.0f/255,255.0f/255,255.0f/255,1.0f);
 	playField = new QuadModel(10.0f,10.0f,&playFieldColor);
+	playField->orientRotateY(XM_PI);
 
 	//Add the  gameModel objects to the GameModels collection
 	//that will be rendered by the graphics system
