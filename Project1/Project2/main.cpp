@@ -1,43 +1,84 @@
-#include "CXBOXController.h"
+#include "../Project1/ControllerInputManager.h"
 #include <iostream>
 
-CXBOXController* Player1;
+#define playerNumber 0
+
+ControllerInputManager* inputManager;
 int main(int argc, char* argv[])
 {
-    Player1 = new CXBOXController(1);
+	inputManager = new ControllerInputManager;
 
-    std::cout << "Instructions:\n";
-    std::cout << "[A] Vibrate Left Only\n";
-    std::cout << "[B] Vibrate Right Only\n";
-    std::cout << "[X] Vibrate Both\n";
-    std::cout << "[Y] Vibrate Neither\n";
-    std::cout << "[BACK] Exit\n";
+	bool LB, RB, LS, RS;
+	LB = RB = LS = RS = false;
 
+	std::cout << "Instructions:\n";
+	std::cout << "[A] Print LS values\n";
+	std::cout << "[B] Print RS values\n";
+	std::cout << "[X] Vibrate Both\n";
+	std::cout << "[Y] Vibrate Neither\n";
+	std::cout << "[LB] Print LT value\n";
+	std::cout << "[RB] Print RT value\n";
+	std::cout << "[BACK] Exit\n";
+		
     while(true)
     {
-        if(Player1->IsConnected())
+        if(inputManager->isConnected(playerNumber))
         {
-            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)
+            if(inputManager->getButtonA(playerNumber))
+			{
+                if (!LS)
+				{
+					std::cout << "[LS] = [" << inputManager->getLS_X(playerNumber) << ", " << inputManager->getLS_Y(playerNumber) << "]" << std::endl;
+					LS = true;
+				}
+			}
+			else
+				LS = false;
+
+            if(inputManager->getButtonB(playerNumber))
+			{
+                if (!RS)
+				{
+					std::cout << "[RS] = [" << inputManager->getRS_X(playerNumber) << ", " << inputManager->getRS_Y(playerNumber) << "]" << std::endl;
+					RS = true;
+				}
+			}
+			else
+				RS = false;
+
+            if(inputManager->getButtonX(playerNumber))
             {
-                Player1->Vibrate(65535, 0);
+                inputManager->vibrate(playerNumber, 65535, 65535);
             }
 
-            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_B)
+            if(inputManager->getButtonY(playerNumber))
             {
-                Player1->Vibrate(0, 65535);
+                inputManager->vibrate(playerNumber);
             }
 
-            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_X)
-            {
-                Player1->Vibrate(65535, 65535);
-            }
+			if(inputManager->getButtonLB(playerNumber))
+			{
+                if (!LB)
+				{
+					std::cout << "[LT] = " << inputManager->getLT(playerNumber) << std::endl;
+					LB = true;
+				}
+			}
+			else
+				LB = false;
 
-            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_Y)
-            {
-                Player1->Vibrate();
-            }
+			if(inputManager->getButtonRB(playerNumber))
+			{
+				if (!RB)
+				{
+					std::cout << "[RT] = " << inputManager->getRT(playerNumber) << std::endl;
+					RB = true;
+				}
+			}
+			else
+				RB = false;
 
-            if(Player1->GetState().Gamepad.wButtons & XINPUT_GAMEPAD_BACK)
+            if(inputManager->getButtonBack(playerNumber))
             {
                 break;
             }
@@ -51,7 +92,7 @@ int main(int argc, char* argv[])
         }
     }
 
-    delete(Player1);
+    delete(inputManager);
 
     return( 0 );
 }
