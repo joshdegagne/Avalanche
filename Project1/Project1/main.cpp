@@ -1,6 +1,6 @@
 #include "Game.h"
 
-static bool use_debug_console = false; //set to true to get the "side car" console window for writing debug info to
+static bool use_debug_console = true; //set to true to get the "side car" console window for writing debug info to
 
 static void writeToDebugConsole(const wchar_t* theString){
 	if(use_debug_console)
@@ -41,7 +41,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 
 	if(result)
 	{
-		//mainGame->Run();
+		mainGame->Run();
 	}
 
 	// Shutdown and release the system object.

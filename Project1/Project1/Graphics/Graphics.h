@@ -16,6 +16,7 @@
 #include "../modelUtil.h"
 #include "../arraylist.h"
 #include "../Model.h"
+#include "../XYZaxis.h"
 
 
 
@@ -53,6 +54,9 @@ private:
 
 private:
 	
+	XYZaxis* axis;
+	ModelUtil* axisModel;
+
 	HWND m_hwnd;
 	D3D* m_D3D;
 	CineCamera* m_Camera;

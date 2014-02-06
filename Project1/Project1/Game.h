@@ -46,7 +46,7 @@ class Game {
 		CineCamera* camera; //our encapsulation of where the camera is looking at our world
 
 		ArrayList<Model>* gameModels; //container to hold all our game world models
-		
+
 		//Object Variables
 		QuadModel* playField;
 

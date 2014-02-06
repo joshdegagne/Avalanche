@@ -57,9 +57,6 @@ bool Game::Initialize()
 	camera->SetDirection(0.0f, 0.0f, -1.0f); //look in negative Z direction
 	camera->SetUpDirection(0.0f, -1.0f, 0.0f); //up points in negative Y direction
 	/*IMPORTANT:  note camera direction and up must be orthogonal */
-
-
-
 	
 	//Create the game objects for our game
 	XMFLOAT4 playFieldColor = XMFLOAT4(255.0f/255,255.0f/255,255.0f/255,1.0f);

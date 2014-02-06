@@ -27,6 +27,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="quadModel.cpp" />
     <ClCompile Include="quadTexturedModel.cpp" />
+    <ClCompile Include="XYZaxis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="arraylist.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="quadModel.h" />
     <ClInclude Include="quadTexturedModel.h" />
     <ClInclude Include="vertextypes.h" />
+    <ClInclude Include="XYZaxis.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphics\color.ps" />
