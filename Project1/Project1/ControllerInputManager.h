@@ -8,17 +8,32 @@
 //#pragma comment(lib, "XInput.lib")
 
 // XBOX Controller Class Definition
-class ControllerInput
+class ControllerInputManager
 {
-	public:
-		ControllerInput(int playerNumber);
-		XINPUT_STATE getState();
-		bool isConnected();
-		void vibrate(int leftVal = 0, int rightVal = 0);
+	public:	//For all public functions, the first integer is ALWAYS the controller number
+		//Special functions
+		bool isConnected(int);
+		void vibrate(int, int leftVal = 0, int rightVal = 0);
+		
+		//Basic input functions
+		bool  getButtonA(int);
+		bool  getButtonB(int);
+		bool  getButtonX(int);
+		bool  getButtonY(int);
+		bool  getButtonLB(int);
+		bool  getButtonRB(int);
+		bool  getButtonLS(int);
+		bool  getButtonRS(int);
+		bool  getButtonStart(int);
+		bool  getButtonBack(int);
+		short getLS_X(int);
+		short getLS_Y(int);
+		short getRS_X(int);
+		short getRS_Y(int);
 
 	private:
-		XINPUT_STATE _controllerState;
-		int _controllerNum;
+		XINPUT_STATE _controllerState[4];
+		XINPUT_STATE getState(int);
 };
 
 #endif

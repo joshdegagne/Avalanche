@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ControllerInput.cpp" />
+    <ClCompile Include="ControllerInputManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\CineCamera.cpp" />
@@ -30,7 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="arraylist.h" />
-    <ClInclude Include="ControllerInput.h" />
+    <ClInclude Include="ControllerInputManager.h" />
     <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
