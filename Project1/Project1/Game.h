@@ -32,7 +32,7 @@ class Game {
 		bool Frame();
 		void InitializeWindows(int&, int&);
 		void ShutdownWindows();
-		float ElapseTime();
+		float getElapsedTime();
 
 	private:
 		LPCWSTR applicationName;
