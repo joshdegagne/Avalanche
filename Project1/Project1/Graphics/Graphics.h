@@ -61,12 +61,9 @@ private:
 	D3D* m_D3D;
 	CineCamera* m_Camera;
 
-	//Model* m_AxisModel;
-	//XYZaxis* m_axis;
-
 	ColorShader* m_ColorShader;
 
-	//ArrayList<GameModel> * m_GameWorldModels;
+	ArrayList<Model> * gameWorldModels;
 
 
 

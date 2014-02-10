@@ -88,13 +88,13 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 	/////////////////////////////
 	//Initializes Game Models
 	/////////////////////////////
-	/*
 	
-	m_GameWorldModels = gameModels;
+	
+	gameWorldModels = gameModels;
 
-	if(m_GameWorldModels && !m_GameWorldModels->isEmpty()){
-		for(int i=0; i< m_GameWorldModels->size(); i++){
-			GameModel* gameModel = m_GameWorldModels->elementAt(i);
+	if(gameWorldModels && !gameWorldModels->isEmpty()){
+		for(int i=0; i< gameWorldModels->size(); i++){
+			Model* gameModel = gameWorldModels->elementAt(i);
 			result = gameModel->GetVertexModel()->Initialize(m_D3D->GetDevice());
 	        if(!result)
 	        {
@@ -104,7 +104,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCame
 
 		}
 	}
-	*/
+	
 	
 
 	// Create the color shader object.
@@ -204,11 +204,10 @@ bool Graphics::Render()
 
 
 		//Write Framestats on Window title caption
-		/*
 		std::wostringstream captionStrm;
 		captionStrm << L"FPS: " << (int)(1.0f/averageFramePeriod) << L" ";
         SetWindowText( m_hwnd, captionStrm.str().c_str() ); //use FPS stats as title caption to windows window.
-		*/
+		
 
 	}
 	else{
@@ -242,10 +241,9 @@ bool Graphics::Render()
 	//////////////////////////////////////////////////////////////////
 	// Game Model render process. Use as reference
 	//////////////////////////////////////////////////////////////////
-	/*
-	if(m_GameWorldModels && !m_GameWorldModels->isEmpty()){
-		for(int i=0; i< m_GameWorldModels->size(); i++){
-			Model* gameModel = m_GameWorldModels->elementAt(i);
+	if(gameWorldModels && !gameWorldModels->isEmpty()){
+		for(int i=0; i< gameWorldModels->size(); i++){
+			Model* gameModel = gameWorldModels->elementAt(i);
 
 		   // Put the cube model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	       gameModel->GetVertexModel()->Render(m_D3D->GetDeviceContext());
@@ -262,7 +260,6 @@ bool Graphics::Render()
 
 		}
 	}
-	*/
 
     // Present the rendered scene to the screen.
 	m_D3D->EndScene();
