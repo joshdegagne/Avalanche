@@ -64,7 +64,7 @@ bool Game::Initialize()
 		return false;
 
 	// Create the Camera object.
-	camera = new CineCamera(screenWidth,screenHeight);
+	camera = new Camera(screenWidth,screenHeight);
 	if(!camera)
 		return false;
 
@@ -75,17 +75,21 @@ bool Game::Initialize()
 	playfield->Initialize(4, conInput); //First parameter is numPlayers
 
 	// Set the initial position of the camera.
-	camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
-	camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
-	camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
-	for(int i=0; i < 100; ++i) camera->TiltUp();
-	for(int i=0; i < 125; ++i) camera->RollLeft();
-	for(int i=0; i < 10; ++i) camera->TiltUp();
-	for(int i=0; i < 15; ++i) camera->PanLeft();
-	for(int i=0; i < 10; ++i) camera->RollLeft();
-	for(int i=0; i < 10; ++i) camera->PanLeft();
-	for(int i=0; i < 10; ++i) camera->RollLeft();
+	//camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
+	//camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
+	//camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
+	//for(int i=0; i < 100; ++i) camera->TiltUp();
+	//for(int i=0; i < 125; ++i) camera->RollLeft();
+	//for(int i=0; i < 10; ++i) camera->TiltUp();
+	//for(int i=0; i < 15; ++i) camera->PanLeft();
+	//for(int i=0; i < 10; ++i) camera->RollLeft();
+	//for(int i=0; i < 10; ++i) camera->PanLeft();
+	//for(int i=0; i < 10; ++i) camera->RollLeft();
 	/*IMPORTANT:  note camera direction and up must be orthogonal */
+
+	camera->SetPosition(24.0f, 5.0f, 15.0f);
+	camera->SetTarget(9.0f, 3.0f, 0.0f);
+	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
 
 	//Create the game objects for our game
 	WCHAR* fieldTexture = L"textures/graph_paper.dds";
@@ -277,6 +281,8 @@ bool Game::Frame()
 	{
 		return false;
 	}
+
+	/*
 	//Move camera or models based on input
 	//We will combinations for a key + arrow keys to control the camera
 	if ( keyInput->IsKeyDown(VK_SHIFT) ){
@@ -344,6 +350,7 @@ bool Game::Frame()
 	
 	}
 	else if ( keyInput->IsKeyDown(ascii_P) ){
+		
 		//print camera position
 		//I'm sorry.
 		std::wostringstream osspx;
@@ -452,8 +459,10 @@ bool Game::Frame()
 		upString += std::wstring(upz);
 		upString += std::wstring(L"\n");
 		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), upString.c_str(), wcslen(upString.c_str()), NULL, NULL);
+		
 	}
-
+	*/
+	
     float elapsedTime = getElapsedTime();
 
 

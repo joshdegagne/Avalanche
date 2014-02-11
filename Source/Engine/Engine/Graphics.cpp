@@ -41,7 +41,7 @@ Graphics::~Graphics()
 
 
 
-bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, CineCamera* initCamera, ArrayList<GameModel>* gameModels)
+bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* initCamera, ArrayList<GameModel>* gameModels)
 {
 	bool result;
 

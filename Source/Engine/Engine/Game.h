@@ -13,7 +13,7 @@
 #include "QuadModel.h"
 #include "QuadTexturedModel.h"
 #include "arraylist.h"
-#include "CineCamera.h"
+#include "Camera.h"
 #include "Playfield.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ private:
 	KeyInput*               keyInput; //out input class object from which to obtain user inputs
 	ControllerInputManager* conInput; //Yay! Input from a controller!
 	Graphics*               graphics; //our graphics class object that encapsulates the graphics pipeline
-	CineCamera*             camera; //our encapsulation of where the camera is looking at our world
+	Camera*					camera; //our encapsulation of where the camera is looking at our world
 
 	float previousTime;
 

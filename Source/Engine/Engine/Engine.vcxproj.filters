@@ -87,9 +87,6 @@
     <ClCompile Include="ControllerInputManager.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -119,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="Obstacle.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +167,6 @@
     <ClInclude Include="ControllerInputManager.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -208,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

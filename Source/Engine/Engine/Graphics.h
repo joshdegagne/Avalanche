@@ -4,7 +4,7 @@
 #pragma once
 
 #include "D3D.h"
-#include "cinecamera.h"
+#include "camera.h"
 #include "Model.h"
 #include "arraylist.h"
 #include "gamemodel.h"
@@ -22,7 +22,7 @@ public:
 	Graphics(const Graphics&);
 	~Graphics();
 
-	bool Initialize(int, int, HWND, CineCamera*, ArrayList<GameModel> * gameModels);
+	bool Initialize(int, int, HWND, Camera*, ArrayList<GameModel> * gameModels);
 	void Shutdown();
 	bool Frame(); 
 
@@ -35,7 +35,7 @@ private:
 	
 	HWND        hwnd;
 	D3D*        d3D;
-	CineCamera* camera;
+	Camera* camera;
 
 	Model*   axisModel;
 	XYZaxis* axis;
