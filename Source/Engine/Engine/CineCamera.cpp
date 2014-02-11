@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "cinecamera.h"
 
-
 CineCamera::CineCamera(int screenWidth, int screenHeight)
 {
 	position = XMFLOAT3(0.0f, 0.0f, -10.0f); //location of camera in 3D space
@@ -320,6 +319,16 @@ void CineCamera::ZoomOut()
 XMFLOAT3 CineCamera::GetPosition()
 {
 	return position;
+}
+
+XMFLOAT3 CineCamera::GetDirection()
+{
+	return direction;
+}
+
+XMFLOAT3 CineCamera::GetUpDirection()
+{
+	return upDirection;
 }
 
 

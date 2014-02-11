@@ -68,6 +68,8 @@ public:
 	void ZoomOut(); //decrease the effectigve focal length of the camera lens (greater field of view angle)
 
 	XMFLOAT3 GetPosition();
+	XMFLOAT3 GetDirection();
+	XMFLOAT3 GetUpDirection();
 
 	void Render();
 	void GetViewMatrix(XMFLOAT4X4&);

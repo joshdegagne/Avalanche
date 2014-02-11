@@ -1,6 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: Game.cpp
 ////////////////////////////////////////////////////////////////////////////////
+#include <sstream>
+#include <vector>
 #include "Game.h"
 
 Game::Game()
@@ -72,18 +74,23 @@ bool Game::Initialize()
 	}
 
 	// Set the initial position of the camera.
-	camera->SetPosition(20.0f, 10.0f, 20.0f); //10 units along Z in front of origin
+	camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
 	camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
-	camera->SetUpDirection(0.0f, -1.0f, 0.0f); //up points in positive Y direction
+	camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
+	for(int i=0; i < 100; ++i) camera->TiltUp();
+	for(int i=0; i < 125; ++i) camera->RollLeft();
+	for(int i=0; i < 10; ++i) camera->TiltUp();
+	for(int i=0; i < 15; ++i) camera->PanLeft();
+	for(int i=0; i < 10; ++i) camera->RollLeft();
+	for(int i=0; i < 10; ++i) camera->PanLeft();
+	for(int i=0; i < 10; ++i) camera->RollLeft();
 	/*IMPORTANT:  note camera direction and up must be orthogonal */
-
-
 
 	
 	//Create the game objects for our game
 	WCHAR* fieldTexture = L"textures/graph_paper.dds";
 
-	playField = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
+	playField = new QuadTexturedModel (36.0f,6.0f,fieldTexture);
 	playField->worldTranslate(9.0f,3.0f,-0.1f);
 
 	//Add the  gameModel objects to the gameModels collection
@@ -235,11 +242,9 @@ bool Game::Frame()
 	As the application grows we'll place more code here. 
 	*/
 	
-	/*
-	Apply transformations to the game objects
-	*/
+	
+	//Apply transformations to the game objects
 
-	//Rotate the object a bit around some axis
 
 	//Handle user inputs
 	bool result;
@@ -335,6 +340,116 @@ bool Game::Frame()
 		  camera->ZoomOut();
 
 	
+	}
+	else if ( keyInput->IsKeyDown(ascii_P) ){
+		//print camera position
+		//I'm sorry.
+		std::wostringstream osspx;
+		std::wostringstream osspy;
+		std::wostringstream osspz;
+		std::wostringstream ossdx;
+		std::wostringstream ossdy;
+		std::wostringstream ossdz;
+		std::wostringstream ossux;
+		std::wostringstream ossuy;
+		std::wostringstream ossuz;
+		std::wstring wspx;
+		std::wstring wspy;
+		std::wstring wspz;
+		std::wstring wsdx;
+		std::wstring wsdy;
+		std::wstring wsdz;
+		std::wstring wsux;
+		std::wstring wsuy;
+		std::wstring wsuz;
+		const wchar_t* cwppx;
+		const wchar_t* cwppy;
+		const wchar_t* cwppz;
+		const wchar_t* cwpdx;
+		const wchar_t* cwpdy;
+		const wchar_t* cwpdz;
+		const wchar_t* cwpux;
+		const wchar_t* cwpuy;
+		const wchar_t* cwpuz;
+
+		float px = camera->GetPosition().x;
+		float py = camera->GetPosition().y;
+		float pz = camera->GetPosition().z;
+		float dx = camera->GetDirection().x;
+		float dy = camera->GetDirection().y;
+		float dz = camera->GetDirection().z;
+		float ux = camera->GetUpDirection().x;
+		float uy = camera->GetUpDirection().y;
+		float uz = camera->GetUpDirection().z;
+
+		osspx<<px;
+		wspx = osspx.str();
+		cwppx = wspx.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufpx( cwppx , cwppx + (wspx.size() + 1) );
+		wchar_t* posx = &bufpx[0];  // wchar_t*
+		std::wstring posString(posx);
+		posString += std::wstring(L" ");
+		osspy<<py;
+		wspy = osspy.str();
+		cwppy = wspy.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufpy( cwppy , cwppy + (wspy.size() + 1) );
+		wchar_t* posy = &bufpy[0];  // wchar_t*
+		posString += std::wstring(posy);
+		posString += std::wstring(L" ");
+		osspz<<pz;
+		wspz = osspz.str();
+		cwppz = wspz.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufpz( cwppz , cwppz + (wspz.size() + 1) );
+		wchar_t* posz = &bufpz[0];  // wchar_t*
+		posString += std::wstring(posz);
+		posString += std::wstring(L"\n");
+		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), posString.c_str(), wcslen(posString.c_str()), NULL, NULL);
+
+		ossdx<<dx;
+		wsdx = ossdx.str();
+		cwpdx = wsdx.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufdx( cwpdx , cwpdx + (wsdx.size() + 1) );
+		wchar_t* dirx = &bufdx[0];  // wchar_t*
+		std::wstring dirString(dirx);
+		dirString += std::wstring(L" ");
+		ossdy<<dy;
+		wsdy = ossdy.str();
+		cwpdy = wsdy.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufdy( cwpdy , cwpdy + (wsdy.size() + 1) );
+		wchar_t* diry = &bufdy[0];  // wchar_t*
+		dirString += std::wstring(diry);
+		dirString += std::wstring(L" ");
+		ossdz<<dz;
+		wsdz = ossdz.str();
+		cwpdz = wsdz.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufdz( cwpdz , cwpdz + (wsdz.size() + 1) );
+		wchar_t* dirz = &bufdz[0];  // wchar_t*
+		dirString += std::wstring(dirz);
+		dirString += std::wstring(L"\n");
+		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), dirString.c_str(), wcslen(dirString.c_str()), NULL, NULL);
+
+		ossux<<ux;
+		wsux = ossux.str();
+		cwpux = wsux.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufux( cwpux , cwpux + (wsux.size() + 1) );
+		wchar_t* upx = &bufux[0];  // wchar_t*
+		std::wstring upString(dirx);
+		upString += std::wstring(L" ");
+		ossuy<<uy;
+		wsuy = ossuy.str();
+		cwpuy = wsuy.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufuy( cwpuy , cwpuy + (wsuy.size() + 1) );
+		wchar_t* upy = &bufuy[0];  // wchar_t*
+		upString += std::wstring(upy);
+		upString += std::wstring(L" ");
+		ossuz<<uz;
+		wsuz = ossuz.str();
+		cwpuz = wsuz.c_str(); // const wchar_t*
+		std::vector<wchar_t> bufuz( cwpuz , cwpuz + (wsuz.size() + 1) );
+		wchar_t* upz = &bufuz[0];  // wchar_t*
+		upString += std::wstring(upz);
+		upString += std::wstring(L"\n");
+		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), upString.c_str(), wcslen(upString.c_str()), NULL, NULL);
 	}
 
     float elapsedTime = getElapsedTime();
