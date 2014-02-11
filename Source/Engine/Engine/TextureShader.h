@@ -1,19 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: TextureShader.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _TEXTURESHADER_H_
-#define _TEXTURESHADER_H_
+#pragma once
 
-
-//////////////
-// INCLUDES //
-//////////////
+#include "DirectXHelper.h"
 #include <d3d11.h>
-#include <DirectXMath.h>
 #include <D3Dcompiler.h>
 #include <fstream>
 using namespace std;
-using namespace DirectX;
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: TextureShader
@@ -53,5 +50,3 @@ private:
 	ID3D11Buffer*       matrixBuffer;
 	ID3D11SamplerState* sampleState;
 };
-
-#endif

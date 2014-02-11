@@ -1,19 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: ColorShader.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _COLORSHADER_H_
-#define _COLORSHADER_H_
+#pragma once
 
-
-//////////////
-// INCLUDES //
-//////////////
+#include "DirectXHelper.h"
 #include <d3d11.h>
-#include <DirectXMath.h>
 #include <D3Dcompiler.h>
 #include <fstream>
 using namespace std;
-using namespace DirectX;
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,5 +48,3 @@ private:
 	ID3D11InputLayout*  layout;
 	ID3D11Buffer*       matrixBuffer;
 };
-
-#endif

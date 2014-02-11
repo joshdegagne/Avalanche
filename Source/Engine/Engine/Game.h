@@ -1,26 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: Game.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _GAME_H_
-#define _GAME_H_
-
-
-///////////////////////////////
-// PRE-PROCESSING DIRECTIVES //
-///////////////////////////////
+#pragma once
 
 #define WIN32_LEAN_AND_MEAN 
-// defining "lean and mean" will leave of some windows API's and keep the system stripped down
-
-//////////////
-// INCLUDES //
-//////////////
 #include <windows.h> //needed to create and destroy windows and call Win32 functions
 
-
-///////////////////////
-// MY CLASS INCLUDES //
-///////////////////////
 #include "KeyInput.h"
 #include "ControllerInputManager.h"
 #include "Graphics.h"
@@ -29,12 +14,10 @@
 #include "QuadTexturedModel.h"
 #include "arraylist.h"
 #include "CineCamera.h"
-
+#include "Playfield.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
-// The System class is our encapsulation of our application.
-// This is really the entry from the windows framework into our own code
 ////////////////////////////////////////////////////////////////////////////////
 class Game
 {
@@ -70,7 +53,8 @@ private:
 	float previousTime;
 
 	//Game World Items
-	QuadTexturedModel* playField;
+	Playfield*		   playfield;
+	QuadTexturedModel* pF;
 
 	ArrayList<GameModel>* gameModels; //container to hold all our game world models
 
@@ -92,6 +76,3 @@ static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 //This will get set to our Game object when 
 //System intialize is called.
 static Game* ApplicationHandle = 0;
-
-
-#endif

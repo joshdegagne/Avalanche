@@ -37,6 +37,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Helper Headers">
+      <UniqueIdentifier>{4a878ead-ae05-4fb6-a056-34707031a77a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,9 +131,6 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CineCamera.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
@@ -185,9 +185,6 @@
     <ClInclude Include="Arraylist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ConeTexturedModel.h">
       <Filter>Header Files\Garbage</Filter>
     </ClInclude>
@@ -205,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="Obstacle.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\Helper Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
