@@ -1,46 +1,20 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: CineCamera.h
+// Filename: OldCamera.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _CINECAMERA_H_
-#define _CINECAMERA_H_
+#pragma once
 
-
-//////////////
-// INCLUDES //
-//////////////
 #include <windows.h> //needed to create and destroy windows and call Win32 functions
+#include "DirectXHelper.h"
 
-#include <DirectXMath.h>
 
-using namespace DirectX;
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: CineCamera
 ////////////////////////////////////////////////////////////////////////////////
-/*
-CineCamearClass provides a camera that responds to tradional cinematography camera moves:
-Pan-Tilt_Strafe-Dolly-Crane-Zooom
-*/
-	//these constants can be adjusted to provide smooth feel for the 
-	//camera moves
-
-	const float CAMERA_TILT_SPEED = 1.0f; //up and down rotation about the sideways vector direction
-	const float CAMERA_PAN_SPEED = 1.0f; //left and right rotation about the up vector
-	const float CAMERA_ROLL_SPEED = 1.0f; //left and right rotation about the camera direction vector
-	const float CAMERA_DOLLY_SPEED = 0.1f;; //used for forward and backward travel along the camera direction vector
-	const float CAMERA_STRAFE_SPEED = 0.1f; //sideways translation along the sideways vector direction
-	const float CAMERA_CRANE_SPEED = 0.1f; //up and down translatoin along the up vector direction
-	const float CAMERA_ZOOM_IN_FACTOR = 0.9f; //field of view mult. factor to zoom in
-	const float CAMERA_ZOOM_OUT_FACTOR = 1.1f; //field of view mult. factor to zoom out
-
-	const float	NOMINAL_FIELD_OF_VIEW = (float)XM_PI / 4.0f;
-
-	const float MAX_CAMERA_FIELD_OF_VIEW = NOMINAL_FIELD_OF_VIEW * 3;
-	const float MIN_CAMERA_FIELD_OF_VIEW = NOMINAL_FIELD_OF_VIEW / 3;
-
-	const float CAMERA_SCREEN_DEPTH = 1000.0f;
-    const float CAMERA_SCREEN_NEAR = 0.1f;
-
 class CineCamera
 {
 public:
@@ -91,4 +65,22 @@ private:
 
 };
 
-#endif
+////////////////////////////////////////////////////////////////////////////////
+// CONSTANTS
+////////////////////////////////////////////////////////////////////////////////
+const float CAMERA_TILT_SPEED = 1.0f; //up and down rotation about the sideways vector direction
+const float CAMERA_PAN_SPEED = 1.0f; //left and right rotation about the up vector
+const float CAMERA_ROLL_SPEED = 1.0f; //left and right rotation about the camera direction vector
+const float CAMERA_DOLLY_SPEED = 0.1f;; //used for forward and backward travel along the camera direction vector
+const float CAMERA_STRAFE_SPEED = 0.1f; //sideways translation along the sideways vector direction
+const float CAMERA_CRANE_SPEED = 0.1f; //up and down translatoin along the up vector direction
+const float CAMERA_ZOOM_IN_FACTOR = 0.9f; //field of view mult. factor to zoom in
+const float CAMERA_ZOOM_OUT_FACTOR = 1.1f; //field of view mult. factor to zoom out
+
+const float	NOMINAL_FIELD_OF_VIEW = (float)XM_PI / 4.0f;
+
+const float MAX_CAMERA_FIELD_OF_VIEW = NOMINAL_FIELD_OF_VIEW * 3;
+const float MIN_CAMERA_FIELD_OF_VIEW = NOMINAL_FIELD_OF_VIEW / 3;
+
+const float CAMERA_SCREEN_DEPTH = 1000.0f;
+const float CAMERA_SCREEN_NEAR = 0.1f;

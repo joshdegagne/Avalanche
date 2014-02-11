@@ -1,21 +1,20 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Filename: Player.h
+// Filename: Obstacle.h
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include "Entity.h"
+#include "DirectXHelper.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class name: Player
+// Class name: Obstacle
 ////////////////////////////////////////////////////////////////////////////////
-class Player: public Entity {
-	public: 
-		//Constructors
-		Player(int);
-		
-		void update(float);
-
+class Obstacle
+{
+	public:
+		Obstacle();
+		~Obstacle();
 	private:
-		int playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
-
+		//Type of obstacle
+		//Obstacle size?
+		XMFLOAT3 position; //Position
 };

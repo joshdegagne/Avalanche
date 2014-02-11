@@ -1,15 +1,18 @@
-#ifndef CONTROLLERINPUT_H
-#define CONTROLLERINPUT_H
+////////////////////////////////////////////////////////////////////////////////
+// Filename: ControllerInputManager.h
+////////////////////////////////////////////////////////////////////////////////
+#pragma once
 
 #define WIN32_LEAN_AND_MEAN
+#define XINPUT_GAMEPAD_THUMB_DEADZONE 8192 //25% deadzone
 #include <windows.h>
 #include <XInput.h>
 #include "DirectXHelper.h"
 //#pragma comment(lib, "XInput.lib")
 
-#define XINPUT_GAMEPAD_THUMB_DEADZONE 8192 //25% deadzone
-
-// XBOX Controller Class Definition
+////////////////////////////////////////////////////////////////////////////////
+// Class Definition
+////////////////////////////////////////////////////////////////////////////////
 class ControllerInputManager
 {
 	public:	//For all public functions, the first integer is ALWAYS the controller number
@@ -43,8 +46,6 @@ class ControllerInputManager
 		XINPUT_STATE getState(int);
 		bool		 controllerIsValid(int);
 };
-
-#endif
 
 ////////////////////////////////////
 ///(SIMPLIFIED) EXTRA NOTATION FOR CLARITY

@@ -37,25 +37,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Helper Headers">
+      <UniqueIdentifier>{4a878ead-ae05-4fb6-a056-34707031a77a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="coneTexturedModel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="cubemodel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="cubeTexturedModel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="prismmodel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="prismTexturedModel.cpp">
-      <Filter>Source Files\Garbage</Filter>
     </ClCompile>
     <ClCompile Include="XYZaxis.cpp">
       <Filter>Source Files\Models</Filter>
@@ -111,29 +99,29 @@
     <ClCompile Include="OldCamera.cpp">
       <Filter>Source Files\Garbage</Filter>
     </ClCompile>
+    <ClCompile Include="Playfield.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConeTexturedModel.cpp">
+      <Filter>Source Files\Garbage</Filter>
+    </ClCompile>
+    <ClCompile Include="Cubemodel.cpp">
+      <Filter>Source Files\Garbage</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeTexturedModel.cpp">
+      <Filter>Source Files\Garbage</Filter>
+    </ClCompile>
+    <ClCompile Include="Prismmodel.cpp">
+      <Filter>Source Files\Garbage</Filter>
+    </ClCompile>
+    <ClCompile Include="PrismTexturedModel.cpp">
+      <Filter>Source Files\Garbage</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="arraylist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="coneTexturedModel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="cubemodel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="cubeTexturedModel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="prismmodel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="prismTexturedModel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
     <ClInclude Include="XYZaxis.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
@@ -141,9 +129,6 @@
       <Filter>Header Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CineCamera.h">
@@ -193,6 +178,36 @@
     </ClInclude>
     <ClInclude Include="OldCamera.h">
       <Filter>Header Files\Garbage</Filter>
+    </ClInclude>
+    <ClInclude Include="Playfield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Arraylist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConeTexturedModel.h">
+      <Filter>Header Files\Garbage</Filter>
+    </ClInclude>
+    <ClInclude Include="Cubemodel.h">
+      <Filter>Header Files\Garbage</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeTexturedModel.h">
+      <Filter>Header Files\Garbage</Filter>
+    </ClInclude>
+    <ClInclude Include="Prismmodel.h">
+      <Filter>Header Files\Garbage</Filter>
+    </ClInclude>
+    <ClInclude Include="PrismTexturedModel.h">
+      <Filter>Header Files\Garbage</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\Helper Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -85,12 +85,13 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControllerInputManager.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OldCamera.cpp" />
     <ClCompile Include="CineCamera.cpp" />
     <ClCompile Include="ColorShader.cpp" />
-    <ClCompile Include="coneTexturedModel.cpp" />
-    <ClCompile Include="cubemodel.cpp" />
-    <ClCompile Include="cubeTexturedModel.cpp" />
+    <ClCompile Include="ConeTexturedModel.cpp" />
+    <ClCompile Include="Cubemodel.cpp" />
+    <ClCompile Include="CubeTexturedModel.cpp" />
     <ClCompile Include="GameModel.cpp" />
     <ClCompile Include="D3D.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -98,8 +99,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="prismmodel.cpp" />
-    <ClCompile Include="prismTexturedModel.cpp" />
+    <ClCompile Include="Playfield.cpp" />
+    <ClCompile Include="Prismmodel.cpp" />
+    <ClCompile Include="PrismTexturedModel.cpp" />
     <ClCompile Include="QuadModel.cpp" />
     <ClCompile Include="QuadTexturedModel.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -108,15 +110,16 @@
     <ClCompile Include="XYZaxis.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="arraylist.h" />
+    <ClInclude Include="Arraylist.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ControllerInputManager.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="OldCamera.h" />
     <ClInclude Include="ColorShader.h" />
-    <ClInclude Include="coneTexturedModel.h" />
-    <ClInclude Include="cubemodel.h" />
-    <ClInclude Include="cubeTexturedModel.h" />
+    <ClInclude Include="ConeTexturedModel.h" />
+    <ClInclude Include="Cubemodel.h" />
+    <ClInclude Include="CubeTexturedModel.h" />
     <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="GameModel.h" />
     <ClInclude Include="D3D.h" />
@@ -125,11 +128,12 @@
     <ClInclude Include="KeyInput.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="prismmodel.h" />
-    <ClInclude Include="prismTexturedModel.h" />
+    <ClInclude Include="Playfield.h" />
+    <ClInclude Include="Prismmodel.h" />
+    <ClInclude Include="PrismTexturedModel.h" />
     <ClInclude Include="QuadModel.h" />
     <ClInclude Include="QuadTexturedModel.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureShader.h" />

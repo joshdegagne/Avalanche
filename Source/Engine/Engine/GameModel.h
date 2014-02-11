@@ -1,26 +1,22 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: GameModel.h
+////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
+#include "DirectXHelper.h"
 #include <d3d11.h>
-#include <DirectXMath.h>
 #include "vertextype.h"
 #include "Model.h"
 #include "ColorShader.h"
 #include "TextureShader.h"
-
 #include <string>
 
-using namespace DirectX;
-
-/*
-GameModel class represents game objects, with geometry that can be oriented and 
-positioned in the world. It provides the protocols to orient and position but
-does not have any geometry. Game Model subclasses provide the actual geometry
-colours and textures for the game objects
-*/
-//Adjust these constants for smooth motion
 const float ROTATION_SPEED = 0.07f; //speed to control user rotation of objects
 const float TRANSLATION_INCREMENT = 0.1f; //speed to control user moved of objects
 
+////////////////////////////////////////////////////////////////////////////////
+// Class name: GameModel
+////////////////////////////////////////////////////////////////////////////////
 class GameModel
 {
 public:

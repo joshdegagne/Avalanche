@@ -1,17 +1,16 @@
-#ifndef _ARRAYLIST_H
-#define _ARRAYLIST_H
+////////////////////////////////////////////////////////////////////////////////
+// Filename: ArrayList.h
+////////////////////////////////////////////////////////////////////////////////
+#pragma once
 
 #include <algorithm>
 #include <exception>
 
 using namespace std;
 
-/*
-Templated ArrayList to hold T*
-This is a basic Template container as built in the COMP 2404 C++ course
-*/
-
-
+////////////////////////////////////////////////////////////////////////////////
+// Class name: ArrayList
+////////////////////////////////////////////////////////////////////////////////
 template <class T>
 class ArrayList 
 {
@@ -179,5 +178,3 @@ ostream & operator<<(ostream& ostr,  const ArrayList<T>& l) {
 	l.printOn(ostr);
 	return ostr;
 }
-
-#endif

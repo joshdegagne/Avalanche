@@ -1,42 +1,20 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: D3D.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _D3D_H_
-#define _D3D_H_
+#pragma once
 
-
-/////////////
-// LINKING //
-/////////////
-/*
-Specify the libraries to link when using this object module. 
-These libraries contain all the Direct3D functionality for setting up and drawing 3D graphics in DirectX
-as well as tools to interface with the hardware on the computer to obtain information about the refresh 
-rate of the monitor, the video card being used, and so forth. 
-*/
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
-
-//////////////
-// INCLUDES //
-//////////////
 #include <dxgi.h>
 #include <d3dcommon.h>
 #include <d3d11.h>
-
-#include <DirectXMath.h> //replaces XNAMath and previous math libraries since VS2010
-
-using namespace DirectX;
-
+#include "DirectXHelper.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: D3D
 ////////////////////////////////////////////////////////////////////////////////
-/*
-This class is our encapsulation and gateway to the DirectX 11 3D pipeline
-*/
 class D3D
 {
 public:
@@ -82,5 +60,3 @@ private:
 
 
 };
-
-#endif
