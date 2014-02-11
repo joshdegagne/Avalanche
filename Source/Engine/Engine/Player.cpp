@@ -1,8 +1,7 @@
 #include "Player.h"
 
-Player::Player(): Entity()
+Player::Player(int pNum): Entity(), playerNum(pNum) 
 {
-
 }
 
 void Player::update(float elapsed)

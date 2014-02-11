@@ -7,10 +7,11 @@ Game::Game()
 {
 	//set pointers to our objects to null so if initialization of them
 	//fails they will not mistakenly be used to clean up memory
-	keyInput = 0; 
-	conInput = 0;
-	graphics = 0;
-	camera   = 0;
+	keyInput  = 0; 
+	conInput  = 0;
+	graphics  = 0;
+	camera    = 0;
+	playfield = 0;
 
 	gameModels = new ArrayList<GameModel>();
 }
@@ -52,24 +53,24 @@ bool Game::Initialize()
 	// Create the keyInput object.  This object will be used to handle reading the keyboard input from the user.
 	keyInput = new KeyInput;
 	if(!keyInput)
-	{
 		return false;
-	}
-		// Initialize the keyInput object.
 	keyInput->Initialize();
 
+	// Create the conInput object. This manages/controls any controller input.
 	conInput = new ControllerInputManager;
 	if(!conInput)
-	{
 		return false;
-	}
 
 	// Create the Camera object.
 	camera = new CineCamera(screenWidth,screenHeight);
 	if(!camera)
-	{
 		return false;
-	}
+
+	// Playfield is where the main part of the game (and its logic) will happen
+	playfield = new Playfield;
+	if (!playfield)
+		return false;
+	playfield->Initialize(4, conInput); //First parameter is numPlayers
 
 	// Set the initial position of the camera.
 	camera->SetPosition(20.0f, 10.0f, 20.0f); //10 units along Z in front of origin
@@ -77,19 +78,16 @@ bool Game::Initialize()
 	camera->SetUpDirection(0.0f, -1.0f, 0.0f); //up points in positive Y direction
 	/*IMPORTANT:  note camera direction and up must be orthogonal */
 
-
-
-	
 	//Create the game objects for our game
 	WCHAR* fieldTexture = L"textures/graph_paper.dds";
 
-	playField = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
-	playField->worldTranslate(9.0f,3.0f,-0.1f);
+	pF = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
+	pF->worldTranslate(9.0f,3.0f,-0.1f);
 
 	//Add the  gameModel objects to the gameModels collection
 	//that will be rendered by the graphics system
 
-	gameModels->add(playField);
+	gameModels->add(pF);
 
 
 	// Create the graphics object.  This object will handle rendering all the graphics for this application.
@@ -116,11 +114,11 @@ bool Game::Initialize()
 void Game::Shutdown()
 {
 	//Shut down our game objects and release their memory
-	if(playField)
+	if(pF)
 	{
-		playField->Shutdown();
-		delete playField;
-		playField = 0;
+		pF->Shutdown();
+		delete pF;
+		pF = 0;
 	}
 
 	//release the memory for the gameModels collection
