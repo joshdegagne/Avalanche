@@ -90,6 +90,7 @@ bool Game::Initialize()
 		players[i] = new Player(*this, i);
 		if (conInput->isConnected(i))
 			activePlayers[activeCounter++] = players[i];
+		gameModels->add(players[i]->getModel());
 	}
 
 	playfield = new Playfield(activePlayers, activeCounter);
@@ -264,10 +265,17 @@ bool Game::Frame()
 
 
 	// Check if the user pressed escape and wants to exit the application.
-	if(keyInput->IsKeyDown(VK_ESCAPE))
-	{
+	if (keyInput->IsKeyDown(VK_ESCAPE))
 		return false;
-	}
+	if (keyInput->IsKeyDown(VK_LEFT)) //Move camera Left
+		players[0]->moveLeft();
+	if (keyInput->IsKeyDown(VK_RIGHT)) //Move camera Right
+	    players[0]->moveRight();
+	if (keyInput->IsKeyDown(VK_UP)) //camera Move Forward
+		players[0]->moveUp();
+	if (keyInput->IsKeyDown(VK_DOWN)) //camera Pull Back
+		players[0]->moveDown();
+
 	// Check if the user pressed the back button and wants to exit the application.
 	if (conInput->getButtonBack(0))
 	{
