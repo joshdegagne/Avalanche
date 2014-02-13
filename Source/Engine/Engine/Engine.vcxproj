@@ -114,6 +114,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ControllerInputManager.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityType.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="OldCamera.h" />
     <ClInclude Include="ColorShader.h" />
