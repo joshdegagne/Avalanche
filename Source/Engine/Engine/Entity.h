@@ -4,6 +4,7 @@
 #pragma once
 
 #include "DirectXHelper.h"
+#include "EntityType.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Entity
@@ -15,6 +16,7 @@ class Entity {
 
 	private:
 		XMFLOAT2 pos;
+		EntityType type;
 
 	public:
 		float getX();

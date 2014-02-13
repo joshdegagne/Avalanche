@@ -209,8 +209,8 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="DebugConsole.h">
-      <Filter>Header Files\Helper Headers</Filter>
+    <ClInclude Include="EntityType.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
