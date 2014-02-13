@@ -49,7 +49,6 @@ bool Game::Initialize()
 	keyInput = new KeyInput;
 	if(!keyInput)
 		return false;
-	keyInput->Initialize();
 
 	conInput = new ControllerInputManager;
 	if(!conInput)
