@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "ControllerInputManager.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Player
@@ -11,11 +12,12 @@
 class Player: public Entity {
 	public: 
 		//Constructors
-		Player(int);
+		Player(ControllerInputManager*, int);
 		
 		void update(float);
 
 	private:
+		ControllerInputManager* controller;
 		int playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 
 };

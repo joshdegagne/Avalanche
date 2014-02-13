@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(int pNum): Entity(), playerNum(pNum) 
+Player::Player(ControllerInputManager* c, int pNum): Entity(), controller(c), playerNum(pNum)
 {
 }
 

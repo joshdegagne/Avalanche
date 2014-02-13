@@ -68,11 +68,23 @@ bool Game::Initialize()
 	if(!camera)
 		return false;
 
+
+	//Assigns all players in game
+	//Checks for all plugged in controllers and passes those players into Playfield
+	players = new Player*[NUMPLAYERS];
+    Player** activePlayers = new Player*[NUMPLAYERS];
+	int activeCounter = 0;
+	for (int i = 0; i < NUMPLAYERS; i++)
+	{
+		players[i] = new Player(conInput, i);
+		if (conInput->isConnected(i))
+			activePlayers[activeCounter++] = players[i];
+	}
+
 	// Playfield is where the main part of the game (and its logic) will happen
-	playfield = new Playfield;
+	playfield = new Playfield(activePlayers, activeCounter);
 	if (!playfield)
 		return false;
-	playfield->Initialize(4, conInput); //First parameter is numPlayers
 
 	// Set the initial position of the camera.
 	//camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
@@ -353,6 +365,22 @@ bool Game::Frame()
 		
 		//print camera position
 		//I'm sorry.
+
+		
+		You need:
+		std::wostringstream oss;
+		std::wstring ws;
+		const wchar_t* cwp;
+		int i = whatever;
+
+		oss<<i;
+		ws = oss.str();
+		cwp = ws.c_str(); // const wchar_t*
+		std::vector<wchar_t> buf( cwp , cwp + (ws.size() + 1) );
+		wchar_t* result = &buf[0];  // wchar_t*
+		std::wstring ourString(result);
+		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), ourString.c_str(), wcslen(ourString.c_str()), NULL, NULL);
+
 		std::wostringstream osspx;
 		std::wostringstream osspy;
 		std::wostringstream osspz;
