@@ -7,13 +7,13 @@
 
 Game::Game()
 {
-	//set pointers to our objects to null so if initialization of them
-	//fails they will not mistakenly be used to clean up memory
 	keyInput  = 0; 
 	conInput  = 0;
 	graphics  = 0;
 	camera    = 0;
+	players	  = 0;
 	playfield = 0;
+	pF		  = 0;
 
 	gameModels = new ArrayList<GameModel>();
 }
@@ -21,17 +21,11 @@ Game::Game()
 
 Game::Game(const Game& other)
 {
-	//always implmement your own copy constructor even if it does nothing
 }
 
 
 Game::~Game()
 {
-	//Always implement your own destructor even if it does nothing.
-	//If your class will ever have subclasses (through inheritance) then make the 
-	//destructor virtual as in
-	// virtual Game::~Game(){...}
-	// otherwise you will likely have memory leaks
 }
 
 ControllerInputManager* Game::getControllerManager() { return conInput; }
@@ -39,40 +33,56 @@ ControllerInputManager* Game::getControllerManager() { return conInput; }
 
 bool Game::Initialize()
 {
+
+	/////////////////
+	//Window/Screen//
+	/////////////////
 	int screenWidth, screenHeight;
-	bool result;
-
-
-	// Initialize the width and height of the screen to zero before sending the variables into 
-	// InitializeWindows() function which will cause them to get set.
-	// They are passed in by reference so can be set from within the InitializeWindows() function
-
 	screenWidth = 0;
 	screenHeight = 0;
-
-	// Initialize the windows api.
-	// Create the actual window. This screenWidth and screenHeight variables will get set
 	InitializeWindows(screenWidth, screenHeight);
 
-	// Create the keyInput object.  This object will be used to handle reading the keyboard input from the user.
+
+	/////////////////
+	//Input Devices//
+	/////////////////
 	keyInput = new KeyInput;
 	if(!keyInput)
 		return false;
 	keyInput->Initialize();
 
-	// Create the conInput object. This manages/controls any controller input.
 	conInput = new ControllerInputManager;
 	if(!conInput)
 		return false;
 
-	// Create the Camera object.
+
+	//////////
+	//Camera//
+	//////////
 	camera = new Camera(screenWidth,screenHeight);
 	if(!camera)
 		return false;
+	/*
+	camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
+	camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
+	camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
+	for(int i=0; i < 100; ++i) camera->TiltUp();
+	for(int i=0; i < 125; ++i) camera->RollLeft();
+	for(int i=0; i < 10; ++i) camera->TiltUp();
+	for(int i=0; i < 15; ++i) camera->PanLeft();
+	for(int i=0; i < 10; ++i) camera->RollLeft();
+	for(int i=0; i < 10; ++i) camera->PanLeft();
+	for(int i=0; i < 10; ++i) camera->RollLeft();
+	IMPORTANT:  note camera direction and up must be orthogonal 
+	*/
+	camera->SetPosition(24.0f, 5.0f, 15.0f);
+	camera->SetTarget(9.0f, 3.0f, 0.0f);
+	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
 
 
-	//Assigns all players in game
-	//Checks for all plugged in controllers and passes those players into Playfield
+	/////////////////////
+	//Players/Playfield//
+	/////////////////////
 	players = new Player*[NUMPLAYERS];
     Player** activePlayers = new Player*[NUMPLAYERS];
 	int activeCounter = 0;
@@ -83,52 +93,31 @@ bool Game::Initialize()
 			activePlayers[activeCounter++] = players[i];
 	}
 
-	// Playfield is where the main part of the game (and its logic) will happen
 	playfield = new Playfield(activePlayers, activeCounter);
 	if (!playfield)
 		return false;
 
-	// Set the initial position of the camera.
-	//camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
-	//camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
-	//camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
-	//for(int i=0; i < 100; ++i) camera->TiltUp();
-	//for(int i=0; i < 125; ++i) camera->RollLeft();
-	//for(int i=0; i < 10; ++i) camera->TiltUp();
-	//for(int i=0; i < 15; ++i) camera->PanLeft();
-	//for(int i=0; i < 10; ++i) camera->RollLeft();
-	//for(int i=0; i < 10; ++i) camera->PanLeft();
-	//for(int i=0; i < 10; ++i) camera->RollLeft();
-	/*IMPORTANT:  note camera direction and up must be orthogonal */
 
-	camera->SetPosition(24.0f, 5.0f, 15.0f);
-	camera->SetTarget(9.0f, 3.0f, 0.0f);
-	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
-
-	//Create the game objects for our game
+	///////////////
+	//Game Models//
+	///////////////
 	WCHAR* fieldTexture = L"textures/graph_paper.dds";
-
 	pF = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
 	pF->worldTranslate(9.0f,3.0f,-0.1f);
-
-	//Add the  gameModel objects to the gameModels collection
-	//that will be rendered by the graphics system
 
 	gameModels->add(pF);
 
 
-	// Create the graphics object.  This object will handle rendering all the graphics for this application.
+	////////////
+	//Graphics//
+	////////////
 	graphics = new Graphics;
 	if(!graphics)
 	{
 		return false;
 	}
 
-	// Initialize the graphics object. 	Engine.exe!WinMain(HINSTANCE__ * hInstance, HINSTANCE__ * hPrevInstance, char * pScmdline, int iCmdshow) Line 21	C++
-	// The Graphics::Initialize will also call back into our game objects an initialize their ModelClass objects once the GraphicsClass has had
-	// a chance to initialize
-
-	result = graphics->Initialize(screenWidth, screenHeight, hwnd, camera, gameModels);
+	bool result = graphics->Initialize(screenWidth, screenHeight, hwnd, camera, gameModels);
 	if(!result)
 	{
 		return false;
@@ -140,7 +129,6 @@ bool Game::Initialize()
 
 void Game::Shutdown()
 {
-	//Shut down our game objects and release their memory
 	if(pF)
 	{
 		pF->Shutdown();
@@ -148,16 +136,12 @@ void Game::Shutdown()
 		pF = 0;
 	}
 
-	//release the memory for the gameModels collection
-	//all objects in it should have been released my the code immediately above
 	if(gameModels)
 	{
 		delete gameModels;
 		gameModels = 0;
 	}
 
-	//Shut down the graphics pipeline object and release its memory
-	// Release the graphics object.
 	if(graphics)
 	{
 		graphics->Shutdown();
@@ -165,7 +149,6 @@ void Game::Shutdown()
 		graphics = 0;
 	}
 
-	// Release the keyInput object's memory.
 	if(keyInput)
 	{
 		delete keyInput;
@@ -178,16 +161,12 @@ void Game::Shutdown()
 		conInput = 0;
 	}
 
-    // Release the camera object's memory.
 	if(camera)
 	{
 		delete camera;
 		camera = 0;
 	}
 
-
-
-	// Shutdown the actual Window's window.
 	ShutdownWindows();
 	
 	return;
@@ -368,6 +347,9 @@ bool Game::Frame()
 		//print camera position
 		//I'm sorry.
 
+		///////////////////////////////////////////////////////////////////////////
+		//DEBUGCONSOLE HEADERFILE HAS MADE THIS OUT OF DATE. PLEASE FIX OR REMOVE//
+		///////////////////////////////////////////////////////////////////////////
 		
 		You need:
 		std::wostringstream oss;
