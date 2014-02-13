@@ -50,7 +50,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	Allocate a "side car" console so we can write some debug information out to it
 	*/
 	AllocConsole();
-	writeTextToConsole(L"Hello World\n");
+	writeTextToConsole(L"Hello World");
 	
 	// Create the system object.
 	game = new Game;
