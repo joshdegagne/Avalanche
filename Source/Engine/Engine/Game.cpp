@@ -1,9 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: Game.cpp
 ////////////////////////////////////////////////////////////////////////////////
+
+#include "Game.h"
+
+////////////////////////////////////////////////////////////////////////////
+//DEBUGCONSOLE HEADERFILE HAS MADE THESE OUT OF DATE. PLEASE FIX OR REMOVE//
+////////////////////////////////////////////////////////////////////////////
 #include <sstream>
 #include <vector>
-#include "Game.h"
+
 
 Game::Game()
 {
@@ -90,7 +96,7 @@ bool Game::Initialize()
 		players[i] = new Player(*this, i);
 		if (conInput->isConnected(i))
 			activePlayers[activeCounter++] = players[i];
-		gameModels->add(players[i]->getModel());
+		gameModels->add(players[i]->getModel()); //Passes in player's model to the graphics class with rest of game models. Is this okay??
 	}
 
 	playfield = new Playfield(activePlayers, activeCounter);
@@ -253,9 +259,17 @@ bool Game::Frame()
 	const int ascii_C = 67;
 	const int ascii_D = 68;
 	const int ascii_E = 69;
+	const int ascii_F = 70;
+	const int ascii_G = 71;
+	const int ascii_H = 72;
+	const int ascii_I = 73;
 	const int ascii_J = 74;
+	const int ascii_K = 75;
+	const int ascii_L = 76;
 	const int ascii_P = 80;
 	const int ascii_R = 82;
+	const int ascii_S = 83;
+	const int ascii_T = 84;
 	const int ascii_U = 85;
 	const int ascii_V = 86;
 	const int ascii_W = 87;
@@ -267,20 +281,54 @@ bool Game::Frame()
 	// Check if the user pressed escape and wants to exit the application.
 	if (keyInput->IsKeyDown(VK_ESCAPE))
 		return false;
-	if (keyInput->IsKeyDown(VK_LEFT)) //Move camera Left
-		players[0]->moveLeft();
-	if (keyInput->IsKeyDown(VK_RIGHT)) //Move camera Right
-	    players[0]->moveRight();
-	if (keyInput->IsKeyDown(VK_UP)) //camera Move Forward
-		players[0]->moveUp();
-	if (keyInput->IsKeyDown(VK_DOWN)) //camera Pull Back
-		players[0]->moveDown();
 
 	// Check if the user pressed the back button and wants to exit the application.
 	if (conInput->getButtonBack(0))
 	{
 		return false;
 	}
+
+	///////////////////////////
+	//KEYBOARD PLAYER TESTING//
+	///////////////////////////
+
+	//Player one testing (ARROW KEYS)
+	if (keyInput->IsKeyDown(VK_LEFT))
+		players[0]->moveLeft();
+	if (keyInput->IsKeyDown(VK_RIGHT)) 
+	    players[0]->moveRight();
+	if (keyInput->IsKeyDown(VK_UP))
+		players[0]->moveUp();
+	if (keyInput->IsKeyDown(VK_DOWN))
+		players[0]->moveDown();
+	//Player two testing (WASD)
+	if (keyInput->IsKeyDown(ascii_A))
+		players[1]->moveLeft();
+	if (keyInput->IsKeyDown(ascii_D)) 
+	    players[1]->moveRight();
+	if (keyInput->IsKeyDown(ascii_W))
+		players[1]->moveUp();
+	if (keyInput->IsKeyDown(ascii_S))
+		players[1]->moveDown();
+	//Player three testing (TFGH)
+	if (keyInput->IsKeyDown(ascii_F))
+		players[2]->moveLeft();
+	if (keyInput->IsKeyDown(ascii_H)) 
+	    players[2]->moveRight();
+	if (keyInput->IsKeyDown(ascii_T))
+		players[2]->moveUp();
+	if (keyInput->IsKeyDown(ascii_G))
+		players[2]->moveDown();
+	//Player four testing (IJKL)
+	if (keyInput->IsKeyDown(ascii_J))
+		players[3]->moveLeft();
+	if (keyInput->IsKeyDown(ascii_L)) 
+	    players[3]->moveRight();
+	if (keyInput->IsKeyDown(ascii_I))
+		players[3]->moveUp();
+	if (keyInput->IsKeyDown(ascii_K))
+		players[3]->moveDown();
+
 
 	/*
 	//Move camera or models based on input
