@@ -4,30 +4,20 @@
 #include <windows.h>
 #include <sstream>
 #include <vector>
-/////////////////////////////////////////////////////////////////////////////
-//Labeling functions automatically format output for labeling of values
-//Format: [Label] [Value]
-//Label = L"Number of players: "
-//Value = 1
-//Output: Number of players: 1
-/////////////////////////////////////////////////////////////////////////////
-//Integers
-static void writeLabelToConsole(const wchar_t* label, int value)
+
+///////////////////////////////////////////////////////////////////////////////////////
+//writes new line to Console. Very straight forward, but shouldn't be necessary to use.
+///////////////////////////////////////////////////////////////////////////////////////
+static void writeNewLineToConsole()
 {
-	writeTextToConsole(label, false);
-	writeNumToConsole(value, true);
-}
-//Floats
-static void writeLabelToConsole(const wchar_t* label, float value)
-{
-	writeTextToConsole(label, false);
-	writeNumToConsole(value, true);
+	WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), L"\n", wcslen(L"\n"), NULL, NULL);
 }
 
 /////////////////////////////////////////////////////////////////////////////
 //These functions are more manual. You give a wchar_t*, int, or float and
 //prints to the debug console. You can also choose to specify if you do not
-//want the function to print a new line after your desired output
+//want the function to print a new line after your desired output.
+//See labeling functions below for more general functions.
 /////////////////////////////////////////////////////////////////////////////
 //Integers
 static void writeNumToConsole (int input, bool printNewLineAfter = true)
@@ -71,10 +61,25 @@ static void writeTextToConsole(const wchar_t* theString, bool printNewLineAfter 
 		writeNewLineToConsole();
 }
 
-///////////////////////////////////////////////////////////////////////////////////////
-//writes new line to Console. Very straight forward, but shouldn't be necessary to use.
-///////////////////////////////////////////////////////////////////////////////////////
-static void writeNewLineToConsole()
+/////////////////////////////////////////////////////////////////////////////
+//Labeling functions automatically format output for labeling of values
+//Format: [Label] [Value]
+//Label = L"Number of players: "
+//Value = 1
+//Output: Number of players: 1
+/////////////////////////////////////////////////////////////////////////////
+//Integers
+static void writeLabelToConsole(const wchar_t* label, int value)
 {
-	WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), L"\n", wcslen(L"\n"), NULL, NULL);
+	writeTextToConsole(label, false);
+	writeNumToConsole(value, true);
 }
+//Floats
+static void writeLabelToConsole(const wchar_t* label, float value)
+{
+	writeTextToConsole(label, false);
+	writeNumToConsole(value, true);
+}
+
+
+
