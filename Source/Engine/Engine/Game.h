@@ -18,6 +18,8 @@
 #include "Player.h"
 #define  NUMPLAYERS 4
 
+class Player;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +35,7 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
+		ControllerInputManager* getControllerManager();
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 

@@ -34,6 +34,8 @@ Game::~Game()
 	// otherwise you will likely have memory leaks
 }
 
+ControllerInputManager* Game::getControllerManager() { return conInput; }
+
 
 bool Game::Initialize()
 {
@@ -76,7 +78,7 @@ bool Game::Initialize()
 	int activeCounter = 0;
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
-		players[i] = new Player(conInput, i);
+		players[i] = new Player(*this, i);
 		if (conInput->isConnected(i))
 			activePlayers[activeCounter++] = players[i];
 	}

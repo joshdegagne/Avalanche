@@ -9,7 +9,7 @@
 #include "Obstacle.h"
 #include "Game.h"
 
-class Game; //Foward declaration needed in order to satisfy compiler
+class Player; //Foward declaration needed in order to satisfy compiler
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Playfield
 // The main encapsulation of the entities and management of said entities

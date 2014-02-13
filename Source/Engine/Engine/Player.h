@@ -4,7 +4,9 @@
 #pragma once
 
 #include "Entity.h"
-#include "ControllerInputManager.h"
+#include "Game.h"
+
+class Game;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Player
@@ -12,7 +14,7 @@
 class Player: public Entity {
 	public: 
 		//Constructors
-		Player(ControllerInputManager*, int);
+		Player(Game&, int);
 		
 		void update(float);
 
