@@ -4,11 +4,12 @@
 #pragma once
 
 #include "DirectXHelper.h"
+#include "Entity.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Obstacle
 ////////////////////////////////////////////////////////////////////////////////
-class Obstacle
+class Obstacle : public Entity
 {
 	public:
 		Obstacle();
@@ -16,5 +17,5 @@ class Obstacle
 	private:
 		//Type of obstacle
 		//Obstacle size?
-		XMFLOAT3 position; //Position
+
 };
