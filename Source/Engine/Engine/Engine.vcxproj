@@ -113,6 +113,7 @@
     <ClInclude Include="Arraylist.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ControllerInputManager.h" />
+    <ClInclude Include="DebugConsole.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="OldCamera.h" />
