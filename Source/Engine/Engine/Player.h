@@ -5,6 +5,8 @@
 
 #include "Entity.h"
 #include "Game.h"
+#define  STICK_MOVEMENT_THRESHOLD 0.3
+#define  TRIGGER_ACTIVATION_THRESHOLD 0.3
 
 class Game;  //Forward declaration
 ////////////////////////////////////////////////////////////////////////////////
@@ -20,5 +22,15 @@ class Player: public Entity {
 	private:
 		ControllerInputManager* controller;
 		int playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
+		
+		//render(); ???
+		//moveLeft();
+		//moveRight();
+		//moveUp();
+		//moveDown();
+		//jump();
+		//rollLeft();
+		//rollRight();
+		//requestPause(); ???
 
 };
