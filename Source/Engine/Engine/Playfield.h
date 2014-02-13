@@ -21,7 +21,7 @@ class Playfield
 		~Playfield();
 	private:
 		ArrayList<Obstacle>*	obstacles;		   //List of obstacles
-		Player**				activePlayers;	   //List of players
+		Player**				activePlayers;	   //List of players (will be of length 1-4)
 		int						numActivePlayers;  //Number of players
 		ControllerInputManager* input;			   //Input Manager
 		QuadTexturedModel*		ground;	           //Playfield quad
