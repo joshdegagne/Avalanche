@@ -3,6 +3,10 @@
 Player::Player(Game& g, int pNum) : Entity(), playerNum(pNum)
 {
 	controller = g.getControllerManager();
+	position.x = 0;
+	position.y = 0;
+	
+	model = new CubeModel(1.0f, 1.0f, 1.0f);
 }
 
 void Player::update(float elapsed)
@@ -95,4 +99,9 @@ void Player::update(float elapsed)
 		//Roll right?
 		return;
 	}
+
+}
+
+void Player::render()
+{
 }
