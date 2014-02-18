@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "Game.h"
-
+#include "DebugConsole.h"
 
 
 /*
@@ -30,12 +30,6 @@ The sources of the comments are:
 /*WinMain is the entry point. Like main() on a simple C++ or java console application
 */
 
-static bool use_debug_console = true; //set to true to get the "side car" console window for writing debug info to
-
-static void writeToDebugConsole(const wchar_t* theString){
-	if(use_debug_console)
-		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), theString, wcslen(theString), NULL, NULL);
-}
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
@@ -55,8 +49,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	/*
 	Allocate a "side car" console so we can write some debug information out to it
 	*/
-	if(use_debug_console) AllocConsole();
-	writeToDebugConsole(L"Hello World\n");
+	AllocConsole();
+	writeTextToConsole(L"Hello World");
 	
 	// Create the system object.
 	game = new Game;

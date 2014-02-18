@@ -12,51 +12,57 @@
 #include "GameModel.h"
 #include "QuadModel.h"
 #include "QuadTexturedModel.h"
-#include "arraylist.h"
+#include "Arraylist.h"
 #include "Camera.h"
 #include "Playfield.h"
+#include "Player.h"
+#define  NUMPLAYERS 4
 
+class Player; //Forward declaration
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
 ////////////////////////////////////////////////////////////////////////////////
 class Game
 {
-public:
-	Game(); //default constructor
-	Game(const Game&); //copy constructor
-	~Game(); //destructor
+	friend class Playfield;
 
-	bool Initialize();
-	void Shutdown();
-	void Run();
+	public:
+		Game(); 
+		Game(const Game&);
+		~Game();
 
-	//This method is used to intercept the windows messages
-	//This is how windows messages or events get into out application
-	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
+		bool Initialize();
+		void Shutdown();
+		void Run();
+		ControllerInputManager* getControllerManager();
 
-private:
-	bool  Frame();
-	void  InitializeWindows(int&, int&);
-	void  ShutdownWindows();
-	float getElapsedTime();
+		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
-private:
-	LPCWSTR   applicationName;
-	HINSTANCE hinstance;
-	HWND      hwnd;  //handle to the Windows window (client window for the application)
+	private:
+		//Functions
+		bool  Frame();
+		void  InitializeWindows(int&, int&);
+		void  ShutdownWindows();
+		float getElapsedTime();
 
-	KeyInput*               keyInput; //out input class object from which to obtain user inputs
-	ControllerInputManager* conInput; //Yay! Input from a controller!
-	Graphics*               graphics; //our graphics class object that encapsulates the graphics pipeline
-	Camera*					camera; //our encapsulation of where the camera is looking at our world
+		//Member Variables
+		LPCWSTR   applicationName;
+		HINSTANCE hinstance;
+		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
-	float previousTime;
+		KeyInput*               keyInput; //out input class object from which to obtain user inputs
+		ControllerInputManager* conInput; //Yay! Input from a controller!
+		Graphics*               graphics; //our graphics class object that encapsulates the graphics pipeline
+		Camera*					camera; //our encapsulation of where the camera is looking at our world
+		Player** 				players;
 
-	//Game World Items
-	Playfield*		   playfield;
-	QuadTexturedModel* pF;
+		float previousTime;
 
-	ArrayList<GameModel>* gameModels; //container to hold all our game world models
+		//Game World Items
+		Playfield*		   playfield;
+		QuadTexturedModel* pF;
+
+		ArrayList<GameModel>* gameModels; //container to hold all our game world models
 
 
 };

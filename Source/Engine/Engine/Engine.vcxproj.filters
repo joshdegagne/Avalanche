@@ -212,6 +212,9 @@
     <ClInclude Include="EntityType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DebugConsole.h">
+      <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">

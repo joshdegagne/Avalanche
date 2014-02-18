@@ -1,19 +1,25 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: Game.cpp
 ////////////////////////////////////////////////////////////////////////////////
+
+#include "Game.h"
+
+////////////////////////////////////////////////////////////////////////////
+//DEBUGCONSOLE HEADERFILE HAS MADE THESE OUT OF DATE. PLEASE FIX OR REMOVE//
+////////////////////////////////////////////////////////////////////////////
 #include <sstream>
 #include <vector>
-#include "Game.h"
+
 
 Game::Game()
 {
-	//set pointers to our objects to null so if initialization of them
-	//fails they will not mistakenly be used to clean up memory
 	keyInput  = 0; 
 	conInput  = 0;
 	graphics  = 0;
 	camera    = 0;
+	players	  = 0;
 	playfield = 0;
+	pF		  = 0;
 
 	gameModels = new ArrayList<GameModel>();
 }
@@ -21,100 +27,103 @@ Game::Game()
 
 Game::Game(const Game& other)
 {
-	//always implmement your own copy constructor even if it does nothing
 }
 
 
 Game::~Game()
 {
-	//Always implement your own destructor even if it does nothing.
-	//If your class will ever have subclasses (through inheritance) then make the 
-	//destructor virtual as in
-	// virtual Game::~Game(){...}
-	// otherwise you will likely have memory leaks
 }
+
+ControllerInputManager* Game::getControllerManager() { return conInput; }
 
 
 bool Game::Initialize()
 {
+
+	/////////////////
+	//Window/Screen//
+	/////////////////
 	int screenWidth, screenHeight;
-	bool result;
-
-
-	// Initialize the width and height of the screen to zero before sending the variables into 
-	// InitializeWindows() function which will cause them to get set.
-	// They are passed in by reference so can be set from within the InitializeWindows() function
-
 	screenWidth = 0;
 	screenHeight = 0;
-
-	// Initialize the windows api.
-	// Create the actual window. This screenWidth and screenHeight variables will get set
 	InitializeWindows(screenWidth, screenHeight);
 
-	// Create the keyInput object.  This object will be used to handle reading the keyboard input from the user.
+
+	/////////////////
+	//Input Devices//
+	/////////////////
 	keyInput = new KeyInput;
 	if(!keyInput)
 		return false;
-	keyInput->Initialize();
 
-	// Create the conInput object. This manages/controls any controller input.
 	conInput = new ControllerInputManager;
 	if(!conInput)
 		return false;
 
-	// Create the Camera object.
+
+	//////////
+	//Camera//
+	//////////
 	camera = new Camera(screenWidth,screenHeight);
 	if(!camera)
 		return false;
-
-	// Playfield is where the main part of the game (and its logic) will happen
-	playfield = new Playfield;
-	if (!playfield)
-		return false;
-	playfield->Initialize(4, conInput); //First parameter is numPlayers
-
-	// Set the initial position of the camera.
-	//camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
-	//camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
-	//camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
-	//for(int i=0; i < 100; ++i) camera->TiltUp();
-	//for(int i=0; i < 125; ++i) camera->RollLeft();
-	//for(int i=0; i < 10; ++i) camera->TiltUp();
-	//for(int i=0; i < 15; ++i) camera->PanLeft();
-	//for(int i=0; i < 10; ++i) camera->RollLeft();
-	//for(int i=0; i < 10; ++i) camera->PanLeft();
-	//for(int i=0; i < 10; ++i) camera->RollLeft();
-	/*IMPORTANT:  note camera direction and up must be orthogonal */
-
+	/*
+	camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
+	camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
+	camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
+	for(int i=0; i < 100; ++i) camera->TiltUp();
+	for(int i=0; i < 125; ++i) camera->RollLeft();
+	for(int i=0; i < 10; ++i) camera->TiltUp();
+	for(int i=0; i < 15; ++i) camera->PanLeft();
+	for(int i=0; i < 10; ++i) camera->RollLeft();
+	for(int i=0; i < 10; ++i) camera->PanLeft();
+	for(int i=0; i < 10; ++i) camera->RollLeft();
+	IMPORTANT:  note camera direction and up must be orthogonal 
+	*/
 	camera->SetPosition(24.0f, 5.0f, 15.0f);
 	camera->SetTarget(9.0f, 3.0f, 0.0f);
 	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
 
-	//Create the game objects for our game
-	WCHAR* fieldTexture = L"textures/graph_paper.dds";
 
+	/////////////////////
+	//Players/Playfield//
+	/////////////////////
+	players = new Player*[NUMPLAYERS];
+    Player** activePlayers = new Player*[NUMPLAYERS];
+	int activeCounter = 0;
+	for (int i = 0; i < NUMPLAYERS; i++)
+	{
+		players[i] = new Player(*this, i);
+		if (conInput->isConnected(i))
+			activePlayers[activeCounter++] = players[i];
+		gameModels->add(players[i]->getModel()); //Passes in player's model to the graphics class with rest of game models. Is this okay??
+	}
+
+	playfield = new Playfield(activePlayers, activeCounter);
+	if (!playfield)
+		return false;
+
+
+	///////////////
+	//Game Models//
+	///////////////
+	WCHAR* fieldTexture = L"textures/graph_paper.dds";
 	pF = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
 	pF->worldTranslate(9.0f,3.0f,-0.1f);
-
-	//Add the  gameModel objects to the gameModels collection
-	//that will be rendered by the graphics system
 
 	gameModels->add(pF);
 
 
-	// Create the graphics object.  This object will handle rendering all the graphics for this application.
+	////////////
+	//Graphics//
+	////////////
 	graphics = new Graphics;
 	if(!graphics)
 	{
 		return false;
 	}
 
-	// Initialize the graphics object. 	Engine.exe!WinMain(HINSTANCE__ * hInstance, HINSTANCE__ * hPrevInstance, char * pScmdline, int iCmdshow) Line 21	C++
-	// The Graphics::Initialize will also call back into our game objects an initialize their ModelClass objects once the GraphicsClass has had
-	// a chance to initialize
-
-	result = graphics->Initialize(screenWidth, screenHeight, hwnd, camera, gameModels);
+	bool result = graphics->Initialize(screenWidth, screenHeight, hwnd, camera, gameModels);
 	if(!result)
 	{
 		return false;
@@ -126,7 +135,6 @@ bool Game::Initialize()
 
 void Game::Shutdown()
 {
-	//Shut down our game objects and release their memory
 	if(pF)
 	{
 		pF->Shutdown();
@@ -134,16 +142,12 @@ void Game::Shutdown()
 		pF = 0;
 	}
 
-	//release the memory for the gameModels collection
-	//all objects in it should have been released my the code immediately above
 	if(gameModels)
 	{
 		delete gameModels;
 		gameModels = 0;
 	}
 
-	//Shut down the graphics pipeline object and release its memory
-	// Release the graphics object.
 	if(graphics)
 	{
 		graphics->Shutdown();
@@ -151,7 +155,6 @@ void Game::Shutdown()
 		graphics = 0;
 	}
 
-	// Release the keyInput object's memory.
 	if(keyInput)
 	{
 		delete keyInput;
@@ -164,16 +167,12 @@ void Game::Shutdown()
 		conInput = 0;
 	}
 
-    // Release the camera object's memory.
 	if(camera)
 	{
 		delete camera;
 		camera = 0;
 	}
 
-
-
-	// Shutdown the actual Window's window.
 	ShutdownWindows();
 	
 	return;
@@ -260,9 +259,17 @@ bool Game::Frame()
 	const int ascii_C = 67;
 	const int ascii_D = 68;
 	const int ascii_E = 69;
+	const int ascii_F = 70;
+	const int ascii_G = 71;
+	const int ascii_H = 72;
+	const int ascii_I = 73;
 	const int ascii_J = 74;
+	const int ascii_K = 75;
+	const int ascii_L = 76;
 	const int ascii_P = 80;
 	const int ascii_R = 82;
+	const int ascii_S = 83;
+	const int ascii_T = 84;
 	const int ascii_U = 85;
 	const int ascii_V = 86;
 	const int ascii_W = 87;
@@ -272,15 +279,56 @@ bool Game::Frame()
 
 
 	// Check if the user pressed escape and wants to exit the application.
-	if(keyInput->IsKeyDown(VK_ESCAPE))
-	{
+	if (keyInput->IsKeyDown(VK_ESCAPE))
 		return false;
-	}
+
 	// Check if the user pressed the back button and wants to exit the application.
 	if (conInput->getButtonBack(0))
 	{
 		return false;
 	}
+
+	///////////////////////////
+	//KEYBOARD PLAYER TESTING//
+	///////////////////////////
+
+	//Player one testing (ARROW KEYS)
+	if (keyInput->IsKeyDown(VK_LEFT))
+		players[0]->moveLeft();
+	if (keyInput->IsKeyDown(VK_RIGHT)) 
+	    players[0]->moveRight();
+	if (keyInput->IsKeyDown(VK_UP))
+		players[0]->moveUp();
+	if (keyInput->IsKeyDown(VK_DOWN))
+		players[0]->moveDown();
+	//Player two testing (WASD)
+	if (keyInput->IsKeyDown(ascii_A))
+		players[1]->moveLeft();
+	if (keyInput->IsKeyDown(ascii_D)) 
+	    players[1]->moveRight();
+	if (keyInput->IsKeyDown(ascii_W))
+		players[1]->moveUp();
+	if (keyInput->IsKeyDown(ascii_S))
+		players[1]->moveDown();
+	//Player three testing (TFGH)
+	if (keyInput->IsKeyDown(ascii_F))
+		players[2]->moveLeft();
+	if (keyInput->IsKeyDown(ascii_H)) 
+	    players[2]->moveRight();
+	if (keyInput->IsKeyDown(ascii_T))
+		players[2]->moveUp();
+	if (keyInput->IsKeyDown(ascii_G))
+		players[2]->moveDown();
+	//Player four testing (IJKL)
+	if (keyInput->IsKeyDown(ascii_J))
+		players[3]->moveLeft();
+	if (keyInput->IsKeyDown(ascii_L)) 
+	    players[3]->moveRight();
+	if (keyInput->IsKeyDown(ascii_I))
+		players[3]->moveUp();
+	if (keyInput->IsKeyDown(ascii_K))
+		players[3]->moveDown();
+
 
 	/*
 	//Move camera or models based on input
@@ -353,6 +401,25 @@ bool Game::Frame()
 		
 		//print camera position
 		//I'm sorry.
+
+		///////////////////////////////////////////////////////////////////////////
+		//DEBUGCONSOLE HEADERFILE HAS MADE THIS OUT OF DATE. PLEASE FIX OR REMOVE//
+		///////////////////////////////////////////////////////////////////////////
+		
+		You need:
+		std::wostringstream oss;
+		std::wstring ws;
+		const wchar_t* cwp;
+		int i = whatever;
+
+		oss<<i;
+		ws = oss.str();
+		cwp = ws.c_str(); // const wchar_t*
+		std::vector<wchar_t> buf( cwp , cwp + (ws.size() + 1) );
+		wchar_t* result = &buf[0];  // wchar_t*
+		std::wstring ourString(result);
+		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), ourString.c_str(), wcslen(ourString.c_str()), NULL, NULL);
+
 		std::wostringstream osspx;
 		std::wostringstream osspy;
 		std::wostringstream osspz;
