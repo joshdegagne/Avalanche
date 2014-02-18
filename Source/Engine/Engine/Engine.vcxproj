@@ -99,6 +99,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerModel.cpp" />
     <ClCompile Include="Playfield.cpp" />
     <ClCompile Include="Prismmodel.cpp" />
     <ClCompile Include="PrismTexturedModel.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="KeyInput.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerModel.h" />
     <ClInclude Include="Playfield.h" />
     <ClInclude Include="Prismmodel.h" />
     <ClInclude Include="PrismTexturedModel.h" />

@@ -120,6 +120,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerModel.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XYZaxis.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="DebugConsole.h">
       <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerModel.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

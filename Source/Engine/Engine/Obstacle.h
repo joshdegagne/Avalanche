@@ -17,5 +17,6 @@ class Obstacle : public Entity
 	private:
 		//Type of obstacle
 		//Obstacle size?
+		float length;
 
 };
