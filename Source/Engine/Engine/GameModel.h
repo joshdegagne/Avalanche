@@ -16,6 +16,7 @@ const float TRANSLATION_INCREMENT = 0.1f; //speed to control user moved of objec
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: GameModel
+// As of 2014/02/19, this is basically identical to gamemodel from the tutorials
 ////////////////////////////////////////////////////////////////////////////////
 class GameModel
 {
@@ -55,6 +56,7 @@ public:
 	virtual ID3D11ShaderResourceView* GetTexture(int i);
 
 	//render method
+	//draw method with different params instead?
 	virtual bool Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader);
 
 	// Movement

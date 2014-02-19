@@ -1,11 +1,11 @@
 #pragma once
 
-#include "QuadModel.h"
+#include "QuadTexturedModel.h"
 
-class PlayerModel : public QuadModel
+class PlayerModel : public QuadTexturedModel
 {
 public:
-	PlayerModel(float lengthX, float lengthY, XMFLOAT4 * pColor = 0); // needs to be oriented to face camera
+	PlayerModel(float lengthX, float lengthY, WCHAR* aTextureFileName); // needs to be oriented to face camera
 	virtual ~PlayerModel(void);
 	virtual void Shutdown();
 
