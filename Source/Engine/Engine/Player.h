@@ -21,14 +21,16 @@ class Player: public Entity {
 		Player(Game&, int);
 		
 		void update(float);
-		CubeModel* getModel();
+		//CubeModel* getCubeModel(); 
+		GameModel* getPlayerModel(); 
 		void render(); 
 
 	private:
 		ControllerInputManager* controller;
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	position;
-		CubeModel*	model;
+		//CubeModel*	cubeModel; // for testing purposes
+		GameModel*	playerModel; // for testing purposes
 	
 	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
 		void moveLeft();

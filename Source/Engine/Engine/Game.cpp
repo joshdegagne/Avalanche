@@ -96,7 +96,7 @@ bool Game::Initialize()
 		players[i] = new Player(*this, i);
 		if (conInput->isConnected(i))
 			activePlayers[activeCounter++] = players[i];
-		gameModels->add(players[i]->getModel()); //Passes in player's model to the graphics class with rest of game models. Is this okay??
+		gameModels->add(players[i]->getPlayerModel()); //Passes in player's model to the graphics class with rest of game models. Is this okay??
 	}
 
 	playfield = new Playfield(activePlayers, activeCounter);

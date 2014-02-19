@@ -6,12 +6,12 @@ Player::Player(Game& g, int pNum) : Entity(), playerNum(pNum)
 	position.x = 0;
 	position.y = 0;
 	
-	model = new CubeModel(1.0f, 1.0f, 1.0f);
+	playerModel = new CubeModel(1.0f, 1.0f, 1.0f);
 }
 
-CubeModel* Player::getModel()
+GameModel* Player::getPlayerModel()
 {
-	return model;
+	return playerModel;
 }
 
 void Player::render()
@@ -114,20 +114,20 @@ void Player::update(float elapsed)
 void Player::moveLeft()
 {
 	position.x -= MOVEMENT_SPEED;
-	model->worldTranslate(0.0f, +MOVEMENT_SPEED, 0.0f); //Left is "up" in our game world
+	playerModel->worldTranslate(0.0f, +MOVEMENT_SPEED, 0.0f); //Left is "up" in our game world
 }
 void Player::moveRight()
 {
 	position.x += MOVEMENT_SPEED;
-	model->worldTranslate(0.0f, -MOVEMENT_SPEED, 0.0f); //Right is "down" in our game world
+	playerModel->worldTranslate(0.0f, -MOVEMENT_SPEED, 0.0f); //Right is "down" in our game world
 }
 void Player::moveDown()
 {
 	position.y -= MOVEMENT_SPEED;
-	model->worldTranslate(+MOVEMENT_SPEED, 0.0f, 0.0f); //Down is "right" in our game world
+	playerModel->worldTranslate(+MOVEMENT_SPEED, 0.0f, 0.0f); //Down is "right" in our game world
 }
 void Player::moveUp()
 {
 	position.y += MOVEMENT_SPEED;
-	model->worldTranslate(-MOVEMENT_SPEED, 0.0f, 0.0f); //Up is "left" in our game world
+	playerModel->worldTranslate(-MOVEMENT_SPEED, 0.0f, 0.0f); //Up is "left" in our game world
 }
