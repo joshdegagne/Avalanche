@@ -5,7 +5,9 @@
 
 #include "Entity.h"
 #include "Game.h"
-#include "Cubemodel.h"
+#include "Cubemodel.h" // for testing movement via controller
+#include "QuadModel.h" // for testing movement via controller
+#include "PlayerModel.h" // for testing
 
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f

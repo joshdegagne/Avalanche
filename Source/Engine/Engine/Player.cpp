@@ -6,7 +6,11 @@ Player::Player(Game& g, int pNum) : Entity(), playerNum(pNum)
 	position.x = 0;
 	position.y = 0;
 	
-	playerModel = new CubeModel(1.0f, 1.0f, 1.0f);
+	// constructing gamemodel here to simply test out the drawing and movement
+	//playerModel = new CubeModel(1.0f, 1.0f, 1.0f);
+	WCHAR* iceClimberHeadTexture = L"textures/iceclimberhead.dds";
+	//playerModel = new QuadTexturedModel(1.0f, 1.0f, iceClimberHeadTexture);
+	playerModel = new PlayerModel(1.0f, 1.0f, iceClimberHeadTexture);
 }
 
 GameModel* Player::getPlayerModel()
