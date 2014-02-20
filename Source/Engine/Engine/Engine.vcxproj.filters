@@ -123,6 +123,9 @@
     <ClCompile Include="PlayerModel.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
+    <ClCompile Include="LogObstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XYZaxis.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="PlayerModel.h">
       <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="LogObstacle.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

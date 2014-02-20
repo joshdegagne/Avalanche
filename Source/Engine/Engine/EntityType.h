@@ -17,7 +17,7 @@ enum class EntityType : int
 	//Obstacles
 	FINISH,
 	ROCK_SMALL, 
-	ROCK,BIG,
+	ROCK_BIG,
 	ICE_PATCH,
 	ICE_SPIKE,
 	SNOW_MOUND,

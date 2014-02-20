@@ -9,7 +9,6 @@ Player::Player(Game& g, int pNum) : Entity(), playerNum(pNum)
 	// constructing gamemodel here to simply test out the drawing and movement
 	//playerModel = new CubeModel(1.0f, 1.0f, 1.0f);
 	WCHAR* iceClimberHeadTexture = L"textures/iceclimberhead.dds";
-	//playerModel = new QuadTexturedModel(1.0f, 1.0f, iceClimberHeadTexture);
 	playerModel = new PlayerModel(1.0f, 1.0f, iceClimberHeadTexture);
 }
 
@@ -119,19 +118,23 @@ void Player::moveLeft()
 {
 	position.x -= MOVEMENT_SPEED;
 	playerModel->worldTranslate(0.0f, +MOVEMENT_SPEED, 0.0f); //Left is "up" in our game world
+	//playerModel->MoveLeft();
 }
 void Player::moveRight()
 {
 	position.x += MOVEMENT_SPEED;
 	playerModel->worldTranslate(0.0f, -MOVEMENT_SPEED, 0.0f); //Right is "down" in our game world
+	//playerModel->MoveRight();
 }
 void Player::moveDown()
 {
 	position.y -= MOVEMENT_SPEED;
 	playerModel->worldTranslate(+MOVEMENT_SPEED, 0.0f, 0.0f); //Down is "right" in our game world
+	//playerModel->MoveDown();
 }
 void Player::moveUp()
 {
 	position.y += MOVEMENT_SPEED;
 	playerModel->worldTranslate(-MOVEMENT_SPEED, 0.0f, 0.0f); //Up is "left" in our game world
+	//playerModel->MoveUp();
 }

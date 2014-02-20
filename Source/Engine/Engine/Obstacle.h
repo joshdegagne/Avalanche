@@ -12,9 +12,9 @@
 class Obstacle : public Entity
 {
 	public:
-		Obstacle();
-		~Obstacle();
-	private:
+		Obstacle(float);
+		float getLength();
+	protected:
 		//Type of obstacle
 		//Obstacle size?
 		float length;

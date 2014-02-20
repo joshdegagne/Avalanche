@@ -1,9 +1,8 @@
 #include "Obstacle.h"
 
-Obstacle::Obstacle()
+Obstacle::Obstacle(float l) : Entity()
 {
+	length = l;
 }
 
-Obstacle::~Obstacle()
-{
-}
+float Obstacle::getLength() { return length; }
