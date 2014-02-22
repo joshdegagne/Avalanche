@@ -1,6 +1,7 @@
 #include "Playfield.h"
 #include "DebugConsole.h"
 
+
 Playfield::Playfield(Player** ps, int pNum) : numActivePlayers(pNum)
 {
 	//Creates new array of length 1-4 (Depending on how many players are playing in this game)
@@ -10,8 +11,15 @@ Playfield::Playfield(Player** ps, int pNum) : numActivePlayers(pNum)
 		activePlayers[i] = ps[i];
 
 	writeLabelToConsole(L"Number of controllers connected: ", numActivePlayers);
+
+	obstacles = new ArrayList<Obstacle>;
+	obstacles->add(new LogObstacle()); // add test obstacle entity - game model is currently made separately in game.cpp
 }
 
 Playfield::~Playfield()
+{
+}
+
+void Playfield::update(float elapsed) 
 {
 }

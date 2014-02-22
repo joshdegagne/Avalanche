@@ -8,6 +8,7 @@
 #include "QuadTexturedModel.h"
 #include "Obstacle.h"
 #include "Game.h"
+#include "LogObstacle.h"
 
 class Player; //Foward declaration needed in order to satisfy compiler
 ////////////////////////////////////////////////////////////////////////////////
@@ -19,6 +20,8 @@ class Playfield
 	public:
 		Playfield(Player**, int);
 		~Playfield();
+
+		void update(float); // for scrolling
 	private:
 		ArrayList<Obstacle>*	obstacles;		   //List of obstacles
 		Player**				activePlayers;	   //List of players (will be of length 1-4)

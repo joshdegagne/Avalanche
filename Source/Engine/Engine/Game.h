@@ -16,6 +16,7 @@
 #include "Camera.h"
 #include "Playfield.h"
 #include "Player.h"
+#include "LogModel.h"
 #define  NUMPLAYERS 4
 
 class Player; //Forward declaration
@@ -62,7 +63,7 @@ class Game
 		Playfield*		   playfield;
 		QuadTexturedModel* pF;
 
-		ArrayList<GameModel>* gameModels; //container to hold all our game world models
+		ArrayList<GameModel>* gameModels; //container to hold all our game world models - change to be in modelmanager class?
 
 
 };

@@ -122,6 +122,18 @@ bool Game::Initialize()
 
 	gameModels->add(pF);
 
+	// test log obstacle model - entity currently made separate in playfield.cpp default constructor
+
+	WCHAR* logTextureFiles[] = {
+		L"textures/tempwoodside.dds",
+		L"textures/tempwoodface.dds",
+		L"textures/tempwoodside.dds"
+	};
+
+	LogModel* testLogObstacleModel = new LogModel(3.0f, 0.25f, 16, logTextureFiles);
+	testLogObstacleModel->worldTranslate(18.0f, 1.5f, 0);
+
+	gameModels->add(testLogObstacleModel);
 
 	////////////
 	//Graphics//
