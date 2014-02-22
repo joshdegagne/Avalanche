@@ -9,6 +9,9 @@
 #include "Obstacle.h"
 #include "Game.h"
 #include "LogObstacle.h"
+#include "LogModel.h"
+
+#define SCROLL_SPEED 0.15f
 
 class Player; //Foward declaration needed in order to satisfy compiler
 ////////////////////////////////////////////////////////////////////////////////
@@ -21,11 +24,15 @@ class Playfield
 		Playfield(Player**, int);
 		~Playfield();
 
+		// initialize method?
 		void update(float); // for scrolling
+
+		LogModel* getTestLogModel(); // made to test scrolling
 	private:
 		ArrayList<Obstacle>*	obstacles;		   //List of obstacles
 		Player**				activePlayers;	   //List of players (will be of length 1-4)
 		int						numActivePlayers;  //Number of players
 		ControllerInputManager* input;			   //Input Manager
 		QuadTexturedModel*		ground;	           //Playfield quad
+		LogModel*				testLogModel;	   //made to test scrolling
 };

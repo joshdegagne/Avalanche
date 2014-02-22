@@ -12,8 +12,21 @@ Playfield::Playfield(Player** ps, int pNum) : numActivePlayers(pNum)
 
 	writeLabelToConsole(L"Number of controllers connected: ", numActivePlayers);
 
+
+	// log obstacle made to test playfield scrolling - let modelmanager handle this stuff when it's available
 	obstacles = new ArrayList<Obstacle>;
+
+	WCHAR* logTextureFiles[] = {
+		L"textures/tempwoodside.dds",
+		L"textures/tempwoodface.dds",
+		L"textures/tempwoodside.dds"
+	};
+
+	testLogModel = new LogModel(3.0f, 0.25f, 16, logTextureFiles);
+
+	/*
 	obstacles->add(new LogObstacle()); // add test obstacle entity - game model is currently made separately in game.cpp
+	*/
 }
 
 Playfield::~Playfield()
@@ -22,4 +35,10 @@ Playfield::~Playfield()
 
 void Playfield::update(float elapsed) 
 {
+	// until modelmanager is made, move both entity and gamemodel separately (logobstable entity ignored for now)
+	// need to make it so that when it reaches the top it is cleared from the game or playfield
+	testLogModel->worldTranslate(-SCROLL_SPEED, 0.0f, 0.0f);
+
 }
+
+LogModel* Playfield::getTestLogModel() { return testLogModel; }

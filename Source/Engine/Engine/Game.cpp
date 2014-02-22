@@ -123,7 +123,7 @@ bool Game::Initialize()
 	gameModels->add(pF);
 
 	// test log obstacle model - entity currently made separate in playfield.cpp default constructor
-
+	/*
 	WCHAR* logTextureFiles[] = {
 		L"textures/tempwoodside.dds",
 		L"textures/tempwoodface.dds",
@@ -134,6 +134,11 @@ bool Game::Initialize()
 	testLogObstacleModel->worldTranslate(18.0f, 1.5f, 0);
 
 	gameModels->add(testLogObstacleModel);
+	*/
+
+	// log model stuff for testing
+	playfield->getTestLogModel()->worldTranslate(18.0f, 1.5f, 0);
+	gameModels->add(playfield->getTestLogModel());
 
 	////////////
 	//Graphics//
@@ -308,6 +313,10 @@ bool Game::Frame()
 	{
 		return false;
 	}
+
+	// playfield scroll testing
+	//if (playfield->getTestLogModel()->GetWorldMatrix().
+	playfield->update(0);
 
 	///////////////////////////
 	//KEYBOARD PLAYER TESTING//

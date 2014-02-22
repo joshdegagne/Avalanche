@@ -12,7 +12,7 @@
 class Obstacle : public Entity
 {
 	public:
-		Obstacle(float);
+		Obstacle(float); // initialized to not be present on the playfield (present = false)
 		Obstacle(float, bool);
 		float getLength();
 		bool isPresent();
