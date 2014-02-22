@@ -116,7 +116,8 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	WCHAR* fieldTexture = L"textures/graph_paper.dds";
+	//WCHAR* fieldTexture = L"textures/graph_paper.dds";
+	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
 	pF = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
 	pF->worldTranslate(9.0f,3.0f,-0.1f);
 
