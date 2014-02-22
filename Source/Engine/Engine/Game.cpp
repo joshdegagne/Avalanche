@@ -80,9 +80,18 @@ bool Game::Initialize()
 	for(int i=0; i < 10; ++i) camera->RollLeft();
 	IMPORTANT:  note camera direction and up must be orthogonal 
 	*/
+
+	// original camera placement by cameron
+	/*
 	camera->SetPosition(24.0f, 5.0f, 15.0f);
 	camera->SetTarget(9.0f, 3.0f, 0.0f);
 	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
+	*/
+
+	camera->SetPosition(22.0f, 8.0f, 13.0f);
+	camera->SetTarget(12.0f, 3.0f, 0.0f);
+	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
+
 
 
 	/////////////////////
