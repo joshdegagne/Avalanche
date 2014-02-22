@@ -2,11 +2,19 @@
 // Filename: LogObstacle.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "LogObstacle.h"
+#include "EntityType.h"
 
-LogObstacle::LogObstacle(float l) : Obstacle(l)
+LogObstacle::LogObstacle() : Obstacle(3.0f)
 {
+	type = EntityType::LOG_3;
+}
+
+LogObstacle::LogObstacle(float l, bool p, EntityType t) : Obstacle(l, p)
+{
+	type = t;
 }
 
 void LogObstacle::update(float elapsed)
 {
+
 }

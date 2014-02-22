@@ -85,6 +85,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControllerInputManager.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="LogModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OldCamera.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="DebugConsole.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityType.h" />
+    <ClInclude Include="LogModel.h" />
     <ClInclude Include="LogObstacle.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="OldCamera.h" />

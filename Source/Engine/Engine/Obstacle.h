@@ -13,10 +13,14 @@ class Obstacle : public Entity
 {
 	public:
 		Obstacle(float);
+		Obstacle(float, bool);
 		float getLength();
+		bool isPresent();
+		void setPresent(bool);
 	protected:
 		//Type of obstacle
 		//Obstacle size?
 		float length;
+		bool present; // whether the obstacle is on screen and moving towards players
 
 };
