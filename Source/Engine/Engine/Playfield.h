@@ -11,9 +11,12 @@
 #include "LogObstacle.h"
 #include "LogModel.h"
 
+#include "KeyInput.h" //Idealy This would be in the players themselves
+
 #define SCROLL_SPEED 0.15f
 
 class Player; //Foward declaration needed in order to satisfy compiler
+class Game;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Playfield
 // The main encapsulation of the entities and management of said entities
@@ -21,18 +24,22 @@ class Player; //Foward declaration needed in order to satisfy compiler
 class Playfield
 {
 	public:
-		Playfield(Player**, int);
+		Playfield(Player**, int, Game*);
 		~Playfield();
 
 		// initialize method?
 		void update(float); // for scrolling
 
-		LogModel* getTestLogModel(); // made to test scrolling
+		ArrayList<GameModel>* getGameModels(); 
+
 	private:
-		ArrayList<Obstacle>*	obstacles;		   //List of obstacles
-		Player**				activePlayers;	   //List of players (will be of length 1-4)
-		int						numActivePlayers;  //Number of players
-		ControllerInputManager* input;			   //Input Manager
-		QuadTexturedModel*		ground;	           //Playfield quad
-		LogModel*				testLogModel;	   //made to test scrolling
+		KeyInput*				keyInput;			//Idealy This would be in the players themselves
+
+		ArrayList<Obstacle>*	obstacles;			//List of obstacles
+		ArrayList<GameModel>*   models;				//list of models to pass to game
+		Player**				activePlayers;		//List of players (will be of length 1-4)
+		Player**                testPlayers;		//List of players for testing w/o controllers
+		int						numActivePlayers;	//Number of players
+		QuadTexturedModel*		ground;				//Playfield quad
+		LogModel*				testLogModel;		//made to test scrolling
 };

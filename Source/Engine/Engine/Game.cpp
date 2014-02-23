@@ -4,20 +4,12 @@
 
 #include "Game.h"
 
-////////////////////////////////////////////////////////////////////////////
-//DEBUGCONSOLE HEADERFILE HAS MADE THESE OUT OF DATE. PLEASE FIX OR REMOVE//
-////////////////////////////////////////////////////////////////////////////
-#include <sstream>
-#include <vector>
-
-
 Game::Game()
 {
 	keyInput  = 0; 
 	conInput  = 0;
 	graphics  = 0;
 	camera    = 0;
-	players	  = 0;
 	playfield = 0;
 	pF		  = 0;
 
@@ -67,48 +59,24 @@ bool Game::Initialize()
 	camera = new Camera(screenWidth,screenHeight);
 	if(!camera)
 		return false;
-	/*
-	camera->SetPosition(26.4438f, 11.6168f, 5.04668f); //10 units along Z in front of origin
-	camera->SetDirection(-1.0f, 0.0f, -1.0f); //look in positive Z direction
-	camera->SetUpDirection(0.0f, -1.f, 0.0f); //up points in positive Y direction
-	for(int i=0; i < 100; ++i) camera->TiltUp();
-	for(int i=0; i < 125; ++i) camera->RollLeft();
-	for(int i=0; i < 10; ++i) camera->TiltUp();
-	for(int i=0; i < 15; ++i) camera->PanLeft();
-	for(int i=0; i < 10; ++i) camera->RollLeft();
-	for(int i=0; i < 10; ++i) camera->PanLeft();
-	for(int i=0; i < 10; ++i) camera->RollLeft();
-	IMPORTANT:  note camera direction and up must be orthogonal 
-	*/
-
-	// original camera placement by cameron
-	/*
-	camera->SetPosition(24.0f, 5.0f, 15.0f);
-	camera->SetTarget(9.0f, 3.0f, 0.0f);
-	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
-	*/
 
 	camera->SetPosition(22.0f, 8.0f, 13.0f);
 	camera->SetTarget(12.0f, 3.0f, 0.0f);
 	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
 
 
-
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
-	players = new Player*[NUMPLAYERS];
     Player** activePlayers = new Player*[NUMPLAYERS];
 	int activeCounter = 0;
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
-		players[i] = new Player(*this, i);
 		if (conInput->isConnected(i))
-			activePlayers[activeCounter++] = players[i];
-		gameModels->add(players[i]->getPlayerModel()); //Passes in player's model to the graphics class with rest of game models. Is this okay??
+			activePlayers[activeCounter++] = new Player(*this, i);
 	}
 
-	playfield = new Playfield(activePlayers, activeCounter);
+	playfield = new Playfield(activePlayers, activeCounter, this);
 	if (!playfield)
 		return false;
 
@@ -116,30 +84,7 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	//WCHAR* fieldTexture = L"textures/graph_paper.dds";
-	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
-	pF = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
-	pF->worldTranslate(9.0f,3.0f,-0.1f);
-
-	gameModels->add(pF);
-
-	// test log obstacle model - entity currently made separate in playfield.cpp default constructor
-	/*
-	WCHAR* logTextureFiles[] = {
-		L"textures/tempwoodside.dds",
-		L"textures/tempwoodface.dds",
-		L"textures/tempwoodside.dds"
-	};
-
-	LogModel* testLogObstacleModel = new LogModel(3.0f, 0.25f, 16, logTextureFiles);
-	testLogObstacleModel->worldTranslate(18.0f, 1.5f, 0);
-
-	gameModels->add(testLogObstacleModel);
-	*/
-
-	// log model stuff for testing
-	playfield->getTestLogModel()->worldTranslate(18.0f, 1.5f, 0);
-	gameModels->add(playfield->getTestLogModel());
+	gameModels->addAll(*playfield->getGameModels());
 
 	////////////
 	//Graphics//
@@ -271,39 +216,9 @@ bool Game::Frame()
 	which will render the graphics for that frame. 
 	As the application grows we'll place more code here. 
 	*/
-	
-	/*
-	Apply transformations to the game objects
-	*/
-
-	//Rotate the object a bit around some axis
 
 	//Handle user inputs
 	bool result;
-
-	const int ascii_A = 65;
-	const int ascii_B = 66;
-	const int ascii_C = 67;
-	const int ascii_D = 68;
-	const int ascii_E = 69;
-	const int ascii_F = 70;
-	const int ascii_G = 71;
-	const int ascii_H = 72;
-	const int ascii_I = 73;
-	const int ascii_J = 74;
-	const int ascii_K = 75;
-	const int ascii_L = 76;
-	const int ascii_P = 80;
-	const int ascii_R = 82;
-	const int ascii_S = 83;
-	const int ascii_T = 84;
-	const int ascii_U = 85;
-	const int ascii_V = 86;
-	const int ascii_W = 87;
-	const int ascii_X = 88;
-	const int ascii_Y = 89;
-	const int ascii_Z = 90;
-
 
 	// Check if the user pressed escape and wants to exit the application.
 	if (keyInput->IsKeyDown(VK_ESCAPE))
@@ -318,248 +233,6 @@ bool Game::Frame()
 	// playfield scroll testing
 	//if (playfield->getTestLogModel()->GetWorldMatrix().
 	playfield->update(0);
-
-	///////////////////////////
-	//KEYBOARD PLAYER TESTING//
-	///////////////////////////
-
-	//Player one testing (ARROW KEYS)
-	if (keyInput->IsKeyDown(VK_LEFT))
-		players[0]->moveLeft();
-	if (keyInput->IsKeyDown(VK_RIGHT)) 
-	    players[0]->moveRight();
-	if (keyInput->IsKeyDown(VK_UP))
-		players[0]->moveUp();
-	if (keyInput->IsKeyDown(VK_DOWN))
-		players[0]->moveDown();
-	//Player two testing (WASD)
-	if (keyInput->IsKeyDown(ascii_A))
-		players[1]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_D)) 
-	    players[1]->moveRight();
-	if (keyInput->IsKeyDown(ascii_W))
-		players[1]->moveUp();
-	if (keyInput->IsKeyDown(ascii_S))
-		players[1]->moveDown();
-	//Player three testing (TFGH)
-	if (keyInput->IsKeyDown(ascii_F))
-		players[2]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_H)) 
-	    players[2]->moveRight();
-	if (keyInput->IsKeyDown(ascii_T))
-		players[2]->moveUp();
-	if (keyInput->IsKeyDown(ascii_G))
-		players[2]->moveDown();
-	//Player four testing (IJKL)
-	if (keyInput->IsKeyDown(ascii_J))
-		players[3]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_L)) 
-	    players[3]->moveRight();
-	if (keyInput->IsKeyDown(ascii_I))
-		players[3]->moveUp();
-	if (keyInput->IsKeyDown(ascii_K))
-		players[3]->moveDown();
-
-
-	/*
-	//Move camera or models based on input
-	//We will combinations for a key + arrow keys to control the camera
-	if ( keyInput->IsKeyDown(VK_SHIFT) ){
-
-	   if ( keyInput->IsKeyDown(VK_LEFT) ) //Move camera Left
-	      camera->StrafeLeft();
-
-	   if ( keyInput->IsKeyDown(VK_RIGHT) ) //Move camera Right
-	      camera->StrafeRight();
-
-	   if ( keyInput->IsKeyDown(VK_UP) ) //camera Move Forward
-		  camera->MoveForward();
-
-	   if ( keyInput->IsKeyDown(VK_DOWN) ) //camera Pull Back
-		  camera->MoveBackward();
-
-	
-	}
-	else if ( keyInput->IsKeyDown(VK_CONTROL) ){
-
-	   if ( keyInput->IsKeyDown(VK_LEFT) ) //Pan camera Left
-	      camera->PanLeft();
-
-	   if ( keyInput->IsKeyDown(VK_RIGHT) ) //Pan camera Right
-	      camera->PanRight();
-
-	   if ( keyInput->IsKeyDown(VK_UP) ) //Tilt camera Downward
-		  camera->TiltDown();
-
-	   if ( keyInput->IsKeyDown(VK_DOWN) ) //Tilt camera Upward
-		  camera->TiltUp();
-
-	
-	}
-	else if ( keyInput->IsKeyDown(ascii_C) ){
-
-
-	   if ( keyInput->IsKeyDown(VK_UP) ) //Crane Up
-		  camera->CraneUp();
-
-	   if ( keyInput->IsKeyDown(VK_DOWN) ) //Crane Down
-		  camera->CraneDown();
-
-	
-	}
-	else if ( keyInput->IsKeyDown(ascii_R) ){
-
-
-	   if ( keyInput->IsKeyDown(VK_LEFT) ) //Roll Left
-		  camera->RollLeft();
-
-	   if ( keyInput->IsKeyDown(VK_RIGHT) ) //Roll Right
-		  camera->RollRight();	
-	}
-
-		else if ( keyInput->IsKeyDown(ascii_Z) ){
-
-
-	   if ( keyInput->IsKeyDown(VK_UP) ) //Zoom In
-		  camera->ZoomIn();
-
-	   if ( keyInput->IsKeyDown(VK_DOWN) ) //Zoom Out
-		  camera->ZoomOut();
-
-	
-	}
-	else if ( keyInput->IsKeyDown(ascii_P) ){
-		
-		//print camera position
-		//I'm sorry.
-
-		///////////////////////////////////////////////////////////////////////////
-		//DEBUGCONSOLE HEADERFILE HAS MADE THIS OUT OF DATE. PLEASE FIX OR REMOVE//
-		///////////////////////////////////////////////////////////////////////////
-		
-		You need:
-		std::wostringstream oss;
-		std::wstring ws;
-		const wchar_t* cwp;
-		int i = whatever;
-
-		oss<<i;
-		ws = oss.str();
-		cwp = ws.c_str(); // const wchar_t*
-		std::vector<wchar_t> buf( cwp , cwp + (ws.size() + 1) );
-		wchar_t* result = &buf[0];  // wchar_t*
-		std::wstring ourString(result);
-		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), ourString.c_str(), wcslen(ourString.c_str()), NULL, NULL);
-
-		std::wostringstream osspx;
-		std::wostringstream osspy;
-		std::wostringstream osspz;
-		std::wostringstream ossdx;
-		std::wostringstream ossdy;
-		std::wostringstream ossdz;
-		std::wostringstream ossux;
-		std::wostringstream ossuy;
-		std::wostringstream ossuz;
-		std::wstring wspx;
-		std::wstring wspy;
-		std::wstring wspz;
-		std::wstring wsdx;
-		std::wstring wsdy;
-		std::wstring wsdz;
-		std::wstring wsux;
-		std::wstring wsuy;
-		std::wstring wsuz;
-		const wchar_t* cwppx;
-		const wchar_t* cwppy;
-		const wchar_t* cwppz;
-		const wchar_t* cwpdx;
-		const wchar_t* cwpdy;
-		const wchar_t* cwpdz;
-		const wchar_t* cwpux;
-		const wchar_t* cwpuy;
-		const wchar_t* cwpuz;
-
-		float px = camera->GetPosition().x;
-		float py = camera->GetPosition().y;
-		float pz = camera->GetPosition().z;
-		float dx = camera->GetDirection().x;
-		float dy = camera->GetDirection().y;
-		float dz = camera->GetDirection().z;
-		float ux = camera->GetUpDirection().x;
-		float uy = camera->GetUpDirection().y;
-		float uz = camera->GetUpDirection().z;
-
-		osspx<<px;
-		wspx = osspx.str();
-		cwppx = wspx.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufpx( cwppx , cwppx + (wspx.size() + 1) );
-		wchar_t* posx = &bufpx[0];  // wchar_t*
-		std::wstring posString(posx);
-		posString += std::wstring(L" ");
-		osspy<<py;
-		wspy = osspy.str();
-		cwppy = wspy.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufpy( cwppy , cwppy + (wspy.size() + 1) );
-		wchar_t* posy = &bufpy[0];  // wchar_t*
-		posString += std::wstring(posy);
-		posString += std::wstring(L" ");
-		osspz<<pz;
-		wspz = osspz.str();
-		cwppz = wspz.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufpz( cwppz , cwppz + (wspz.size() + 1) );
-		wchar_t* posz = &bufpz[0];  // wchar_t*
-		posString += std::wstring(posz);
-		posString += std::wstring(L"\n");
-		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), posString.c_str(), wcslen(posString.c_str()), NULL, NULL);
-
-		ossdx<<dx;
-		wsdx = ossdx.str();
-		cwpdx = wsdx.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufdx( cwpdx , cwpdx + (wsdx.size() + 1) );
-		wchar_t* dirx = &bufdx[0];  // wchar_t*
-		std::wstring dirString(dirx);
-		dirString += std::wstring(L" ");
-		ossdy<<dy;
-		wsdy = ossdy.str();
-		cwpdy = wsdy.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufdy( cwpdy , cwpdy + (wsdy.size() + 1) );
-		wchar_t* diry = &bufdy[0];  // wchar_t*
-		dirString += std::wstring(diry);
-		dirString += std::wstring(L" ");
-		ossdz<<dz;
-		wsdz = ossdz.str();
-		cwpdz = wsdz.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufdz( cwpdz , cwpdz + (wsdz.size() + 1) );
-		wchar_t* dirz = &bufdz[0];  // wchar_t*
-		dirString += std::wstring(dirz);
-		dirString += std::wstring(L"\n");
-		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), dirString.c_str(), wcslen(dirString.c_str()), NULL, NULL);
-
-		ossux<<ux;
-		wsux = ossux.str();
-		cwpux = wsux.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufux( cwpux , cwpux + (wsux.size() + 1) );
-		wchar_t* upx = &bufux[0];  // wchar_t*
-		std::wstring upString(dirx);
-		upString += std::wstring(L" ");
-		ossuy<<uy;
-		wsuy = ossuy.str();
-		cwpuy = wsuy.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufuy( cwpuy , cwpuy + (wsuy.size() + 1) );
-		wchar_t* upy = &bufuy[0];  // wchar_t*
-		upString += std::wstring(upy);
-		upString += std::wstring(L" ");
-		ossuz<<uz;
-		wsuz = ossuz.str();
-		cwpuz = wsuz.c_str(); // const wchar_t*
-		std::vector<wchar_t> bufuz( cwpuz , cwpuz + (wsuz.size() + 1) );
-		wchar_t* upz = &bufuz[0];  // wchar_t*
-		upString += std::wstring(upz);
-		upString += std::wstring(L"\n");
-		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), upString.c_str(), wcslen(upString.c_str()), NULL, NULL);
-		
-	}
-	*/
 	
     float elapsedTime = getElapsedTime();
 
