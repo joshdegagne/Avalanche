@@ -10,10 +10,7 @@
 enum class EntityType : int
 {
 	//Players
-	PLAYER1,
-	PLAYER2,
-	PLAYER3,
-	PLAYER4,
+	PLAYER,
 	//Obstacles
 	FINISH,
 	ROCK_SMALL, 
@@ -23,12 +20,7 @@ enum class EntityType : int
 	SNOW_MOUND,
 	SNOW_BALL,
 	//Variable length obstacles.
-	LOG_3, 
-	LOG_4,
-	LOG_5,
-	LOG_6,
-	LOG_FALLING_4,
-	LOG_FALLING_5,
-	LOG_FALLING_6,
+	LOG,
+	LOG_FALLING
 	
 };
