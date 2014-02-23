@@ -6,13 +6,11 @@
 #include "DirectXHelper.h"
 #include <d3d11.h>
 #include "vertextype.h"
-#include "Model.h"
-#include "ColorShader.h"
-#include "TextureShader.h"
 #include <string>
 
-const float ROTATION_SPEED = 0.07f; //speed to control user rotation of objects
-const float TRANSLATION_INCREMENT = 0.1f; //speed to control user moved of objects
+class Model;
+class ColorShader;
+class TextureShader;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: GameModel
@@ -58,18 +56,6 @@ public:
 	//render method
 	//draw method with different params instead?
 	virtual bool Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader);
-
-	// Movement
-	//Transformation methods to position object
-	//relative to world axis
-
-	virtual void MoveLeft();
-	virtual void MoveRight();
-	virtual void MoveUp();
-	virtual void MoveDown();
-
-	virtual void RotateLeft();
-	virtual void RotateRight();
 
 
 protected:

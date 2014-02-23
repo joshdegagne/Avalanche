@@ -1,6 +1,8 @@
 #include "gamemodel.h"
 #include "Model.h"
 #include "quadTexturedModel.h"
+#include "ColorShader.h"
+#include "TextureShader.h"
 
 QuadTexturedModel::QuadTexturedModel(float lengthX, float lengthY, WCHAR* aTextureFileName) : GameModel()
 {

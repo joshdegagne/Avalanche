@@ -1,6 +1,8 @@
 #include "gamemodel.h"
 #include "Model.h"
 #include "prismmodel.h"
+#include "ColorShader.h"
+#include "TextureShader.h"
 
 PrismModel::PrismModel(float height, float radius, int nFaces, XMFLOAT4 * pColors) : GameModel()
 {
