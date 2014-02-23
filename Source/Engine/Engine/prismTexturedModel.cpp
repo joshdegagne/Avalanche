@@ -1,6 +1,8 @@
 #include "gamemodel.h"
 #include "Model.h"
 #include "prismTexturedmodel.h"
+#include "ColorShader.h"
+#include "TextureShader.h"
 
 PrismTexturedModel::PrismTexturedModel(float height, float radius, int nFaces, WCHAR** pTextureFileNames) : GameModel()
 {

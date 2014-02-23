@@ -6,7 +6,7 @@
 
 LogObstacle::LogObstacle() : Obstacle(3.0f)
 {
-	type = EntityType::LOG_3;
+	type = EntityType::LOG;
 	// orientation?
 }
 

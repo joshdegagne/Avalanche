@@ -1,6 +1,8 @@
 #include "gamemodel.h"
 #include "Model.h"
 #include "cubeTexturedModel.h"
+#include "ColorShader.h"
+#include "TextureShader.h"
 
 CubeTexturedModel::CubeTexturedModel(float lengthX, float lengthY, float lengthZ, WCHAR** pTextureFileNames) : GameModel()
 {
