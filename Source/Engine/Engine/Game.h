@@ -9,7 +9,7 @@
 #include "KeyInput.h"
 #include "ControllerInputManager.h"
 #include "Graphics.h"
-#include "GameModel.h"
+#include "IViewModel.h"
 #include "QuadModel.h"
 #include "QuadTexturedModel.h"
 #include "Arraylist.h"
@@ -63,7 +63,7 @@ class Game
 		Playfield*		   playfield;
 		QuadTexturedModel* pF;
 
-		ArrayList<GameModel>* gameModels; //container to hold all our game world models - change to be in modelmanager class?
+		ArrayList<IViewModel>* gameModels; //container to hold all our game world models - change to be in modelmanager class?
 
 
 };

@@ -17,7 +17,7 @@ class TextureShader;
 // Class name: GameModel
 // As of 2014/02/19, this is basically identical to gamemodel from the tutorials
 ////////////////////////////////////////////////////////////////////////////////
-class GameModel : IViewModel
+class GameModel : public IViewModel
 {
 public:
 	GameModel();

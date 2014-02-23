@@ -5,6 +5,9 @@
 //#include <iostream>
 #include <sstream>   // for wostringstream
 
+#include "camera.h"
+#include "ColorShader.h"
+#include "TextureShader.h"
 #include "Graphics.h"
 
 
@@ -22,7 +25,7 @@ Graphics::Graphics()
 	colorShader = 0;
 	textureShader = 0;
 
-	gameWorldModels = 0;
+	viewModels = 0;
 
 
 
@@ -41,7 +44,7 @@ Graphics::~Graphics()
 
 
 
-bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* initCamera, ArrayList<GameModel>* gameModels)
+bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* initCamera, ArrayList<IViewModel>* models)
 {
 	bool result;
 
@@ -95,13 +98,13 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 
 
 
-	gameWorldModels = gameModels;
+	viewModels = models;
 
-	if(gameWorldModels && !gameWorldModels->isEmpty()){
-		for(int i=0; i< gameWorldModels->size(); i++){
-			GameModel* gameModel = gameWorldModels->elementAt(i);
+	if(viewModels && !viewModels->isEmpty()){
+		for(int i=0; i< viewModels->size(); i++){
+			IViewModel* viewModel = viewModels->elementAt(i);
 			//result = gameModel->GetVertexModel()->Initialize(m_D3D->GetDevice());			
-			result = gameModel->InitializeVertexModels(d3D->GetDevice()); //initialize the models for this graphics device
+			result = viewModel->InitializeVertexModels(d3D->GetDevice()); //initialize the models for this graphics device
 	        if(!result)
 	        {
 		       MessageBox(hwnd, L"Could not initialize the game model object.", L"Error", MB_OK);
@@ -284,16 +287,16 @@ bool Graphics::Render()
 	d3D->GetWorldMatrix(axisWorld); //set to identity matrix
 
 
-	if(gameWorldModels && !gameWorldModels->isEmpty())
+	if(viewModels && !viewModels->isEmpty())
 
-		for(int i=0; i< gameWorldModels->size(); i++){
-			GameModel* gameModel = gameWorldModels->elementAt(i);
+		for(int i=0; i< viewModels->size(); i++){
+			IViewModel* viewModel = viewModels->elementAt(i);
 
 		   // Provide the game models with a graphics device context,
 		   // view and projection matrices, and
 		   // shaders and ask them to render themselves
 
-		  result = gameModel->Render(d3D->GetDeviceContext(), 
+		  result = viewModel->Render(d3D->GetDeviceContext(), 
 								          viewMatrix, 
 								          projectionMatrix,
 										  colorShader,
