@@ -1,7 +1,7 @@
 #include "gamemodel.h"
 #include "Model.h"
 
-GameModel::GameModel()
+GameModel::GameModel() : IViewModel()
 {
 
 	//initialize all matrices to identity matrix

@@ -13,7 +13,7 @@ Game::Game()
 	playfield = 0;
 	pF		  = 0;
 
-	gameModels = new ArrayList<GameModel>();
+	gameModels = new ArrayList<IViewModel>();
 }
 
 

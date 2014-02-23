@@ -7,6 +7,7 @@
 #include <d3d11.h>
 #include "vertextype.h"
 #include <string>
+#include "IViewModel.h"
 
 class Model;
 class ColorShader;
@@ -16,7 +17,7 @@ class TextureShader;
 // Class name: GameModel
 // As of 2014/02/19, this is basically identical to gamemodel from the tutorials
 ////////////////////////////////////////////////////////////////////////////////
-class GameModel
+class GameModel : public IViewModel
 {
 public:
 	GameModel();
