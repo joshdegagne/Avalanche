@@ -20,6 +20,7 @@
 #define  NUMPLAYERS 4
 
 class Player; //Forward declaration
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,9 +52,9 @@ class Game
 		HINSTANCE hinstance;
 		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
-		KeyInput*               keyInput; //out input class object from which to obtain user inputs
+		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
 		ControllerInputManager* conInput; //Yay! Input from a controller!
-		Graphics*               graphics; //our graphics class object that encapsulates the graphics pipeline
+		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world
 		Player** 				players;
 
