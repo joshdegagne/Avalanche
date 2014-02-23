@@ -56,7 +56,6 @@ class Game
 		ControllerInputManager* conInput; //Yay! Input from a controller!
 		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world
-		Player** 				players;
 
 		float previousTime;
 

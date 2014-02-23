@@ -10,7 +10,6 @@ Game::Game()
 	conInput  = 0;
 	graphics  = 0;
 	camera    = 0;
-	players	  = 0;
 	playfield = 0;
 	pF		  = 0;
 
@@ -69,18 +68,15 @@ bool Game::Initialize()
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
-	players = new Player*[NUMPLAYERS];
     Player** activePlayers = new Player*[NUMPLAYERS];
 	int activeCounter = 0;
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
-		players[i] = new Player(*this, i);
 		if (conInput->isConnected(i))
-			activePlayers[activeCounter++] = players[i];
-		gameModels->add(players[i]->getPlayerModel()); //Passes in player's model to the graphics class with rest of game models. Is this okay??
+			activePlayers[activeCounter++] = new Player(*this, i);
 	}
 
-	playfield = new Playfield(activePlayers, activeCounter);
+	playfield = new Playfield(activePlayers, activeCounter, this);
 	if (!playfield)
 		return false;
 
@@ -88,16 +84,7 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	//WCHAR* fieldTexture = L"textures/graph_paper.dds";
-	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
-	pF = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
-	pF->worldTranslate(9.0f,3.0f,-0.1f);
-
-	gameModels->add(pF);
-
-	// log model stuff for testing
-	playfield->getTestLogModel()->worldTranslate(18.0f, 1.5f, 0);
-	gameModels->add(playfield->getTestLogModel());
+	gameModels->addAll(*playfield->getGameModels());
 
 	////////////
 	//Graphics//
@@ -233,30 +220,6 @@ bool Game::Frame()
 	//Handle user inputs
 	bool result;
 
-	const int ascii_A = 65;
-	const int ascii_B = 66;
-	const int ascii_C = 67;
-	const int ascii_D = 68;
-	const int ascii_E = 69;
-	const int ascii_F = 70;
-	const int ascii_G = 71;
-	const int ascii_H = 72;
-	const int ascii_I = 73;
-	const int ascii_J = 74;
-	const int ascii_K = 75;
-	const int ascii_L = 76;
-	const int ascii_P = 80;
-	const int ascii_R = 82;
-	const int ascii_S = 83;
-	const int ascii_T = 84;
-	const int ascii_U = 85;
-	const int ascii_V = 86;
-	const int ascii_W = 87;
-	const int ascii_X = 88;
-	const int ascii_Y = 89;
-	const int ascii_Z = 90;
-
-
 	// Check if the user pressed escape and wants to exit the application.
 	if (keyInput->IsKeyDown(VK_ESCAPE))
 		return false;
@@ -270,47 +233,6 @@ bool Game::Frame()
 	// playfield scroll testing
 	//if (playfield->getTestLogModel()->GetWorldMatrix().
 	playfield->update(0);
-
-	///////////////////////////
-	//KEYBOARD PLAYER TESTING//
-	///////////////////////////
-
-	//Player one testing (ARROW KEYS)
-	if (keyInput->IsKeyDown(VK_LEFT))
-		players[0]->moveLeft();
-	if (keyInput->IsKeyDown(VK_RIGHT)) 
-	    players[0]->moveRight();
-	if (keyInput->IsKeyDown(VK_UP))
-		players[0]->moveUp();
-	if (keyInput->IsKeyDown(VK_DOWN))
-		players[0]->moveDown();
-	//Player two testing (WASD)
-	if (keyInput->IsKeyDown(ascii_A))
-		players[1]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_D)) 
-	    players[1]->moveRight();
-	if (keyInput->IsKeyDown(ascii_W))
-		players[1]->moveUp();
-	if (keyInput->IsKeyDown(ascii_S))
-		players[1]->moveDown();
-	//Player three testing (TFGH)
-	if (keyInput->IsKeyDown(ascii_F))
-		players[2]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_H)) 
-	    players[2]->moveRight();
-	if (keyInput->IsKeyDown(ascii_T))
-		players[2]->moveUp();
-	if (keyInput->IsKeyDown(ascii_G))
-		players[2]->moveDown();
-	//Player four testing (IJKL)
-	if (keyInput->IsKeyDown(ascii_J))
-		players[3]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_L)) 
-	    players[3]->moveRight();
-	if (keyInput->IsKeyDown(ascii_I))
-		players[3]->moveUp();
-	if (keyInput->IsKeyDown(ascii_K))
-		players[3]->moveDown();
 	
     float elapsedTime = getElapsedTime();
 
