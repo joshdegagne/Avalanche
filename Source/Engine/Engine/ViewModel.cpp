@@ -18,13 +18,23 @@ ViewModel<T>::~ViewModel()
 	delete entityList;
 }
 
-
+/*	Add
+ *	==================================================
+ *		Adds the specified Entity to the list of
+ *	entitys drawn by this ViewModel.
+ *
+ *		entity : the entity to be added
+ */
 template <class T>
 void ViewModel<T>::Add(const T& entity)
 {
 	entityList->push_front(entity);
 }
 
+/*	GetAssociatedType
+ *	==================================================
+ *		Returns the EntityType associated with this ViewModel.
+ */
 template <class T>
 EntityType ViewModel<T>::GetAssociatedType()
 {
