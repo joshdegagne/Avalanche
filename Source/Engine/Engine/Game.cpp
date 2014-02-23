@@ -27,6 +27,7 @@ Game::~Game()
 }
 
 ControllerInputManager* Game::getControllerManager() { return conInput; }
+KeyInput* Game::getKeyInput() { return keyInput; }
 
 
 bool Game::Initialize()

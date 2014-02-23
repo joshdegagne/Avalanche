@@ -7,8 +7,6 @@ Playfield::Playfield(Player** ps, int pNum, Game* game) : numActivePlayers(pNum)
 	//Initialize arraylist of game models
 	models = new ArrayList<GameModel>;
 
-	keyInput = game->keyInput;
-
 	//Creates new array of length 1-4 (Depending on how many players are playing in this game)
 	//Playfield itself does not know the players' numbers, just how many there are
 	activePlayers = new Player*[numActivePlayers];
@@ -53,6 +51,12 @@ Playfield::Playfield(Player** ps, int pNum, Game* game) : numActivePlayers(pNum)
 
 Playfield::~Playfield()
 {
+	for (int i = 0; i , models->size(); ++i)
+	{
+		delete models->elementAt(i);
+	}
+	delete models;
+	models = 0;
 }
 
 ArrayList<GameModel>* Playfield::getGameModels()
@@ -62,48 +66,10 @@ ArrayList<GameModel>* Playfield::getGameModels()
 
 void Playfield::update(float elapsed) 
 {
+	for (int i = 0; i < NUMPLAYERS; ++i){
+		testPlayers[i]->update(elapsed);
+	}
 	// until modelmanager is made, move both entity and gamemodel separately (logobstable entity ignored for now)
 	// need to make it so that when it reaches the top it is cleared from the game or playfield
 	testLogModel->worldTranslate(-SCROLL_SPEED, 0.0f, 0.0f);
-
-	///////////////////////////
-	//KEYBOARD PLAYER TESTING//
-	///////////////////////////
-
-	//Player one testing (ARROW KEYS)
-	if (keyInput->IsKeyDown(VK_LEFT))
-		testPlayers[0]->moveLeft();
-	if (keyInput->IsKeyDown(VK_RIGHT)) 
-	    testPlayers[0]->moveRight();
-	if (keyInput->IsKeyDown(VK_UP))
-		testPlayers[0]->moveUp();
-	if (keyInput->IsKeyDown(VK_DOWN))
-		testPlayers[0]->moveDown();
-	//Player two testing (WASD)
-	if (keyInput->IsKeyDown(ascii_A))
-		testPlayers[1]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_D)) 
-	    testPlayers[1]->moveRight();
-	if (keyInput->IsKeyDown(ascii_W))
-		testPlayers[1]->moveUp();
-	if (keyInput->IsKeyDown(ascii_S))
-		testPlayers[1]->moveDown();
-	//Player three testing (TFGH)
-	if (keyInput->IsKeyDown(ascii_F))
-		testPlayers[2]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_H)) 
-	    testPlayers[2]->moveRight();
-	if (keyInput->IsKeyDown(ascii_T))
-		testPlayers[2]->moveUp();
-	if (keyInput->IsKeyDown(ascii_G))
-		testPlayers[2]->moveDown();
-	//Player four testing (IJKL)
-	if (keyInput->IsKeyDown(ascii_J))
-		testPlayers[3]->moveLeft();
-	if (keyInput->IsKeyDown(ascii_L)) 
-	    testPlayers[3]->moveRight();
-	if (keyInput->IsKeyDown(ascii_I))
-		testPlayers[3]->moveUp();
-	if (keyInput->IsKeyDown(ascii_K))
-		testPlayers[3]->moveDown();
 }

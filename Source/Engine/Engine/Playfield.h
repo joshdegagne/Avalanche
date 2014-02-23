@@ -11,8 +11,6 @@
 #include "LogObstacle.h"
 #include "LogModel.h"
 
-#include "KeyInput.h" //Idealy This would be in the players themselves
-
 #define SCROLL_SPEED 0.15f
 
 class Player; //Foward declaration needed in order to satisfy compiler
@@ -24,7 +22,7 @@ class Game;
 class Playfield
 {
 	public:
-		Playfield(Player**, int, Game*);
+		Playfield(Player**, int, Game*); //Game pointer can come out of here when we no longer have test players
 		~Playfield();
 
 		// initialize method?
@@ -33,8 +31,6 @@ class Playfield
 		ArrayList<GameModel>* getGameModels(); 
 
 	private:
-		KeyInput*				keyInput;			//Idealy This would be in the players themselves
-
 		ArrayList<Obstacle>*	obstacles;			//List of obstacles
 		ArrayList<GameModel>*   models;				//list of models to pass to game
 		Player**				activePlayers;		//List of players (will be of length 1-4)

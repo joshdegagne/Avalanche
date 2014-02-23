@@ -37,6 +37,7 @@ class Game
 		void Shutdown();
 		void Run();
 		ControllerInputManager* getControllerManager();
+		KeyInput*				getKeyInput();
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
