@@ -5,6 +5,8 @@ Player::Player(Game& g, int pNum) : Entity(), playerNum(pNum)
 	controller = g.getControllerManager();
 	position.x = 0;
 	position.y = 0;
+	position.z = 0;
+	jumpIncrement = 0.0f;
 	
 	// constructing gamemodel here to simply test out the drawing and movement
 	//playerModel = new CubeModel(1.0f, 1.0f, 1.0f);
@@ -56,7 +58,7 @@ void Player::update(float elapsed)
 	/////////////////
 	if (controller->getButtonA(playerNum))
 	{
-		//Jump?
+		//jump();
 		return;
 	}
 	if (controller->getButtonB(playerNum))
@@ -137,4 +139,29 @@ void Player::moveUp()
 	position.y += MOVEMENT_SPEED;
 	playerModel->worldTranslate(-MOVEMENT_SPEED, 0.0f, 0.0f); //Up is "left" in our game world
 	//playerModel->MoveUp();
+}
+
+void Player::jump(float elapsed)
+{
+	if (jumpIncrement == 0.0f)
+	{
+		jumpIncrement = elapsed;
+	}
+}
+
+void Player::jumpArc(float elapsed)
+{
+	if (jumpIncrement > 0.0f && jumpIncrement < 4.0f)
+	{
+		jumpIncrement += elapsed;
+		float arc = (-1*(jumpIncrement - 2)*(jumpIncrement - 2))+4; //parabola
+
+		position.z += arc;
+		playerModel->worldTranslate(0.0f, 0.0f, arc);
+	}
+	else
+	{
+		jumpIncrement = 0.0f;
+		position.z = 0;
+	}
 }

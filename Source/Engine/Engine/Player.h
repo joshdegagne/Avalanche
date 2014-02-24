@@ -12,6 +12,7 @@
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
 #define	 MOVEMENT_SPEED 0.1f
+#define  JUMP_HEIGHT 4.0f
 
 class Game;  //Forward declaration
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +31,9 @@ class Player: public Entity {
 	private:
 		ControllerInputManager* controller;
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
-		XMFLOAT2	position;
+		float       jumpIncrement;
+		XMFLOAT3	position;
+
 		//CubeModel*	cubeModel; // for testing purposes
 		GameModel*	playerModel; // for testing purposes
 	
@@ -39,7 +42,9 @@ class Player: public Entity {
 		void moveRight();
 		void moveUp();
 		void moveDown();
-		//jump();
+		//Possible jump implementation (no real physics simulation here)
+		void jump(float);
+		void jumpArc(float);
 		//rollLeft();
 		//rollRight();
 		//requestPause(); ???
