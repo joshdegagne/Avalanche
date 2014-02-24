@@ -59,10 +59,19 @@ public:
 			resize( capacity * 2 );
 		elements[numberOfElements++] = element; 
 	}
-	void addAll(ArrayList<T> collection){
-		if(collection.isEmpty()) return;
-		for(int i=0; i<collection.size(); i++){
-			add(collection.elementAt(i));
+
+	void addAll(ArrayList<T>* collection){
+		if(collection->isEmpty()) return;
+		for(int i=0; i<collection->size(); i++){
+			add(collection->elementAt(i));
+		}
+	}
+
+	template <class R>
+	void addAll(ArrayList<R>* collection){
+		if(collection->isEmpty()) return;
+		for(int i=0; i<collection->size(); i++){
+			add(collection->elementAt(i));
 		}
 	}
 

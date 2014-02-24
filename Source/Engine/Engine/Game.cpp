@@ -84,7 +84,7 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	gameModels->addAll(*playfield->getGameModels());
+	gameModels->addAll(playfield->getGameModels());
 
 	////////////
 	//Graphics//
