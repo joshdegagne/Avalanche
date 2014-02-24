@@ -22,6 +22,7 @@ class Player: public Entity {
 	public: 
 		//Constructors
 		Player(Game&, int);
+		~Player();
 		
 		void update(float);
 		//CubeModel* getCubeModel(); 
@@ -29,19 +30,23 @@ class Player: public Entity {
 		void render(); 
 
 	private:
+		KeyInput*               keyboard;
 		ControllerInputManager* controller;
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
-		float       jumpIncrement;
 		XMFLOAT3	position;
+		XMFLOAT2	velocity;
+		float       jumpIncrement;
 
 		//CubeModel*	cubeModel; // for testing purposes
 		GameModel*	playerModel; // for testing purposes
-	
-	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
+		//Movemnet
 		void moveLeft();
 		void moveRight();
 		void moveUp();
 		void moveDown();
+		void stop();
+	
+	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
 		//Possible jump implementation (no real physics simulation here)
 		void jump(float);
 		void jumpArc(float);

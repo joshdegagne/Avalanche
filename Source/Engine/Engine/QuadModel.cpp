@@ -1,6 +1,8 @@
 #include "gamemodel.h"
 #include "Model.h"
 #include "quadmodel.h"
+#include "ColorShader.h"
+#include "TextureShader.h"
 
 QuadModel::QuadModel(float lengthX, float lengthY, XMFLOAT4 * pColor) : GameModel()
 {

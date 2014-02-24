@@ -1,7 +1,7 @@
 #include "gamemodel.h"
 #include "Model.h"
 
-GameModel::GameModel()
+GameModel::GameModel() : IViewModel()
 {
 
 	//initialize all matrices to identity matrix
@@ -124,42 +124,5 @@ void GameModel::worldRotateZ(float radianAngle){
 
 void GameModel::worldTranslate(float deltaX, float deltaY, float deltaZ){
 		XMStoreFloat4x4(&worldTranslateMatrix, XMLoadFloat4x4(&worldTranslateMatrix) * XMMatrixTranslation(deltaX, deltaY, deltaZ));
-
-}
-
-
-
-
-
-//User Control Moved Methods
-
-void GameModel::MoveLeft()
-{
-	worldTranslate(-TRANSLATION_INCREMENT, 0.0f, 0.0f);
-}
-
-void GameModel::MoveRight()
-{
-	worldTranslate(TRANSLATION_INCREMENT, 0, 0);
-}
-
-void GameModel::MoveUp()
-{
-	worldTranslate(0.0f, TRANSLATION_INCREMENT, 0.0f);
-}
-
-void GameModel::MoveDown()
-{
-	worldTranslate(0.0f, -TRANSLATION_INCREMENT, 0.0f);
-}
-
-void GameModel::RotateLeft()
-{
-	orientRotateY(-XM_PIDIV4*ROTATION_SPEED);
-}
-
-void GameModel::RotateRight()
-{
-	orientRotateY(XM_PIDIV4*ROTATION_SPEED);
 
 }

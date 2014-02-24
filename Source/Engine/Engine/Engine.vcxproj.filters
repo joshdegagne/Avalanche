@@ -126,6 +126,12 @@
     <ClCompile Include="LogObstacle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LogModel.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModel.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="XYZaxis.h">
@@ -226,6 +232,15 @@
     </ClInclude>
     <ClInclude Include="LogObstacle.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LogModel.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModel.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="IViewModel.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

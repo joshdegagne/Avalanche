@@ -9,16 +9,18 @@
 #include "KeyInput.h"
 #include "ControllerInputManager.h"
 #include "Graphics.h"
-#include "GameModel.h"
+#include "IViewModel.h"
 #include "QuadModel.h"
 #include "QuadTexturedModel.h"
 #include "Arraylist.h"
 #include "Camera.h"
 #include "Playfield.h"
 #include "Player.h"
+#include "LogModel.h"
 #define  NUMPLAYERS 4
 
 class Player; //Forward declaration
+
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +37,7 @@ class Game
 		void Shutdown();
 		void Run();
 		ControllerInputManager* getControllerManager();
+		KeyInput*				getKeyInput();
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -50,11 +53,10 @@ class Game
 		HINSTANCE hinstance;
 		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
-		KeyInput*               keyInput; //out input class object from which to obtain user inputs
+		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
 		ControllerInputManager* conInput; //Yay! Input from a controller!
-		Graphics*               graphics; //our graphics class object that encapsulates the graphics pipeline
+		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world
-		Player** 				players;
 
 		float previousTime;
 
@@ -62,7 +64,7 @@ class Game
 		Playfield*		   playfield;
 		QuadTexturedModel* pF;
 
-		ArrayList<GameModel>* gameModels; //container to hold all our game world models
+		ArrayList<IViewModel>* gameModels; //container to hold all our game world models - change to be in modelmanager class?
 
 
 };

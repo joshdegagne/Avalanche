@@ -1,3 +1,6 @@
+
+#include "ColorShader.h"
+#include "TextureShader.h"
 #include "gamemodel.h"
 #include "Model.h"
 #include "coneTexturedmodel.h"

@@ -1,6 +1,7 @@
 #include "gamemodel.h"
 #include "Model.h"
 #include "cubemodel.h"
+#include "ColorShader.h"
 
 CubeModel::CubeModel(float lengthX, float lengthY, float lengthZ, XMFLOAT4 * pColors) : GameModel()
 {

@@ -14,7 +14,7 @@ class Entity {
 		//Constructors
 		Entity(float = 0, float = 0);
 
-	private:
+	protected:
 		XMFLOAT2 pos;
 		EntityType type;
 

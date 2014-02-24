@@ -4,13 +4,14 @@
 #pragma once
 
 #include "D3D.h"
-#include "camera.h"
 #include "Model.h"
 #include "arraylist.h"
 #include "gamemodel.h"
 #include "XYZaxis.h"
-#include "ColorShader.h"
-#include "TextureShader.h"
+
+class Camera;
+class ColorShader;
+class TextureShader;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Graphics
@@ -22,7 +23,7 @@ public:
 	Graphics(const Graphics&);
 	~Graphics();
 
-	bool Initialize(int, int, HWND, Camera*, ArrayList<GameModel> * gameModels);
+	bool Initialize(int, int, HWND, Camera*, ArrayList<IViewModel> * viewModels);
 	void Shutdown();
 	bool Frame(); 
 
@@ -43,7 +44,7 @@ private:
 	ColorShader*   colorShader;
 	TextureShader* textureShader;
 
-	ArrayList<GameModel> * gameWorldModels;
+	ArrayList<IViewModel> * viewModels;
 
 
 

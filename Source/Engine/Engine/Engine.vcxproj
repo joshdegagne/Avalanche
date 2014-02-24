@@ -85,6 +85,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControllerInputManager.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="LogModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OldCamera.cpp" />
@@ -109,6 +110,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureShader.cpp" />
+    <ClCompile Include="ViewModel.cpp" />
     <ClCompile Include="XYZaxis.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +120,8 @@
     <ClInclude Include="DebugConsole.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityType.h" />
+    <ClInclude Include="IViewModel.h" />
+    <ClInclude Include="LogModel.h" />
     <ClInclude Include="LogObstacle.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="OldCamera.h" />
@@ -144,6 +148,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureShader.h" />
     <ClInclude Include="vertextype.h" />
+    <ClInclude Include="ViewModel.h" />
     <ClInclude Include="XYZaxis.h" />
   </ItemGroup>
   <ItemGroup>
