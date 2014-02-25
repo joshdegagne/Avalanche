@@ -21,6 +21,12 @@ public:
 	EntityType GetAssociatedType();
 
 protected:
+	void orientRotateX(float);
+	void orientRotateY(float);
+	void orientRotateZ(float);
+	void orientTranslate(float, float, float);
+
+protected:
 	std::list<T>*	entityList;
 	EntityType		associatedEntity;
 

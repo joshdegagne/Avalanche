@@ -150,6 +150,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerViewModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="EntityType.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

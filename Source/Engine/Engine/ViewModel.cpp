@@ -33,10 +33,38 @@ void ViewModel<T>::Add(const T& entity)
 
 /*	GetAssociatedType
  *	==================================================
- *		Returns the EntityType associated with this ViewModel.
+ *		Returns the EntityType associated with this
+ *	ViewModel.
  */
 template <class T>
 EntityType ViewModel<T>::GetAssociatedType()
 {
 	return associatedType;
+}
+
+template <class T>
+void ViewModel<T>::orientRotateX(float radianAngle)
+{
+        // orientationMatrix *= Matrix.CreateRotationY(ry);
+		XMStoreFloat4x4(&orientRotateMatrix, XMLoadFloat4x4(&orientRotateMatrix) * XMMatrixRotationX(radianAngle));
+}
+
+template <class T>
+void ViewModel<T>::orientRotateY(float radianAngle)
+{
+        // orientationMatrix *= Matrix.CreateRotationY(ry);
+		XMStoreFloat4x4(&orientRotateMatrix, XMLoadFloat4x4(&orientRotateMatrix) * XMMatrixRotationY(radianAngle));
+}
+
+template <class T>
+void ViewModel<T>::orientRotateZ(float radianAngle)
+{
+        // orientationMatrix *= Matrix.CreateRotationY(ry);
+		XMStoreFloat4x4(&orientRotateMatrix, XMLoadFloat4x4(&orientRotateMatrix) * XMMatrixRotationZ(radianAngle));
+}
+
+template <class T>
+void ViewModel<T>::orientTranslate(float deltaX, float deltaY, float deltaZ)
+{
+		XMStoreFloat4x4(&orientTranslateMatrix, XMLoadFloat4x4(&orientTranslateMatrix) * XMMatrixTranslation(deltaX, deltaY, deltaZ));
 }
