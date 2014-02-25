@@ -230,7 +230,7 @@ bool LogViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 
 	if(!textureShader) return false; //we were not provided with a shader
 
 	XMFLOAT4X4 worldMatrix;
-	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat2( &entity->getPos() )));
+	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat3( &entity->getPos() )));
 
 	const int NUMBER_OF_TEXTURES = 3; //one for the sides and one each for top and bottom
 
