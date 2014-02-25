@@ -15,7 +15,7 @@ public:
 
 protected:
 	bool initializeTextures(ID3D11Device* d3dDevice);
-	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, LogObsacle*);
+	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, LogObstacle*);
 
 private:
 	static const int NUMBER_OF_TEXTURES = 3;
