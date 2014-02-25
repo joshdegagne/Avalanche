@@ -1,8 +1,10 @@
 
 #include "EntityType.h"
-#include "PlayerViewModel.h"
 #include "TextureShader.h"
 #include "ViewModel.cpp"
+#include "Player.h"
+
+#include "PlayerViewModel.h"
 
 PlayerViewModel::PlayerViewModel() : ViewModel<Player>(EntityType::PLAYER)
 {
@@ -49,13 +51,16 @@ bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X
 {
 	if(!textureShader) return false; //we were not provided with a shader
 
+	XMFLOAT4X4 worldMatrix;
+	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat2( &entity->getPos() )));
+
 	// Put the game model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	vertexModel->Render(deviceContext);
 
 	//render the game model
 	bool result = textureShader->Render(deviceContext, 
 										vertexModel->GetIndexCount(), 
-										GetWorldMatrix(), 
+										worldMatrix, 
 										viewMatrix, 
 										projectionMatrix,
 										texture->GetTexture()); //get the texture to render

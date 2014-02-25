@@ -26,7 +26,7 @@ public:
 protected:
 	ViewModel(EntityType);
 
-	virtual bool RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, T entity) = 0;
+	virtual bool RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, T* entity) = 0;
 
 	XMFLOAT4X4 GetOrientation();
 
