@@ -5,6 +5,8 @@
 
 #include <d3d11.h>
 #include "DDSTextureLoader.h"
+#include "ITexture.h"
+
 using namespace DirectX;
 
 
@@ -15,7 +17,7 @@ using namespace DirectX;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Texture
 ////////////////////////////////////////////////////////////////////////////////
-class Texture
+class Texture : public ITexture
 {
 public:
 	Texture();

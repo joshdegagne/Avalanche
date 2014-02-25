@@ -121,6 +121,7 @@
     <ClInclude Include="DebugConsole.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityType.h" />
+    <ClInclude Include="ITexture.h" />
     <ClInclude Include="IViewModel.h" />
     <ClInclude Include="LogModel.h" />
     <ClInclude Include="LogObstacle.h" />

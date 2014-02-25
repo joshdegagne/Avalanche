@@ -266,6 +266,9 @@
     <ClInclude Include="PlayerViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
+    <ClInclude Include="ITexture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">
