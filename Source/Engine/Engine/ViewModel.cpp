@@ -88,6 +88,9 @@ bool ViewModel<T>::Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMa
 	for(int i = 0; i < entityList->size(); ++i)
 	{
 		T* entity = entityList->elementAt(i);
-		RenderEntity(deviceContext, viewMatrix, projectionMatrix, colorShader, textureShader, entity);
+		if(!RenderEntity(deviceContext, viewMatrix, projectionMatrix, colorShader, textureShader, entity))
+			return false;
 	}
+
+	return true;
 }
