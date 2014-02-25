@@ -45,11 +45,6 @@ bool PlayerViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	return true;
 }
 
-ID3D11ShaderResourceView* PlayerViewModel::GetTexture(){
-
-	return texture->GetTexture();
-}
-
 bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, Player* entity)
 {
 	if(!textureShader) return false; //we were not provided with a shader
