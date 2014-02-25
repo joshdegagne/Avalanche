@@ -14,7 +14,7 @@ public:
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:
-	bool RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader);
+	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, Player*);
 
 private:
 	ITexture* texture;
