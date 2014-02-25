@@ -81,3 +81,13 @@ void ViewModel<T>::orientTranslate(float deltaX, float deltaY, float deltaZ)
 {
 		XMStoreFloat4x4(&orientTranslateMatrix, XMLoadFloat4x4(&orientTranslateMatrix) * XMMatrixTranslation(deltaX, deltaY, deltaZ));
 }
+
+template <class T>
+bool ViewModel<T>::Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader)
+{
+	for(int i = 0; i < entityList->size(); ++i)
+	{
+		T* entity = entityList->elementAt(i);
+		RenderEntity(deviceContext, viewMatrix, projectionMatrix, colorShader, textureShader, entity);
+	}
+}

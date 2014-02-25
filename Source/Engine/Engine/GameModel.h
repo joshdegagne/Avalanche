@@ -61,8 +61,6 @@ public:
 
 protected:
 
-
-
 	//Construction translate and orient matrices
     XMFLOAT4X4 orientRotateMatrix; //matrix to orient object in model co-ord system
     XMFLOAT4X4 orientTranslateMatrix; //matrix to translate object in model co-ord system

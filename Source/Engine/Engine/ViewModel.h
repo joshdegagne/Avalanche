@@ -13,19 +13,22 @@ template <class T>
 class ViewModel : IViewModel
 {
 public:
-	ViewModel(EntityType);
 	virtual ~ViewModel();
 
 	virtual bool InitializeVertexModels(ID3D11Device* d3dDevice) = 0;
-	virtual bool Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader) = 0;
 	virtual bool initializeTextures(ID3D11Device* d3dDevice) = 0;
 
 	virtual ID3D11ShaderResourceView* GetTexture() = 0;
-
+	bool Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader);
+	
 	void		Add(const T&);
 	EntityType GetAssociatedType();
 
 protected:
+	ViewModel(EntityType);
+
+	virtual bool RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, T entity) = 0;
+
 	XMFLOAT4X4 GetOrientation();
 
 	void orientRotateX(float);
