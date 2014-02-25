@@ -1,4 +1,6 @@
-Avalanche - game project for comp 2501
-================
+Avalanche
+=========
+**Semester project for comp 2501**
 
-Hey look, we're making a game?
+
+Hey look, we're making a *game?*
