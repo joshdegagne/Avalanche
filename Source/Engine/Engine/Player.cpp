@@ -42,10 +42,6 @@ Player::Player(Game& g, int pNum) : Entity()
 	velocity.x = 0;
 	velocity.y = 0;
 	jumpIncrement = 0.0f;
-	
-	// constructing gamemodel here to simply test out the drawing and movement
-	WCHAR* iceClimberHeadTexture = L"textures/iceclimberhead.dds";
-	playerModel = new PlayerModel(1.0f, 1.0f, iceClimberHeadTexture);
 }
 
 Player::~Player()
@@ -84,22 +80,23 @@ void Player::update(float elapsed)
 	////////////////////////////
 	//Keyboard Movement Checks//
 	////////////////////////////
-		if (keyboard->IsKeyDown(keys[0]))
-		{
-			moveLeft();
-		}
-		else if (keyboard->IsKeyDown(keys[1])) 
-		{
-			moveRight();
-		}
-		if (keyboard->IsKeyDown(keys[2]))
-		{
-			moveUp();
-		}
-		else if (keyboard->IsKeyDown(keys[3]))
-		{
-			moveDown();
-		}
+	if (keyboard->IsKeyDown(keys[0]))
+	{
+		moveLeft();
+	}
+	else if (keyboard->IsKeyDown(keys[1])) 
+	{
+		moveRight();
+	}
+	if (keyboard->IsKeyDown(keys[2]))
+	{
+		moveUp();
+	}
+	else if (keyboard->IsKeyDown(keys[3]))
+	{
+		moveDown();
+	}
+	
 
 	////////////////
 	//Stick Checks//
@@ -187,8 +184,8 @@ void Player::update(float elapsed)
 	///////////////////
 	//Update Position//
 	///////////////////
-	position.x += velocity.x;
-	position.y += velocity.y;
+	position.x += velocity.x * elapsed;
+	position.y += velocity.y * elapsed;
 	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
 }
 

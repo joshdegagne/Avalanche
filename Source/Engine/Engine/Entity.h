@@ -16,7 +16,7 @@ class Entity {
 
 	protected:
 		XMFLOAT3	position;
-		EntityType type;
+		EntityType	type;
 
 	public:
 		float getX();
@@ -24,10 +24,13 @@ class Entity {
 		void setX(float);
 		void setY(float);
 
-		void setPos(float, float);
+		XMFLOAT3	getPosition();
+
+		void moveTo(float, float);
+		void moveBy(float, float);
+		void moveBy(XMFLOAT2, float);
 
 		EntityType getEntityType();
 		
-		XMFLOAT3 getPos();
 		virtual void update(float) = 0;
 };
