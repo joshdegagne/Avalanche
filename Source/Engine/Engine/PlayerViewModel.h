@@ -8,7 +8,7 @@ class ITexture;
 class PlayerViewModel : public ViewModel<Player>
 {
 public:
-	PlayerViewModel(float, float, WCHAR*);
+	PlayerViewModel();
 	virtual ~PlayerViewModel();
 
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);

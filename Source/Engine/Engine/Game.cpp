@@ -69,8 +69,7 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	PlayerViewModel* playerViewModel = new PlayerViewModel(1.0, 1.0, L"textures/iceclimberhead.dds");
-
+	PlayerViewModel* playerViewModel = new PlayerViewModel();
 	
 	gameModels->add(playerViewModel);
 
@@ -79,13 +78,13 @@ bool Game::Initialize()
 	/////////////////////
     Player** activePlayers = new Player*[NUMPLAYERS];
 	int activeCounter = 0;
-	for (activeCounter = 0; activeCounter < NUMPLAYERS; activeCounter++)
+	for (int i = 0; i < NUMPLAYERS; i++)
 	{
 		//Comment this line out for testing purposes
 		//if (conInput->isConnected(i))
 		{
-			activePlayers[activeCounter] = new Player(*this, activeCounter);
-			playerViewModel->entityList->add(activePlayers[activeCounter]);
+			activePlayers[activeCounter++] = new Player(*this, i);
+			playerViewModel->entityList->add(activePlayers[i]);
 		}
 	}
 

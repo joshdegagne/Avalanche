@@ -7,7 +7,12 @@
 
 #include "PlayerViewModel.h"
 
-PlayerViewModel::PlayerViewModel(float width, float height, WCHAR* aTextureFileName) : ViewModel<Player>(EntityType::PLAYER)
+const float WIDTH	= 1.0f;
+const float HEIGHT	= 1.0f;
+
+WCHAR* TEXTURE = L"textures/iceclimberhead.dds";
+
+PlayerViewModel::PlayerViewModel() : ViewModel<Player>(EntityType::PLAYER)
 {
 	/*
 	Create a quad consisting of 4 vertices and 2 triangles
@@ -21,19 +26,19 @@ PlayerViewModel::PlayerViewModel(float width, float height, WCHAR* aTextureFileN
 
 	//potentially dangerous, we should probably make a copy of the string and
 	//release it ourselves later
-	textureFileName = aTextureFileName;
+	textureFileName = TEXTURE;
 
 	//Quad Face
-	textureVertices[0].position = XMFLOAT3(0.0f, -width/2, 0.0f); // Top left.
+	textureVertices[0].position = XMFLOAT3(0.0f, -WIDTH/2, 0.0f); // Top left.
 	textureVertices[0].texture = XMFLOAT2(1.0f, 1.0f);
 	
-	textureVertices[1].position = XMFLOAT3(0.0f, width/2, 0.0f);  // Bottom left.
+	textureVertices[1].position = XMFLOAT3(0.0f, WIDTH/2, 0.0f);  // Bottom left.
 	textureVertices[1].texture = XMFLOAT2(0.0f, 1.0f);
 
-	textureVertices[2].position = XMFLOAT3(0.0f, -width/2, height);  // Top right.
+	textureVertices[2].position = XMFLOAT3(0.0f, -WIDTH/2, HEIGHT);  // Top right.
 	textureVertices[2].texture = XMFLOAT2(1.0f, 0.0f);
 	
-	textureVertices[3].position = XMFLOAT3(0.0f, width/2, height);   // Bottom right.
+	textureVertices[3].position = XMFLOAT3(0.0f, WIDTH/2, HEIGHT);   // Bottom right.
 	textureVertices[3].texture = XMFLOAT2(0.0f, 0.0f);
 
 	// Load the index array with data.
