@@ -11,7 +11,6 @@ template <class T>
 class ViewModel : IViewModel
 {
 public:
-	ViewModel(EntityType);
 	virtual ~ViewModel();
 
 	virtual bool InitializeVertexModels(ID3D11Device* d3dDevice) = 0;
@@ -21,6 +20,10 @@ public:
 	EntityType GetAssociatedType();
 
 protected:
+	ViewModel(EntityType);
+
+	virtual bool RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, T entity) = 0;
+
 	XMFLOAT4X4 GetOrientation();
 
 	void orientRotateX(float);
