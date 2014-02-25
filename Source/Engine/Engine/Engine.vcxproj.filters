@@ -40,13 +40,28 @@
     <Filter Include="Header Files\Helper Headers">
       <UniqueIdentifier>{4a878ead-ae05-4fb6-a056-34707031a77a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Models\EntityModels">
+      <UniqueIdentifier>{b99d55ab-5284-4dd1-92db-8467e7630415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models\EntityModels">
+      <UniqueIdentifier>{ff71462b-9a5e-4317-8cb6-93360d02ccf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models\BasicModels">
+      <UniqueIdentifier>{e57c9796-afbc-407f-aa13-44a96b865db6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models\BasicModels">
+      <UniqueIdentifier>{fd9a7143-dbeb-47df-9470-c17a8c14a28f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{832972d4-5e66-4457-b8cf-18e2f7de170b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{371ebc3c-8ad5-45bc-ba34-00caadac49f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="XYZaxis.cpp">
-      <Filter>Source Files\Models</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
@@ -78,20 +93,8 @@
     <ClCompile Include="GameModel.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
-    <ClCompile Include="QuadTexturedModel.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadModel.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
     <ClCompile Include="ControllerInputManager.cpp">
       <Filter>Source Files\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OldCamera.cpp">
       <Filter>Source Files\Garbage</Filter>
@@ -114,29 +117,41 @@
     <ClCompile Include="PrismTexturedModel.cpp">
       <Filter>Source Files\Garbage</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerModel.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="LogObstacle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LogModel.cpp">
-      <Filter>Source Files\Models</Filter>
     </ClCompile>
     <ClCompile Include="ViewModel.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
+    <ClCompile Include="LogModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTexturedModel.cpp">
+      <Filter>Source Files\Models\BasicModels</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadModel.cpp">
+      <Filter>Source Files\Models\BasicModels</Filter>
+    </ClCompile>
+    <ClCompile Include="XYZaxis.cpp">
+      <Filter>Source Files\Models\BasicModels</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="LogObstacle.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="XYZaxis.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
     <ClInclude Include="vertextype.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
@@ -170,20 +185,8 @@
     <ClInclude Include="GameModel.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
-    <ClInclude Include="QuadTexturedModel.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadModel.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
     <ClInclude Include="ControllerInputManager.h">
       <Filter>Header Files\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OldCamera.h">
       <Filter>Header Files\Garbage</Filter>
@@ -209,9 +212,6 @@
     <ClInclude Include="PrismTexturedModel.h">
       <Filter>Header Files\Garbage</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DirectXHelper.h">
       <Filter>Header Files\Helper Headers</Filter>
     </ClInclude>
@@ -221,26 +221,44 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="EntityType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DebugConsole.h">
       <Filter>Header Files\Helper Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerModel.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="LogObstacle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LogModel.h">
-      <Filter>Header Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="ViewModel.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="IViewModel.h">
       <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="LogModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadModel.h">
+      <Filter>Header Files\Models\BasicModels</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTexturedModel.h">
+      <Filter>Header Files\Models\BasicModels</Filter>
+    </ClInclude>
+    <ClInclude Include="XYZaxis.h">
+      <Filter>Header Files\Models\BasicModels</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="LogObstacle.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityType.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
