@@ -1,4 +1,4 @@
-2501_GameProject
+Avalanch - game project for comp 2501
 ================
 
-Hey look, a game?
+Hey look, we're making a game?
