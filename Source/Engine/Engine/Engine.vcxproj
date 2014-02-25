@@ -87,6 +87,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="LogModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
+    <ClCompile Include="LogViewModel.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OldCamera.cpp" />
     <ClCompile Include="CineCamera.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="IViewModel.h" />
     <ClInclude Include="LogModel.h" />
     <ClInclude Include="LogObstacle.h" />
+    <ClInclude Include="LogViewModel.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="OldCamera.h" />
     <ClInclude Include="ColorShader.h" />

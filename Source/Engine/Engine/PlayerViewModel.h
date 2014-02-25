@@ -18,6 +18,10 @@ protected:
 	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, Player*);
 
 private:
-	
+	WCHAR*				textureFileName;
+	ITexture*			texture;
+	TextureVertexType*	textureVertices;
+	unsigned long*		indices;
+	Model*				vertexModel;
 };
 

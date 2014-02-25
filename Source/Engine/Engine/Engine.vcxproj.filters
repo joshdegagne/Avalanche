@@ -114,9 +114,6 @@
     <ClCompile Include="Prismmodel.cpp">
       <Filter>Source Files\Garbage</Filter>
     </ClCompile>
-    <ClCompile Include="PrismTexturedModel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
@@ -152,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="PlayerViewModel.cpp">
       <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
+    <ClCompile Include="LogViewModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
+    <ClCompile Include="PrismTexturedModel.cpp">
+      <Filter>Source Files\Models\BasicModels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +215,6 @@
     <ClInclude Include="Prismmodel.h">
       <Filter>Header Files\Garbage</Filter>
     </ClInclude>
-    <ClInclude Include="PrismTexturedModel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
     <ClInclude Include="DirectXHelper.h">
       <Filter>Header Files\Helper Headers</Filter>
     </ClInclude>
@@ -268,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="ITexture.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="LogViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="PrismTexturedModel.h">
+      <Filter>Header Files\Models\BasicModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

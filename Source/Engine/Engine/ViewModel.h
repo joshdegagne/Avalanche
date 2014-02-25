@@ -41,13 +41,6 @@ protected:
 	
 	EntityType		associatedEntity;
 
-	WCHAR*			textureFileName;
-	ITexture*		texture;
-	Model*			vertexModel;
-
-	TextureVertexType* textureVertices;
-	unsigned long*	   indices;
-
 	XMFLOAT4X4 orientRotateMatrix;
     XMFLOAT4X4 orientTranslateMatrix;
 };
