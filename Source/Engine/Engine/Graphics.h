@@ -34,9 +34,9 @@ private:
 
 private:
 	
-	HWND        hwnd;
-	D3D*        d3D;
-	Camera* camera;
+	HWND	hwnd;
+	D3D*	d3D;
+	Camera*	camera;
 
 	Model*   axisModel;
 	XYZaxis* axis;

@@ -36,8 +36,9 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
+		KeyInput*               getKeyInput();
 		ControllerInputManager* getControllerManager();
-		KeyInput*				getKeyInput();
+		
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -54,6 +55,7 @@ class Game
 		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
 		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
+		ArrayList<KeyInput>*    playerKeys;
 		ControllerInputManager* conInput; //Yay! Input from a controller!
 		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world

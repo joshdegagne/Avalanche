@@ -6,7 +6,7 @@
 
 Game::Game()
 {
-	keyInput  = 0; 
+	keyInput  = 0;
 	conInput  = 0;
 	graphics  = 0;
 	camera    = 0;
@@ -26,8 +26,8 @@ Game::~Game()
 {
 }
 
+KeyInput*               Game::getKeyInput() {return keyInput; }
 ControllerInputManager* Game::getControllerManager() { return conInput; }
-KeyInput* Game::getKeyInput() { return keyInput; }
 
 
 bool Game::Initialize()
@@ -231,13 +231,11 @@ bool Game::Frame()
 		return false;
 	}
 
-	// playfield scroll testing
-	//if (playfield->getTestLogModel()->GetWorldMatrix().
-	playfield->update(0);
+	// playfield update
+	float elapsedTime = getElapsedTime();
+
+	playfield->update(elapsedTime);
 	
-    float elapsedTime = getElapsedTime();
-
-
 
 	// Do the frame processing for the graphics object.
 	result = graphics->Frame();

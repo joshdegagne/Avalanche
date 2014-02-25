@@ -31,6 +31,7 @@ class Player: public Entity {
 
 	private:
 		KeyInput*               keyboard;
+		int						keys[4];
 		ControllerInputManager* controller;
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT3	position;
