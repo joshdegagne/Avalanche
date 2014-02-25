@@ -73,8 +73,11 @@ bool Game::Initialize()
 	int activeCounter = 0;
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
-		if (conInput->isConnected(i))
+		//Comment this line out for testing purposes
+		//if (conInput->isConnected(i))
+		{
 			activePlayers[activeCounter++] = new Player(*this, i);
+		}
 	}
 
 	playfield = new Playfield(activePlayers, activeCounter, this);

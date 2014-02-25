@@ -252,5 +252,5 @@ XINPUT_STATE ControllerInputManager::getState(int controllerNum)
 
 bool ControllerInputManager::controllerIsValid(int controllerNum)
 {
-	return (controllerNum >=0 && controllerNum < 4);
+	return ( (controllerNum >=0 && controllerNum < 4) && (isConnected(controllerNum)) );
 }

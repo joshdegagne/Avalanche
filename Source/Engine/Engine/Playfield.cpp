@@ -16,14 +16,7 @@ Playfield::Playfield(Player** ps, int pNum, Game* game) : numActivePlayers(pNum)
 		models->add(activePlayers[i]->getPlayerModel());
 	}
 
-	writeLabelToConsole(L"Number of controllers connected: ", numActivePlayers);
-
-	//Test players
-	testPlayers = new Player*[NUMPLAYERS];
-	for (int i = 0; i < NUMPLAYERS; i++){
-		testPlayers[i] = new Player(*game, i);
-		models->add(testPlayers[i]->getPlayerModel());
-	}
+	writeLabelToConsole(L"Number of players connected: ", numActivePlayers);
 
 	// log obstacle made to test playfield scrolling - let modelmanager handle this stuff when it's available
 	obstacles = new ArrayList<Obstacle>;
@@ -66,8 +59,8 @@ ArrayList<GameModel>* Playfield::getGameModels()
 
 void Playfield::update(float elapsed) 
 {
-	for (int i = 0; i < NUMPLAYERS; ++i){
-		testPlayers[i]->update(elapsed);
+	for (int i = 0; i < numActivePlayers; ++i){
+		activePlayers[i]->update(elapsed);
 	}
 	// until modelmanager is made, move both entity and gamemodel separately (logobstable entity ignored for now)
 	// need to make it so that when it reaches the top it is cleared from the game or playfield
