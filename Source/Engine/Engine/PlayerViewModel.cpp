@@ -24,17 +24,17 @@ PlayerViewModel::PlayerViewModel(float width, float height, WCHAR* aTextureFileN
 	textureFileName = aTextureFileName;
 
 	//Quad Face
-	textureVertices[0].position = XMFLOAT3(-width/2, 0.0f, 0.0f); // Top left.
-	textureVertices[0].texture = XMFLOAT2(0.0f, 0.0f);
+	textureVertices[0].position = XMFLOAT3(0.0f, -width/2, 0.0f); // Top left.
+	textureVertices[0].texture = XMFLOAT2(1.0f, 1.0f);
 	
-	textureVertices[1].position = XMFLOAT3( width/2, 0.0f, 0.0f);  // Bottom left.
+	textureVertices[1].position = XMFLOAT3(0.0f, width/2, 0.0f);  // Bottom left.
 	textureVertices[1].texture = XMFLOAT2(0.0f, 1.0f);
 
-	textureVertices[2].position = XMFLOAT3(-width/2, 0.0f, height);  // Top right.
+	textureVertices[2].position = XMFLOAT3(0.0f, -width/2, height);  // Top right.
 	textureVertices[2].texture = XMFLOAT2(1.0f, 0.0f);
 	
-	textureVertices[3].position = XMFLOAT3(width/2, 0.0f, height);   // Bottom right.
-	textureVertices[3].texture = XMFLOAT2(1.0f, 1.0f);
+	textureVertices[3].position = XMFLOAT3(0.0f, width/2, height);   // Bottom right.
+	textureVertices[3].texture = XMFLOAT2(0.0f, 0.0f);
 
 	// Load the index array with data.
 	// Two triangles per face. The directions are consistent
@@ -42,11 +42,11 @@ PlayerViewModel::PlayerViewModel(float width, float height, WCHAR* aTextureFileN
 
 	//Quad Face
 	indices[0] = 0;  // Top left.
-	indices[1] = 2;  // Top right.
-	indices[2] = 1;  // Bottom left.
+	indices[1] = 1;  // Top right.
+	indices[2] = 2;  // Bottom left.
 	indices[3] = 1;  // Bottom left.
-	indices[4] = 2;  // Top right.  
-	indices[5] = 3;  // Bottom right.
+	indices[4] = 3;  // Top right.  
+	indices[5] = 2;  // Bottom right.
 
 	//Create the ModelClass object that will be used to deliver these vertices to the graphics pipeline
 	vertexModel = new Model(textureVertices, vertexCount, indices, indexCount, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
