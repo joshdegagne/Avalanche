@@ -22,7 +22,7 @@ class Game;
 class Playfield
 {
 	public:
-		Playfield(Player**, int, Game*); //Game pointer can come out of here when we no longer have test players
+		Playfield(Game*); //Game pointer can come out of here when we no longer have test players
 		~Playfield();
 
 		// initialize method?
@@ -30,11 +30,15 @@ class Playfield
 
 		ArrayList<GameModel>* getGameModels(); 
 
+	protected:
+		void add(Player* player);
+
 	private:
+		ArrayList<Entity>*		entities;
+		ArrayList<Player>*		activePlayers;			//List of players in the current match
 		ArrayList<Obstacle>*	obstacles;			//List of obstacles
 		ArrayList<GameModel>*   models;				//list of models to pass to game
-		Player**				activePlayers;		//List of players (will be of length 1-4)
-		int						numActivePlayers;	//Number of players
+		//Player**				activePlayers;		//List of players (will be of length 1-4)
 		QuadTexturedModel*		ground;				//Playfield quad
 		LogModel*				testLogModel;		//made to test scrolling
 };

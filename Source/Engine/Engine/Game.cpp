@@ -13,6 +13,7 @@ Game::Game()
 	camera    = 0;
 	playfield = 0;
 	pF		  = 0;
+	players = NULL;
 
 	gameModels = new ArrayList<IViewModel>();
 }
@@ -76,19 +77,24 @@ bool Game::Initialize()
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
-    Player** activePlayers = new Player*[NUMPLAYERS];
-	int activeCounter = 0;
+	players = new ArrayList<Player>();
+
+    //Player** activePlayers = new Player*[NUMPLAYERS];
+	//int activeCounter = 0;
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
+		Player* player = new Player(*this, i);
+		players->add(player);
+		playerViewModel->entityList->add(player);
 		//Comment this line out for testing purposes
 		//if (conInput->isConnected(i))
-		{
-			activePlayers[activeCounter++] = new Player(*this, i);
-			playerViewModel->entityList->add(activePlayers[i]);
-		}
+		//{
+			//activePlayers[activeCounter++] = new Player(*this, i);
+			//playerViewModel->entityList->add(activePlayers[i]);
+		//}
 	}
 
-	playfield = new Playfield(activePlayers, activeCounter, this);
+	playfield = new Playfield(this);
 	if (!playfield)
 		return false;
 
@@ -152,6 +158,12 @@ void Game::Shutdown()
 	{
 		delete camera;
 		camera = 0;
+	}
+
+	if(players)
+	{
+		delete players;
+		players = NULL;
 	}
 
 	ShutdownWindows();
@@ -262,6 +274,11 @@ float Game::getElapsedTime()
 	float elapsedTime = currentTime - previousTime;
 	previousTime = currentTime;
 	return elapsedTime;
+}
+
+ArrayList<Player>* Game::GetPlayers()
+{
+	return players;
 }
 
 LRESULT CALLBACK Game::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)

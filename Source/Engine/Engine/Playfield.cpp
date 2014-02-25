@@ -2,24 +2,31 @@
 #include "DebugConsole.h"
 
 
-Playfield::Playfield(Player** ps, int pNum, Game* game) : numActivePlayers(pNum)
+Playfield::Playfield(Game* game)
 {
 	//Initialize arraylist of game models
 	models = new ArrayList<GameModel>;
 
+	entities = new ArrayList<Entity>();
+	activePlayers = new ArrayList<Player>();
+	obstacles = new ArrayList<Obstacle>();
+
 	//Creates new array of length 1-4 (Depending on how many players are playing in this game)
 	//Playfield itself does not know the players' numbers, just how many there are
-	activePlayers = new Player*[numActivePlayers];
-	for (int i = 0; i < numActivePlayers; ++i)
+	//activePlayers = new Player*[numActivePlayers];
+	//for (int i = 0; i < numActivePlayers; ++i)
+	//{
+	//	activePlayers[i] = ps[i];
+	//	//models->add(activePlayers[i]->getPlayerModel());
+	//}
+
+	for(int i = 0; i < game->GetPlayers()->size(); ++i)
 	{
-		activePlayers[i] = ps[i];
-		//models->add(activePlayers[i]->getPlayerModel());
+		//if(game->getControllerManager()->isConnected(i))
+			add(game->GetPlayers()->elementAt(i));
 	}
 
-	writeLabelToConsole(L"Number of players connected: ", numActivePlayers);
-
-	// log obstacle made to test playfield scrolling - let modelmanager handle this stuff when it's available
-	obstacles = new ArrayList<Obstacle>;
+	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
 
 	//Ground Texture. (could have an enum and a switch statement for different levels)
 	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
@@ -52,6 +59,12 @@ Playfield::~Playfield()
 	models = 0;
 }
 
+void Playfield::add(Player* player)
+{
+	activePlayers->add(player);
+	entities->add(player);
+}
+
 ArrayList<GameModel>* Playfield::getGameModels()
 {
 	return models;
@@ -59,8 +72,8 @@ ArrayList<GameModel>* Playfield::getGameModels()
 
 void Playfield::update(float elapsed) 
 {
-	for (int i = 0; i < numActivePlayers; ++i){
-		activePlayers[i]->update(elapsed);
+	for (int i = 0; i < entities->size(); ++i){
+		entities->elementAt(i)->update(elapsed);
 	}
 	// until modelmanager is made, move both entity and gamemodel separately (logobstable entity ignored for now)
 	// need to make it so that when it reaches the top it is cleared from the game or playfield

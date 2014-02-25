@@ -36,8 +36,11 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
+
 		KeyInput*               getKeyInput();
 		ControllerInputManager* getControllerManager();
+
+		ArrayList<Player>* GetPlayers();
 		
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
@@ -54,6 +57,7 @@ class Game
 		HINSTANCE hinstance;
 		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
+		ArrayList<Player>* players;
 		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
 		ArrayList<KeyInput>*    playerKeys;
 		ControllerInputManager* conInput; //Yay! Input from a controller!
