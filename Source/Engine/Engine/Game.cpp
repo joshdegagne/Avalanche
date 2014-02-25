@@ -2,6 +2,7 @@
 // Filename: Game.cpp
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "PlayerViewModel.h"
 #include "Game.h"
 
 Game::Game()
@@ -65,18 +66,26 @@ bool Game::Initialize()
 	camera->SetTarget(12.0f, 3.0f, 0.0f);
 	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
 
+	///////////////
+	//Game Models//
+	///////////////
+	PlayerViewModel* playerViewModel = new PlayerViewModel(1.0, 1.0, L"textures/iceclimberhead.dds");
+
+	
+	gameModels->add(playerViewModel);
 
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
     Player** activePlayers = new Player*[NUMPLAYERS];
 	int activeCounter = 0;
-	for (int i = 0; i < NUMPLAYERS; i++)
+	for (activeCounter = 0; activeCounter < NUMPLAYERS; activeCounter++)
 	{
 		//Comment this line out for testing purposes
 		//if (conInput->isConnected(i))
 		{
-			activePlayers[activeCounter++] = new Player(*this, i);
+			activePlayers[activeCounter] = new Player(*this, activeCounter);
+			playerViewModel->entityList->add(activePlayers[activeCounter]);
 		}
 	}
 
@@ -84,11 +93,8 @@ bool Game::Initialize()
 	if (!playfield)
 		return false;
 
-
-	///////////////
-	//Game Models//
-	///////////////
 	gameModels->addAll(playfield->getGameModels());
+	
 
 	////////////
 	//Graphics//

@@ -5,7 +5,7 @@
 class Player;
 class ITexture;
 
-class PlayerViewModel : ViewModel<Player>
+class PlayerViewModel : public ViewModel<Player>
 {
 public:
 	PlayerViewModel(float, float, WCHAR*);

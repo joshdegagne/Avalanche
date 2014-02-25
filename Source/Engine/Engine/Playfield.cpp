@@ -13,7 +13,7 @@ Playfield::Playfield(Player** ps, int pNum, Game* game) : numActivePlayers(pNum)
 	for (int i = 0; i < numActivePlayers; ++i)
 	{
 		activePlayers[i] = ps[i];
-		models->add(activePlayers[i]->getPlayerModel());
+		//models->add(activePlayers[i]->getPlayerModel());
 	}
 
 	writeLabelToConsole(L"Number of players connected: ", numActivePlayers);

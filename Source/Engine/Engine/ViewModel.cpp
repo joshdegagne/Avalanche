@@ -11,6 +11,9 @@ inline ViewModel<T>::ViewModel(EntityType associatedType)
 	entityList = new ArrayList<T>();
 
 	this->associatedEntity = associatedType;
+
+	XMStoreFloat4x4(&orientRotateMatrix, XMMatrixIdentity());
+	XMStoreFloat4x4(&orientTranslateMatrix, XMMatrixIdentity());
 }
 
 //DESTRUCTOR
@@ -28,7 +31,7 @@ inline ViewModel<T>::~ViewModel()
  *		entity : the entity to be added
  */
 template <class T>
-void ViewModel<T>::Add(const T& entity)
+inline void ViewModel<T>::Add(const T& entity)
 {
 	entityList->add(&entity);
 }

@@ -3,10 +3,11 @@
 #include "TextureShader.h"
 #include "ViewModel.cpp"
 #include "Player.h"
+#include "DebugConsole.h"
 
 #include "PlayerViewModel.h"
 
-PlayerViewModel::PlayerViewModel(float lengthX, float lengthY, WCHAR* aTextureFileName) : ViewModel<Player>(EntityType::PLAYER)
+PlayerViewModel::PlayerViewModel(float width, float height, WCHAR* aTextureFileName) : ViewModel<Player>(EntityType::PLAYER)
 {
 	/*
 	Create a quad consisting of 4 vertices and 2 triangles
@@ -23,16 +24,16 @@ PlayerViewModel::PlayerViewModel(float lengthX, float lengthY, WCHAR* aTextureFi
 	textureFileName = aTextureFileName;
 
 	//Quad Face
-	textureVertices[0].position = XMFLOAT3(-lengthX/2, -lengthY/2, 0.0f); // Top left.
+	textureVertices[0].position = XMFLOAT3(-width/2, 0.0f, 0.0f); // Top left.
 	textureVertices[0].texture = XMFLOAT2(0.0f, 0.0f);
 	
-	textureVertices[1].position = XMFLOAT3(-lengthX/2, lengthY/2, 0.0f);  // Bottom left.
+	textureVertices[1].position = XMFLOAT3( width/2, 0.0f, 0.0f);  // Bottom left.
 	textureVertices[1].texture = XMFLOAT2(0.0f, 1.0f);
 
-	textureVertices[2].position = XMFLOAT3(lengthX/2, -lengthY/2, 0.0f);  // Top right.
+	textureVertices[2].position = XMFLOAT3(-width/2, 0.0f, height);  // Top right.
 	textureVertices[2].texture = XMFLOAT2(1.0f, 0.0f);
 	
-	textureVertices[3].position = XMFLOAT3(lengthX/2, lengthY/2, 0.0f);   // Bottom right.
+	textureVertices[3].position = XMFLOAT3(width/2, 0.0f, height);   // Bottom right.
 	textureVertices[3].texture = XMFLOAT2(1.0f, 1.0f);
 
 	// Load the index array with data.
@@ -49,6 +50,9 @@ PlayerViewModel::PlayerViewModel(float lengthX, float lengthY, WCHAR* aTextureFi
 
 	//Create the ModelClass object that will be used to deliver these vertices to the graphics pipeline
 	vertexModel = new Model(textureVertices, vertexCount, indices, indexCount, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//orientRotateZ(-XM_PIDIV2);
+	//orientRotateY(XM_PIDIV4/2);
 }
 
 PlayerViewModel::~PlayerViewModel()
@@ -117,7 +121,7 @@ bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X
 	if(!textureShader) return false; //we were not provided with a shader
 
 	XMFLOAT4X4 worldMatrix;
-	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat2( &entity->getPos() )));
+	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat3( &entity->getPos() )));
 
 	// Put the game model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	vertexModel->Render(deviceContext);
@@ -129,7 +133,6 @@ bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X
 										viewMatrix, 
 										projectionMatrix,
 										texture->GetTexture()); //get the texture to render
-	
 
 	return result; 
 }

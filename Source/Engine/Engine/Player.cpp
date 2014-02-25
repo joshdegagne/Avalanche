@@ -189,7 +189,7 @@ void Player::update(float elapsed)
 	///////////////////
 	position.x += velocity.x;
 	position.y += velocity.y;
-	playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
+	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
 }
 
 void Player::moveLeft()
