@@ -1,4 +1,4 @@
-Avalanch - game project for comp 2501
+Avalanche - game project for comp 2501
 ================
 
 Hey look, we're making a game?
