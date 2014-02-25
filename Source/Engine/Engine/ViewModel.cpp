@@ -2,18 +2,20 @@
 #include "EntityType.h"
 #include "ViewModel.h"
 
-//CONSTRUCTOR
-template <class T>
-ViewModel<T>::ViewModel(EntityType associatedType)
-{
-	entityList = new list<T>();
+using namespace std;
 
-	this->associatedType = associatedType;
+//CONSTRUCTOR
+template<class T>
+inline ViewModel<T>::ViewModel(EntityType associatedType)
+{
+	entityList = new ArrayList<T>();
+
+	this->associatedEntity = associatedType;
 }
 
 //DESTRUCTOR
 template<class T>
-ViewModel<T>::~ViewModel()
+inline ViewModel<T>::~ViewModel()
 {
 	delete entityList;
 }
@@ -28,7 +30,7 @@ ViewModel<T>::~ViewModel()
 template <class T>
 void ViewModel<T>::Add(const T& entity)
 {
-	entityList->push_front(entity);
+	entityList->add(&entity);
 }
 
 /*	GetAssociatedType
@@ -40,6 +42,17 @@ template <class T>
 EntityType ViewModel<T>::GetAssociatedType()
 {
 	return associatedType;
+}
+
+template <class T>
+XMFLOAT4X4 ViewModel<T>::GetOrientation()
+{
+    
+	//Build the world matrix to give to the graphis system
+	XMFLOAT4X4 worldMatrix; 
+	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4(&orientRotateMatrix) * XMLoadFloat4x4(&orientTranslateMatrix));
+
+	return worldMatrix;
 }
 
 template <class T>
