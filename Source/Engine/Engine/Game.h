@@ -17,7 +17,7 @@
 #include "Playfield.h"
 #include "Player.h"
 #include "LogModel.h"
-#define  NUMPLAYERS 4
+#define  NUMPLAYERS 4 //USED FOR POTENTIAL PLAYER LOOPS ONLY
 
 class Player; //Forward declaration
 

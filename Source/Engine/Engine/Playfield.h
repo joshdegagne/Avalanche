@@ -34,7 +34,6 @@ class Playfield
 		ArrayList<Obstacle>*	obstacles;			//List of obstacles
 		ArrayList<GameModel>*   models;				//list of models to pass to game
 		Player**				activePlayers;		//List of players (will be of length 1-4)
-		Player**                testPlayers;		//List of players for testing w/o controllers
 		int						numActivePlayers;	//Number of players
 		QuadTexturedModel*		ground;				//Playfield quad
 		LogModel*				testLogModel;		//made to test scrolling
