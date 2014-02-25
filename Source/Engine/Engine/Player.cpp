@@ -184,26 +184,28 @@ void Player::update(float elapsed)
 	///////////////////
 	//Update Position//
 	///////////////////
-	position.x += velocity.x * elapsed;
-	position.y += velocity.y * elapsed;
+	moveBy(velocity, elapsed * MOVEMENT_SPEED);
+
+	//position.x += velocity.x * elapsed;
+	//position.y += velocity.y * elapsed;
 	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
 }
 
 void Player::moveLeft()
 {
-	velocity.y = MOVEMENT_SPEED;
+	velocity.y = 1;
 }
 void Player::moveRight()
 {
-	velocity.y = -MOVEMENT_SPEED;
+	velocity.y = -1;
 }
 void Player::moveDown()
 {
-	velocity.x = MOVEMENT_SPEED;
+	velocity.x = 1;
 }
 void Player::moveUp()
 {
-	velocity.x = -MOVEMENT_SPEED;
+	velocity.x = -1;
 }
 
 void Player::stop()

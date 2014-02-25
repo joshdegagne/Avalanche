@@ -11,7 +11,7 @@
 
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
-#define	 MOVEMENT_SPEED 0.1f
+#define	 MOVEMENT_SPEED 0.006f
 #define  JUMP_HEIGHT 4.0f
 
 class Game;  //Forward declaration
