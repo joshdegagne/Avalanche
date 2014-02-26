@@ -23,23 +23,24 @@ class Player: public Entity {
 		//Constructors
 		Player(Game&, int);
 		~Player();
-		
-		void update(float);
-		//CubeModel* getCubeModel(); 
-		GameModel* getPlayerModel(); 
-		void render(); 
+		GameModel*	getPlayerModel(); 
+		void		update(float);
+		void		render(); 
 
 	private:
-		KeyInput*               keyboard;
-		int						keys[4];
+		GameModel*	playerModel; // for testing purposes
 		ControllerInputManager* controller;
+		KeyInput*	keyboard;
+		int			keys[4];
+
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
 		float       jumpIncrement;
 
-		//CubeModel*	cubeModel; // for testing purposes
-		GameModel*	playerModel; // for testing purposes
-		//Movemnet
+		void checkControllerInputs();
+		void checkKeyboardInputs();
+
+		//Movement
 		void moveLeft();
 		void moveRight();
 		void moveUp();
