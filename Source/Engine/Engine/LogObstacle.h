@@ -9,10 +9,7 @@
 class LogObstacle : public Obstacle
 {
 public:
-	LogObstacle(); // default log of size 3
-	LogObstacle(float, bool, EntityType);
-	
-	void update(float);
+	LogObstacle();
 
 private:
 
