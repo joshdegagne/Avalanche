@@ -229,7 +229,7 @@ bool LogViewModel::initializeTextures(ID3D11Device* d3dDevice){
 }
 
 bool LogViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, LogObstacle* entity){
-	
+
 	if(!textureShader) return false; //we were not provided with a shader
 
 	XMFLOAT4X4 worldMatrix;

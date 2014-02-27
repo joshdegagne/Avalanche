@@ -102,6 +102,7 @@ bool Game::Initialize()
 		return false;
 
 	gameModels->addAll(playfield->getGameModels());
+	gameModels->addAll(playfield->getViewModels());
 	
 
 	////////////
