@@ -81,6 +81,11 @@ bool BoundViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 	return result;
 }
 
+bool BoundViewModel::initializeTextures(ID3D11Device* d3dDevice){
+	
+	return true;
+}
+
 bool BoundViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, BoundingBox* entity)
 {
 	if(!textureShader) return false; //we were not provided with a shader

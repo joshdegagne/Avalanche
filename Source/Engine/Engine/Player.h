@@ -36,14 +36,14 @@ class Player: public Entity {
 		GameModel*	 playerModel; // for testing purposes
 		ControllerInputManager* controller;
 		KeyInput*	 keyboard;
-		int			 keys[4];
+		int			 keys[5];
 
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
 		float       jumpIncrement;
 
-		void checkControllerInputs();
-		void checkKeyboardInputs();
+		void checkControllerInputs(float);
+		void checkKeyboardInputs(float);
 
 		//Movement
 		void moveLeft();

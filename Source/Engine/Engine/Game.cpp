@@ -3,16 +3,17 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "PlayerViewModel.h"
+#include "BoundViewModel.h"
 #include "Game.h"
 
 Game::Game()
 {
+	start     = duration_cast <milliseconds>(high_resolution_clock::now().time_since_epoch());
 	keyInput  = 0;
 	conInput  = 0;
 	graphics  = 0;
 	camera    = 0;
 	playfield = 0;
-	pF		  = 0;
 	players = NULL;
 
 	gameModels = new ArrayList<IViewModel>();
@@ -71,13 +72,14 @@ bool Game::Initialize()
 	//Game Models//
 	///////////////
 	PlayerViewModel* playerViewModel = new PlayerViewModel();
-	
+	BoundViewModel* boundViewModel = new BoundViewModel();
 	gameModels->add(playerViewModel);
 
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
 	players = new ArrayList<Player>();
+
 
     //Player** activePlayers = new Player*[NUMPLAYERS];
 	//int activeCounter = 0;
@@ -122,13 +124,6 @@ bool Game::Initialize()
 
 void Game::Shutdown()
 {
-	if(pF)
-	{
-		pF->Shutdown();
-		delete pF;
-		pF = 0;
-	}
-
 	if(gameModels)
 	{
 		delete gameModels;
@@ -252,9 +247,7 @@ bool Game::Frame()
 	}
 
 	// playfield update
-	float elapsedTime = getElapsedTime();
-
-	playfield->update(elapsedTime);
+	playfield->update(getElapsedTime());
 	
 
 	// Do the frame processing for the graphics object.
@@ -269,11 +262,9 @@ bool Game::Frame()
 
 float Game::getElapsedTime()
 {
-	
-	float currentTime = (float) GetTickCount();
-	float elapsedTime = currentTime - previousTime;
-	previousTime = currentTime;
-	return elapsedTime;
+	milliseconds elapsed = duration_cast <milliseconds>(high_resolution_clock::now().time_since_epoch()) - start;
+	start += elapsed;
+	return elapsed.count();
 }
 
 ArrayList<Player>* Game::GetPlayers()

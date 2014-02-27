@@ -115,8 +115,8 @@ bool PlayerViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	result = texture->Initialize(d3dDevice, textureFileName);
 	if(!result)
 	{
-	return false;
-}
+		return false;
+	}
 
 	return true;
 }

@@ -15,6 +15,7 @@ Player::Player(Game& g, int pNum) : Entity()
 		keys[1] = VK_RIGHT;
 		keys[2] = VK_UP;
 		keys[3] = VK_DOWN;
+		keys[4] = VK_SPACE;
 	}
 	else if (playerNum == 1) //Player two (WASD)
 	{
@@ -22,6 +23,7 @@ Player::Player(Game& g, int pNum) : Entity()
 		keys[1] = ascii_D;
 		keys[2] = ascii_W;
 		keys[3] = ascii_S;
+		keys[4] = 0;
 	}
 	else if (playerNum == 2) //Player three (TFGH)
 	{
@@ -29,6 +31,7 @@ Player::Player(Game& g, int pNum) : Entity()
 		keys[1] = ascii_H;
 		keys[2] = ascii_T;
 		keys[3] = ascii_G;
+		keys[4] = 0;
 	}
 	else if (playerNum == 3) //Player four (IJKL)
 	{
@@ -36,6 +39,7 @@ Player::Player(Game& g, int pNum) : Entity()
 		keys[1] = ascii_L;
 		keys[2] = ascii_I;
 		keys[3] = ascii_K;
+		keys[4] = 0;
 	}
 
 	position.x = 0;
@@ -68,23 +72,23 @@ GameModel* Player::getPlayerModel()
 
 void Player::update(float elapsed)
 {
+	writeLabelToConsole(L"Elapsed time: ", elapsed);
 	//Needed: 
-	//  - implementation/usage of "elapsed"
 	//  - Prioritization of actions?
 	//	- Check for buttons being released?
 
 	stop();
 
 	if (controller->isConnected(playerNum))
-		checkControllerInputs();
+		checkControllerInputs(elapsed);
 	else
-		checkKeyboardInputs();
+		checkKeyboardInputs(elapsed);
 
 	///////////////////
 	//Update Position//
 	///////////////////
 	moveBy(velocity, elapsed * MOVEMENT_SPEED);
-
+	jumpArc(elapsed);
 	//position.x += velocity.x * elapsed;
 	//position.y += velocity.y * elapsed;
 	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
@@ -94,7 +98,7 @@ void Player::render()
 {
 }
 
-void Player::checkControllerInputs()
+void Player::checkControllerInputs(float elapsed)
 {
 	////////////////
 	//Stick Checks//
@@ -170,7 +174,7 @@ void Player::checkControllerInputs()
 	}
 }
 
-void Player::checkKeyboardInputs()
+void Player::checkKeyboardInputs(float elapsed)
 {
 	if (keyboard->IsKeyDown(keys[0]))
 	{
@@ -187,6 +191,10 @@ void Player::checkKeyboardInputs()
 	else if (keyboard->IsKeyDown(keys[3]))
 	{
 		moveDown();
+	}
+	if (keyboard->IsKeyDown(keys[4]))
+	{
+		jump(elapsed);
 	}
 }
 
@@ -216,6 +224,7 @@ void Player::stop()
 
 void Player::jump(float elapsed)
 {
+	
 	if (jumpIncrement == 0.0f)
 	{
 		jumpIncrement = elapsed;

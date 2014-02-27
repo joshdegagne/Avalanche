@@ -5,13 +5,12 @@
 
 #define WIN32_LEAN_AND_MEAN 
 #include <windows.h> //needed to create and destroy windows and call Win32 functions
+#include <chrono>
 
 #include "KeyInput.h"
 #include "ControllerInputManager.h"
 #include "Graphics.h"
 #include "IViewModel.h"
-#include "QuadModel.h"
-#include "QuadTexturedModel.h"
 #include "Arraylist.h"
 #include "Camera.h"
 #include "Playfield.h"
@@ -19,6 +18,8 @@
 #include "LogModel.h"
 #include "BoundingBox.h"
 #define  NUMPLAYERS 4 //USED FOR POTENTIAL PLAYER LOOPS ONLY
+
+using namespace std::chrono;
 
 class Player; //Forward declaration
 
@@ -64,12 +65,10 @@ class Game
 		ControllerInputManager* conInput; //Yay! Input from a controller!
 		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world
-
-		float previousTime;
+		milliseconds            start;
 
 		//Game World Items
 		Playfield*		   playfield;
-		QuadTexturedModel* pF;
 
 		ArrayList<IViewModel>* gameModels; //container to hold all our game world models - change to be in modelmanager class?
 
