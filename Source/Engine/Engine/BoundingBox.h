@@ -19,11 +19,8 @@ class BoundingBox {
 		void initialize(Entity*);
 		void update();
 
-		ColorVertexType* getVertices();
-		unsigned long*	 getIndices();
-		int				 getIndexCount();
-		int				 getVertexCount();
-
+		Entity*   getParent();
+		XMFLOAT3* getDimensions();
 
 	private:
 		void setWLH(float, float, float);
@@ -32,10 +29,5 @@ class BoundingBox {
 		float   width;
 		float   length;
 		float   height;
-		ColorVertexType* vertices;
-		unsigned long*	 indices;
-		int				 vertexCount;
-		int				 indexCount;
-		XMFLOAT4		 colour;
-
+		
 };

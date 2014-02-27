@@ -165,6 +165,9 @@
     <ClCompile Include="BoundingBox.cpp">
       <Filter>Source Files\Entities\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="BoundViewModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
       <Filter>Header Files\Entities\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

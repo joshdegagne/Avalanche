@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoundingBox.cpp" />
+    <ClCompile Include="BoundViewModel.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControllerInputManager.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -119,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="Arraylist.h" />
     <ClInclude Include="BoundingBox.h" />
+    <ClInclude Include="BoundViewModel.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ControllerInputManager.h" />
     <ClInclude Include="DebugConsole.h" />
