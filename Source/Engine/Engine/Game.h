@@ -43,6 +43,7 @@ class Game
 		ControllerInputManager* getControllerManager();
 
 		ArrayList<Player>* GetPlayers();
+		ArrayList<IViewModel>* GetViewModels();
 		
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);

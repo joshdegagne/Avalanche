@@ -1,4 +1,6 @@
 
+#include <typeinfo> 
+
 #include "EntityType.h"
 #include "ViewModel.h"
 
@@ -6,7 +8,7 @@ using namespace std;
 
 //CONSTRUCTOR
 template<class T>
-inline ViewModel<T>::ViewModel(EntityType associatedType)
+inline ViewModel<T>::ViewModel(EntityType associatedType) : ViewModelBase(associatedType)
 {
 	entityList = new ArrayList<T>();
 
@@ -31,20 +33,15 @@ inline ViewModel<T>::~ViewModel()
  *		entity : the entity to be added
  */
 template <class T>
-inline void ViewModel<T>::Add(const T& entity)
+void ViewModel<T>::Add(T* entity)
 {
-	entityList->add(&entity);
+	entityList->add(entity);
 }
 
-/*	GetAssociatedType
- *	==================================================
- *		Returns the EntityType associated with this
- *	ViewModel.
- */
 template <class T>
-EntityType ViewModel<T>::GetAssociatedType()
+const std::type_info& ViewModel<T>::GetType()
 {
-	return associatedType;
+	return typeid(T);
 }
 
 template <class T>

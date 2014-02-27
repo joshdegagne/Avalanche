@@ -28,7 +28,8 @@ class Playfield
 		// initialize method?
 		void update(float); // for scrolling
 
-		ArrayList<GameModel>* getGameModels(); 
+		ArrayList<GameModel>*	getGameModels(); 
+		ArrayList<IViewModel>*  getViewModels();
 
 	protected:
 		void add(Player* player);
@@ -38,7 +39,12 @@ class Playfield
 		ArrayList<Player>*		activePlayers;			//List of players in the current match
 		ArrayList<Obstacle>*	obstacles;			//List of obstacles
 		ArrayList<GameModel>*   models;				//list of models to pass to game
-		//Player**				activePlayers;		//List of players (will be of length 1-4)
+		ArrayList<IViewModel>*  viewModels;
 		QuadTexturedModel*		ground;				//Playfield quad
 		LogModel*				testLogModel;		//made to test scrolling
+
+		const float fieldLength;
+		const float fieldWidth;
+
+		void placeObstacle(Obstacle*, int lane = -1);
 };

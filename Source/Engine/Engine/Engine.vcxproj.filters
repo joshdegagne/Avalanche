@@ -162,6 +162,12 @@
     <ClCompile Include="PrismTexturedModel.cpp">
       <Filter>Source Files\Models\BasicModels</Filter>
     </ClCompile>
+    <ClCompile Include="ModelManager.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewModelBase.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
       <Filter>Source Files\Entities\Collision</Filter>
     </ClCompile>
@@ -286,6 +292,15 @@
     </ClInclude>
     <ClInclude Include="PrismTexturedModel.h">
       <Filter>Header Files\Models\BasicModels</Filter>
+    </ClInclude>
+    <ClInclude Include="IManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelManager.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewModelBase.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
       <Filter>Header Files\Entities\Collision</Filter>

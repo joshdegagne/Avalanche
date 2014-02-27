@@ -3,6 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "PlayerViewModel.h"
+#include "LogViewModel.h"
+#include "ViewModel.cpp"
 #include "BoundViewModel.h"
 #include "Game.h"
 
@@ -72,28 +74,21 @@ bool Game::Initialize()
 	//Game Models//
 	///////////////
 	PlayerViewModel* playerViewModel = new PlayerViewModel();
+	LogViewModel*	 logViewModel	 = new LogViewModel();
+	
 	BoundViewModel* boundViewModel = new BoundViewModel();
 	gameModels->add(playerViewModel);
+	gameModels->add(logViewModel);
 
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
 	players = new ArrayList<Player>();
-
-
-    //Player** activePlayers = new Player*[NUMPLAYERS];
-	//int activeCounter = 0;
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
 		Player* player = new Player(*this, i);
 		players->add(player);
-		playerViewModel->entityList->add(player);
-		//Comment this line out for testing purposes
-		//if (conInput->isConnected(i))
-		//{
-			//activePlayers[activeCounter++] = new Player(*this, i);
-			//playerViewModel->entityList->add(activePlayers[i]);
-		//}
+		playerViewModel->Add(player);
 	}
 
 	playfield = new Playfield(this);
@@ -101,6 +96,7 @@ bool Game::Initialize()
 		return false;
 
 	gameModels->addAll(playfield->getGameModels());
+	gameModels->addAll(playfield->getViewModels());
 	
 
 	////////////
@@ -270,6 +266,10 @@ float Game::getElapsedTime()
 ArrayList<Player>* Game::GetPlayers()
 {
 	return players;
+}
+ArrayList<IViewModel>* Game::GetViewModels()
+{
+	return gameModels;
 }
 
 LRESULT CALLBACK Game::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)

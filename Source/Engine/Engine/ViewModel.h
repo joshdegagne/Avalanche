@@ -3,14 +3,14 @@
 
 #include "arraylist.h"
 #include "Model.h"
-#include "IViewModel.h"
+#include "ViewModelBase.h"
 #include "Texture.h"
 
 class Model;
 enum class EntityType;
 
 template <class T>
-class ViewModel : public IViewModel
+class ViewModel : public ViewModelBase
 {
 public:
 	virtual ~ViewModel();
@@ -20,10 +20,9 @@ public:
 
 	bool Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader);
 	
-	void		Add(const T&);
-	EntityType	GetAssociatedType();
+	void Add(T* entity);
 
-	ArrayList<T>*	entityList;
+	const std::type_info& GetType();
 
 protected:
 	ViewModel(EntityType);
@@ -38,8 +37,7 @@ protected:
 	void orientTranslate(float, float, float);
 
 protected:
-	
-	EntityType		associatedEntity;
+	ArrayList<T>*	entityList;
 
 	XMFLOAT4X4 orientRotateMatrix;
     XMFLOAT4X4 orientTranslateMatrix;
