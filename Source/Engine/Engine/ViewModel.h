@@ -3,14 +3,14 @@
 
 #include "arraylist.h"
 #include "Model.h"
-#include "IViewModel.h"
+#include "ViewModelBase.h"
 #include "Texture.h"
 
 class Model;
 enum class EntityType;
 
 template <class T>
-class ViewModel : public IViewModel
+class ViewModel : public ViewModelBase
 {
 public:
 	virtual ~ViewModel();
@@ -22,7 +22,7 @@ public:
 	
 	void Add(T* entity);
 
-	EntityType	GetAssociatedType();
+	const std::type_info& GetType();
 
 protected:
 	ViewModel(EntityType);
@@ -38,8 +38,6 @@ protected:
 
 protected:
 	ArrayList<T>*	entityList;
-	
-	EntityType		associatedEntity;
 
 	XMFLOAT4X4 orientRotateMatrix;
     XMFLOAT4X4 orientTranslateMatrix;
