@@ -4,6 +4,7 @@
 ////////////////////////
 #include "PlayerViewModel.h"
 #include "LogViewModel.h"
+#include "ViewModel.cpp"
 ////////////////////////
 
 
@@ -38,9 +39,9 @@ Playfield::Playfield(Game* game) : fieldLength(20.0f), fieldWidth(6.0f)
 	viewModels->add(logViewModel);
 
 	for (int i = 0; i < activePlayers->size(); ++i)
-		playerViewModel->entityList->add(activePlayers->elementAt(i));
+		playerViewModel->Add(activePlayers->elementAt(i));
 
-	logViewModel->entityList->add(testLogObstacle);
+	logViewModel->Add(testLogObstacle);
 	////////////////////////////////////////////
 	
 
