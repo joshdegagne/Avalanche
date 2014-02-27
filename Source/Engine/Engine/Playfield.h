@@ -38,7 +38,11 @@ class Playfield
 		ArrayList<Player>*		activePlayers;			//List of players in the current match
 		ArrayList<Obstacle>*	obstacles;			//List of obstacles
 		ArrayList<GameModel>*   models;				//list of models to pass to game
-		//Player**				activePlayers;		//List of players (will be of length 1-4)
 		QuadTexturedModel*		ground;				//Playfield quad
 		LogModel*				testLogModel;		//made to test scrolling
+
+		const float fieldLength;
+		const float fieldWidth;
+
+		void placeObstacle(Entity*, int lane = -1);
 };

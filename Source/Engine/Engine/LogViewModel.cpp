@@ -5,7 +5,8 @@
 #include "TextureShader.h"
 #include "ViewModel.cpp"
 
-LogViewModel::LogViewModel(float height, float radius, int nFaces, WCHAR** textureFileNames) : ViewModel<LogObsacle>(EntityType::LOG)
+
+LogViewModel::LogViewModel() : ViewModel<LogObstacle>(EntityType::LOG)
 {
 	/*
 	pTextureFileNames is expected to be an array of 3 items
@@ -14,12 +15,14 @@ LogViewModel::LogViewModel(float height, float radius, int nFaces, WCHAR** textu
 	pTextureFileName[2] is the texture applied to the bottom end of the prism
 	*/
 
-	int numberOfFaces = nFaces;
-
-	m_textureFileNames = new WCHAR*[NUMBER_OF_TEXTURES]; //file names of 3 face .dds texture files
-    for(int i=0; i<NUMBER_OF_TEXTURES; i++){
-		m_textureFileNames[i] = textureFileNames[i]; //record the file names of the 3 prism face texture files
-	}
+	int   numberOfFaces = 16;
+	float width = 3.0f;
+	float radius = 0.25f;
+	
+	m_textureFileNames = new WCHAR*[3];
+	m_textureFileNames[0] = L"textures/tempwoodside.dds";
+	m_textureFileNames[1] = L"textures/tempwoodface.dds";
+	m_textureFileNames[2] = L"textures/tempwoodside.dds";
 
 	//keep number of faces in a reasonable range
 	if(numberOfFaces < 3) numberOfFaces = 3;
@@ -27,17 +30,17 @@ LogViewModel::LogViewModel(float height, float radius, int nFaces, WCHAR** textu
 	
 	//changing the sign of angle will affect whether the inside or outside of the prism
 	//is visible
-	float angle = -XM_PI * 2 / nFaces; //slice angle of each face
+	float angle = -XM_PI * 2 / numberOfFaces; //slice angle of each face
 
 	//temporary vertices for top and bottom
  	XMFLOAT3* topVertices = new XMFLOAT3[numberOfFaces + 1];
  	XMFLOAT3* bottomVertices = new XMFLOAT3[numberOfFaces + 1];
 	
-    XMFLOAT3 v0top(radius, height/2, 0); 
-    XMFLOAT3 v0bottom(radius, -height/2, 0);
+    XMFLOAT3 v0top(radius, width/2, 0); 
+    XMFLOAT3 v0bottom(radius, -width/2, 0);
 
-    XMFLOAT3 topCenter(0, height/2, 0);
-    XMFLOAT3 bottomCenter(0, -height/2, 0);
+    XMFLOAT3 topCenter(0, width/2, 0);
+    XMFLOAT3 bottomCenter(0, -width/2, 0);
 
     topVertices[0] = v0top;
     topVertices[numberOfFaces] = v0top;

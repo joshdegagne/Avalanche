@@ -2,7 +2,7 @@
 #include "DebugConsole.h"
 
 
-Playfield::Playfield(Game* game)
+Playfield::Playfield(Game* game) : fieldLength(20.0f), fieldWidth(6.0f)
 {
 	//Initialize arraylist of game models
 	models = new ArrayList<GameModel>;
@@ -20,6 +20,8 @@ Playfield::Playfield(Game* game)
 	//	//models->add(activePlayers[i]->getPlayerModel());
 	//}
 
+	
+
 	for(int i = 0; i < game->GetPlayers()->size(); ++i)
 	{
 		//if(game->getControllerManager()->isConnected(i))
@@ -30,9 +32,17 @@ Playfield::Playfield(Game* game)
 
 	//Ground Texture. (could have an enum and a switch statement for different levels)
 	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
-	ground = new QuadTexturedModel (18.0f,6.0f,fieldTexture);
-	ground->worldTranslate(9.0f,3.0f,-0.1f);
+	ground = new QuadTexturedModel (fieldLength, fieldWidth, fieldTexture);
+	ground->worldTranslate(fieldLength/2, 3.0f, -0.1f);
 	models->add(ground);
+
+	LogObstacle* testLogObstacle = new LogObstacle();
+	placeObstacle(testLogObstacle);
+
+
+
+	//////////////////////////////////
+
 
 	WCHAR* logTextureFiles[] = {
 		L"textures/tempwoodside.dds",
@@ -41,7 +51,7 @@ Playfield::Playfield(Game* game)
 	};
 
 	testLogModel = new LogModel(3.0f, 0.25f, 16, logTextureFiles);
-	testLogModel->worldTranslate(18.0f, 1.5f, 0);
+	testLogModel->worldTranslate(fieldLength, 1.5f, 0);
 	models->add(testLogModel);
 
 	/*
@@ -78,4 +88,13 @@ void Playfield::update(float elapsed)
 	// until modelmanager is made, move both entity and gamemodel separately (logobstable entity ignored for now)
 	// need to make it so that when it reaches the top it is cleared from the game or playfield
 	testLogModel->worldTranslate(-SCROLL_SPEED, 0.0f, 0.0f);
+}
+
+void Playfield::placeObstacle(Entity* entity, int lane)
+{
+	if (lane == -1); //Then randomize based on algorithm! :D
+	else
+	{
+		entity->moveTo(fieldWidth*(float)lane, fieldLength);
+	}
 }
