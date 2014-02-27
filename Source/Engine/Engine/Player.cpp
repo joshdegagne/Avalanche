@@ -3,8 +3,10 @@
 
 Player::Player(Game& g, int pNum) : Entity()
 {
-	controller = g.getControllerManager();
-	keyboard   = g.getKeyInput();
+
+	bound->initialize(this);
+	controller	= g.getControllerManager();
+	keyboard	= g.getKeyInput();
 
 	playerNum = pNum;
 	if (playerNum == 0) //Player one (Arrow Keys)
@@ -64,10 +66,6 @@ GameModel* Player::getPlayerModel()
 	return playerModel;
 }
 
-void Player::render()
-{
-}
-
 void Player::update(float elapsed)
 {
 	//Needed: 
@@ -77,27 +75,27 @@ void Player::update(float elapsed)
 
 	stop();
 
-	////////////////////////////
-	//Keyboard Movement Checks//
-	////////////////////////////
-	if (keyboard->IsKeyDown(keys[0]))
-	{
-		moveLeft();
-	}
-	else if (keyboard->IsKeyDown(keys[1])) 
-	{
-		moveRight();
-	}
-	if (keyboard->IsKeyDown(keys[2]))
-	{
-		moveUp();
-	}
-	else if (keyboard->IsKeyDown(keys[3]))
-	{
-		moveDown();
-	}
-	
+	if (controller->isConnected(playerNum))
+		checkControllerInputs();
+	else
+		checkKeyboardInputs();
 
+	///////////////////
+	//Update Position//
+	///////////////////
+	moveBy(velocity, elapsed * MOVEMENT_SPEED);
+
+	//position.x += velocity.x * elapsed;
+	//position.y += velocity.y * elapsed;
+	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
+}
+
+void Player::render()
+{
+}
+
+void Player::checkControllerInputs()
+{
 	////////////////
 	//Stick Checks//
 	////////////////
@@ -126,42 +124,34 @@ void Player::update(float elapsed)
 	if (controller->getButtonA(playerNum))
 	{
 		//jump();
-		return;
 	}
 	if (controller->getButtonB(playerNum))
 	{
 		//Ability?
-		return;
 	}
 	if (controller->getButtonX(playerNum))
 	{
 		//Ability?
-		return;
 	}
 	if (controller->getButtonY(playerNum))
 	{
 		//Ability?
-		return;
 	}
 	if (controller->getButtonLB(playerNum))
 	{
 		//Roll left? Or would that be LT?
-		return;
 	}
 	if (controller->getButtonRB(playerNum))
 	{
 		//Roll right? Or would that be RT?
-		return;
 	}
 	if (controller->getButtonStart(playerNum))
 	{
 		//Pause game?
-		return;
 	}
 	if (controller->getButtonBack(playerNum))
 	{
 		//????
-		return;
 	}
 
 	//////////////////
@@ -171,25 +161,35 @@ void Player::update(float elapsed)
 	if (LT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
 		//Roll left?
-		return;
 	}
 
 	float RT = controller->getRT(playerNum);
 	if (RT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
 		//Roll right?
-		return;
 	}
-
-	///////////////////
-	//Update Position//
-	///////////////////
-	moveBy(velocity, elapsed * MOVEMENT_SPEED);
-
-	//position.x += velocity.x * elapsed;
-	//position.y += velocity.y * elapsed;
-	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
 }
+
+void Player::checkKeyboardInputs()
+{
+	if (keyboard->IsKeyDown(keys[0]))
+	{
+		moveLeft();
+	}
+	else if (keyboard->IsKeyDown(keys[1])) 
+	{
+		moveRight();
+	}
+	if (keyboard->IsKeyDown(keys[2]))
+	{
+		moveUp();
+	}
+	else if (keyboard->IsKeyDown(keys[3]))
+	{
+		moveDown();
+	}
+}
+
 
 void Player::moveLeft()
 {

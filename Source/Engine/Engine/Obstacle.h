@@ -12,15 +12,19 @@
 class Obstacle : public Entity
 {
 	public:
-		Obstacle(float); // initialized to not be present on the playfield (present = false)
-		Obstacle(float, bool);
+		Obstacle(float = 1.0, float = 1.0, bool = false);
 		float getLength();
-		bool isPresent();
-		void setPresent(bool);
+		bool  isPresent();
+		void  setPresent(bool);
+		void  setProgress(float);
+		void  update(float);
+	
 	protected:
 		//Type of obstacle
 		//Obstacle size?
 		float length;
-		bool present; // whether the obstacle is on screen and moving towards players
+		float height;
+		float progress;
+		bool  present; // whether the obstacle is on screen and moving towards players
 
 };

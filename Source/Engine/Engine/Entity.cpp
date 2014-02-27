@@ -5,6 +5,12 @@ Entity::Entity(float x, float y)
 	position.x = x;
 	position.y = y;
 	position.z = 0;
+
+	bound = new BoundingBox();
+}
+Entity::~Entity()
+{
+	delete bound;
 }
 
 float Entity::getX() { return position.x; }
@@ -15,6 +21,8 @@ void Entity::setY(float y) { position.y = y; }
 EntityType Entity::getEntityType() { return type; }
 
 XMFLOAT3 Entity::getPosition() { return position; }
+
+BoundingBox* Entity::getBound() { return bound; }
 
 void Entity::moveTo(float x, float y)
 {

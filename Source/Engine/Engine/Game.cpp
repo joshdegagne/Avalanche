@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "PlayerViewModel.h"
+#include "LogViewModel.h"
 #include "ViewModel.cpp"
 #include "Game.h"
 
@@ -72,8 +73,10 @@ bool Game::Initialize()
 	//Game Models//
 	///////////////
 	PlayerViewModel* playerViewModel = new PlayerViewModel();
+	LogViewModel*	 logViewModel	 = new LogViewModel();
 	
 	gameModels->add(playerViewModel);
+	gameModels->add(logViewModel);
 
 	/////////////////////
 	//Players/Playfield//
@@ -91,6 +94,7 @@ bool Game::Initialize()
 		return false;
 
 	gameModels->addAll(playfield->getGameModels());
+	gameModels->addAll(playfield->getViewModels());
 	
 
 	////////////
@@ -271,6 +275,10 @@ float Game::getElapsedTime()
 ArrayList<Player>* Game::GetPlayers()
 {
 	return players;
+}
+ArrayList<IViewModel>* Game::GetViewModels()
+{
+	return gameModels;
 }
 
 LRESULT CALLBACK Game::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)

@@ -17,6 +17,7 @@
 #include "Playfield.h"
 #include "Player.h"
 #include "LogModel.h"
+#include "BoundingBox.h"
 #define  NUMPLAYERS 4 //USED FOR POTENTIAL PLAYER LOOPS ONLY
 
 class Player; //Forward declaration
@@ -41,6 +42,7 @@ class Game
 		ControllerInputManager* getControllerManager();
 
 		ArrayList<Player>* GetPlayers();
+		ArrayList<IViewModel>* GetViewModels();
 		
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);

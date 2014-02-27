@@ -2,13 +2,13 @@
 
 #include "ViewModel.h"
 
-class LogObsacle;
+class LogObstacle;
 class ITexture;
 
-class LogViewModel : ViewModel<LogObsacle>
+class LogViewModel : public ViewModel<LogObstacle>
 {
 public:
-	LogViewModel(float, float, int, WCHAR**);
+	LogViewModel();
 	virtual ~LogViewModel();
 
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
