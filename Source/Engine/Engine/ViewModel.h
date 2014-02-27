@@ -20,10 +20,9 @@ public:
 
 	bool Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader);
 	
-	void		Add(const T&);
-	EntityType	GetAssociatedType();
+	void Add(T* entity);
 
-	ArrayList<T>*	entityList;
+	EntityType	GetAssociatedType();
 
 protected:
 	ViewModel(EntityType);
@@ -38,6 +37,7 @@ protected:
 	void orientTranslate(float, float, float);
 
 protected:
+	ArrayList<T>*	entityList;
 	
 	EntityType		associatedEntity;
 

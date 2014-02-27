@@ -31,9 +31,9 @@ inline ViewModel<T>::~ViewModel()
  *		entity : the entity to be added
  */
 template <class T>
-inline void ViewModel<T>::Add(const T& entity)
+void ViewModel<T>::Add(T* entity)
 {
-	entityList->add(&entity);
+	entityList->add(entity);
 }
 
 /*	GetAssociatedType

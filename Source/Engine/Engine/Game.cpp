@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "PlayerViewModel.h"
+#include "ViewModel.cpp"
 #include "Game.h"
 
 Game::Game()
@@ -78,20 +79,11 @@ bool Game::Initialize()
 	//Players/Playfield//
 	/////////////////////
 	players = new ArrayList<Player>();
-
-    //Player** activePlayers = new Player*[NUMPLAYERS];
-	//int activeCounter = 0;
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
 		Player* player = new Player(*this, i);
 		players->add(player);
-		playerViewModel->entityList->add(player);
-		//Comment this line out for testing purposes
-		//if (conInput->isConnected(i))
-		//{
-			//activePlayers[activeCounter++] = new Player(*this, i);
-			//playerViewModel->entityList->add(activePlayers[i]);
-		//}
+		playerViewModel->Add(player);
 	}
 
 	playfield = new Playfield(this);
