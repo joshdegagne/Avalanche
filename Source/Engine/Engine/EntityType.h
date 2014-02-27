@@ -21,6 +21,7 @@ enum class EntityType : int
 	SNOW_BALL,
 	//Variable length obstacles.
 	LOG,
-	LOG_FALLING
-	
+	LOG_FALLING,
+	//Debug bounding box
+	BOUNDING_BOX
 };
