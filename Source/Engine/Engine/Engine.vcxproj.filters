@@ -58,6 +58,12 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{371ebc3c-8ad5-45bc-ba34-00caadac49f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities\Collision">
+      <UniqueIdentifier>{fbaa57a2-8861-4d6d-9cab-5600e87cf60d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Collision">
+      <UniqueIdentifier>{dfd861ae-0e94-4eab-9ca9-9915194c1c7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -155,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="PrismTexturedModel.cpp">
       <Filter>Source Files\Models\BasicModels</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Source Files\Entities\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="PrismTexturedModel.h">
       <Filter>Header Files\Models\BasicModels</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files\Entities\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

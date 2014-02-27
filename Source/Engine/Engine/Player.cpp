@@ -3,8 +3,10 @@
 
 Player::Player(Game& g, int pNum) : Entity()
 {
-	controller = g.getControllerManager();
-	keyboard   = g.getKeyInput();
+
+	bound->initialize(this);
+	controller	= g.getControllerManager();
+	keyboard	= g.getKeyInput();
 
 	playerNum = pNum;
 	if (playerNum == 0) //Player one (Arrow Keys)

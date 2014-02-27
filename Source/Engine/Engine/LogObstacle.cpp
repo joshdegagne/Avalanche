@@ -7,5 +7,7 @@
 LogObstacle::LogObstacle() : Obstacle(3.0f, 1.0f)
 {
 	type = EntityType::LOG;
+
+	bound->initialize(this);
 	// orientation?
 }

@@ -8,11 +8,16 @@
 #include "Cubemodel.h" // for testing movement via controller
 #include "QuadModel.h" // for testing movement via controller
 #include "PlayerModel.h" // for testing
+#include "BoundingBox.h"
 
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
 #define	 MOVEMENT_SPEED 0.006f
 #define  JUMP_HEIGHT 4.0f
+
+#define  P_WIDTH  1.0f
+#define  P_LENGTH 1.0f
+#define  P_HEIGHT 1.0f
 
 class Game;  //Forward declaration
 ////////////////////////////////////////////////////////////////////////////////
@@ -28,10 +33,10 @@ class Player: public Entity {
 		void		render(); 
 
 	private:
-		GameModel*	playerModel; // for testing purposes
+		GameModel*	 playerModel; // for testing purposes
 		ControllerInputManager* controller;
-		KeyInput*	keyboard;
-		int			keys[4];
+		KeyInput*	 keyboard;
+		int			 keys[4];
 
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
