@@ -28,6 +28,7 @@ Playfield::Playfield(Game* game) : fieldLength(20.0f), fieldWidth(6.0f)
 
 	LogObstacle* testLogObstacle = new LogObstacle();
 	placeObstacle(testLogObstacle);
+	obstacles->add(testLogObstacle);
 
 	////////////////////////////////////////////
 	PlayerViewModel* playerViewModel = new PlayerViewModel();
@@ -104,13 +105,21 @@ void Playfield::update(float elapsed)
 	for (int i = 0; i < entities->size(); ++i){
 		entities->elementAt(i)->update(elapsed);
 	}
+	for (int i = 0; i < obstacles->size(); ++i)
+	{
+		obstacles->elementAt(i)->update(elapsed);
+	}
 }
 
-void Playfield::placeObstacle(Entity* entity, int lane)
+void Playfield::placeObstacle(Obstacle* obstacle, int lane)
 {
 	if (lane == -1); //Then randomize based on algorithm! :D
-	else
-	{
-		entity->moveTo(fieldWidth*(float)lane, fieldLength);
-	}
+	//entity->moveTo(fieldWidth*(float)lane, fieldLength);
+
+	lane = 0;
+	float laneLength = fieldWidth/6;
+	obstacle->moveBy(fieldLength, -(laneLength)*(lane) + (laneLength)*1.5);
+	obstacle->setProgress(fieldLength);
+	writeTextToConsole(L"Moved log to end of lane");
+
 }

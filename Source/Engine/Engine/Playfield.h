@@ -46,5 +46,5 @@ class Playfield
 		const float fieldLength;
 		const float fieldWidth;
 
-		void placeObstacle(Entity*, int lane = -1);
+		void placeObstacle(Obstacle*, int lane = -1);
 };

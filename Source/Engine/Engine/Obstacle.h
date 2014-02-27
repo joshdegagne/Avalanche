@@ -16,6 +16,7 @@ class Obstacle : public Entity
 		float getLength();
 		bool  isPresent();
 		void  setPresent(bool);
+		void  setProgress(float);
 		void  update(float);
 	
 	protected:
@@ -23,6 +24,7 @@ class Obstacle : public Entity
 		//Obstacle size?
 		float length;
 		float height;
+		float progress;
 		bool  present; // whether the obstacle is on screen and moving towards players
 
 };
