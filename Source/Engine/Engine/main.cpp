@@ -2,10 +2,21 @@
 // Filename: main.cpp
 ////////////////////////////////////////////////////////////////////////////////
 
+//Memory leak checkers//////
+#define DEBUG //Comment this to remove memory leak output
+
+#ifdef DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#endif
+///////////////////////////
+
 #include <iostream>
 
 #include "Game.h"
 #include "DebugConsole.h"
+
 
 
 /*
@@ -72,6 +83,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	game->Shutdown(); //give system a chance to clean up
 	delete game;  //release the system object's memory
 	game = 0;     //set system pointer to 0 so it is no longer valid
+
+
+	#ifdef DEBUG
+	//This populates the memory leak report
+	_CrtDumpMemoryLeaks();
+	#endif
 
 	return 0;
 }
