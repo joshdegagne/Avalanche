@@ -45,7 +45,10 @@ class Playfield
 		void populateLists(Game* game);
 		void populateViewModels();
 		void associateEntitiesAndModels();
+
 		void addObstacleToPlayfield(Obstacle*, int lane = -1);
 		void removeObstacleFromPlayfield(Obstacle*);
 		void placeObstacle(Obstacle*, int lane = -1);
+
+		void checkPlayerBounds(Player*);
 };

@@ -3,6 +3,7 @@
 
 Player::Player(Game& g, int pNum) : Entity()
 {
+	type = EntityType::PLAYER;
 
 	bound->initialize(this);
 	controller	= g.getControllerManager();
@@ -47,7 +48,12 @@ Player::Player(Game& g, int pNum) : Entity()
 	position.z = 0;
 	velocity.x = 0;
 	velocity.y = 0;
+	lockLeftMovement(false);
+	lockRightMovement(false);
+	lockForwardMovement(false);
 	jumpIncrement = 0.0f;
+
+	moveTo(1.0f, 1.0f);
 }
 
 Player::~Player()
@@ -65,14 +71,12 @@ Player::~Player()
 	}
 }
 
-GameModel* Player::getPlayerModel()
-{
-	return playerModel;
-}
+GameModel* Player::getPlayerModel() { return playerModel; }
+int Player::getPlayerNum() { return playerNum; }
 
 void Player::update(float elapsed)
 {
-	writeLabelToConsole(L"Elapsed time: ", elapsed);
+	//writeLabelToConsole(L"Elapsed time: ", elapsed);
 	//Needed: 
 	//  - Prioritization of actions?
 	//	- Check for buttons being released?
@@ -98,6 +102,10 @@ void Player::render()
 {
 }
 
+void Player::lockLeftMovement(bool b)    { movementLocks[0] = b; writeLabelToConsole(L"Movement locked for player ", playerNum);}
+void Player::lockRightMovement(bool b)   { movementLocks[1] = b; writeLabelToConsole(L"Movement locked for player ", playerNum);}
+void Player::lockForwardMovement(bool b) { movementLocks[2] = b; writeLabelToConsole(L"Movement locked for player ", playerNum);}
+
 void Player::checkControllerInputs(float elapsed)
 {
 	////////////////
@@ -105,13 +113,13 @@ void Player::checkControllerInputs(float elapsed)
 	////////////////
 	float LSX = controller->getLS_X(playerNum);
 	float LSY = controller->getLS_Y(playerNum);
-	if (LSX > STICK_MOVEMENT_THRESHOLD)
-	{
-		//moveRight();
-	}
-	else if (LSX < -STICK_MOVEMENT_THRESHOLD)
+	if (LSX < -STICK_MOVEMENT_THRESHOLD)
 	{
 		//moveLeft();
+	}
+	else if (LSX > STICK_MOVEMENT_THRESHOLD)
+	{
+		//moveRight();
 	}
 	if (LSY > STICK_MOVEMENT_THRESHOLD)
 	{
@@ -201,20 +209,34 @@ void Player::checkKeyboardInputs(float elapsed)
 
 void Player::moveLeft()
 {
-	velocity.y = 1;
+	if (!movementLocks[0])
+	{
+		velocity.y = 1;
+		if (movementLocks[1])
+			lockRightMovement(false);
+	}
 }
 void Player::moveRight()
 {
-	velocity.y = -1;
-}
-void Player::moveDown()
-{
-	velocity.x = 1;
+	if (!movementLocks[1])
+	{
+		velocity.y = -1;
+		if (movementLocks[0])
+				lockLeftMovement(false);
+	}
 }
 void Player::moveUp()
 {
 	velocity.x = -1;
+	if (movementLocks[2])
+		lockForwardMovement(false);
 }
+void Player::moveDown()
+{
+	if (!movementLocks[2])
+	velocity.x = 1;
+}
+
 
 void Player::stop()
 {

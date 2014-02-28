@@ -71,14 +71,25 @@ void Playfield::update(float elapsed)
 	{
 		Entity* currEntity = entities->elementAt(i);
 
-		currEntity->update(elapsed);
-		if (currEntity->getEntityType() != EntityType::PLAYER && currEntity->getX() < -2.0f)
+		if (currEntity->getEntityType() == EntityType::PLAYER)
 		{
-			removeObstacleFromPlayfield((Obstacle*)currEntity);
+			checkPlayerBounds((Player*)currEntity);
+			currEntity->update(elapsed);
+		}
+		else
+		{
+			currEntity->update(elapsed);
+			if (currEntity->getX() < -2.0f)
+			{
+				removeObstacleFromPlayfield((Obstacle*)currEntity);
+			}
 		}
 	}
 }
 
+//////////////////////
+//Intialization Code//
+//////////////////////
 
 //Creates obstacles and places them in the obstacles arraylist
 void Playfield::populateLists(Game* game)
@@ -118,6 +129,9 @@ void Playfield::associateEntitiesAndModels()
 	}
 }
 
+/////////////////
+//Obstacle Code//
+/////////////////
 void Playfield::addObstacleToPlayfield(Obstacle* obstacle, int lane)
 {
 	placeObstacle(obstacle, lane);
@@ -141,4 +155,31 @@ void Playfield::placeObstacle(Obstacle* obstacle, int lane)
 	obstacle->moveBy(fieldLength, (laneLength)*(lane) + (laneLength)*1.5f);
 	writeTextToConsole(L"Moved log to end of lane");
 
+}
+
+///////////////
+//Player Code//
+///////////////
+void Playfield::checkPlayerBounds(Player* player)
+{
+	XMFLOAT3 position = player->getPosition(); 
+
+	if (position.y >= fieldWidth)
+	{
+		player->lockLeftMovement();
+	}
+	else if (position.y <= 0)
+	{
+		player->lockRightMovement();
+	}
+	if (position.x >= fieldLength)
+	{
+		player->lockForwardMovement();
+	}
+	else if (position.x <= 0)
+	{
+		//kill player?
+	}
+	
+	
 }
