@@ -6,6 +6,7 @@
 #include "arraylist.h"
 #include "Player.h"
 #include "QuadTexturedModel.h"
+#include "QuadModel.h"
 #include "Obstacle.h"
 #include "Game.h"
 #include "LogObstacle.h"
@@ -38,6 +39,7 @@ class Playfield
 		ArrayList<GameModel>*   models;				//list of models to pass to game
 		ArrayList<IViewModel>*  viewModels;			//List of IViewModels (So far just Player and LogObstacle)
 		QuadTexturedModel*		ground;				//Playfield quad
+		QuadModel*				deathArea;			//Death quad
 
 		const float fieldLength;
 		const float fieldWidth;
@@ -47,7 +49,7 @@ class Playfield
 		void associateEntitiesAndModels();
 
 		void addObstacleToPlayfield(Obstacle*, int lane = -1);
-		void removeObstacleFromPlayfield(Obstacle*);
+		void kill(Entity*);
 		void placeObstacle(Obstacle*, int lane = -1);
 
 		void checkPlayerBounds(Player*);

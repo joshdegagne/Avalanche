@@ -102,9 +102,9 @@ void Player::render()
 {
 }
 
-void Player::lockLeftMovement(bool b)    { movementLocks[0] = b; writeLabelToConsole(L"Movement locked for player ", playerNum);}
-void Player::lockRightMovement(bool b)   { movementLocks[1] = b; writeLabelToConsole(L"Movement locked for player ", playerNum);}
-void Player::lockForwardMovement(bool b) { movementLocks[2] = b; writeLabelToConsole(L"Movement locked for player ", playerNum);}
+void Player::lockLeftMovement(bool b)    { movementLocks[0] = b; }
+void Player::lockRightMovement(bool b)   { movementLocks[1] = b; }
+void Player::lockForwardMovement(bool b) { movementLocks[2] = b; }
 
 void Player::checkControllerInputs(float elapsed)
 {

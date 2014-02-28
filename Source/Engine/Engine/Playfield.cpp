@@ -16,6 +16,7 @@ Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f)
 	models = new ArrayList<GameModel>;
 	viewModels = new ArrayList<IViewModel>;
 	ground = 0;
+	deathArea = 0;
 }
 
 Playfield::~Playfield()
@@ -43,6 +44,7 @@ Playfield::~Playfield()
 	models = 0;
 	viewModels = 0;
 	ground = 0;
+	deathArea = 0;
 }
 
 ArrayList<GameModel>* Playfield::getGameModels() { return models; }
@@ -62,8 +64,14 @@ void Playfield::initialize(Game* game)
 	//Ground Texture. (could have an enum and a switch statement for different levels)
 	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
 	ground = new QuadTexturedModel (fieldLength, fieldWidth, fieldTexture);
-	ground->worldTranslate(fieldLength/2, 3.0f, -0.1f);
+	ground->worldTranslate(fieldLength/2, fieldWidth/2, -0.1f);
 	models->add(ground);
+
+	XMFLOAT4 deathAreaColour = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
+	float DAlength = fieldLength/10.0f;
+	deathArea = new QuadModel (DAlength, fieldWidth, &deathAreaColour);
+	deathArea->worldTranslate(-DAlength/2, fieldWidth/2, -0.1f);
+	models->add(deathArea);
 }
 void Playfield::update(float elapsed) 
 {
@@ -81,7 +89,7 @@ void Playfield::update(float elapsed)
 			currEntity->update(elapsed);
 			if (currEntity->getX() < -2.0f)
 			{
-				removeObstacleFromPlayfield((Obstacle*)currEntity);
+				kill(currEntity);
 			}
 		}
 	}
@@ -138,10 +146,10 @@ void Playfield::addObstacleToPlayfield(Obstacle* obstacle, int lane)
 	entities->add(obstacle);
 }
 
-void Playfield::removeObstacleFromPlayfield(Obstacle* obstacle)
+void Playfield::kill(Entity* entity)
 {
-	entities->remove(obstacle);
-	obstacle->moveTo(0.0f, 0.0f);
+	entities->remove(entity);
+	entity->moveTo(10.0f, -5.0f); //Moves off to the side (should only be visible for testing)
 }
 
 
@@ -178,7 +186,7 @@ void Playfield::checkPlayerBounds(Player* player)
 	}
 	else if (position.x <= 0)
 	{
-		//kill player?
+		kill(player);
 	}
 	
 	
