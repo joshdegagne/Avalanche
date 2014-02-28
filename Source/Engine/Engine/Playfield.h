@@ -22,10 +22,10 @@ class Game;
 class Playfield
 {
 	public:
-		Playfield(Game*); //Game pointer can come out of here when we no longer have test players
+		Playfield(); //Game pointer can come out of here when we no longer have test players
 		~Playfield();
 
-		// initialize method?
+		void initialize(Game*);
 		void update(float); // for scrolling
 
 		ArrayList<GameModel>*	getGameModels(); 

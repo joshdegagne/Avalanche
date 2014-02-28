@@ -91,9 +91,10 @@ bool Game::Initialize()
 		playerViewModel->Add(player);
 	}
 
-	playfield = new Playfield(this);
+	playfield = new Playfield();
 	if (!playfield)
 		return false;
+	playfield->initialize(this);
 
 	gameModels->addAll(playfield->getGameModels());
 	gameModels->addAll(playfield->getViewModels());

@@ -8,7 +8,7 @@
 ////////////////////////
 
 
-Playfield::Playfield(Game* game) : fieldLength(20.0f), fieldWidth(6.0f)
+Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f)
 {
 	//Initialize arraylist of game models
 	models = new ArrayList<GameModel>;
@@ -17,54 +17,6 @@ Playfield::Playfield(Game* game) : fieldLength(20.0f), fieldWidth(6.0f)
 	entities = new ArrayList<Entity>();
 	activePlayers = new ArrayList<Player>();
 	obstacles = new ArrayList<Obstacle>();
-
-	//Creates new array of length 1-4 (Depending on how many players are playing in this game)
-	//Playfield itself does not know the players' numbers, just how many there are
-	//activePlayers = new Player*[numActivePlayers];
-	//for (int i = 0; i < numActivePlayers; ++i)
-	//{
-	//	activePlayers[i] = ps[i];
-	//	//models->add(activePlayers[i]->getPlayerModel());
-	//}
-
-	populateEntityList(game);
-	populateViewModels();
-	associateEntitiesAndModels();
-	
-	placeObstacle(obstacles->elementAt(0));
-	placeObstacle(obstacles->elementAt(1), 3);
-
-	
-
-	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
-
-	//Ground Texture. (could have an enum and a switch statement for different levels)
-	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
-	ground = new QuadTexturedModel (fieldLength, fieldWidth, fieldTexture);
-	ground->worldTranslate(fieldLength/2, 3.0f, -0.1f);
-	models->add(ground);
-
-	
-
-
-
-	/////////////////////////////////
-	/*
-
-
-	WCHAR* logTextureFiles[] = {
-		L"textures/tempwoodside.dds",
-		L"textures/tempwoodface.dds",
-		L"textures/tempwoodside.dds"
-	};
-
-	testLogModel = new LogModel(3.0f, 0.25f, 16, logTextureFiles);
-	testLogModel->worldTranslate(fieldLength, 1.5f, 0);
-	models->add(testLogModel);
-
-	/*
-	obstacles->add(new LogObstacle()); // add test obstacle entity - game model is currently made separately in game.cpp
-	*/
 }
 
 Playfield::~Playfield()
@@ -80,6 +32,23 @@ Playfield::~Playfield()
 ArrayList<GameModel>* Playfield::getGameModels() { return models; }
 ArrayList<IViewModel>* Playfield::getViewModels() { return viewModels; }
 
+void Playfield::initialize(Game* game)
+{
+	populateEntityList(game);
+	populateViewModels();
+	associateEntitiesAndModels();
+	
+	placeObstacle(obstacles->elementAt(0));
+	placeObstacle(obstacles->elementAt(1), 3);
+
+	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
+
+	//Ground Texture. (could have an enum and a switch statement for different levels)
+	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
+	ground = new QuadTexturedModel (fieldLength, fieldWidth, fieldTexture);
+	ground->worldTranslate(fieldLength/2, 3.0f, -0.1f);
+	models->add(ground);
+}
 void Playfield::update(float elapsed) 
 {
 	for (int i = 0; i < entities->size(); ++i){
