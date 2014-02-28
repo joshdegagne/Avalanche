@@ -50,12 +50,12 @@ ArrayList<IViewModel>* Playfield::getViewModels() { return viewModels; }
 
 void Playfield::initialize(Game* game)
 {
-	populateEntityList(game);
+	populateLists(game);
 	populateViewModels();
 	associateEntitiesAndModels();
 	
-	placeObstacle(obstacles->elementAt(0));
-	placeObstacle(obstacles->elementAt(1), 3);
+	addObstacleToPlayfield(obstacles->elementAt(0));
+	addObstacleToPlayfield(obstacles->elementAt(1), 3);
 
 	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
 
@@ -67,29 +67,31 @@ void Playfield::initialize(Game* game)
 }
 void Playfield::update(float elapsed) 
 {
-	for (int i = 0; i < entities->size(); ++i){
-		entities->elementAt(i)->update(elapsed);
-	}
-	for (int i = 0; i < obstacles->size(); ++i)
+	for (int i = 0; i < entities->size(); ++i)
 	{
-		obstacles->elementAt(i)->update(elapsed);
+		Entity* currEntity = entities->elementAt(i);
+
+		currEntity->update(elapsed);
+		if (currEntity->getEntityType() != EntityType::PLAYER && currEntity->getX() < -2.0f)
+		{
+			removeObstacleFromPlayfield((Obstacle*)currEntity);
+		}
 	}
 }
 
 
 //Creates obstacles and places them in the obstacles arraylist
-void Playfield::populateEntityList(Game* game)
+void Playfield::populateLists(Game* game)
 {
 	for(int i = 0; i < game->GetPlayers()->size(); ++i)
 	{
 			Player* player = game->GetPlayers()->elementAt(i);
 			activePlayers->add(player);
-			entities->add(player); //Unused right now
+			entities->add(player);
 	}
 	for (int i = 0; i < 3; ++i)
 	{
 		obstacles->add(new LogObstacle);
-		entities->add(obstacles->elementAt(i)); //unused right now
 	}
 }
 //Creates the view models and places them in the viewModels arraylist
@@ -105,15 +107,27 @@ void Playfield::associateEntitiesAndModels()
 	PlayerViewModel* pView = (PlayerViewModel*)(viewModels->elementAt(0));
 	LogViewModel*	 lView = (LogViewModel*)(viewModels->elementAt(1));
 
-	for (int i = 0; i < entities->size(); ++i)
-	{
-		Obstacle*	   currObstacle  = ((Obstacle*)(entities->elementAt(i)));
+	for (int i = 0; i < activePlayers->size(); ++i)
+		pView->Add(activePlayers->elementAt(i));
 
-		if (pView->GetAssociatedType() == currObstacle->getEntityType())
-			pView->Add((Player*)currObstacle);
-		else if (lView->GetAssociatedType() == currObstacle->getEntityType())
+	for (int i = 0; i < obstacles->size(); ++i)
+	{
+		Obstacle* currObstacle = obstacles->elementAt(i);
+		if (lView->GetAssociatedType() == currObstacle->getEntityType())
 			lView->Add((LogObstacle*)currObstacle);
 	}
+}
+
+void Playfield::addObstacleToPlayfield(Obstacle* obstacle, int lane)
+{
+	placeObstacle(obstacle, lane);
+	entities->add(obstacle);
+}
+
+void Playfield::removeObstacleFromPlayfield(Obstacle* obstacle)
+{
+	entities->remove(obstacle);
+	obstacle->moveTo(0.0f, 0.0f);
 }
 
 
@@ -125,7 +139,6 @@ void Playfield::placeObstacle(Obstacle* obstacle, int lane)
 
 	float laneLength = fieldWidth/6;
 	obstacle->moveBy(fieldLength, (laneLength)*(lane) + (laneLength)*1.5f);
-	obstacle->setProgress(fieldLength);
 	writeTextToConsole(L"Moved log to end of lane");
 
 }

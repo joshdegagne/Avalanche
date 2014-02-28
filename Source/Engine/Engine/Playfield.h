@@ -32,18 +32,20 @@ class Playfield
 		ArrayList<IViewModel>*  getViewModels();
 
 	private:
-		ArrayList<Entity>*		entities;
-		ArrayList<Player>*		activePlayers;			//List of players in the current match
-		ArrayList<Obstacle>*	obstacles;			//List of obstacles
+		ArrayList<Entity>*		entities;			//List of entities CURRENTLY BEING UPDATED
+		ArrayList<Player>*		activePlayers;		//List of players in the current match
+		ArrayList<Obstacle>*	obstacles;			//List of obstacles (Finite bag/number of obstacles)
 		ArrayList<GameModel>*   models;				//list of models to pass to game
-		ArrayList<IViewModel>*  viewModels;
+		ArrayList<IViewModel>*  viewModels;			//List of IViewModels (So far just Player and LogObstacle)
 		QuadTexturedModel*		ground;				//Playfield quad
 
 		const float fieldLength;
 		const float fieldWidth;
 
-		void populateEntityList(Game* game);
+		void populateLists(Game* game);
 		void populateViewModels();
 		void associateEntitiesAndModels();
+		void addObstacleToPlayfield(Obstacle*, int lane = -1);
+		void removeObstacleFromPlayfield(Obstacle*);
 		void placeObstacle(Obstacle*, int lane = -1);
 };

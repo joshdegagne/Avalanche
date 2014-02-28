@@ -24,7 +24,6 @@ class Obstacle : public Entity
 		//Obstacle size?
 		float length;
 		float height;
-		float progress;
 		bool  present; // whether the obstacle is on screen and moving towards players
 
 };
