@@ -27,26 +27,14 @@ Playfield::Playfield(Game* game) : fieldLength(20.0f), fieldWidth(6.0f)
 	//	//models->add(activePlayers[i]->getPlayerModel());
 	//}
 
-	LogObstacle* testLogObstacle = new LogObstacle();
-	placeObstacle(testLogObstacle);
-	obstacles->add(testLogObstacle);
-
-	////////////////////////////////////////////
-	PlayerViewModel* playerViewModel = new PlayerViewModel();
-	LogViewModel*	 logViewModel	 = new LogViewModel();
+	populateEntityList(game);
+	populateViewModels();
+	associateEntitiesAndModels();
 	
-	viewModels->add(playerViewModel);
-	viewModels->add(logViewModel);
+	placeObstacle(obstacles->elementAt(0));
+	placeObstacle(obstacles->elementAt(1), 3);
 
-	for (int i = 0; i < activePlayers->size(); ++i)
-		playerViewModel->Add(activePlayers->elementAt(i));
-
-	logViewModel->Add(testLogObstacle);
-	////////////////////////////////////////////
 	
-
-	for(int i = 0; i < game->GetPlayers()->size(); ++i)
-			add(game->GetPlayers()->elementAt(i));
 
 	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
 
@@ -89,12 +77,6 @@ Playfield::~Playfield()
 	models = 0;
 }
 
-void Playfield::add(Player* player)
-{
-	activePlayers->add(player);
-	entities->add(player);
-}
-
 ArrayList<GameModel>* Playfield::getGameModels() { return models; }
 ArrayList<IViewModel>* Playfield::getViewModels() { return viewModels; }
 
@@ -109,14 +91,55 @@ void Playfield::update(float elapsed)
 	}
 }
 
+
+//Creates obstacles and places them in the obstacles arraylist
+void Playfield::populateEntityList(Game* game)
+{
+	for(int i = 0; i < game->GetPlayers()->size(); ++i)
+	{
+			Player* player = game->GetPlayers()->elementAt(i);
+			activePlayers->add(player);
+			entities->add(player); //Unused right now
+	}
+	for (int i = 0; i < 3; ++i)
+	{
+		obstacles->add(new LogObstacle);
+		entities->add(obstacles->elementAt(i)); //unused right now
+	}
+}
+//Creates the view models and places them in the viewModels arraylist
+void Playfield::populateViewModels()
+{
+	viewModels->add(new PlayerViewModel);
+	viewModels->add(new LogViewModel);
+}
+//Connects entities to their view models.
+void Playfield::associateEntitiesAndModels()
+{
+	//Technically we should be able to loop through the viewModels, but we can't right now
+	PlayerViewModel* pView = (PlayerViewModel*)(viewModels->elementAt(0));
+	LogViewModel*	 lView = (LogViewModel*)(viewModels->elementAt(1));
+
+	for (int i = 0; i < entities->size(); ++i)
+	{
+		Obstacle*	   currObstacle  = ((Obstacle*)(entities->elementAt(i)));
+
+		if (pView->GetAssociatedType() == currObstacle->getEntityType())
+			pView->Add((Player*)currObstacle);
+		else if (lView->GetAssociatedType() == currObstacle->getEntityType())
+			lView->Add((LogObstacle*)currObstacle);
+	}
+}
+
+
+//Places input obstacle at the "beginning" of the playfield. Optional: Specific lane input
 void Playfield::placeObstacle(Obstacle* obstacle, int lane)
 {
-	if (lane == -1); //Then randomize based on algorithm! :D
-	//entity->moveTo(fieldWidth*(float)lane, fieldLength);
+	if (lane == -1) //Then randomize based on algorithm! :D
+		lane = 0;	//This should be the randomization call (temp value for testing)
 
-	lane = 0;
 	float laneLength = fieldWidth/6;
-	obstacle->moveBy(fieldLength, -(laneLength)*(lane) + (laneLength)*1.5f);
+	obstacle->moveBy(fieldLength, (laneLength)*(lane) + (laneLength)*1.5f);
 	obstacle->setProgress(fieldLength);
 	writeTextToConsole(L"Moved log to end of lane");
 

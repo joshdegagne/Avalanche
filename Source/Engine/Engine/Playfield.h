@@ -31,9 +31,6 @@ class Playfield
 		ArrayList<GameModel>*	getGameModels(); 
 		ArrayList<IViewModel>*  getViewModels();
 
-	protected:
-		void add(Player* player);
-
 	private:
 		ArrayList<Entity>*		entities;
 		ArrayList<Player>*		activePlayers;			//List of players in the current match
@@ -46,5 +43,8 @@ class Playfield
 		const float fieldLength;
 		const float fieldWidth;
 
+		void populateEntityList(Game* game);
+		void populateViewModels();
+		void associateEntitiesAndModels();
 		void placeObstacle(Obstacle*, int lane = -1);
 };
