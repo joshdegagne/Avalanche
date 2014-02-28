@@ -46,10 +46,7 @@ Playfield::Playfield(Game* game) : fieldLength(20.0f), fieldWidth(6.0f)
 	
 
 	for(int i = 0; i < game->GetPlayers()->size(); ++i)
-	{
-		//if(game->getControllerManager()->isConnected(i))
 			add(game->GetPlayers()->elementAt(i));
-	}
 
 	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
 
@@ -119,7 +116,7 @@ void Playfield::placeObstacle(Obstacle* obstacle, int lane)
 
 	lane = 0;
 	float laneLength = fieldWidth/6;
-	obstacle->moveBy(fieldLength, -(laneLength)*(lane) + (laneLength)*1.5);
+	obstacle->moveBy(fieldLength, -(laneLength)*(lane) + (laneLength)*1.5f);
 	obstacle->setProgress(fieldLength);
 	writeTextToConsole(L"Moved log to end of lane");
 

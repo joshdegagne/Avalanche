@@ -260,7 +260,7 @@ float Game::getElapsedTime()
 {
 	milliseconds elapsed = duration_cast <milliseconds>(high_resolution_clock::now().time_since_epoch()) - start;
 	start += elapsed;
-	return elapsed.count();
+	return (float)elapsed.count();
 }
 
 ArrayList<Player>* Game::GetPlayers()

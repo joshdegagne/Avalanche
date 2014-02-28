@@ -10,6 +10,6 @@ void Obstacle::setProgress(float x) { progress = x; }
 
 void Obstacle::update(float elapsedTime)
 {
-	position.x-= 0.1;
+	position.x-= 0.1f;
 }
 
