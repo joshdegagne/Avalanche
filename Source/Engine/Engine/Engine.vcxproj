@@ -113,6 +113,8 @@
     <ClCompile Include="QuadModel.cpp" />
     <ClCompile Include="QuadTexturedModel.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="RockObstacle.cpp" />
+    <ClCompile Include="RockViewModel.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureShader.cpp" />
     <ClCompile Include="ViewModel.cpp" />
@@ -158,6 +160,8 @@
     <ClInclude Include="QuadTexturedModel.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="RockObstacle.h" />
+    <ClInclude Include="RockViewModel.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureShader.h" />
     <ClInclude Include="vertextype.h" />

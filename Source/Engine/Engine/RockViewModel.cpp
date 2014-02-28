@@ -1,12 +1,12 @@
 
 #include "EntityType.h"
-#include "LogObstacle.h"
-#include "LogViewModel.h"
+#include "RockObstacle.h"
+#include "RockViewModel.h"
 #include "TextureShader.h"
 #include "ViewModel.cpp"
 
 
-LogViewModel::LogViewModel() : ViewModel<LogObstacle>(EntityType::LOG)
+RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_SMALL)
 {
 	/*
 	pTextureFileNames is expected to be an array of 3 items
@@ -15,14 +15,14 @@ LogViewModel::LogViewModel() : ViewModel<LogObstacle>(EntityType::LOG)
 	pTextureFileName[2] is the texture applied to the bottom end of the prism
 	*/
 
-	int   numberOfFaces = 16;
-	float width = 3.0f;
-	float radius = 0.25f;
+	int   numberOfFaces = 4;
+	float width = 1.0f;
+	float radius = 1.0f;
 	
 	m_textureFileNames = new WCHAR*[3];
-	m_textureFileNames[0] = L"textures/tempwoodside.dds";
-	m_textureFileNames[1] = L"textures/tempwoodface.dds";
-	m_textureFileNames[2] = L"textures/tempwoodside.dds";
+	m_textureFileNames[0] = L"textures/temprock1.dds";
+	m_textureFileNames[1] = L"textures/temprock1.dds";
+	m_textureFileNames[2] = L"textures/temprock1.dds";
 
 	//keep number of faces in a reasonable range
 	if(numberOfFaces < 3) numberOfFaces = 3;
@@ -150,10 +150,12 @@ LogViewModel::LogViewModel() : ViewModel<LogObstacle>(EntityType::LOG)
 				 numberOfBottomVertices, //index count
 				 D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	orientTranslate(0.0f, width/2, 0.0f);
+	orientRotateY(XM_PIDIV4);
+	orientRotateZ(XM_PIDIV2);
+	orientTranslate(0.0f, radius/2, radius/2);
 }
 
-LogViewModel::~LogViewModel()
+RockViewModel::~RockViewModel()
 {
 	if(m_textureVertices)
 	{
@@ -191,7 +193,7 @@ LogViewModel::~LogViewModel()
 	}
 }
 
-bool LogViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
+bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 	bool result = false;
 
@@ -206,7 +208,7 @@ bool LogViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 }
 
-bool LogViewModel::initializeTextures(ID3D11Device* d3dDevice){
+bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	
 	bool result;
 
@@ -230,7 +232,7 @@ bool LogViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	return true;
 }
 
-bool LogViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, LogObstacle* entity){
+bool RockViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, RockObstacle* entity){
 
 	if(!textureShader) return false; //we were not provided with a shader
 

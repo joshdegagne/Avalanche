@@ -10,7 +10,7 @@
 #include "Obstacle.h"
 #include "Game.h"
 #include "LogObstacle.h"
-#include "LogModel.h"
+#include "RockObstacle.h"
 
 #define SCROLL_SPEED 0.15f
 
