@@ -10,23 +10,39 @@
 
 Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f)
 {
-	//Initialize arraylist of game models
-	models = new ArrayList<GameModel>;
-	viewModels = new ArrayList<IViewModel>;
-
 	entities = new ArrayList<Entity>();
 	activePlayers = new ArrayList<Player>();
 	obstacles = new ArrayList<Obstacle>();
+	models = new ArrayList<GameModel>;
+	viewModels = new ArrayList<IViewModel>;
+	ground = 0;
 }
 
 Playfield::~Playfield()
 {
-	for (int i = 0; i , models->size(); ++i)
-	{
+	delete entities;
+	delete activePlayers;
+
+	for (int i = 0; i < obstacles->size(); ++i)
+		delete obstacles->elementAt(i);
+	delete obstacles;
+
+	for (int i = 0; i < models->size(); ++i)
 		delete models->elementAt(i);
-	}
 	delete models;
+	
+	for (int i = 0; i < viewModels->size(); ++i)
+		delete viewModels->elementAt(i);
+	delete viewModels;
+
+	delete ground;
+
+	entities = 0;
+	activePlayers = 0;
+	obstacles = 0;
 	models = 0;
+	viewModels = 0;
+	ground = 0;
 }
 
 ArrayList<GameModel>* Playfield::getGameModels() { return models; }

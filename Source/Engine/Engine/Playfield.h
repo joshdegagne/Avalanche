@@ -38,7 +38,6 @@ class Playfield
 		ArrayList<GameModel>*   models;				//list of models to pass to game
 		ArrayList<IViewModel>*  viewModels;
 		QuadTexturedModel*		ground;				//Playfield quad
-		LogModel*				testLogModel;		//made to test scrolling
 
 		const float fieldLength;
 		const float fieldWidth;
