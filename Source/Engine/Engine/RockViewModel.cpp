@@ -4,6 +4,7 @@
 #include "RockViewModel.h"
 #include "TextureShader.h"
 #include "ViewModel.cpp"
+#include "DebugConsole.h"
 
 
 RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_SMALL)
@@ -204,6 +205,7 @@ bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 	result = initializeTextures(d3dDevice);
 
+	//writeTextToConsole(L"bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)");
 	return result;
 
 }
@@ -228,6 +230,8 @@ bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice){
 		     return false;
 	      }
 	}
+
+	//writeTextToConsole(L"bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice)");
 
 	return true;
 }

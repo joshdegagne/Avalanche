@@ -180,6 +180,12 @@
     <ClCompile Include="RockViewModel.cpp">
       <Filter>Source Files\Models\EntityModels</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteTexture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -319,6 +325,12 @@
     </ClInclude>
     <ClInclude Include="RockObstacle.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteTexture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

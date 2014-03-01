@@ -115,7 +115,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="RockObstacle.cpp" />
     <ClCompile Include="RockViewModel.cpp" />
+    <ClCompile Include="SpriteTexture.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TextureShader.cpp" />
     <ClCompile Include="ViewModel.cpp" />
     <ClCompile Include="ViewModelBase.cpp" />
@@ -162,7 +164,9 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="RockObstacle.h" />
     <ClInclude Include="RockViewModel.h" />
+    <ClInclude Include="SpriteTexture.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TextureShader.h" />
     <ClInclude Include="vertextype.h" />
     <ClInclude Include="ViewModel.h" />
