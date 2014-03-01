@@ -27,10 +27,8 @@ public:
 	bool Initialize(ID3D11Device*, WCHAR*);
 	void Shutdown();
 
-	void update(float);
-
-	ID3D11ShaderResourceView** GetTextures();
+	ID3D11ShaderResourceView* GetTexture();
 
 private:
-	ID3D11ShaderResourceView** texture;
+	ID3D11ShaderResourceView* texture;
 };
