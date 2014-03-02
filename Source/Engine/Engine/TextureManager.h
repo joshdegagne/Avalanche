@@ -13,7 +13,7 @@ class TextureManager : public IManager
 public:
 	TextureManager();
 
-	void initialize();
+	bool initialize();
 	void update(float);
 
 	Texture* loadTexture(WCHAR*);

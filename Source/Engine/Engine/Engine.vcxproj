@@ -138,6 +138,7 @@
     <ClInclude Include="LogModel.h" />
     <ClInclude Include="LogObstacle.h" />
     <ClInclude Include="LogViewModel.h" />
+    <ClInclude Include="ModelManager-inl.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="OldCamera.h" />

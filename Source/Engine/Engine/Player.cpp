@@ -1,5 +1,7 @@
 #include "Player.h"
+#include "ControllerInputManager.h"
 #include "DebugConsole.h"
+#include "KeyInput.h"
 
 Player::Player(Game& g, int pNum) : Entity()
 {

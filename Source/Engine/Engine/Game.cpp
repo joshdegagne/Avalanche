@@ -7,6 +7,18 @@
 #include "ViewModel.cpp"
 #include "BoundViewModel.h"
 #include "Game.h"
+#include "KeyInput.h"
+#include "ControllerInputManager.h"
+#include "Graphics.h"
+#include "IViewModel.h"
+#include "Arraylist.h"
+#include "Camera.h"
+#include "Playfield.h"
+#include "Player.h"
+#include "LogModel.h"
+#include "BoundingBox.h"
+#include "ModelManager.h"
+#include "ModelManager-inl.h"
 
 Game::Game()
 {
@@ -16,7 +28,9 @@ Game::Game()
 	graphics  = 0;
 	camera    = 0;
 	playfield = 0;
-	players = NULL;
+
+	modelManager	= nullptr;
+	players			= nullptr;
 
 	gameModels = new ArrayList<IViewModel>();
 }
@@ -30,10 +44,6 @@ Game::Game(const Game& other)
 Game::~Game()
 {
 }
-
-KeyInput*               Game::getKeyInput() {return keyInput; }
-ControllerInputManager* Game::getControllerManager() { return conInput; }
-
 
 bool Game::Initialize()
 {
@@ -73,12 +83,20 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	PlayerViewModel* playerViewModel = new PlayerViewModel();
-	LogViewModel*	 logViewModel	 = new LogViewModel();
+	modelManager = new ModelManager();
+	if(!modelManager)
+		return false;
+
+	bool initialized = modelManager->initialize();
+	if(!initialized)
+		return false;
+
+	//PlayerViewModel* playerViewModel = new PlayerViewModel();
+	//LogViewModel*	 logViewModel	 = new LogViewModel();
 	
-	BoundViewModel* boundViewModel = new BoundViewModel();
-	gameModels->add(playerViewModel);
-	gameModels->add(logViewModel);
+	//BoundViewModel* boundViewModel = new BoundViewModel();
+	//gameModels->add(playerViewModel);
+	//gameModels->add(logViewModel);
 
 	/////////////////////
 	//Players/Playfield//
@@ -88,7 +106,7 @@ bool Game::Initialize()
 	{
 		Player* player = new Player(*this, i);
 		players->add(player);
-		playerViewModel->Add(player);
+		modelManager->add(player);
 	}
 
 	playfield = new Playfield();

@@ -7,21 +7,23 @@
 #include <windows.h> //needed to create and destroy windows and call Win32 functions
 #include <chrono>
 
-#include "KeyInput.h"
-#include "ControllerInputManager.h"
-#include "Graphics.h"
-#include "IViewModel.h"
 #include "Arraylist.h"
-#include "Camera.h"
-#include "Playfield.h"
-#include "Player.h"
-#include "LogModel.h"
-#include "BoundingBox.h"
+
 #define  NUMPLAYERS 4 //USED FOR POTENTIAL PLAYER LOOPS ONLY
 
 using namespace std::chrono;
 
-class Player; //Forward declaration
+////////////////////////////////////////////////////////////////////////////////
+// Forward Declarations
+////////////////////////////////////////////////////////////////////////////////
+class Camera;
+class ControllerInputManager;
+class Graphics;
+class IViewModel;
+class KeyInput;
+class ModelManager;
+class Player;
+class Playfield;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
@@ -39,12 +41,13 @@ class Game
 		void Shutdown();
 		void Run();
 
-		KeyInput*               getKeyInput();
-		ControllerInputManager* getControllerManager();
+		// Manager Getter/Setters
+		KeyInput*               getKeyInput()			{ return keyInput; }
+		ControllerInputManager* getControllerManager()	{ return conInput; }
+		ModelManager*			getModelManager()		{ return modelManager; }
 
 		ArrayList<Player>* GetPlayers();
 		ArrayList<IViewModel>* GetViewModels();
-		
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -61,12 +64,16 @@ class Game
 		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
 		ArrayList<Player>* players;
-		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
 		ArrayList<KeyInput>*    playerKeys;
-		ControllerInputManager* conInput; //Yay! Input from a controller!
 		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world
 		milliseconds            start;
+		
+
+		// Managers
+		ControllerInputManager* conInput; //Yay! Input from a controller!
+		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
+		ModelManager*			modelManager;
 
 		//Game World Items
 		Playfield*		   playfield;
