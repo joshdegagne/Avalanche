@@ -5,16 +5,20 @@
 
 class Entity;
 class ViewModelBase;
+class IViewModel;
 
 class ModelManager : public IManager
 {
 public:
 	ModelManager();
+	~ModelManager();
 
 	bool initialize();
 	void update(float);
 
-	template<class T> void add(T* entity);
+	ArrayList<IViewModel>* getGameModels() { return (ArrayList<IViewModel>*) models; }
+
+	template<class T> void add(T& entity);
 private:
 	ArrayList<ViewModelBase>* models;
 };

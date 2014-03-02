@@ -6,6 +6,8 @@
 #include "LogViewModel.h"
 #include "RockViewModel.h"
 #include "ViewModel.cpp"
+#include "ModelManager.h"
+#include "ModelManager-inl.h"
 ////////////////////////
 
 
@@ -54,8 +56,9 @@ ArrayList<IViewModel>* Playfield::getViewModels() { return viewModels; }
 void Playfield::initialize(Game* game)
 {
 	populateLists(game);
-	populateViewModels();
-	associateEntitiesAndModels();
+
+	for(int i = 0; i < entities->size(); ++i)
+		game->getModelManager()->add(*entities->elementAt(i));
 	
 	addObstacleToPlayfield(obstacles->elementAt(0));	//Log
 	addObstacleToPlayfield(obstacles->elementAt(3), 3); //Rock
@@ -113,38 +116,15 @@ void Playfield::populateLists(Game* game)
 	}
 	for (int i = 0; i < 3; ++i)
 	{
-		obstacles->add(new LogObstacle);
+		Obstacle* obstacle = new LogObstacle();
+		obstacles->add(obstacle);
+		entities->add(obstacle);
 	}
 	for (int i = 0; i < 3; ++i)
 	{
-		obstacles->add(new RockObstacle);
-	}
-}
-//Creates the view models and places them in the viewModels arraylist
-void Playfield::populateViewModels()
-{
-	viewModels->add(new PlayerViewModel);
-	viewModels->add(new LogViewModel);
-	viewModels->add(new RockViewModel);
-}
-//Connects entities to their view models.
-void Playfield::associateEntitiesAndModels()
-{
-	//Technically we should be able to loop through the viewModels, but we can't right now
-	PlayerViewModel* pView = (PlayerViewModel*)(viewModels->elementAt(0));
-	LogViewModel*	 lView = (LogViewModel*)(viewModels->elementAt(1));
-	RockViewModel*   rView = (RockViewModel*)(viewModels->elementAt(2));
-
-	for (int i = 0; i < activePlayers->size(); ++i)
-		pView->Add(activePlayers->elementAt(i));
-
-	for (int i = 0; i < obstacles->size(); ++i)
-	{
-		Obstacle* currObstacle = obstacles->elementAt(i);
-		if (lView->GetAssociatedType() == currObstacle->getEntityType())
-			lView->Add((LogObstacle*)currObstacle);
-		else if (rView->GetAssociatedType() == currObstacle->getEntityType())
-			rView->Add((RockObstacle*)currObstacle);
+		Obstacle* obstacle = new RockObstacle();
+		obstacles->add(obstacle);
+		entities->add(obstacle);
 	}
 }
 
@@ -171,7 +151,7 @@ void Playfield::placeObstacle(Obstacle* obstacle, int lane)
 		lane = 0;	//This should be the randomization call (temp value for testing)
 
 	float laneLength = fieldWidth/6;
-	obstacle->moveBy(fieldLength, (laneLength)*(lane));
+	obstacle->moveTo(fieldLength, (laneLength)*(lane));
 	writeTextToConsole(L"Moved obstacle to end of lane");
 
 }

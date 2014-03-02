@@ -91,12 +91,7 @@ bool Game::Initialize()
 	if(!initialized)
 		return false;
 
-	//PlayerViewModel* playerViewModel = new PlayerViewModel();
-	//LogViewModel*	 logViewModel	 = new LogViewModel();
-	
-	//BoundViewModel* boundViewModel = new BoundViewModel();
-	//gameModels->add(playerViewModel);
-	//gameModels->add(logViewModel);
+	gameModels->addAll(modelManager->getGameModels());
 
 	/////////////////////
 	//Players/Playfield//
@@ -106,7 +101,7 @@ bool Game::Initialize()
 	{
 		Player* player = new Player(*this, i);
 		players->add(player);
-		modelManager->add(player);
+		//modelManager->add(*player);
 	}
 
 	playfield = new Playfield();
@@ -114,6 +109,7 @@ bool Game::Initialize()
 		return false;
 	playfield->initialize(this);
 
+	
 	gameModels->addAll(playfield->getGameModels());
 	gameModels->addAll(playfield->getViewModels());
 	
@@ -170,10 +166,19 @@ void Game::Shutdown()
 		camera = 0;
 	}
 
+	if(modelManager)
+	{
+		delete modelManager;
+		modelManager = nullptr;
+	}
+
 	if(players)
 	{
+		for(int i = 0; i < players->size(); ++i)
+			delete players->elementAt(i);
+
 		delete players;
-		players = NULL;
+		players = nullptr;
 	}
 
 	ShutdownWindows();
@@ -285,10 +290,6 @@ float Game::getElapsedTime()
 ArrayList<Player>* Game::GetPlayers()
 {
 	return players;
-}
-ArrayList<IViewModel>* Game::GetViewModels()
-{
-	return gameModels;
 }
 
 LRESULT CALLBACK Game::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)

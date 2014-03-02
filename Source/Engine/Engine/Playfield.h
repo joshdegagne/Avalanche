@@ -45,8 +45,6 @@ class Playfield
 		const float fieldWidth;
 
 		void populateLists(Game* game);
-		void populateViewModels();
-		void associateEntitiesAndModels();
 
 		void addObstacleToPlayfield(Obstacle*, int lane = -1);
 		void kill(Entity*);
