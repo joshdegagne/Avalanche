@@ -101,7 +101,6 @@ bool Game::Initialize()
 	{
 		Player* player = new Player(*this, i);
 		players->add(player);
-		//modelManager->add(*player);
 	}
 
 	playfield = new Playfield();
@@ -111,7 +110,6 @@ bool Game::Initialize()
 
 	
 	gameModels->addAll(playfield->getGameModels());
-	gameModels->addAll(playfield->getViewModels());
 	
 
 	////////////

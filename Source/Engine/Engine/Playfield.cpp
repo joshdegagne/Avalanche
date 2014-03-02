@@ -17,7 +17,6 @@ Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f)
 	activePlayers = new ArrayList<Player>();
 	obstacles = new ArrayList<Obstacle>();
 	models = new ArrayList<GameModel>;
-	viewModels = new ArrayList<IViewModel>;
 	ground = 0;
 	deathArea = 0;
 }
@@ -35,9 +34,6 @@ Playfield::~Playfield()
 		delete models->elementAt(i);
 	delete models;
 	
-	for (int i = 0; i < viewModels->size(); ++i)
-		delete viewModels->elementAt(i);
-	delete viewModels;
 
 	delete ground;
 
@@ -45,13 +41,11 @@ Playfield::~Playfield()
 	activePlayers = 0;
 	obstacles = 0;
 	models = 0;
-	viewModels = 0;
 	ground = 0;
 	deathArea = 0;
 }
 
 ArrayList<GameModel>* Playfield::getGameModels() { return models; }
-ArrayList<IViewModel>* Playfield::getViewModels() { return viewModels; }
 
 void Playfield::initialize(Game* game)
 {
@@ -134,7 +128,6 @@ void Playfield::populateLists(Game* game)
 void Playfield::addObstacleToPlayfield(Obstacle* obstacle, int lane)
 {
 	placeObstacle(obstacle, lane);
-	entities->add(obstacle);
 }
 
 void Playfield::kill(Entity* entity)

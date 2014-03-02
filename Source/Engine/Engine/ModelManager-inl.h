@@ -2,8 +2,6 @@
 
 #include <type_traits>
 
-#include "DebugConsole.h"
-
 #include "ModelManager.h"
 
 using namespace std;
@@ -19,7 +17,6 @@ void ModelManager::add(T& entity)
 
 		if(type == entityType)
 		{
-			writeTextToConsole(L"Entity added to ModelManager");
 			((ViewModel<T>*) models->elementAt(i))->Add(&entity);
 		}
 	}
