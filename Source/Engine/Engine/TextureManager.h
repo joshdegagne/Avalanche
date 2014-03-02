@@ -12,7 +12,7 @@ class TextureManager : public IManager
 public:
 	TextureManager();
 
-	void initialize();
+	bool initialize();
 	void update(float);
 
 	Texture* loadTexture(WCHAR*); // Create new Texture, save pointer, initialize Texture, return pointer to Texture... Ref to D3D device?

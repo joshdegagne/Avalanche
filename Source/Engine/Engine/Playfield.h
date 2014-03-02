@@ -30,14 +30,12 @@ class Playfield
 		void update(float); // for scrolling
 
 		ArrayList<GameModel>*	getGameModels(); 
-		ArrayList<IViewModel>*  getViewModels();
 
 	private:
 		ArrayList<Entity>*		entities;			//List of entities CURRENTLY BEING UPDATED
 		ArrayList<Player>*		activePlayers;		//List of players in the current match
 		ArrayList<Obstacle>*	obstacles;			//List of obstacles (Finite bag/number of obstacles)
 		ArrayList<GameModel>*   models;				//list of models to pass to game
-		ArrayList<IViewModel>*  viewModels;			//List of IViewModels (So far just Player and LogObstacle)
 		QuadTexturedModel*		ground;				//Playfield quad
 		QuadModel*				deathArea;			//Death quad
 
@@ -45,8 +43,6 @@ class Playfield
 		const float fieldWidth;
 
 		void populateLists(Game* game);
-		void populateViewModels();
-		void associateEntitiesAndModels();
 
 		void addObstacleToPlayfield(Obstacle*, int lane = -1);
 		void kill(Entity*);

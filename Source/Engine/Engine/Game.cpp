@@ -7,6 +7,18 @@
 #include "ViewModel.cpp"
 #include "BoundViewModel.h"
 #include "Game.h"
+#include "KeyInput.h"
+#include "ControllerInputManager.h"
+#include "Graphics.h"
+#include "IViewModel.h"
+#include "Arraylist.h"
+#include "Camera.h"
+#include "Playfield.h"
+#include "Player.h"
+#include "LogModel.h"
+#include "BoundingBox.h"
+#include "ModelManager.h"
+#include "ModelManager-inl.h"
 
 Game::Game()
 {
@@ -16,7 +28,9 @@ Game::Game()
 	graphics  = 0;
 	camera    = 0;
 	playfield = 0;
-	players = NULL;
+
+	modelManager	= nullptr;
+	players			= nullptr;
 
 	gameModels = new ArrayList<IViewModel>();
 }
@@ -30,10 +44,6 @@ Game::Game(const Game& other)
 Game::~Game()
 {
 }
-
-KeyInput*               Game::getKeyInput() {return keyInput; }
-ControllerInputManager* Game::getControllerManager() { return conInput; }
-
 
 bool Game::Initialize()
 {
@@ -73,12 +83,15 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	PlayerViewModel* playerViewModel = new PlayerViewModel();
-	LogViewModel*	 logViewModel	 = new LogViewModel();
-	
-	BoundViewModel* boundViewModel = new BoundViewModel();
-	gameModels->add(playerViewModel);
-	gameModels->add(logViewModel);
+	modelManager = new ModelManager();
+	if(!modelManager)
+		return false;
+
+	bool initialized = modelManager->initialize();
+	if(!initialized)
+		return false;
+
+	gameModels->addAll(modelManager->getGameModels());
 
 	/////////////////////
 	//Players/Playfield//
@@ -88,7 +101,6 @@ bool Game::Initialize()
 	{
 		Player* player = new Player(*this, i);
 		players->add(player);
-		playerViewModel->Add(player);
 	}
 
 	playfield = new Playfield();
@@ -96,8 +108,8 @@ bool Game::Initialize()
 		return false;
 	playfield->initialize(this);
 
+	
 	gameModels->addAll(playfield->getGameModels());
-	gameModels->addAll(playfield->getViewModels());
 	
 
 	////////////
@@ -152,10 +164,19 @@ void Game::Shutdown()
 		camera = 0;
 	}
 
+	if(modelManager)
+	{
+		delete modelManager;
+		modelManager = nullptr;
+	}
+
 	if(players)
 	{
+		for(int i = 0; i < players->size(); ++i)
+			delete players->elementAt(i);
+
 		delete players;
-		players = NULL;
+		players = nullptr;
 	}
 
 	ShutdownWindows();
@@ -267,10 +288,6 @@ float Game::getElapsedTime()
 ArrayList<Player>* Game::GetPlayers()
 {
 	return players;
-}
-ArrayList<IViewModel>* Game::GetViewModels()
-{
-	return gameModels;
 }
 
 LRESULT CALLBACK Game::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)

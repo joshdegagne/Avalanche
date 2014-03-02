@@ -1,5 +1,7 @@
 #include "Player.h"
+#include "ControllerInputManager.h"
 #include "DebugConsole.h"
+#include "KeyInput.h"
 
 Player::Player(Game& g, int pNum) : Entity()
 {
@@ -58,17 +60,6 @@ Player::Player(Game& g, int pNum) : Entity()
 
 Player::~Player()
 {
-	if (playerModel)
-	{
-		delete playerModel;
-		playerModel = 0;
-	}
-
-	if (keyboard)
-	{
-		delete keyboard;
-		keyboard = 0;
-	}
 }
 
 GameModel* Player::getPlayerModel() { return playerModel; }

@@ -6,9 +6,9 @@ TextureManager::TextureManager()
 {
 }
 
-void TextureManager::initialize()
+bool TextureManager::initialize()
 {
-
+	return true;
 }
 
 void TextureManager::update(float elapsedTime)
