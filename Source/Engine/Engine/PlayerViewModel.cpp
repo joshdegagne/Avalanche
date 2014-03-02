@@ -101,6 +101,7 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 	return result;
 }
 
+// Take in ref to game?
 bool PlayerViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	
 	bool result;
