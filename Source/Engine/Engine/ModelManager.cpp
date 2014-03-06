@@ -25,7 +25,7 @@ ModelManager::~ModelManager()
 	}
 }
 
-bool ModelManager::initialize()
+bool ModelManager::initialize(Game& game)
 {
 
 	//create the model collection

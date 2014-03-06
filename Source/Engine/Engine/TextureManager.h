@@ -7,6 +7,7 @@
 
 //class Entity;
 //class ViewModelBase;
+class Game;
 
 using namespace DirectX;
 
@@ -15,7 +16,7 @@ class TextureManager : public IManager
 public:
 	TextureManager(ID3D11Device*);
 
-	bool initialize(); // What for, again?
+	bool initialize(Game&); // What for, again?
 	void update(float);  // For SpriteTextures?
 
 	Texture* loadTexture(WCHAR*); // Create new Texture, save pointer, initialize Texture, return pointer to Texture... Ref to D3D device?

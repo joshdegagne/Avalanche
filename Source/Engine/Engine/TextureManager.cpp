@@ -2,6 +2,7 @@
 #include "ITexture.h"
 #include "Texture.h"
 #include <memory>
+#include "Game.h"
 
 
 TextureManager::TextureManager(ID3D11Device* d)
@@ -9,7 +10,7 @@ TextureManager::TextureManager(ID3D11Device* d)
 	device = d;
 }
 
-bool TextureManager::initialize()
+bool TextureManager::initialize(Game& game)
 {
 	return true;
 }

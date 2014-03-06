@@ -13,7 +13,7 @@ public:
 	ModelManager();
 	~ModelManager();
 
-	bool initialize();
+	bool initialize(Game&);
 	void update(float);
 
 	ArrayList<IViewModel>* getGameModels() { return (ArrayList<IViewModel>*) models; }
