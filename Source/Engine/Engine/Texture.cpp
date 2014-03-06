@@ -23,18 +23,31 @@ bool Texture::Initialize(ID3D11Device* device, WCHAR* filename)
 {
 	HRESULT result;
 
-
 	// Load the texture in.
 	
 	result = CreateDDSTextureFromFile(device, filename, NULL, &texture, NULL);
+
 	if(FAILED(result))
 	{
 		return false;
 	}
 
 	return true;
+
+	
+	//unique_ptr<ScratchImage> image (new ScratchImage);
+	//ScratchImage
+	//unique_p
+
+	//HRESULT result = LoadFromWICFile(filename, WIC_FLAGS_NONE, nullptr, *image);
+
 }
 
+bool Texture::Initialize(ID3D11ShaderResourceView* view) 
+{
+	texture = view;
+	return true;
+}
 
 void Texture::Shutdown()
 {

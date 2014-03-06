@@ -3,9 +3,12 @@
 #include "ITexture.h"
 #include "Texture.h"
 #include "SpriteTexture.h"
+#include "DirectXTex.h"
 
 //class Entity;
 //class ViewModelBase;
+
+using namespace DirectX;
 
 class TextureManager : public IManager
 {
@@ -16,7 +19,7 @@ public:
 	void update(float);  // For SpriteTextures?
 
 	Texture* loadTexture(WCHAR*); // Create new Texture, save pointer, initialize Texture, return pointer to Texture... Ref to D3D device?
-	SpriteTexture* loadSpriteTexture(WCHAR*, float); 
+	SpriteTexture* loadSpriteTexture(WCHAR*, float); // Takes in width... Should it take in the number of cells? Or columns and rows?
 	void unloadTexture(ITexture*); // Makes deletion
 
 	// initialize texture taking in reference to game?
