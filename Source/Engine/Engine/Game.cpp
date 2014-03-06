@@ -87,7 +87,7 @@ bool Game::Initialize()
 	if(!modelManager)
 		return false;
 
-	bool initialized = modelManager->initialize();
+	bool initialized = modelManager->initialize(*this);
 	if(!initialized)
 		return false;
 
