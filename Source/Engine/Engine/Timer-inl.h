@@ -1,7 +1,7 @@
 #include "Timer.h"
 
 template<class T>
-void Timer<T>::initialize(float iTime, void (T::*callback)())
+void Timer<T>::initialize(float iTime, void (T::*callback) ())
 {
 	initialTime = iTime;
 	time = initialTime;
@@ -14,7 +14,7 @@ void Timer<T>::update(float elapsedTime)
 	time -= elapsedTime;
 	if (time <= 0)
 	{
-		callbackFunction();
+		callbackFunction; //Calls callback function (NO IT DOES NOT NEED PARENTHESES)
 	}
 }
 

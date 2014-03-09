@@ -1,4 +1,5 @@
 #include "PlayerInjuredState.h"
+#include "Timer-inl.h"
 
 PlayerInjuredState::PlayerInjuredState(Player& p, float duration = -1.0f) : PlayerState(p, duration)
 {
@@ -13,12 +14,12 @@ PlayerInjuredState::~PlayerInjuredState()
 
 void PlayerInjuredState::initialize()
 {
-	
+	timer->initialize(0.0f, &PlayerInjuredState::stateEnd);
 }
 
-void PlayerInjuredState::update()
+void PlayerInjuredState::update(float elapsedTime)
 {
-	
+	timer->update(elapsedTime);
 }
 
 void PlayerInjuredState::stateEnd()

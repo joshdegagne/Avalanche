@@ -13,7 +13,7 @@ public:
 	~PlayerRollState();
 
 	void initialize();
-	void update();
+	void update(float);
 	void stateEnd();
 
 private:

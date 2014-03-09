@@ -9,7 +9,7 @@
 template <class T>
 class Timer {
 public:
-	void  initialize(float, void(T::*callback)());
+	void  initialize(float, void (T::*callback) ());
 	void  update(float);
 	float getProgressPercentage();
 private:

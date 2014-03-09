@@ -17,9 +17,9 @@ void PlayerRegularState::initialize()
 	timer->initialize(0.0f, &PlayerRegularState::stateEnd);
 }
 
-void PlayerRegularState::update()
+void PlayerRegularState::update(float elapsedTime)
 {
-	
+	timer->update(elapsedTime);
 }
 
 void PlayerRegularState::stateEnd()

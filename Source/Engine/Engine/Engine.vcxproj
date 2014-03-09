@@ -105,7 +105,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerInjuedState.cpp" />
+    <ClCompile Include="PlayerInjuredState.cpp" />
     <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerModel.cpp" />
     <ClCompile Include="PlayerRegularState.cpp" />
