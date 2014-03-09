@@ -64,12 +64,6 @@
     <Filter Include="Source Files\Entities\Collision">
       <UniqueIdentifier>{dfd861ae-0e94-4eab-9ca9-9915194c1c7a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Entities\States">
-      <UniqueIdentifier>{0fed6d6c-7f2e-4cca-858c-d183c6295148}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities\States">
-      <UniqueIdentifier>{1b265fe4-b467-4b03-9019-6634b18f0a68}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -192,11 +186,14 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Source Files\Entities\States</Filter>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerRegularState.cpp">
-      <Filter>Source Files\Entities\States</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInjuedState.cpp">
       <Filter>Source Files\Entities\States</Filter>
@@ -360,19 +357,22 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInjuredState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerJumpState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRegularState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRollState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
