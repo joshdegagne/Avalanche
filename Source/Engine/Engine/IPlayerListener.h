@@ -10,6 +10,6 @@ class PlayerState;
 ////////////////////////////////////////////////////////////////////////////////
 class IPlayerListener {
 public:
-	virtual void onStateStart(PlayerState&) = 0;
+	virtual void onStateStart(PlayerState&)  = 0;
 	virtual void onStateEnd(PlayerState&)    = 0;
 };

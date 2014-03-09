@@ -2,6 +2,7 @@
 #include "ControllerInputManager.h"
 #include "DebugConsole.h"
 #include "KeyInput.h"
+#include "PlayerRegularState.h"
 
 Player::Player(Game& g, int pNum) : Entity()
 {
@@ -111,14 +112,14 @@ void Player::notifyStateStart(PlayerState& PS)
 {
 	for (int i = 0; i < listeners.size(); ++i)
 	{
-		//Notify all listeners of the state start!
+		listeners.elementAt(i)->onStateStart(PS);
 	}
 }
 void Player::notifyStateEnd(PlayerState& PS)
 {
 	for (int i = 0; i < listeners.size(); ++i)
 	{
-		//Notify all listeners of the state end!
+		listeners.elementAt(i)->onStateEnd(PS);
 	}
 }
 
@@ -128,22 +129,15 @@ void Player::removeListener(IPlayerListener& IPL) { listeners.remove(&IPL); }
 
 void Player::addState(PlayerState& PS)
 {
-	if (states.size() == 1)
-	{
-		//If the only playerstate is the regular state, then remove it
-	}
+	for(int i = 0; i < states.size(); ++i)
+		states.elementAt(i)->removeIfRegularState();
 	states.add(&PS);
-	//PS.onAdd();
 }
 void Player::removeState(PlayerState& PS)
 {
-	states.add(&PS);
-	//PS.onRemove();
-
+	states.remove(&PS);
 	if (states.size() == 0)
-	{
-		//Add new regular state
-	}
+		states.add(new PlayerRegularState(*this));
 }
 
 /////////////////////

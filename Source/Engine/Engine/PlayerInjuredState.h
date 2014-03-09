@@ -9,7 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerInjuredState : public PlayerState {
 public:
-	PlayerInjuredState(Player&, float);
+	PlayerInjuredState(Player&, float = PS_INJURED_DURATION);
 	~PlayerInjuredState();
 
 	void initialize();

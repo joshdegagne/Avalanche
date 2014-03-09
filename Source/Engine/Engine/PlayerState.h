@@ -5,6 +5,11 @@
 #include "arraylist.h"
 #include "Timer.h"
 
+#define PS_REGULAR_DURATION -1.0f
+#define PS_INJURED_DURATION -1.0f
+#define PS_JUMP_DURATION -1.0f
+#define PS_ROLL_DURATION -1.0f
+
 // Forward Declarations
 class Player;
 class Obstacle;
@@ -21,6 +26,7 @@ public:
 	virtual void initialize()  = 0;
 	virtual void update(float) = 0;
 	virtual void stateEnd()    = 0;
+	virtual void removeIfRegularState();
 
 protected:
 	Player& player;

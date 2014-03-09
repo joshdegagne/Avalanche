@@ -9,12 +9,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerRegularState : public PlayerState {
 public:
-	PlayerRegularState(Player&, float);
+	PlayerRegularState(Player&, float = PS_REGULAR_DURATION);
 	~PlayerRegularState();
 
 	void initialize();
 	void update(float);
 	void stateEnd();
+	void removeIfRegularState();
 
 private:
 	Timer<PlayerRegularState>* timer;

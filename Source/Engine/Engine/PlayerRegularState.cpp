@@ -1,7 +1,8 @@
 #include "PlayerRegularState.h"
 #include "Timer-inl.h"
+#include "Player.h"
 
-PlayerRegularState::PlayerRegularState(Player& p, float duration = -1.0f) : PlayerState(p, duration)
+PlayerRegularState::PlayerRegularState(Player& p, float duration) : PlayerState(p, duration)
 {
 	timer = new Timer<PlayerRegularState>;
 	initialize();
@@ -25,4 +26,9 @@ void PlayerRegularState::update(float elapsedTime)
 void PlayerRegularState::stateEnd()
 {
 	
+}
+
+void PlayerRegularState::removeIfRegularState()
+{
+	player.removeState(*this);
 }
