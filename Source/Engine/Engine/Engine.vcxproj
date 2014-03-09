@@ -106,6 +106,8 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerModel.cpp" />
+    <ClCompile Include="PlayerRegularState.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerViewModel.cpp" />
     <ClCompile Include="Playfield.cpp" />
     <ClCompile Include="Prismmodel.cpp" />
@@ -155,7 +157,11 @@
     <ClInclude Include="KeyInput.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerInjuredState.h" />
+    <ClInclude Include="PlayerJumpState.h" />
     <ClInclude Include="PlayerModel.h" />
+    <ClInclude Include="PlayerRegularState.h" />
+    <ClInclude Include="PlayerRollState.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerViewModel.h" />
     <ClInclude Include="Playfield.h" />
