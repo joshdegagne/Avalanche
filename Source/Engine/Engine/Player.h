@@ -9,6 +9,9 @@
 #include "QuadModel.h" // for testing movement via controller
 #include "PlayerModel.h" // for testing
 #include "BoundingBox.h"
+#include "Obstacle.h"
+#include "IPlayerListener.h"
+#include "PlayerState.h"
 
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
@@ -33,16 +36,16 @@ class Player: public Entity {
 		void		update(float);
 		void		render(); 
 
-		void onCollideObstacle(Obstacle*); //NEW
-		void onCollidePlayer(Player*); //NEW
+		void onCollideObstacle(Obstacle&); //NEW
+		void onCollidePlayer(Player&); //NEW
 
 		void lockLeftMovement(bool = true);
 		void lockRightMovement(bool = true);
 		void lockForwardMovement(bool = true);
 		
-		void addListener(IPlayerListener*); //NEW
-		void addState(PlayerState*); //NEW
-		void removeState(PlayerState*); //NEW
+		void addListener(IPlayerListener&); //NEW
+		void addState(PlayerState&); //NEW
+		void removeState(PlayerState&); //NEW
 
 	private:
 		GameModel*	 playerModel; // for testing purposes
@@ -59,8 +62,8 @@ class Player: public Entity {
 
 		void checkControllerInputs(float);
 		void checkKeyboardInputs(float);
-		void notifyStateStart(PlayerState*); //NEW
-		void notifyStateEnd(PlayerState*); //NEW
+		void notifyStateStart(PlayerState&); //NEW
+		void notifyStateEnd(PlayerState&); //NEW
 
 		//Movement
 		void moveLeft();
