@@ -133,6 +133,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityType.h" />
     <ClInclude Include="IManager.h" />
+    <ClInclude Include="IPlayerListener.h" />
     <ClInclude Include="ITexture.h" />
     <ClInclude Include="IViewModel.h" />
     <ClInclude Include="LogModel.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerModel.h" />
+    <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerViewModel.h" />
     <ClInclude Include="Playfield.h" />
     <ClInclude Include="Prismmodel.h" />

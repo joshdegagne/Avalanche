@@ -335,6 +335,12 @@
     <ClInclude Include="ModelManager-inl.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
+    <ClInclude Include="IPlayerListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">
