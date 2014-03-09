@@ -92,6 +92,63 @@ void Player::render()
 {
 }
 
+///////////////////////
+//Collision Functions//
+///////////////////////
+void Player::onCollide(Player&)
+{
+}
+
+void Player::onCollide(Obstacle&)
+{
+}
+
+////////////////////////////
+//State/Listener Functions//
+////////////////////////////
+//Private
+void Player::notifyStateStart(PlayerState& PS)
+{
+	for (int i = 0; i < listeners.size(); ++i)
+	{
+		//Notify all listeners of the state start!
+	}
+}
+void Player::notifyStateEnd(PlayerState& PS)
+{
+	for (int i = 0; i < listeners.size(); ++i)
+	{
+		//Notify all listeners of the state end!
+	}
+}
+
+//Public
+void Player::addListener(IPlayerListener& IPL) { listeners.add(&IPL); }
+void Player::removeListener(IPlayerListener& IPL) { listeners.remove(&IPL); }
+
+void Player::addState(PlayerState& PS)
+{
+	if (states.size() == 1)
+	{
+		//If the only playerstate is the regular state, then remove it
+	}
+	states.add(&PS);
+	//PS.onAdd();
+}
+void Player::removeState(PlayerState& PS)
+{
+	states.add(&PS);
+	//PS.onRemove();
+
+	if (states.size() == 0)
+	{
+		//Add new regular state
+	}
+}
+
+/////////////////////
+//Input (and Locks)//
+/////////////////////
 void Player::lockLeftMovement(bool b)    { movementLocks[0] = b; }
 void Player::lockRightMovement(bool b)   { movementLocks[1] = b; }
 void Player::lockForwardMovement(bool b) { movementLocks[2] = b; }
@@ -197,6 +254,9 @@ void Player::checkKeyboardInputs(float elapsed)
 }
 
 
+//////////////////////
+//Movement Functions//
+//////////////////////
 void Player::moveLeft()
 {
 	if (!movementLocks[0])

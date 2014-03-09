@@ -5,9 +5,6 @@
 
 #include "Entity.h"
 #include "Game.h"
-#include "Cubemodel.h" // for testing movement via controller
-#include "QuadModel.h" // for testing movement via controller
-#include "PlayerModel.h" // for testing
 #include "BoundingBox.h"
 #include "Obstacle.h"
 #include "IPlayerListener.h"
@@ -31,28 +28,28 @@ class Player: public Entity {
 		//Constructors
 		Player(Game&, int);
 		~Player();
-		GameModel*	getPlayerModel(); 
 		int			getPlayerNum();
 		void		update(float);
 		void		render(); 
 
-		void onCollideObstacle(Obstacle&); //NEW
-		void onCollidePlayer(Player&); //NEW
-
+		void onCollide(Player&);	//NEW
+		void onCollide(Obstacle&);	//NEW
+		
+		void addListener(IPlayerListener&);
+		void removeListener(IPlayerListener&);
+		void addState(PlayerState&);			//NEW
+		void removeState(PlayerState&);			//NEW
+		
 		void lockLeftMovement(bool = true);
 		void lockRightMovement(bool = true);
 		void lockForwardMovement(bool = true);
-		
-		void addListener(IPlayerListener&); //NEW
-		void addState(PlayerState&); //NEW
-		void removeState(PlayerState&); //NEW
 
 	private:
 		KeyInput*	 keyboard;
 		int			 keys[5];
 		ControllerInputManager*		controller;
-		ArrayList<PlayerState>		states; //NEW
-		ArrayList<IPlayerListener>	listeners; //NEW
+		ArrayList<PlayerState>		states;		//NEW
+		ArrayList<IPlayerListener>	listeners;	//NEW
 
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
@@ -62,7 +59,7 @@ class Player: public Entity {
 		void checkControllerInputs(float);
 		void checkKeyboardInputs(float);
 		void notifyStateStart(PlayerState&); //NEW
-		void notifyStateEnd(PlayerState&); //NEW
+		void notifyStateEnd(PlayerState&);	 //NEW
 
 		//Movement
 		void moveLeft();
