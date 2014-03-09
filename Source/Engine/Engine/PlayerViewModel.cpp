@@ -4,6 +4,7 @@
 #include "ViewModel.cpp"
 #include "Player.h"
 #include "DebugConsole.h"
+#include "Game.h"
 
 #include "PlayerViewModel.h"
 
@@ -12,7 +13,7 @@ const float HEIGHT	= 1.0f;
 
 WCHAR* TEXTURE = L"textures/iceclimberhead.dds";
 
-PlayerViewModel::PlayerViewModel() : ViewModel<Player>(EntityType::PLAYER)
+PlayerViewModel::PlayerViewModel(Game& game) : ViewModel<Player>(EntityType::PLAYER)
 {
 	/*
 	Create a quad consisting of 4 vertices and 2 triangles

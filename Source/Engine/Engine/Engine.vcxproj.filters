@@ -218,9 +218,6 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
-    <ClInclude Include="GameModel.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
     <ClInclude Include="ControllerInputManager.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
@@ -263,18 +260,6 @@
     <ClInclude Include="IViewModel.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
-    <ClInclude Include="LogModel.h">
-      <Filter>Header Files\Models\EntityModels</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerModel.h">
-      <Filter>Header Files\Models\EntityModels</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadModel.h">
-      <Filter>Header Files\Models\BasicModels</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadTexturedModel.h">
-      <Filter>Header Files\Models\BasicModels</Filter>
-    </ClInclude>
     <ClInclude Include="XYZaxis.h">
       <Filter>Header Files\Models\BasicModels</Filter>
     </ClInclude>
@@ -301,9 +286,6 @@
     </ClInclude>
     <ClInclude Include="LogViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
-    </ClInclude>
-    <ClInclude Include="PrismTexturedModel.h">
-      <Filter>Header Files\Models\BasicModels</Filter>
     </ClInclude>
     <ClInclude Include="IManager.h">
       <Filter>Header Files</Filter>

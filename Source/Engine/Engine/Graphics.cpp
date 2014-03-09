@@ -24,12 +24,6 @@ Graphics::Graphics()
 
 	colorShader = 0;
 	textureShader = 0;
-
-	viewModels = 0;
-
-
-
-
 }
 
 
@@ -44,7 +38,7 @@ Graphics::~Graphics()
 
 
 
-bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* initCamera, ArrayList<IViewModel>* models)
+bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* initCamera)
 {
 	bool result;
 
@@ -85,9 +79,6 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 
 	// Set the initial position of the camera.
 	//m_Camera->SetPosition(0.0f, 0.0f, -10.0f); 
-	
-
-
 
     // Create A model for the axis
 	axisModel = new Model(axis->GetVertices(), 
@@ -95,37 +86,6 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 										axis->GetIndices(), 
 										axis->GetIndexCount(), 
 										D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
-
-
-
-	viewModels = models;
-
-	if(viewModels && !viewModels->isEmpty()){
-		for(int i=0; i< viewModels->size(); i++){
-			IViewModel* viewModel = viewModels->elementAt(i);
-			//result = gameModel->GetVertexModel()->Initialize(m_D3D->GetDevice());			
-			result = viewModel->InitializeVertexModels(d3D->GetDevice()); //initialize the models for this graphics device
-	        if(!result)
-	        {
-		       MessageBox(hwnd, L"Could not initialize the game model object.", L"Error", MB_OK);
-		       return false;
-	        }
-			/*
-			if(gameModel->isTextureVertexModel()){
-				result = gameModel->initializeTextures(m_D3D->GetDevice());
-	            if(!result)
-	            {
-		            MessageBox(hwnd, L"Could not initialize the game model textures.", L"Error", MB_OK);
-		            return false;
-	            }
-
-			}
-			*/
-
-
-		}
-	}
-
 
 
 	result = axisModel->Initialize(d3D->GetDevice());
@@ -138,9 +98,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 	// Create the color shader object.
 	colorShader = new ColorShader;
 	if(!colorShader)
-	{
 		return false;
-	}
 
 	// Initialize the color shader object.
 	result = colorShader->Initialize(d3D->GetDevice(), hwnd);
@@ -215,23 +173,7 @@ void Graphics::Shutdown()
 }
 
 
-bool Graphics::Frame()
-{
-	bool result;
-
-
-	// Render the graphics scene.
-	result = Render();
-	if(!result)
-	{
-		return false;
-	}
-
-	return true;
-}
-
-
-bool Graphics::Render()
+bool Graphics::Render(ArrayList<IViewModel>* viewModels)
 {
 	// Update our time	
 	static float t = 0.0f;

@@ -2,10 +2,7 @@
 // Filename: Game.cpp
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "PlayerViewModel.h"
-#include "LogViewModel.h"
 #include "ViewModel.cpp"
-#include "BoundViewModel.h"
 #include "Game.h"
 #include "KeyInput.h"
 #include "ControllerInputManager.h"
@@ -15,10 +12,10 @@
 #include "Camera.h"
 #include "Playfield.h"
 #include "Player.h"
-#include "LogModel.h"
 #include "BoundingBox.h"
 #include "ModelManager.h"
 #include "ModelManager-inl.h"
+#include "TextureManager.h"
 
 Game::Game()
 {
@@ -29,6 +26,7 @@ Game::Game()
 	camera    = 0;
 	playfield = 0;
 
+	textureManager	= nullptr;
 	modelManager	= nullptr;
 	players			= nullptr;
 
@@ -68,7 +66,6 @@ bool Game::Initialize()
 	if(!conInput)
 		return false;
 
-
 	//////////
 	//Camera//
 	//////////
@@ -79,6 +76,21 @@ bool Game::Initialize()
 	camera->SetPosition(22.0f, 8.0f, 13.0f);
 	camera->SetTarget(12.0f, 3.0f, 0.0f);
 	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
+
+	////////////
+	//Graphics//
+	////////////
+	graphics = new Graphics;
+	if(!graphics)
+	{
+		return false;
+	}
+
+	bool result = graphics->Initialize(screenWidth, screenHeight, hwnd, camera);
+	if(!result)
+	{
+		return false;
+	}
 
 	///////////////
 	//Game Models//
@@ -109,23 +121,8 @@ bool Game::Initialize()
 	playfield->initialize(this);
 
 	
-	gameModels->addAll(playfield->getGameModels());
+	//gameModels->addAll(playfield->getGameModels());
 	
-
-	////////////
-	//Graphics//
-	////////////
-	graphics = new Graphics;
-	if(!graphics)
-	{
-		return false;
-	}
-
-	bool result = graphics->Initialize(screenWidth, screenHeight, hwnd, camera, gameModels);
-	if(!result)
-	{
-		return false;
-	}
 	
 	return true;
 }
@@ -269,7 +266,7 @@ bool Game::Frame()
 	
 
 	// Do the frame processing for the graphics object.
-	result = graphics->Frame();
+	result = graphics->Render(gameModels);
 	if(!result)
 	{
 		return false;

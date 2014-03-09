@@ -23,14 +23,11 @@ public:
 	Graphics(const Graphics&);
 	~Graphics();
 
-	bool Initialize(int, int, HWND, Camera*, ArrayList<IViewModel> * viewModels);
+	ID3D11Device* getDevice() { return d3D->GetDevice(); }
+
+	bool Initialize(int, int, HWND, Camera*);
 	void Shutdown();
-	bool Frame(); 
-
-
-
-private:
-	bool Render();
+	bool Render(ArrayList<IViewModel>* viewModels);
 
 private:
 	
@@ -43,11 +40,6 @@ private:
 
 	ColorShader*   colorShader;
 	TextureShader* textureShader;
-
-	ArrayList<IViewModel> * viewModels;
-
-
-
 };
 
 ////////////////////////////////////////////////////////////////////////////////

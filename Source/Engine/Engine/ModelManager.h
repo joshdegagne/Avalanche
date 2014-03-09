@@ -3,6 +3,7 @@
 #include "ArrayList.h"
 #include "IManager.h"
 
+class Game;
 class Entity;
 class ViewModelBase;
 class IViewModel;

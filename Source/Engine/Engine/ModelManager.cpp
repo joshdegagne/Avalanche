@@ -1,4 +1,5 @@
 
+#include "Game.h"
 #include "Entity.h"
 #include "LogViewModel.h"
 #include "PlayerViewModel.h"
@@ -34,7 +35,7 @@ bool ModelManager::initialize(Game& game)
 		return false;
 
 	//create all the models
-	models->add(new PlayerViewModel());
+	models->add(new PlayerViewModel(game));
 	models->add(new LogViewModel());
 	//models->add(new BoundViewModel());
 	models->add(new RockViewModel());
@@ -43,6 +44,14 @@ bool ModelManager::initialize(Game& game)
 		if(models->elementAt(i) == nullptr)
 			return false;
 
+	bool success;
+	for(int i=0; i< models->size(); i++)
+	{
+		IViewModel* viewModel = models->elementAt(i);		
+		success = viewModel->InitializeVertexModels(game.getDevice());
+		if(!success)
+			return false;
+	}
 
 	return true;
 }

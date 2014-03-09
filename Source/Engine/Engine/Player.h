@@ -33,24 +33,24 @@ class Player: public Entity {
 		void		update(float);
 		void		render(); 
 
-		void onCollideObstacle(Obstacle*); //NEW
-		void onCollidePlayer(Player*); //NEW
+		//void onCollideObstacle(Obstacle*); //NEW
+		//void onCollidePlayer(Player*); //NEW
 
 		void lockLeftMovement(bool = true);
 		void lockRightMovement(bool = true);
 		void lockForwardMovement(bool = true);
 		
-		void addListener(IPlayerListener*); //NEW
-		void addState(PlayerState*); //NEW
-		void removeState(PlayerState*); //NEW
+		//void addListener(IPlayerListener*); //NEW
+		//void addState(PlayerState*); //NEW
+		//void removeState(PlayerState*); //NEW
 
 	private:
 		GameModel*	 playerModel; // for testing purposes
 		KeyInput*	 keyboard;
 		int			 keys[5];
 		ControllerInputManager*		controller;
-		ArrayList<PlayerState>		states; //NEW
-		ArrayList<IPlayerListener>	listeners; //NEW
+		//ArrayList<PlayerState>		states; //NEW
+		//ArrayList<IPlayerListener>	listeners; //NEW
 
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
@@ -59,8 +59,8 @@ class Player: public Entity {
 
 		void checkControllerInputs(float);
 		void checkKeyboardInputs(float);
-		void notifyStateStart(PlayerState*); //NEW
-		void notifyStateEnd(PlayerState*); //NEW
+		//void notifyStateStart(PlayerState*); //NEW
+		//void notifyStateEnd(PlayerState*); //NEW
 
 		//Movement
 		void moveLeft();

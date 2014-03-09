@@ -3,15 +3,18 @@
 #include "Texture.h"
 #include <memory>
 #include "Game.h"
+#include "Graphics.h"
 
 
-TextureManager::TextureManager(ID3D11Device* d)
+TextureManager::TextureManager()
 {
-	device = d;
+	device = nullptr;
 }
 
 bool TextureManager::initialize(Game& game)
 {
+	device = game.getDevice();
+
 	return true;
 }
 

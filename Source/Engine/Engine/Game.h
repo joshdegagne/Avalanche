@@ -8,6 +8,7 @@
 #include <chrono>
 
 #include "Arraylist.h"
+#include "Graphics.h"
 
 #define  NUMPLAYERS 4 //USED FOR POTENTIAL PLAYER LOOPS ONLY
 
@@ -24,6 +25,7 @@ class KeyInput;
 class ModelManager;
 class Player;
 class Playfield;
+class TextureManager;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
@@ -45,6 +47,8 @@ class Game
 		KeyInput*               getKeyInput()			{ return keyInput; }
 		ControllerInputManager* getControllerManager()	{ return conInput; }
 		ModelManager*			getModelManager()		{ return modelManager; }
+		TextureManager*			getTextureManager()		{ return textureManager; }
+		ID3D11Device*			getDevice()				{ return graphics->getDevice(); }
 
 		ArrayList<Player>* GetPlayers();
 
@@ -73,6 +77,7 @@ class Game
 		ControllerInputManager* conInput; //Yay! Input from a controller!
 		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
 		ModelManager*			modelManager;
+		TextureManager*			textureManager;
 
 		//Game World Items
 		Playfield*		   playfield;

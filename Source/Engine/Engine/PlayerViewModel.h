@@ -4,11 +4,12 @@
 
 class Player;
 class ITexture;
+class Game;
 
 class PlayerViewModel : public ViewModel<Player>
 {
 public:
-	PlayerViewModel();
+	PlayerViewModel(Game&);
 	virtual ~PlayerViewModel();
 
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);

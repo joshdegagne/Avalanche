@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ArrayList.h"
 #include "IManager.h"
 #include "ITexture.h"
@@ -14,7 +16,7 @@ using namespace DirectX;
 class TextureManager : public IManager
 {
 public:
-	TextureManager(ID3D11Device*);
+	TextureManager();
 
 	bool initialize(Game&); // What for, again?
 	void update(float);  // For SpriteTextures?
