@@ -1,25 +1,20 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: PlayerState.h
+// Filename: PlayerRollState.h
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
-#include "arraylist.h"
-
-// Forward Declarations
-class Player;
-class Obstacle;
+#include "PlayerState.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-// Abstract class name: PlayerState
+// Class Name: PlayerRollState
 ////////////////////////////////////////////////////////////////////////////////
-class PlayerState {
+class PlayerRollState : public PlayerState {
 public:
-	PlayerState(Player&);
+	PlayerRollState();
+	~PlayerRollState();
 
-	virtual void onCollideWith(Player*) = 0;
-	virtual void onCollideWith(Obstacle*) = 0;
-	virtual void initialize() = 0;
-	virtual void stateEnd() = 0;
+	void initialize();
+	void stateEnd();
+
 private:
-	Player& player;
 
 };
