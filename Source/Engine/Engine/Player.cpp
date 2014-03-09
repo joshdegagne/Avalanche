@@ -62,7 +62,6 @@ Player::~Player()
 {
 }
 
-GameModel* Player::getPlayerModel() { return playerModel; }
 int Player::getPlayerNum() { return playerNum; }
 
 void Player::update(float elapsed)
@@ -252,7 +251,6 @@ void Player::jumpArc(float elapsed)
 		float arc = (-1*(jumpIncrement - 2)*(jumpIncrement - 2))+4; //parabola
 
 		position.z += arc;
-		playerModel->worldTranslate(0.0f, 0.0f, arc);
 	}
 	else
 	{

@@ -48,7 +48,6 @@ class Player: public Entity {
 		void removeState(PlayerState&); //NEW
 
 	private:
-		GameModel*	 playerModel; // for testing purposes
 		KeyInput*	 keyboard;
 		int			 keys[5];
 		ControllerInputManager*		controller;
