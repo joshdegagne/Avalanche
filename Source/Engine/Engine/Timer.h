@@ -6,14 +6,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Interface Name: IPlayerListener
 ////////////////////////////////////////////////////////////////////////////////
+template <class T>
 class Timer {
-	public:
-		void  initialize(float, void(*callback)());
-		void  update(float);
-		float getProgressPercentage();
-	private:
-		float initialTime;
-		float time;
-		void  (*callbackFunction)(); //Function pointer called at the end of the timer
+public:
+	void  initialize(float, void(T::*callback)());
+	void  update(float);
+	float getProgressPercentage();
+private:
+	float initialTime;
+	float time;
+	void  (T::*callbackFunction)(); //Function pointer called at the end of the timer
 
 };

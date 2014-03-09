@@ -1,9 +1,4 @@
 #include "PlayerState.h"
 
-PlayerState::PlayerState(Player& p) 
-	       : player(p), timer(*(new Timer)) {}
-
-PlayerState::~PlayerState()
-{
-	delete &timer;
-}
+PlayerState::PlayerState(Player& p, float duration) 
+	        : player(p), stateDuration(duration) {}

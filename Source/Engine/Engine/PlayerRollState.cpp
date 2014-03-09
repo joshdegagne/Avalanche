@@ -1,7 +1,8 @@
 #include "PlayerRollState.h"
 
-PlayerRollState::PlayerRollState(Player& p) : PlayerState(p)
+PlayerRollState::PlayerRollState(Player& p, float duration = -1.0f) : PlayerState(p, duration)
 {
+	timer = new Timer<PlayerRollState>;
 	initialize();
 }
 

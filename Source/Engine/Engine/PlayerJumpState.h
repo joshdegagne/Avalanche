@@ -9,7 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerJumpState : public PlayerState {
 public:
-	PlayerJumpState(Player&);
+	PlayerJumpState(Player&, float);
 	~PlayerJumpState();
 
 	void initialize();
@@ -17,5 +17,5 @@ public:
 	void stateEnd();
 
 private:
-
+	Timer<PlayerJumpState>* timer;
 };

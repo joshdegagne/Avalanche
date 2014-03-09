@@ -64,12 +64,6 @@
     <Filter Include="Source Files\Entities\Collision">
       <UniqueIdentifier>{dfd861ae-0e94-4eab-9ca9-9915194c1c7a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Entities\States">
-      <UniqueIdentifier>{8fad000a-9647-4a9b-8f03-3f7ff92eea32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities\States">
-      <UniqueIdentifier>{572148bd-e1ab-4895-b80c-1ba400197f2a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -192,23 +186,23 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
+    <ClCompile Include="PlayerRegularState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInjuedState.cpp">
-      <Filter>Source Files\Entities\States</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerJumpState.cpp">
-      <Filter>Source Files\Entities\States</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRegularState.cpp">
-      <Filter>Source Files\Entities\States</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerRollState.cpp">
-      <Filter>Source Files\Entities\States</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Source Files\Entities\States</Filter>
+    <ClCompile Include="Timer-inl.h">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,23 +356,23 @@
     <ClInclude Include="IPlayerListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInjuredState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerJumpState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRegularState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlayerRollState.h">
-      <Filter>Header Files\Entities\States</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerState.h">
-      <Filter>Header Files\Entities\States</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

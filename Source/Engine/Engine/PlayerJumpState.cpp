@@ -1,7 +1,8 @@
 #include "PlayerJumpState.h"
 
-PlayerJumpState::PlayerJumpState(Player& p) : PlayerState(p)
+PlayerJumpState::PlayerJumpState(Player& p, float duration = -1.0f) : PlayerState(p, duration)
 {
+	timer = new Timer<PlayerJumpState>;
 	initialize();
 }
 

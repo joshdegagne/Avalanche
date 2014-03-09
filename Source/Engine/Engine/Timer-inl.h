@@ -1,13 +1,15 @@
 #include "Timer.h"
 
-void Timer::initialize(float iTime, void (*callback)())
+template<class T>
+void Timer<T>::initialize(float iTime, void (T::*callback)())
 {
 	initialTime = iTime;
 	time = initialTime;
     callbackFunction = callback;
 }
 
-void Timer::update(float elapsedTime)
+template<class T>
+void Timer<T>::update(float elapsedTime)
 {
 	time -= elapsedTime;
 	if (time <= 0)
@@ -16,7 +18,8 @@ void Timer::update(float elapsedTime)
 	}
 }
 
-float Timer::getProgressPercentage()
+template<class T>
+float Timer<T>::getProgressPercentage()
 {
 	return 1.0f - time/initialTime;
 }

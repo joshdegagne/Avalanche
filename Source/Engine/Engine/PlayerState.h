@@ -14,8 +14,7 @@ class Obstacle;
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerState {
 public:
-	PlayerState(Player&);
-	~PlayerState();
+	PlayerState(Player&, float);
 
 //	virtual void onCollideWith(Player*)   = 0;
 //	virtual void onCollideWith(Obstacle*) = 0;
@@ -25,6 +24,5 @@ public:
 
 protected:
 	Player& player;
-	Timer&  timer;
-
+	float   stateDuration;
 };

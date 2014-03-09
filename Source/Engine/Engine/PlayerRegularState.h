@@ -9,7 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerRegularState : public PlayerState {
 public:
-	PlayerRegularState(Player&);
+	PlayerRegularState(Player&, float);
 	~PlayerRegularState();
 
 	void initialize();
@@ -17,5 +17,6 @@ public:
 	void stateEnd();
 
 private:
+	Timer<PlayerRegularState>* timer;
 
 };

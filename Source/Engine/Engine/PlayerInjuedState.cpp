@@ -1,7 +1,8 @@
 #include "PlayerInjuredState.h"
 
-PlayerInjuredState::PlayerInjuredState(Player& p) : PlayerState(p)
+PlayerInjuredState::PlayerInjuredState(Player& p, float duration = -1.0f) : PlayerState(p, duration)
 {
+	timer = new Timer<PlayerInjuredState>;
 	initialize();
 }
 

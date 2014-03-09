@@ -9,7 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerRollState : public PlayerState {
 public:
-	PlayerRollState(Player&);
+	PlayerRollState(Player&, float);
 	~PlayerRollState();
 
 	void initialize();
@@ -17,5 +17,5 @@ public:
 	void stateEnd();
 
 private:
-
+	Timer<PlayerRollState>* timer;
 };
