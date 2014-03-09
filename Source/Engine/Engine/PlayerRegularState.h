@@ -9,10 +9,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerRegularState : public PlayerState {
 public:
-	PlayerRegularState();
+	PlayerRegularState(Player&);
 	~PlayerRegularState();
 
 	void initialize();
+	void update();
 	void stateEnd();
 
 private:

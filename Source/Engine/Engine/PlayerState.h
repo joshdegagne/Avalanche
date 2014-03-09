@@ -7,6 +7,7 @@
 // Forward Declarations
 class Player;
 class Obstacle;
+class Timer;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Abstract class name: PlayerState
@@ -15,11 +16,13 @@ class PlayerState {
 public:
 	PlayerState(Player&);
 
-	virtual void onCollideWith(Player*) = 0;
-	virtual void onCollideWith(Obstacle*) = 0;
+//	virtual void onCollideWith(Player*)   = 0;
+//	virtual void onCollideWith(Obstacle*) = 0;
 	virtual void initialize() = 0;
-	virtual void stateEnd() = 0;
+	virtual void update()     = 0;
+	virtual void stateEnd()   = 0;
 private:
 	Player& player;
+	Timer&  timer;
 
 };

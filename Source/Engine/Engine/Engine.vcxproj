@@ -105,8 +105,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerInjuedState.cpp" />
+    <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerModel.cpp" />
     <ClCompile Include="PlayerRegularState.cpp" />
+    <ClCompile Include="PlayerRollState.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerViewModel.cpp" />
     <ClCompile Include="Playfield.cpp" />

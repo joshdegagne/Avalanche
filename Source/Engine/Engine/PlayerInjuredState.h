@@ -9,10 +9,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerInjuredState : public PlayerState {
 public:
-	PlayerInjuredState();
+	PlayerInjuredState(Player&);
 	~PlayerInjuredState();
 
 	void initialize();
+	void update();
 	void stateEnd();
 
 private:

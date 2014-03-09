@@ -9,10 +9,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerRollState : public PlayerState {
 public:
-	PlayerRollState();
+	PlayerRollState(Player&);
 	~PlayerRollState();
 
 	void initialize();
+	void update();
 	void stateEnd();
 
 private:

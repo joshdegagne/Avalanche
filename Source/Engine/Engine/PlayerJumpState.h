@@ -9,10 +9,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerJumpState : public PlayerState {
 public:
-	PlayerJumpState();
+	PlayerJumpState(Player&);
 	~PlayerJumpState();
 
 	void initialize();
+	void update();
 	void stateEnd();
 
 private:
