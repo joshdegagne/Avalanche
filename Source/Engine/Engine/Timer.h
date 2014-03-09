@@ -13,7 +13,7 @@ public:
 	void  update(float);
 	float getProgressPercentage();
 private:
-	float initialTime;
+	float initialTime; //If set to a negative value, it is an inactive timer!
 	float time;
 	void  (T::*callbackFunction)(); //Function pointer called at the end of the timer
 
