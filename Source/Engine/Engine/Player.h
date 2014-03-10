@@ -75,6 +75,7 @@ class Player: public Entity {
 		void stop();
 
 		//Possible jump implementation (no real physics simulation here)
+		void setHeight(float);
 		void jump();
 		void jumpArc(float);
 		void rollLeft();

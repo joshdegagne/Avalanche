@@ -15,4 +15,8 @@ public:
 	void initialize();
 	void update(float);
 	void timerCallback();
+
+private:
+	void  updateJumpArc();
+	float getJumpArc(float);
 };

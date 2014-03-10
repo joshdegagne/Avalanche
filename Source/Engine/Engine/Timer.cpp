@@ -15,13 +15,13 @@ void Timer::update(float elapsedTime)
 	time -= elapsedTime;
 	if (time <= 0)
 	{
+		time = 0;
 		originalObject->timerCallback(); //Calls callback function (NO IT DOES NOT NEED PARENTHESES)
-		time = initialTime;
+		//time = initialTime;
 	}
 }
 
 float Timer::getProgressPercentage()
 {
-	return time;
-	//return 1.0f - time/initialTime;
+	return 1.0f - time/initialTime;
 }

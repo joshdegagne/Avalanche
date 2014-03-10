@@ -22,11 +22,26 @@ void PlayerJumpState::initialize()
 
 void PlayerJumpState::update(float elapsedTime)
 {
-	writeLabelToConsole(L"Jump State for Player 0 progress = ", timer.getProgressPercentage());
+	updateJumpArc();
 	timer.update(elapsedTime);
 }
 
 void PlayerJumpState::timerCallback()
 {
+	updateJumpArc();
 	player.removeState(*this);
+}
+
+void PlayerJumpState::updateJumpArc()
+{
+	player.setHeight( getJumpArc(timer.getProgressPercentage()*100) );
+	writeLabelToConsole(L"Jump Progress% for Player = ", timer.getProgressPercentage());
+	writeLabelToConsole(L"Jump Height for Player = ", player.getPosition().z);
+}
+
+float PlayerJumpState::getJumpArc(float timerProgress)
+{
+	//return (-(timerProgress - 2)*(timerProgress - 2))+4;
+	return ( ( -((timerProgress - 50.0f)/35.3535f)*((timerProgress - 50.0f)/35.3535f) ) +2);
+
 }
