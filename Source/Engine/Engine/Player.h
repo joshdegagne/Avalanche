@@ -62,20 +62,22 @@ class Player: public Entity {
 		void notifyStateStart(PlayerState&); //NEW
 		void notifyStateEnd(PlayerState&);	 //NEW
 
+		
+	
+	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
+
 		//Movement
 		void moveLeft();
 		void moveRight();
 		void moveUp();
 		void moveDown();
 		void stop();
-	
-	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
+
 		//Possible jump implementation (no real physics simulation here)
 		void jump();
-		void roll(); //For testing only
 		void jumpArc(float);
-		//rollLeft();
-		//rollRight();
+		void rollLeft();
+		void rollRight();
 		//requestPause(); ???
 
 };

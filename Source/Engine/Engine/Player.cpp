@@ -89,7 +89,7 @@ void Player::update(float elapsed)
 	//Update Position//
 	///////////////////
 	moveBy(velocity, elapsed * MOVEMENT_SPEED);
-	jumpArc(elapsed);
+	//jumpArc(elapsed);
 	//position.x += velocity.x * elapsed;
 	//position.y += velocity.y * elapsed;
 	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
@@ -189,21 +189,24 @@ void Player::checkControllerInputs(float elapsed)
 	////////////////
 	float LSX = controller->getLS_X(playerNum);
 	float LSY = controller->getLS_Y(playerNum);
-	if (LSX < -STICK_MOVEMENT_THRESHOLD)
+	if (!containsState(PlayerStateType::PST_ROLL))
 	{
-		moveLeft();
-	}
-	else if (LSX > STICK_MOVEMENT_THRESHOLD)
-	{
-		moveRight();
-	}
-	if (LSY > STICK_MOVEMENT_THRESHOLD)
-	{
-		moveUp();
-	}
-	else if (LSY < -STICK_MOVEMENT_THRESHOLD)
-	{
-		moveDown();
+		if (LSX < -STICK_MOVEMENT_THRESHOLD)
+		{
+			moveLeft();
+		}
+		else if (LSX > STICK_MOVEMENT_THRESHOLD)
+		{
+			moveRight();
+		}
+		if (LSY > STICK_MOVEMENT_THRESHOLD)
+		{
+			moveUp();
+		}
+		else if (LSY < -STICK_MOVEMENT_THRESHOLD)
+		{
+			moveDown();
+		}
 	}
 
 	/////////////////
@@ -215,7 +218,6 @@ void Player::checkControllerInputs(float elapsed)
 	}
 	if (controller->getButtonB(playerNum))
 	{
-		roll();
 		//Ability?
 	}
 	if (controller->getButtonX(playerNum))
@@ -249,38 +251,42 @@ void Player::checkControllerInputs(float elapsed)
 	float LT = controller->getLT(playerNum);
 	if (LT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
-		//Roll left?
+		rollLeft();
 	}
 
 	float RT = controller->getRT(playerNum);
 	if (RT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
-		//Roll right?
+		rollRight();
 	}
 }
 
 void Player::checkKeyboardInputs(float elapsed)
 {
-	if (keyboard->IsKeyDown(keys[0]))
+	if (!containsState(PlayerStateType::PST_ROLL))
 	{
-		moveLeft();
-	}
-	else if (keyboard->IsKeyDown(keys[1])) 
-	{
-		moveRight();
-	}
-	if (keyboard->IsKeyDown(keys[2]))
-	{
-		moveUp();
-	}
-	else if (keyboard->IsKeyDown(keys[3]))
-	{
-		moveDown();
+		if (keyboard->IsKeyDown(keys[0]))
+		{
+			moveLeft();
+		}
+		else if (keyboard->IsKeyDown(keys[1])) 
+		{
+			moveRight();
+		}
+		if (keyboard->IsKeyDown(keys[2]))
+		{
+			moveUp();
+		}
+		else if (keyboard->IsKeyDown(keys[3]))
+		{
+			moveDown();
+		}
 	}
 	if (keyboard->IsKeyDown(keys[4]))
 	{
 		jump();
 	}
+	
 }
 
 
@@ -330,10 +336,15 @@ void Player::jump()
 		addState( *(new PlayerJumpState(*this)) );
 }
 
-void Player::roll()
+void Player::rollLeft()
 {
 	if (!containsState( PlayerStateType::PST_ROLL ))
-		addState( *(new PlayerRollState(*this)) );
+		addState( *(new PlayerRollState(*this, true)) );
+}
+void Player::rollRight()
+{
+	if (!containsState( PlayerStateType::PST_ROLL ))
+		addState( *(new PlayerRollState(*this, false)) );
 }
 
 void Player::jumpArc(float elapsed)

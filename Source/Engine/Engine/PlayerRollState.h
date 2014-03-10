@@ -9,10 +9,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 class PlayerRollState : public PlayerState {
 public:
-	PlayerRollState(Player&, float = PS_ROLL_DURATION);
+	PlayerRollState(Player&, bool,  float = PS_ROLL_DURATION);
 	~PlayerRollState();
 
 	void initialize();
 	void update(float);
 	void timerCallback();
+	bool isRollingLeft();
+
+private:
+	bool rollingLeft;
 };

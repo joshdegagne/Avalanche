@@ -3,8 +3,8 @@
 
 #include "DebugConsole.h"
 
-PlayerRollState::PlayerRollState(Player& p, float duration) 
-				: PlayerState(p, duration, PlayerStateType::PST_ROLL)
+PlayerRollState::PlayerRollState(Player& p, bool isLeft, float duration) 
+				: PlayerState(p, duration, PlayerStateType::PST_ROLL), rollingLeft(isLeft)
 {
 	writeLabelToConsole(L"Roll State created for Player ", player.getPlayerNum());
 	initialize();
@@ -30,3 +30,5 @@ void PlayerRollState::timerCallback()
 {
 	player.removeState(*this);
 }
+
+bool PlayerRollState::isRollingLeft() { return rollingLeft; }
