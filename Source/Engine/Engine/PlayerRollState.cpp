@@ -22,7 +22,10 @@ void PlayerRollState::initialize()
 
 void PlayerRollState::update(float elapsedTime)
 {
-	writeLabelToConsole(L"Roll State for Player 0 progress = ", timer.getProgressPercentage());
+	if (rollingLeft)
+		player.moveLeft(elapsedTime, MOVEMENT_SPEED*1.5f);
+	else
+		player.moveRight(elapsedTime, MOVEMENT_SPEED*1.5f);
 	timer.update(elapsedTime);
 }
 
