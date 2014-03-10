@@ -12,7 +12,7 @@
 
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
-#define	 MOVEMENT_SPEED 0.006f
+#define	 MOVEMENT_SPEED 0.004f
 #define  JUMP_HEIGHT 4.0f
 
 #define  P_WIDTH  1.0f
@@ -54,6 +54,7 @@ class Player: public Entity {
 
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
+		float		speed;
 		bool		movementLocks[3]; //Used for bounds checking in the playfield
 		float       jumpIncrement;
 
@@ -67,10 +68,10 @@ class Player: public Entity {
 	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
 
 		//Movement
-		void moveLeft();
-		void moveRight();
-		void moveUp();
-		void moveDown();
+		void moveLeft(float elapsed, float speed = MOVEMENT_SPEED);
+		void moveRight(float elapsed, float speed = MOVEMENT_SPEED);
+		void moveUp(float elapsed, float speed = MOVEMENT_SPEED);
+		void moveDown(float elapsed, float speed = MOVEMENT_SPEED);
 		void stop();
 
 		//Possible jump implementation (no real physics simulation here)

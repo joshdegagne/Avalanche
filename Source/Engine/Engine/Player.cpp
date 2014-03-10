@@ -52,6 +52,7 @@ Player::Player(Game& g, int pNum) : Entity()
 	position.z = 0;
 	velocity.x = 0;
 	velocity.y = 0;
+	speed = 0;
 	lockLeftMovement(false);
 	lockRightMovement(false);
 	lockForwardMovement(false);
@@ -88,7 +89,7 @@ void Player::update(float elapsed)
 	///////////////////
 	//Update Position//
 	///////////////////
-	moveBy(velocity, elapsed * MOVEMENT_SPEED);
+	moveBy(velocity, speed);
 	//jumpArc(elapsed);
 	//position.x += velocity.x * elapsed;
 	//position.y += velocity.y * elapsed;
@@ -193,19 +194,19 @@ void Player::checkControllerInputs(float elapsed)
 	{
 		if (LSX < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveLeft();
+			moveLeft(elapsed);
 		}
 		else if (LSX > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveRight();
+			moveRight(elapsed);
 		}
 		if (LSY > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveUp();
+			moveUp(elapsed);
 		}
 		else if (LSY < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveDown();
+			moveDown(elapsed);
 		}
 	}
 
@@ -267,19 +268,19 @@ void Player::checkKeyboardInputs(float elapsed)
 	{
 		if (keyboard->IsKeyDown(keys[0]))
 		{
-			moveLeft();
+			moveLeft(elapsed);
 		}
 		else if (keyboard->IsKeyDown(keys[1])) 
 		{
-			moveRight();
+			moveRight(elapsed);
 		}
 		if (keyboard->IsKeyDown(keys[2]))
 		{
-			moveUp();
+			moveUp(elapsed);
 		}
 		else if (keyboard->IsKeyDown(keys[3]))
 		{
-			moveDown();
+			moveDown(elapsed);
 		}
 	}
 	if (keyboard->IsKeyDown(keys[4]))
@@ -293,34 +294,40 @@ void Player::checkKeyboardInputs(float elapsed)
 //////////////////////
 //Movement Functions//
 //////////////////////
-void Player::moveLeft()
+void Player::moveLeft(float elapsed, float sp)
 {
 	if (!movementLocks[0])
 	{
-		velocity.y = 1;
+		speed = sp*elapsed;
+		velocity.y = speed;
 		if (movementLocks[1])
 			lockRightMovement(false);
 	}
 }
-void Player::moveRight()
+void Player::moveRight(float elapsed, float sp)
 {
 	if (!movementLocks[1])
 	{
-		velocity.y = -1;
+		speed = sp*elapsed;
+		velocity.y = -speed;
 		if (movementLocks[0])
 				lockLeftMovement(false);
 	}
 }
-void Player::moveUp()
+void Player::moveUp(float elapsed, float sp)
 {
-	velocity.x = -1;
+	speed = sp*elapsed;
+	velocity.x = -speed;
 	if (movementLocks[2])
 		lockForwardMovement(false);
 }
-void Player::moveDown()
+void Player::moveDown(float elapsed, float sp)
 {
 	if (!movementLocks[2])
-	velocity.x = 1;
+	{
+		speed = sp*elapsed;
+		velocity.x = speed;
+	}
 }
 
 
