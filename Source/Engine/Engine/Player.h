@@ -37,8 +37,9 @@ class Player: public Entity {
 		
 		void addListener(IPlayerListener&);
 		void removeListener(IPlayerListener&);
-		void addState(PlayerState&);			//NEW
-		void removeState(PlayerState&);			//NEW
+		void addState(PlayerState&);				//NEW
+		void removeState(PlayerState&);				//NEW
+		bool containsState(PlayerStateType PST);		//NEW
 		
 		void lockLeftMovement(bool = true);
 		void lockRightMovement(bool = true);
@@ -70,7 +71,8 @@ class Player: public Entity {
 	
 	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
 		//Possible jump implementation (no real physics simulation here)
-		void jump(float);
+		void jump();
+		void roll(); //For testing only
 		void jumpArc(float);
 		//rollLeft();
 		//rollRight();

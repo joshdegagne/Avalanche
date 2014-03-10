@@ -1,8 +1,9 @@
 #include "Player.h"
 #include "ControllerInputManager.h"
-#include "DebugConsole.h"
 #include "KeyInput.h"
-#include "PlayerRegularState.h"
+#include "PlayerStatesList.h"
+
+#include "DebugConsole.h"
 
 Player::Player(Game& g, int pNum) : Entity()
 {
@@ -56,6 +57,8 @@ Player::Player(Game& g, int pNum) : Entity()
 	lockForwardMovement(false);
 	jumpIncrement = 0.0f;
 
+	addState(*(new PlayerRegularState(*this)));
+
 	moveTo(1.0f, 1.0f);
 }
 
@@ -78,6 +81,9 @@ void Player::update(float elapsed)
 		checkControllerInputs(elapsed);
 	else
 		checkKeyboardInputs(elapsed);
+
+	for (int i = 0; i < states.size(); ++i)
+		states.elementAt(i)->update(elapsed);
 
 	///////////////////
 	//Update Position//
@@ -127,17 +133,46 @@ void Player::notifyStateEnd(PlayerState& PS)
 void Player::addListener(IPlayerListener& IPL) { listeners.add(&IPL); }
 void Player::removeListener(IPlayerListener& IPL) { listeners.remove(&IPL); }
 
+//CURRENTLY INEFFICIENT. DUPLICATE TESTING SHOULD BE DONE BEFORE WE REACH THIS POINT!
 void Player::addState(PlayerState& PS)
 {
+	//Loop check through all current PlayerStates (Duplicate testing)
 	for(int i = 0; i < states.size(); ++i)
-		states.elementAt(i)->removeIfRegularState();
+	{
+		PlayerState* currentState = states.elementAt(i);
+		
+		//If we already have one of this type, return and don't add. We don't want two of the same PlayerState!
+		if (currentState->getStateType() == PS.getStateType())
+		{
+			delete &PS;
+			return;
+		}
+
+		//If there is a PlayerRegularState in here, then get rid of it
+		if (currentState->getStateType() == PlayerStateType::PST_REGULAR)
+		{
+			states.remove(currentState);
+			delete currentState;
+		}
+	}
+
 	states.add(&PS);
 }
 void Player::removeState(PlayerState& PS)
 {
 	states.remove(&PS);
+	delete &PS;
 	if (states.size() == 0)
 		states.add(new PlayerRegularState(*this));
+}
+
+bool Player::containsState(PlayerStateType PST)
+{
+	for(int i = 0; i < states.size(); ++i)
+		if (states.elementAt(i)->getStateType() == PST) 
+			return true;
+
+	return false;
 }
 
 /////////////////////
@@ -156,19 +191,19 @@ void Player::checkControllerInputs(float elapsed)
 	float LSY = controller->getLS_Y(playerNum);
 	if (LSX < -STICK_MOVEMENT_THRESHOLD)
 	{
-		//moveLeft();
+		moveLeft();
 	}
 	else if (LSX > STICK_MOVEMENT_THRESHOLD)
 	{
-		//moveRight();
+		moveRight();
 	}
 	if (LSY > STICK_MOVEMENT_THRESHOLD)
 	{
-		//moveUp();
+		moveUp();
 	}
 	else if (LSY < -STICK_MOVEMENT_THRESHOLD)
 	{
-		//moveDown();
+		moveDown();
 	}
 
 	/////////////////
@@ -176,10 +211,11 @@ void Player::checkControllerInputs(float elapsed)
 	/////////////////
 	if (controller->getButtonA(playerNum))
 	{
-		//jump();
+		jump();
 	}
 	if (controller->getButtonB(playerNum))
 	{
+		roll();
 		//Ability?
 	}
 	if (controller->getButtonX(playerNum))
@@ -243,7 +279,7 @@ void Player::checkKeyboardInputs(float elapsed)
 	}
 	if (keyboard->IsKeyDown(keys[4]))
 	{
-		jump(elapsed);
+		jump();
 	}
 }
 
@@ -288,13 +324,16 @@ void Player::stop()
 	velocity.y = 0;
 }
 
-void Player::jump(float elapsed)
+void Player::jump()
 {
-	
-	if (jumpIncrement == 0.0f)
-	{
-		jumpIncrement = elapsed;
-	}
+	if (!containsState( PlayerStateType::PST_JUMP ))
+		addState( *(new PlayerJumpState(*this)) );
+}
+
+void Player::roll()
+{
+	if (!containsState( PlayerStateType::PST_ROLL ))
+		addState( *(new PlayerRollState(*this)) );
 }
 
 void Player::jumpArc(float elapsed)

@@ -1,19 +1,12 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: Timer.h
+// Filename: ITimedObject.h
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
-#include "ITimedObject.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// Interface Name: IPlayerListener
+// Interface Name: ITimedObject
 ////////////////////////////////////////////////////////////////////////////////
-class Timer {
+class ITimedObject {
 public:
-	void  initialize(float, ITimedObject*);
-	void  update(float);
-	float getProgressPercentage();
-private:
-	float		 initialTime; //If set to a negative value, it is an inactive timer!
-	float		 time;
-	ITimedObject* originalObject;
+	virtual void timerCallback()  = 0;
 };

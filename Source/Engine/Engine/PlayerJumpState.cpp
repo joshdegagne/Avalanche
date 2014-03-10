@@ -1,28 +1,32 @@
 #include "PlayerJumpState.h"
-#include "Timer-inl.h"
+#include "Player.h"
 
-PlayerJumpState::PlayerJumpState(Player& p, float duration) : PlayerState(p, duration)
+#include "DebugConsole.h"
+
+PlayerJumpState::PlayerJumpState(Player& p, float duration) 
+				: PlayerState(p, duration, PlayerStateType::PST_JUMP)
 {
-	timer = new Timer<PlayerJumpState>;
+	writeLabelToConsole(L"Jump State created for Player ", player.getPlayerNum());
 	initialize();
 }
 
 PlayerJumpState::~PlayerJumpState()
 {
-	
+	writeLabelToConsole(L"Jump State destroyed for Player ", player.getPlayerNum());
 }
 
 void PlayerJumpState::initialize()
 {
-	timer->initialize(0.0f, &PlayerJumpState::stateEnd);
+	timer.initialize(stateDuration, this);
 }
 
 void PlayerJumpState::update(float elapsedTime)
 {
-	timer->update(elapsedTime);
+	writeLabelToConsole(L"Jump State for Player 0 progress = ", timer.getProgressPercentage());
+	timer.update(elapsedTime);
 }
 
-void PlayerJumpState::stateEnd()
+void PlayerJumpState::timerCallback()
 {
-	
+	player.removeState(*this);
 }

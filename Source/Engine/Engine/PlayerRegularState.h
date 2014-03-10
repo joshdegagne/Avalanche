@@ -14,10 +14,9 @@ public:
 
 	void initialize();
 	void update(float);
-	void stateEnd();
-	void removeIfRegularState();
+	void timerCallback();
 
 private:
-	Timer<PlayerRegularState>* timer;
+	Timer timer;
 
 };

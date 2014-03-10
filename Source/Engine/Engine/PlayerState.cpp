@@ -1,6 +1,8 @@
 #include "PlayerState.h"
 
-PlayerState::PlayerState(Player& p, float duration) 
-	        : player(p), stateDuration(duration) {}
+PlayerState::PlayerState(Player& p, float duration, PlayerStateType pst) 
+	        : player(p), stateDuration(duration), PST(pst) {}
 
-void PlayerState::removeIfRegularState() {} //Do nothing for all except Regular (which overrides this)
+PlayerState::~PlayerState() {}
+
+PlayerStateType PlayerState::getStateType() { return PST; }

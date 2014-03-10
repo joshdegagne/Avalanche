@@ -14,8 +14,8 @@ public:
 
 	void initialize();
 	void update(float);
-	void stateEnd();
+	void timerCallback();
 
 private:
-	Timer<PlayerInjuredState>* timer;
+	Timer timer;
 };

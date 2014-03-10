@@ -1,34 +1,31 @@
 #include "PlayerRegularState.h"
-#include "Timer-inl.h"
 #include "Player.h"
 
-PlayerRegularState::PlayerRegularState(Player& p, float duration) : PlayerState(p, duration)
+#include "DebugConsole.h"
+
+PlayerRegularState::PlayerRegularState(Player& p, float duration) 
+				   : PlayerState(p, duration, PlayerStateType::PST_REGULAR)
 {
-	timer = new Timer<PlayerRegularState>;
+	writeLabelToConsole(L"Regular State created for Player ", player.getPlayerNum());
 	initialize();
 }
 
 PlayerRegularState::~PlayerRegularState()
 {
-	
+	writeLabelToConsole(L"Regular State destroyed for Player ", player.getPlayerNum());
 }
 
 void PlayerRegularState::initialize()
 {
-	timer->initialize(0.0f, &PlayerRegularState::stateEnd);
+	timer.initialize(stateDuration, this);
 }
 
 void PlayerRegularState::update(float elapsedTime)
 {
-	timer->update(elapsedTime);
+	timer.update(elapsedTime);
 }
 
-void PlayerRegularState::stateEnd()
-{
-	
-}
-
-void PlayerRegularState::removeIfRegularState()
+void PlayerRegularState::timerCallback()
 {
 	player.removeState(*this);
 }

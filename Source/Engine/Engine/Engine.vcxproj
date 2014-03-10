@@ -124,7 +124,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TextureShader.cpp" />
-    <ClCompile Include="Timer-inl.h" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="ViewModel.cpp" />
     <ClCompile Include="ViewModelBase.cpp" />
     <ClCompile Include="XYZaxis.cpp" />
@@ -141,6 +141,7 @@
     <ClInclude Include="IManager.h" />
     <ClInclude Include="IPlayerListener.h" />
     <ClInclude Include="ITexture.h" />
+    <ClInclude Include="ITimedObject.h" />
     <ClInclude Include="IViewModel.h" />
     <ClInclude Include="LogModel.h" />
     <ClInclude Include="LogObstacle.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="PlayerRegularState.h" />
     <ClInclude Include="PlayerRollState.h" />
     <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="PlayerStatesList.h" />
     <ClInclude Include="PlayerViewModel.h" />
     <ClInclude Include="Playfield.h" />
     <ClInclude Include="Prismmodel.h" />
