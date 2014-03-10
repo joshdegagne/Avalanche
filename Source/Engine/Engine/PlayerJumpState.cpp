@@ -41,7 +41,9 @@ void PlayerJumpState::updateJumpArc()
 
 float PlayerJumpState::getJumpArc(float timerProgress)
 {
-	//return (-(timerProgress - 2)*(timerProgress - 2))+4;
-	return ( ( -((timerProgress - 50.0f)/35.3535f)*((timerProgress - 50.0f)/35.3535f) ) +2);
+	float arc = ( ( -((timerProgress - 50.0f)/35.3535f)*((timerProgress - 50.0f)/35.3535f) ) +2);
+	if (arc < 0)
+		arc = 0;
+	return arc;
 
 }

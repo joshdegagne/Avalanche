@@ -23,9 +23,9 @@ void PlayerRollState::initialize()
 void PlayerRollState::update(float elapsedTime)
 {
 	if (rollingLeft)
-		player.moveLeft(elapsedTime, MOVEMENT_SPEED*1.5f);
+		player.moveLeft(elapsedTime, MOVEMENT_SPEED*1.75f);
 	else
-		player.moveRight(elapsedTime, MOVEMENT_SPEED*1.5f);
+		player.moveRight(elapsedTime, MOVEMENT_SPEED*1.75f);
 	timer.update(elapsedTime);
 }
 
