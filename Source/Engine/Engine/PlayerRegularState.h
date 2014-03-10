@@ -15,8 +15,4 @@ public:
 	void initialize();
 	void update(float);
 	void timerCallback();
-
-private:
-	Timer timer;
-
 };

@@ -42,5 +42,6 @@ public:
 protected:
 	Player&			player;
 	PlayerStateType PST;
+	Timer			timer;
 	float			stateDuration;
 };
