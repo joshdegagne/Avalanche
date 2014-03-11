@@ -36,7 +36,7 @@ bool ModelManager::initialize(Game& game)
 	//create all the models
 	models->add(new PlayerViewModel());
 	models->add(new LogViewModel());
-	//models->add(new BoundViewModel());
+	models->add(new BoundViewModel());
 	models->add(new RockViewModel());
 
 	for(int i = 0; i < models->size(); ++i)

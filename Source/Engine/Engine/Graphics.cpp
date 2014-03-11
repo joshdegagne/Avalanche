@@ -102,27 +102,13 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 
 	if(viewModels && !viewModels->isEmpty()){
 		for(int i=0; i< viewModels->size(); i++){
-			IViewModel* viewModel = viewModels->elementAt(i);
-			//result = gameModel->GetVertexModel()->Initialize(m_D3D->GetDevice());			
+			IViewModel* viewModel = viewModels->elementAt(i);	
 			result = viewModel->InitializeVertexModels(d3D->GetDevice()); //initialize the models for this graphics device
 	        if(!result)
 	        {
 		       MessageBox(hwnd, L"Could not initialize the game model object.", L"Error", MB_OK);
 		       return false;
 	        }
-			/*
-			if(gameModel->isTextureVertexModel()){
-				result = gameModel->initializeTextures(m_D3D->GetDevice());
-	            if(!result)
-	            {
-		            MessageBox(hwnd, L"Could not initialize the game model textures.", L"Error", MB_OK);
-		            return false;
-	            }
-
-			}
-			*/
-
-
 		}
 	}
 
