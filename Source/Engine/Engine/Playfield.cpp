@@ -51,10 +51,13 @@ void Playfield::initialize(Game* game)
 {
 	populateLists(game);
 
+	//regisers entities to thier respective view models
 	for(int i = 0; i < entities->size(); ++i)
 	{
 		game->getModelManager()->add(*entities->elementAt(i));
+#ifdef COLLISION_DEBUG
 		game->getModelManager()->add(*entities->elementAt(i)->getBound());
+#endif
 	}
 
 	

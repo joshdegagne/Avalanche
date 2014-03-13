@@ -1,10 +1,5 @@
 #pragma once
 
-//Uncomment to enable collision debugging
-#ifndef COLLISION_DEBUG
-#define COLLISION_DEBUG
-#endif
-
 #include "arraylist.h"
 #include "Model.h"
 #include "ViewModelBase.h"

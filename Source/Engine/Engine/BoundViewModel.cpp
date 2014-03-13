@@ -12,19 +12,26 @@
 
 BoundViewModel::BoundViewModel() : ViewModel<BoundingBox>(EntityType::BOUNDING_BOX)
 {	
-	int vertexCount = 4;
-	int indexCount  = 6;
+	int vertexCount = 8;
+	int indexCount  = 12;
 	vertices = new ColorVertexType[vertexCount];
 	indices  = new unsigned long[indexCount];
 
 	vertices[0].position = XMFLOAT3(-0.5f, -0.5f, 0.0f);
 	vertices[1].position = XMFLOAT3( 0.5f, -0.5f, 0.0f);
-	vertices[2].position = XMFLOAT3(-0.5f,  0.5f, 0.0f);	
-	vertices[3].position = XMFLOAT3( 0.5f,  0.5f, 0.0f);	
+	vertices[2].position = XMFLOAT3(-0.5f,  0.5f, 0.0f);
+	vertices[3].position = XMFLOAT3( 0.5f,  0.5f, 0.0f);
 
+	vertices[4].position = XMFLOAT3( 0.0f,  0.5f,  1.0f);
+	vertices[5].position = XMFLOAT3( 0.0f, -0.5f,  0.0f);
+	vertices[6].position = XMFLOAT3( 0.0f,  0.5f,  0.0f);
+	vertices[7].position = XMFLOAT3( 0.0f, -0.5f,  1.0f);
 
-	for (int i = 0; i < vertexCount; ++i)
-		vertices[i].color = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f); //red
+	for (int i = 0; i < 4; ++i)
+		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 0.5f); //green
+
+	for (int i = 4; i < 8; ++i)
+		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 1.0f, 0.5f); //cyan
 	
 	indices[0]  = 0;
 	indices[1]  = 1;
@@ -32,6 +39,13 @@ BoundViewModel::BoundViewModel() : ViewModel<BoundingBox>(EntityType::BOUNDING_B
 	indices[3]  = 1;
 	indices[4]  = 3;
 	indices[5]  = 2;
+
+	indices[6]  = 4;
+	indices[7]  = 5;
+	indices[8]  = 6;
+	indices[9]  = 4;
+	indices[10] = 7;
+	indices[11] = 5;
 
 
 	vertexModel = new Model(vertices, vertexCount, indices, indexCount, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
