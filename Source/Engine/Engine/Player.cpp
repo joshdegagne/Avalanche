@@ -21,7 +21,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[1] = VK_RIGHT;
 		keys[2] = VK_UP;
 		keys[3] = VK_DOWN;
-		keys[4] = VK_SPACE;
+		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
 	}
@@ -31,7 +31,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[1] = ascii_D;
 		keys[2] = ascii_W;
 		keys[3] = ascii_S;
-		keys[4] = 0;
+		keys[4] = VK_SPACE;
 		keys[5] = ascii_Q;
 		keys[6] = ascii_E;
 	}

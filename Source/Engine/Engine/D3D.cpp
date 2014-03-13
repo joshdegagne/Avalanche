@@ -15,6 +15,7 @@ D3D::D3D()
 	depthStencilState = 0;
 	depthStencilView = 0;
 	rasterState = 0;
+	alphaEnableBlendingState = 0;
 
 
 
@@ -53,6 +54,8 @@ bool D3D::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, b
 	D3D11_RASTERIZER_DESC rasterDesc;
 	D3D11_VIEWPORT viewport;
 	float fieldOfView, screenAspect;
+	
+	D3D11_BLEND_DESC blendStateDescription;
 
 	/*
 	Before we can initialize Direct3D we have to get the refresh rate from the video card/monitor. 
@@ -493,6 +496,29 @@ bool D3D::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, b
 	*/
 	// Create an orthographic projection matrix for 2D rendering.
 	XMStoreFloat4x4(&orthoMatrix, XMMatrixOrthographicLH((float)screenWidth, (float)screenHeight, screenNear, screenDepth));
+
+	// Clear the second depth stencil state before setting the parameters.
+	ZeroMemory(&blendStateDescription, sizeof(D3D11_BLEND_DESC));
+
+	// Create an alpha enabled blend state description.
+	blendStateDescription.AlphaToCoverageEnable = TRUE;
+	blendStateDescription.RenderTarget[0].BlendEnable = TRUE;
+    blendStateDescription.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    blendStateDescription.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    blendStateDescription.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	blendStateDescription.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	blendStateDescription.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    blendStateDescription.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	blendStateDescription.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	// Create the blend state using the description.
+	result = device->CreateBlendState(&blendStateDescription, &alphaEnableBlendingState);
+	if(FAILED(result))
+	{
+		return false;
+	}
+	float blendFactor[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+	deviceContext->OMSetBlendState(alphaEnableBlendingState, NULL, 0xFFFFFFFF);
 
     return true;
 }

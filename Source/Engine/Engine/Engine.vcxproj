@@ -93,6 +93,7 @@
     <ClCompile Include="LogViewModel.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="ObstacleBag.cpp" />
     <ClCompile Include="OldCamera.cpp" />
     <ClCompile Include="CineCamera.cpp" />
     <ClCompile Include="ColorShader.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="ModelManager-inl.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="ObstacleBag.h" />
     <ClInclude Include="OldCamera.h" />
     <ClInclude Include="ColorShader.h" />
     <ClInclude Include="ConeTexturedModel.h" />
