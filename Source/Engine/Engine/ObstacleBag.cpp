@@ -15,9 +15,9 @@ void ObstacleBag::initialize(Game* game)
 	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new LogObstacle(*game));
-	//obstacleList.add(new RockObstacle(*game));
-	//obstacleList.add(new RockObstacle(*game));
-	//obstacleList.add(new RockObstacle(*game));
+	obstacleList.add(new RockObstacle(*game));
+	obstacleList.add(new RockObstacle(*game));
+	obstacleList.add(new RockObstacle(*game));
 }
 
 Obstacle* ObstacleBag::pullRandomObstacle()
