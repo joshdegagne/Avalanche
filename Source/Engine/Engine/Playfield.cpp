@@ -122,16 +122,7 @@ void Playfield::populateLists(Game* game)
 			activePlayers->add(player);
 			entities->add(player);
 	}
-	for (int i = 0; i < 3; ++i)
-	{
-		Obstacle* obstacle = new LogObstacle(*game);
-		obstacleBag->addObstacle(obstacle);
-	}
-	for (int i = 0; i < 3; ++i)
-	{
-		Obstacle* obstacle = new RockObstacle(*game);
-		obstacleBag->addObstacle(obstacle);
-	}
+	obstacleBag->initialize(game);
 }
 
 /////////////////

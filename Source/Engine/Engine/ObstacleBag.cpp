@@ -1,6 +1,24 @@
 #include "ObstacleBag.h"
 #include <random>
+#include "LogObstacle.h"
+#include "RockObstacle.h"
+
 #include "DebugConsole.h"
+
+ObstacleBag::~ObstacleBag()
+{
+	delete finishLine;
+}
+
+void ObstacleBag::initialize(Game* game)
+{
+	obstacleList.add(new LogObstacle(*game));
+	obstacleList.add(new LogObstacle(*game));
+	obstacleList.add(new LogObstacle(*game));
+	//obstacleList.add(new RockObstacle(*game));
+	//obstacleList.add(new RockObstacle(*game));
+	//obstacleList.add(new RockObstacle(*game));
+}
 
 Obstacle* ObstacleBag::pullRandomObstacle()
 {
@@ -28,15 +46,6 @@ Obstacle* ObstacleBag::getObstacleAlgorithm()
 	return getObstacle(dis(gen));
 }
 
-
-void ObstacleBag::addObstacle(Obstacle* o) 
-{ 
-	obstacleList.add(o); 
-}
-void ObstacleBag::removeObstacle(Obstacle* o) 
-{ 
-	obstacleList.remove(o); 
-}
 Obstacle* ObstacleBag::getObstacle(int i) 
 { 
 	return obstacleList.elementAt(i); 
