@@ -47,7 +47,7 @@ class Player: public Entity {
 
 	private:
 		KeyInput*	 keyboard;
-		int			 keys[5];
+		int			 keys[7];
 		ControllerInputManager*		controller;
 		ArrayList<PlayerState>		states;		//NEW
 		ArrayList<IPlayerListener>	listeners;	//NEW
