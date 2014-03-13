@@ -52,7 +52,11 @@ void Playfield::initialize(Game* game)
 	populateLists(game);
 
 	for(int i = 0; i < entities->size(); ++i)
+	{
 		game->getModelManager()->add(*entities->elementAt(i));
+		game->getModelManager()->add(*entities->elementAt(i)->getBound());
+	}
+
 	
 	addObstacleToPlayfield(obstacles->elementAt(0));	//Log
 	addObstacleToPlayfield(obstacles->elementAt(3), 3); //Rock

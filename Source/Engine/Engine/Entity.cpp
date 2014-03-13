@@ -11,7 +11,6 @@ Entity::Entity(Game& g, float x, float y)
 	position.z = 0;
 
 	bound = new BoundingBox();
-	//g.getModelManager()->add(*bound);
 }
 Entity::~Entity()
 {
