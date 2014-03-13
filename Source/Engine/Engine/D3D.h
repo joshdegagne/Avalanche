@@ -56,7 +56,8 @@ private:
 	XMFLOAT4X4 projectionMatrix;
 	XMFLOAT4X4 worldMatrix;
 	XMFLOAT4X4 orthoMatrix;
-
+	
+	ID3D11BlendState* alphaEnableBlendingState;
 
 
 };
