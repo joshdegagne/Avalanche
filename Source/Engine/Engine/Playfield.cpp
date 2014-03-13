@@ -53,9 +53,15 @@ void Playfield::initialize(Game* game)
 	populateLists(game);
 
 	for(int i = 0; i < activePlayers->size(); ++i)
+	{
 		game->getModelManager()->add(*activePlayers->elementAt(i));
+		game->getModelManager()->add(*activePlayers->elementAt(i)->getBound());
+	}
 	for(int i = 0; i < obstacleBag->getNumObstacles(); ++i)
+	{
 		game->getModelManager()->add(*obstacleBag->getObstacle(i));
+		game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
+	}
 	
 	addObstacleToPlayfield();
 

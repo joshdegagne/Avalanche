@@ -31,7 +31,7 @@ public:
 	// Modify current frame by framerate, add equals, multiply elapsed time by framerate
 	// Loops with frames
 
-	ID3D11ShaderResourceView* GetTexture(); // Return current frame
+	ID3D11ShaderResourceView* GetCurrentTexture(); // Return current frame
 	// Swappable with Texture
 	// Framerate getter and setter
 
