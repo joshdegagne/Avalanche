@@ -22,6 +22,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[2] = VK_UP;
 		keys[3] = VK_DOWN;
 		keys[4] = VK_SPACE;
+		keys[5] = ascii_Q;
+		keys[6] = ascii_E;
 	}
 	else if (playerNum == 1) //Player two (WASD)
 	{
@@ -30,6 +32,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[2] = ascii_W;
 		keys[3] = ascii_S;
 		keys[4] = 0;
+		keys[5] = 0;
+		keys[6] = 0;
 	}
 	else if (playerNum == 2) //Player three (TFGH)
 	{
@@ -38,6 +42,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[2] = ascii_T;
 		keys[3] = ascii_G;
 		keys[4] = 0;
+		keys[5] = 0;
+		keys[6] = 0;
 	}
 	else if (playerNum == 3) //Player four (IJKL)
 	{
@@ -46,6 +52,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[2] = ascii_I;
 		keys[3] = ascii_K;
 		keys[4] = 0;
+		keys[5] = 0;
+		keys[6] = 0;
 	}
 
 	position.x = 0;
@@ -287,6 +295,14 @@ void Player::checkKeyboardInputs(float elapsed)
 	if (keyboard->IsKeyDown(keys[4]))
 	{
 		jump();
+	}
+	if (keyboard->IsKeyDown(keys[5]))
+	{
+		rollLeft();
+	}
+	if (keyboard->IsKeyDown(keys[6]))
+	{
+		rollRight();
 	}
 	
 }
