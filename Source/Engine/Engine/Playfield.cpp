@@ -96,6 +96,7 @@ void Playfield::update(float elapsed)
 				kill(currEntity);
 			}
 		}
+		currEntity->getBound()->update();
 	}
 }
 

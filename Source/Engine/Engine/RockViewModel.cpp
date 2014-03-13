@@ -7,7 +7,7 @@
 #include "DebugConsole.h"
 
 
-RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_SMALL)
+RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_BIG)
 {
 	/*
 	pTextureFileNames is expected to be an array of 3 items

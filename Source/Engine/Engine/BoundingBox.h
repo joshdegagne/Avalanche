@@ -23,12 +23,11 @@ class BoundingBox : public EntityBase{
 
 		Entity*    getParent();
 		XMFLOAT3*  getDimensions();
+		XMFLOAT3*  getPosition();
 
 	private:
-		void setWLH(float, float, float);
-
-		Entity* parent;
-		float   width;
-		float   length;
-		float   height;
+		Entity*  parent;
+		XMFLOAT3 position;
+		XMFLOAT3 dimensions;
+		XMFLOAT3 offset;
 };
