@@ -28,10 +28,10 @@ BoundViewModel::BoundViewModel() : ViewModel<BoundingBox>(EntityType::BOUNDING_B
 	vertices[7].position = XMFLOAT3( 0.0f, -0.5f,  1.0f);
 
 	for (int i = 0; i < 4; ++i)
-		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 0.5f); //green
+		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 0.9f); //green
 
 	for (int i = 4; i < 8; ++i)
-		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 1.0f, 0.5f); //cyan
+		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 1.0f, 0.9f); //cyan
 	
 	indices[0]  = 0;
 	indices[1]  = 1;
