@@ -9,7 +9,7 @@ void Timer::initialize(float iTime, ITimedObject* object)
 
 void Timer::update(float elapsedTime)
 {
-	if (initialTime < 0.0f) //Inactive timer duration check
+	if (time <= 0.0f) //Inactive or finished timer duration check
 		return;
 
 	time -= elapsedTime;
@@ -23,5 +23,8 @@ void Timer::update(float elapsedTime)
 
 float Timer::getProgressPercentage()
 {
-	return 1.0f - time/initialTime;
+	float t = time;
+	if (t < 0.0f)
+		t = 0.0f;
+	return 1.0f - t/initialTime;
 }

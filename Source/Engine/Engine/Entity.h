@@ -7,6 +7,10 @@
 #include "DirectXHelper.h"
 #include "EntityBase.h"
 
+#define DEAD_X 10.0f
+#define DEAD_Y -5.0f
+#define DEAD_Z 0.0f
+
 class Game;
 
 class BoundingBox;
@@ -16,7 +20,7 @@ class BoundingBox;
 class Entity : public EntityBase {
 	public:
 		//Constructors
-		Entity(Game&, float = 0, float = 0);
+		Entity(Game&, float = DEAD_X, float = DEAD_Y);
 		~Entity();
 
 	protected:
