@@ -9,7 +9,7 @@
 class RockObstacle : public Obstacle
 {
 public:
-	RockObstacle();
+	RockObstacle(Game&);
 
 private:
 

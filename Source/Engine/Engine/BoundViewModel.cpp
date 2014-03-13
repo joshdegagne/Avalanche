@@ -12,9 +12,8 @@
 
 BoundViewModel::BoundViewModel() : ViewModel<BoundingBox>(EntityType::BOUNDING_BOX)
 {	
-	writeTextToConsole(L"Hey");
-	vertexCount = 4;
-	indexCount  = 6;
+	int vertexCount = 4;
+	int indexCount  = 6;
 	vertices = new ColorVertexType[vertexCount];
 	indices  = new unsigned long[indexCount];
 
@@ -69,6 +68,8 @@ bool BoundViewModel::initializeTextures(ID3D11Device* d3dDevice){
 
 bool BoundViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* doesNothing, BoundingBox* entity)
 {
+	if (!colorShader) return false; //we were not provided with a shader
+
 	XMMATRIX scaleMatrix       = XMMatrixScalingFromVector(XMLoadFloat3(entity->getDimensions()));
 	XMMATRIX translationMatrix = XMMatrixTranslationFromVector( XMLoadFloat3( &entity->getParent()->getPosition()));
 	XMFLOAT4X4 worldMatrix;
@@ -77,7 +78,6 @@ bool BoundViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4
 	// Put the game model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	vertexModel->Render(deviceContext);
 
-	writeNumToConsole(entity->getDimensions()->x);
 	//render the game model
 	bool result = colorShader->Render(deviceContext, 
 										vertexModel->GetIndexCount(), 

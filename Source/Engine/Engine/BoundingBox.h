@@ -5,6 +5,7 @@
 
 #include "DirectXHelper.h"
 #include "vertextype.h"
+#include "EntityBase.h"
 #include "Entity.h"
 
 class Entity;
@@ -12,7 +13,7 @@ class Entity;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: BoundingBox
 ////////////////////////////////////////////////////////////////////////////////
-class BoundingBox {
+class BoundingBox : public EntityBase{
 
 	public:
 		BoundingBox();
@@ -20,8 +21,8 @@ class BoundingBox {
 		void initialize(Entity*);
 		void update();
 
-		Entity*   getParent();
-		XMFLOAT3* getDimensions();
+		Entity*    getParent();
+		XMFLOAT3*  getDimensions();
 
 	private:
 		void setWLH(float, float, float);
@@ -30,5 +31,4 @@ class BoundingBox {
 		float   width;
 		float   length;
 		float   height;
-		
 };

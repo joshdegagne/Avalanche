@@ -4,7 +4,7 @@
 #include "LogObstacle.h"
 #include "EntityType.h"
 
-LogObstacle::LogObstacle() : Obstacle(3.0f, 1.0f)
+LogObstacle::LogObstacle(Game& g) : Obstacle(g, 3.0f, 1.0f)
 {
 	type = EntityType::LOG;
 

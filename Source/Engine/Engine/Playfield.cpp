@@ -110,13 +110,13 @@ void Playfield::populateLists(Game* game)
 	}
 	for (int i = 0; i < 3; ++i)
 	{
-		Obstacle* obstacle = new LogObstacle();
+		Obstacle* obstacle = new LogObstacle(*game);
 		obstacles->add(obstacle);
 		entities->add(obstacle);
 	}
 	for (int i = 0; i < 3; ++i)
 	{
-		Obstacle* obstacle = new RockObstacle();
+		Obstacle* obstacle = new RockObstacle(*game);
 		obstacles->add(obstacle);
 		entities->add(obstacle);
 	}

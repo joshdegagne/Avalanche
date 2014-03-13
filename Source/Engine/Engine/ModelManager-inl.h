@@ -3,6 +3,8 @@
 #include <type_traits>
 
 #include "ModelManager.h"
+#include "DebugConsole.h"
+
 
 using namespace std;
 

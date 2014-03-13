@@ -30,17 +30,15 @@ public:
 
 protected:
 	ViewModel(EntityType);
-
 	virtual bool RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, T* entity) = 0;
 
+	//Orientation functions
 	XMFLOAT4X4 GetOrientation();
-
 	void orientRotateX(float);
 	void orientRotateY(float);
 	void orientRotateZ(float);
 	void orientTranslate(float, float, float);
 
-protected:
 	ArrayList<T>*	entityList;
 
 	XMFLOAT4X4 orientRotateMatrix;

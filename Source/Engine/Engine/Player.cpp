@@ -5,11 +5,12 @@
 
 #include "DebugConsole.h"
 
-Player::Player(Game& g, int pNum) : Entity()
+Player::Player(Game& g, int pNum) : Entity(g)
 {
 	type = EntityType::PLAYER;
 
 	bound->initialize(this);
+
 	controller	= g.getControllerManager();
 	keyboard	= g.getKeyInput();
 

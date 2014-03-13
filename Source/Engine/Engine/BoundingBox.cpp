@@ -2,7 +2,7 @@
 
 BoundingBox::BoundingBox()
 {	
-
+	type = EntityType::BOUNDING_BOX;
 }
 
 BoundingBox::~BoundingBox()

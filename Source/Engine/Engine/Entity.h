@@ -5,21 +5,22 @@
 
 #include "BoundingBox.h"
 #include "DirectXHelper.h"
-#include "EntityType.h"
+#include "EntityBase.h"
+
+class Game;
 
 class BoundingBox;
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Entity
 ////////////////////////////////////////////////////////////////////////////////
-class Entity {
+class Entity : public EntityBase {
 	public:
 		//Constructors
-		Entity(float = 0, float = 0);
+		Entity(Game&, float = 0, float = 0);
 		~Entity();
 
 	protected:
 		XMFLOAT3	 position;
-		EntityType	 type;
 		BoundingBox* bound;
 
 	public:
@@ -35,8 +36,6 @@ class Entity {
 		void moveTo(float, float);
 		void moveBy(float, float);
 		void moveBy(XMFLOAT2, float);
-
-		EntityType getEntityType();
 		
 		virtual void update(float) = 0;
 };

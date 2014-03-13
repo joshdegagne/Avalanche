@@ -4,7 +4,7 @@
 #include "RockObstacle.h"
 #include "EntityType.h"
 
-RockObstacle::RockObstacle() : Obstacle(1.0f, 1.0f)
+RockObstacle::RockObstacle(Game& g) : Obstacle(g, 1.0f, 1.0f)
 {
 	type = EntityType::ROCK_SMALL;
 

@@ -55,9 +55,6 @@ PlayerViewModel::PlayerViewModel() : ViewModel<Player>(EntityType::PLAYER)
 
 	//Create the ModelClass object that will be used to deliver these vertices to the graphics pipeline
 	vertexModel = new Model(textureVertices, vertexCount, indices, indexCount, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	//orientRotateZ(-XM_PIDIV2);
-	//orientRotateY(XM_PIDIV4/2);
 }
 
 PlayerViewModel::~PlayerViewModel()
