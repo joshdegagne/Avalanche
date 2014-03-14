@@ -12,26 +12,34 @@
 
 BoundViewModel::BoundViewModel() : ViewModel<BoundingBox>(EntityType::BOUNDING_BOX)
 {	
-	int vertexCount = 8;
-	int indexCount  = 12;
+	int vertexCount = 12;
+	int indexCount  = 18;
 	vertices = new ColorVertexType[vertexCount];
 	indices  = new unsigned long[indexCount];
 
-	vertices[0].position = XMFLOAT3(-0.5f, -0.5f, 0.0f);
-	vertices[1].position = XMFLOAT3( 0.5f, -0.5f, 0.0f);
-	vertices[2].position = XMFLOAT3(-0.5f,  0.5f, 0.0f);
-	vertices[3].position = XMFLOAT3( 0.5f,  0.5f, 0.0f);
+	vertices[0].position  = XMFLOAT3(-0.5f, -0.5f, 0.0f);
+	vertices[1].position  = XMFLOAT3( 0.5f, -0.5f, 0.0f);
+	vertices[2].position  = XMFLOAT3(-0.5f,  0.5f, 0.0f);
+	vertices[3].position  = XMFLOAT3( 0.5f,  0.5f, 0.0f);
 
-	vertices[4].position = XMFLOAT3( 0.0f,  0.5f,  1.0f);
-	vertices[5].position = XMFLOAT3( 0.0f, -0.5f,  0.0f);
-	vertices[6].position = XMFLOAT3( 0.0f,  0.5f,  0.0f);
-	vertices[7].position = XMFLOAT3( 0.0f, -0.5f,  1.0f);
+	vertices[4].position  = XMFLOAT3( 0.0f,  0.5f,  1.0f);
+	vertices[5].position  = XMFLOAT3( 0.0f, -0.5f,  0.0f);
+	vertices[6].position  = XMFLOAT3( 0.0f,  0.5f,  0.0f);
+	vertices[7].position  = XMFLOAT3( 0.0f, -0.5f,  1.0f);
+
+	vertices[8].position  = XMFLOAT3(-0.5f,  0.0f,  1.0f);
+	vertices[9].position  = XMFLOAT3( 0.5f,  0.0f,  0.0f);
+	vertices[10].position = XMFLOAT3(-0.5f,  0.0f,  0.0f);
+	vertices[11].position = XMFLOAT3( 0.5f,  0.0f,  1.0f);
 
 	for (int i = 0; i < 4; ++i)
 		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 0.9f); //green
 
 	for (int i = 4; i < 8; ++i)
 		vertices[i].color = XMFLOAT4(0.0f, 1.0f, 1.0f, 0.9f); //cyan
+
+	for (int i = 8; i < 12; ++i)
+		vertices[i].color = XMFLOAT4(1.0f, 1.0f, 0.0f, 0.9f); //yellow
 	
 	indices[0]  = 0;
 	indices[1]  = 1;
@@ -47,6 +55,12 @@ BoundViewModel::BoundViewModel() : ViewModel<BoundingBox>(EntityType::BOUNDING_B
 	indices[10] = 7;
 	indices[11] = 5;
 
+	indices[12] = 8;
+	indices[13] = 9;
+	indices[14] = 10;
+	indices[15] = 8;
+	indices[16] = 11;
+	indices[17] = 9;
 
 	vertexModel = new Model(vertices, vertexCount, indices, indexCount, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
@@ -84,7 +98,8 @@ bool BoundViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4
 {
 	if (!colorShader) return false; //we were not provided with a shader
 
-	XMMATRIX scaleMatrix       = XMMatrixScalingFromVector(XMLoadFloat3(entity->getDimensions()));
+	XMFLOAT3 scaleVector       = *entity->getDimensions();
+	XMMATRIX scaleMatrix       = XMMatrixScalingFromVector(XMLoadFloat3(&scaleVector));
 	XMMATRIX translationMatrix = XMMatrixTranslationFromVector( XMLoadFloat3( entity->getPosition()));
 	XMFLOAT4X4 worldMatrix;
 	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * scaleMatrix * translationMatrix);

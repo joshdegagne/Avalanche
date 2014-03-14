@@ -30,7 +30,7 @@ void BoundingBox::initialize(Entity* e)
 	}
 	else if (parent->getEntityType() == EntityType::ROCK_BIG)
 	{
-		dimensions = XMFLOAT3(1.5f, 1.5f, 1.2f);
+		dimensions = XMFLOAT3(1.5f, 1.5f, 1.5f);
 		offset     = XMFLOAT3(0.0f, 0.5f, 0.0f);
 	}
 	else

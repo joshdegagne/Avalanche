@@ -11,6 +11,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 
 	bound->initialize(this);
 
+	writeLabelToConsole(L"Bottom of the player's bounding box: ",bound->getPosition()->z);
+
 	controller	= g.getControllerManager();
 	keyboard	= g.getKeyInput();
 

@@ -76,7 +76,7 @@ Texture* TextureManager::loadTexture(WCHAR* filename)
 
 SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float width) 
 {
-	SpriteTexture* spriteTexture;
+	//SpriteTexture* spriteTexture;
 	// Set float index
 	// Set float frameRate
 	// set int maxFrame
