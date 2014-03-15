@@ -139,7 +139,7 @@ void Player::notifyStateEnd(PlayerState& PS)
 void Player::addListener(IPlayerListener& IPL) { listeners.add(&IPL); }
 void Player::removeListener(IPlayerListener& IPL) { listeners.remove(&IPL); }
 
-//CURRENTLY INEFFICIENT. DUPLICATE TESTING SHOULD BE DONE BEFORE WE REACH THIS POINT!
+//Adds PlayerState to states. DOES NOT DO DUPLICATE STATE CHECKING. You must do this before calling addState! Use this: "!containsState(PlayerStateType)"
 void Player::addState(PlayerState& PS)
 {
 	//Loop check through all current PlayerStates (Duplicate testing)
@@ -147,13 +147,6 @@ void Player::addState(PlayerState& PS)
 	{
 		PlayerState* currentState = states.elementAt(i);
 		
-		//If we already have one of this type, return and don't add. We don't want two of the same PlayerState!
-		if (currentState->getStateType() == PS.getStateType())
-		{
-			delete &PS;
-			return;
-		}
-
 		//If there is a PlayerRegularState in here, then get rid of it
 		if (currentState->getStateType() == PlayerStateType::PST_REGULAR)
 		{
@@ -307,8 +300,8 @@ void Player::checkKeyboardInputs(float elapsed)
 		}
 		if (keyboard->IsKeyDown(keys[7]))
 		{
-			PlayerInjuredState* injured = new PlayerInjuredState(*this);
-			addState(*injured);
+			if (!containsState(PlayerStateType::PST_INJURED))
+				addState(*(new PlayerInjuredState(*this)));
 		}
 	}
 	
