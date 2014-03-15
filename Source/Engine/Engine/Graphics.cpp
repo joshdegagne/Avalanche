@@ -82,7 +82,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 		return false;
 	}
 	axis->Initialize();
-	#endif
+
 
 	// Set the initial position of the camera.
 	//m_Camera->SetPosition(0.0f, 0.0f, -10.0f); 
@@ -101,6 +101,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 		MessageBox(hwnd, L"Could not initialize the axis model object.", L"Error", MB_OK);
 		return false;
 	}
+	#endif
 
 	// Create the color shader object.
 	colorShader = new ColorShader;
@@ -260,7 +261,7 @@ bool Graphics::Render(ArrayList<IViewModel>* viewModels)
  
 
 	// Set up the model for axis scale
-
+	#ifdef ALL_DEBUG
 	axisModel->Render(d3D->GetDeviceContext());
 	result = colorShader->Render(d3D->GetDeviceContext(), axisModel->GetIndexCount(), axisWorld, viewMatrix, projectionMatrix);
 	
@@ -268,6 +269,7 @@ bool Graphics::Render(ArrayList<IViewModel>* viewModels)
 	{
 		return false;
 	}
+	#endif ALL_DEBUG
 
 
     // Present the rendered scene to the screen.
