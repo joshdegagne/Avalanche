@@ -110,10 +110,17 @@ void Player::render()
 ///////////////////////
 void Player::onCollide(Player&)
 {
+	if (!containsState(PlayerStateType::PST_INJURED))
+	{
+	}
 }
 
 void Player::onCollide(Obstacle&)
 {
+	if (!containsState(PlayerStateType::PST_INJURED))
+	{
+		addState(*new PlayerInjuredState(*this));
+	}
 }
 
 ////////////////////////////

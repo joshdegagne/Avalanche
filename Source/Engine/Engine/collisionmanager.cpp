@@ -40,7 +40,7 @@ void CollisionManager::checkForCollisions()
 				writeNumToConsole(i, false);
 				writeLabelToConsole(L" has collided with Obstacle ", j);
 				#endif
-				//players.elementAt(i)->collideWithObstacle(obstacles.elementAt(j));
+				players->elementAt(i)->onCollide(*(obstacles->elementAt(j)));
 				continue;
 			}
 		}
@@ -54,7 +54,7 @@ void CollisionManager::checkForCollisions()
 				writeNumToConsole(i, false);
 				writeLabelToConsole(L" has collided with Player ", j);
 				#endif
-				//players.elementAt(i)->collideWithPlayer(players.elementAt(j));
+				players->elementAt(i)->onCollide(*(players->elementAt(j)));
 				continue;
 			}
 		}

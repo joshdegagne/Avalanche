@@ -1,18 +1,22 @@
 #include "PlayerRollState.h"
 #include "Player.h"
 
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 PlayerRollState::PlayerRollState(Player& p, bool isLeft, float duration) 
 				: PlayerState(p, duration, PlayerStateType::PST_ROLL), rollingLeft(isLeft)
 {
+	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Roll State created for Player ", player.getPlayerNum());
+	#endif
 	initialize();
 }
 
 PlayerRollState::~PlayerRollState()
 {
+	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Roll State destroyed for Player ", player.getPlayerNum());
+	#endif
 }
 
 void PlayerRollState::initialize()
