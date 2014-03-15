@@ -1,14 +1,31 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: CollisionManager.h
+////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include "robot.h"
+//#include "IManager.h"
+#include "arraylist.h"
 
+class Player;
+class Obstacle;
+class BoundingBox;
+
+////////////////////////////////////////////////////////////////////////////////
+// Class: CollisionManager
+////////////////////////////////////////////////////////////////////////////////
 class CollisionManager
 {
 public:
-	CollisionManager(void);
-	~CollisionManager(void);
+	void addPlayerReference(Player*);
+	void addObstacleReference(Obstacle*);
+	void checkForCollisions();
 
-	void	MoveIfNotColliding(Robot* a, Robot* b, void (Robot::*FuncPtr)(void));
-	bool	AreColliding(Robot* a, Robot* b);
+private:
+	ArrayList<Player>	players;
+	ArrayList<Obstacle> obstacles;
+
+	bool intersects(BoundingBox*, BoundingBox*);
+
+
+
 };
-

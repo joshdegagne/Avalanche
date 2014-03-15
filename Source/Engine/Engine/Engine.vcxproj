@@ -85,6 +85,7 @@
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="BoundViewModel.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="ControllerInputManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityBase.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="BoundViewModel.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="ControllerInputManager.h" />
     <ClInclude Include="DebugConsole.h" />
     <ClInclude Include="Entity.h" />
