@@ -79,7 +79,7 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 
 	// Set the initial position of the camera.
 	//m_Camera->SetPosition(0.0f, 0.0f, -10.0f); 
-
+	
     // Create A model for the axis
 	axisModel = new Model(axis->GetVertices(), 
 										axis->GetVertexCount(), 
@@ -217,7 +217,9 @@ bool Graphics::Render(ArrayList<IViewModel>* viewModels)
 	bool result;
 
 	// Clear the buffers to begin the scene.
-	d3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f); //R,G,B,A values for background (Opaque Black)
+	//d3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f); //R,G,B,A values for background (Opaque Black)
+	d3D->BeginScene(100.0f, 30.0f, 100.0f, 0.5f); //R,G,B,A values for background 
+	//d3D->BeginScene(216.0f, 191.0f, 216.0f, 1.0f); //R,G,B,A values for background (Purple?)
 
 	// Generate the view matrix based on the camera's position.
 	camera->Render();

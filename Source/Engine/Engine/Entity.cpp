@@ -1,6 +1,10 @@
 #include "Entity.h"
+#include "Game.h"
+#include "ModelManager.h"
+#include "ModelManager-inl.h"
 
-Entity::Entity(float x, float y)
+
+Entity::Entity(Game& g, float x, float y)
 {
 	position.x = x;
 	position.y = y;
@@ -17,8 +21,6 @@ float Entity::getX() { return position.x; }
 float Entity::getY() { return position.y; }
 void Entity::setX(float x) { position.x = x; }
 void Entity::setY(float y) { position.y = y; }
-
-EntityType Entity::getEntityType() { return type; }
 
 XMFLOAT3 Entity::getPosition() { return position; }
 

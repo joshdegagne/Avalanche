@@ -1,29 +1,18 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: EntityType.h
+// Filename: PlayerRegularState.h
 ////////////////////////////////////////////////////////////////////////////////
-
 #pragma once
+#include "PlayerState.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class name: EntityType
+// Class Name: PlayerRegularState
 ////////////////////////////////////////////////////////////////////////////////
-enum class EntityType : int
-{
-	//Default
-	DEFAULT_ENTITY,
-	//Players
-	PLAYER,
-	//Obstacles
-	FINISH,
-	ROCK_SMALL, 
-	ROCK_BIG,
-	ICE_PATCH,
-	ICE_SPIKE,
-	SNOW_MOUND,
-	SNOW_BALL,
-	//Variable length obstacles.
-	LOG,
-	LOG_FALLING,
-	//Debug bounding box
-	BOUNDING_BOX
+class PlayerRegularState : public PlayerState {
+public:
+	PlayerRegularState(Player&, float = PS_REGULAR_DURATION);
+	~PlayerRegularState();
+
+	void initialize();
+	void update(float);
+	void timerCallback();
 };

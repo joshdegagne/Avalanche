@@ -7,7 +7,7 @@
 #include "DebugConsole.h"
 
 
-RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_SMALL)
+RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_BIG)
 {
 	/*
 	pTextureFileNames is expected to be an array of 3 items
@@ -240,8 +240,10 @@ bool RockViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4
 
 	if(!textureShader) return false; //we were not provided with a shader
 
+	XMFLOAT3 positionVector = entity->getPosition();
+	positionVector.z +=0.2f;
 	XMFLOAT4X4 worldMatrix;
-	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat3( &entity->getPosition() )));
+	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat3( &positionVector )));
 
 	const int NUMBER_OF_TEXTURES = 3; //one for the sides and one each for top and bottom
 

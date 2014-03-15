@@ -1,29 +1,18 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: EntityType.h
+// Filename: PlayerInjuredState.h
 ////////////////////////////////////////////////////////////////////////////////
-
 #pragma once
+#include "PlayerState.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class name: EntityType
+// Class Name: PlayerInjuredState
 ////////////////////////////////////////////////////////////////////////////////
-enum class EntityType : int
-{
-	//Default
-	DEFAULT_ENTITY,
-	//Players
-	PLAYER,
-	//Obstacles
-	FINISH,
-	ROCK_SMALL, 
-	ROCK_BIG,
-	ICE_PATCH,
-	ICE_SPIKE,
-	SNOW_MOUND,
-	SNOW_BALL,
-	//Variable length obstacles.
-	LOG,
-	LOG_FALLING,
-	//Debug bounding box
-	BOUNDING_BOX
+class PlayerInjuredState : public PlayerState {
+public:
+	PlayerInjuredState(Player&, float = PS_INJURED_DURATION);
+	~PlayerInjuredState();
+
+	void initialize();
+	void update(float);
+	void timerCallback();
 };

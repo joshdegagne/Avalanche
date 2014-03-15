@@ -3,11 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "RockObstacle.h"
 #include "EntityType.h"
+#include "DebugConsole.h"
 
-RockObstacle::RockObstacle() : Obstacle(1.0f, 1.0f)
+RockObstacle::RockObstacle(Game& g) : Obstacle(g, 1.0f, 1.0f)
 {
-	type = EntityType::ROCK_SMALL;
+	type = EntityType::ROCK_BIG;
 
 	bound->initialize(this);
-	// orientation?
+
+	writeLabelToConsole(L"Bottom of the rock's bounding box: ",bound->getPosition()->z);
 }

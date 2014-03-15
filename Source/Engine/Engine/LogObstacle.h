@@ -9,7 +9,7 @@
 class LogObstacle : public Obstacle
 {
 public:
-	LogObstacle();
+	LogObstacle(Game&);
 
 private:
 

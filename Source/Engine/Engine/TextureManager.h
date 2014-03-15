@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "SpriteTexture.h"
 #include "DirectXTex.h"
+#include "Game.h"
 
 //class Entity;
 //class ViewModelBase;

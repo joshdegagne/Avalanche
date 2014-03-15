@@ -51,7 +51,14 @@ public:
 
 
 
-	~ArrayList() {delete [] elements;}
+	~ArrayList()
+	{
+		if (elements)
+		{
+			delete [] elements;
+			elements = 0;
+		}
+	}
 
 	void add(T* element)
 	{

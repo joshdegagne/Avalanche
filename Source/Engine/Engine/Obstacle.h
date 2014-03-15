@@ -12,7 +12,7 @@
 class Obstacle : public Entity
 {
 	public:
-		Obstacle(float = 1.0, float = 1.0, bool = false);
+		Obstacle(Game&, float = 1.0, float = 1.0, bool = false);
 		float getLength();
 		bool  isPresent();
 		void  setPresent(bool);
