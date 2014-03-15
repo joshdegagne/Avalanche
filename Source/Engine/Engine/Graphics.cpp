@@ -10,6 +10,8 @@
 #include "TextureShader.h"
 #include "Graphics.h"
 
+#include "DebugDefinitions.h"
+
 
 
 Graphics::Graphics()
@@ -34,6 +36,9 @@ Graphics::Graphics(const Graphics& other)
 
 Graphics::~Graphics()
 {
+	#ifdef ALL_DEBUG
+	delete axis;
+	#endif
 }
 
 
@@ -70,12 +75,14 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 		return false;
 	}
 
+	#ifdef ALL_DEBUG
 	axis = new XYZaxis; //create orgin axis object to display co-ord system (mostly for debug)
 	if(!axis)
 	{
 		return false;
 	}
 	axis->Initialize();
+	#endif
 
 	// Set the initial position of the camera.
 	//m_Camera->SetPosition(0.0f, 0.0f, -10.0f); 
