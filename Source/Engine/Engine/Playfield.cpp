@@ -49,12 +49,16 @@ ArrayList<GameModel>* Playfield::getGameModels() { return models; }
 
 void Playfield::initialize(Game* game)
 {
+	collisionManager = game->getCollisionManager();
+
 	timer.initialize(GAME_LENGTH, this);
+
 	populateLists(game);
 
 	for(int i = 0; i < activePlayers->size(); ++i)
 	{
 		game->getModelManager()->add(*activePlayers->elementAt(i));
+		collisionManager->addPlayerReference(*activePlayers->elementAt(i));
 #ifdef COLLISION_DEBUG
 		game->getModelManager()->add(*activePlayers->elementAt(i)->getBound());
 #endif
@@ -62,6 +66,7 @@ void Playfield::initialize(Game* game)
 	for(int i = 0; i < obstacleBag->getNumObstacles(); ++i)
 	{
 		game->getModelManager()->add(*obstacleBag->getObstacle(i));
+		collisionManager->addObstacleReference(*obstacleBag->getObstacle(i));
 #ifdef COLLISION_DEBUG
 		game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
 #endif
@@ -107,6 +112,7 @@ void Playfield::update(float elapsed)
 		}
 		currEntity->getBound()->update();
 	}
+	collisionManager->checkForCollisions();
 }
 
 void Playfield::timerCallback()

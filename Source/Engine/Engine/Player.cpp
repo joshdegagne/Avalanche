@@ -71,7 +71,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 
 	addState(*(new PlayerRegularState(*this)));
 
-	moveTo(1.0f, 1.0f);
+	moveTo(1.0f, 1.0f * playerNum);
 }
 
 Player::~Player()

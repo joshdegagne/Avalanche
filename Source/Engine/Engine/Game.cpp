@@ -16,6 +16,7 @@
 #include "ModelManager.h"
 #include "ModelManager-inl.h"
 #include "TextureManager.h"
+#include "CollisionManager.h"
 
 Game::Game()
 {
@@ -28,6 +29,7 @@ Game::Game()
 
 	textureManager	= nullptr;
 	modelManager	= nullptr;
+	collisionManager= nullptr;
 	players			= nullptr;
 
 	gameModels = new ArrayList<IViewModel>();
@@ -106,6 +108,11 @@ bool Game::Initialize()
 	gameModels->addAll(modelManager->getGameModels());
 
 	/////////////////////
+	//Collision Manager//
+	/////////////////////
+	collisionManager = new CollisionManager;
+
+	/////////////////////
 	//Players/Playfield//
 	/////////////////////
 	players = new ArrayList<Player>();
@@ -119,6 +126,7 @@ bool Game::Initialize()
 	if (!playfield)
 		return false;
 	playfield->initialize(this);
+
 
 	
 	//gameModels->addAll(playfield->getGameModels());

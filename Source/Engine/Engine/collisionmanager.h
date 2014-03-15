@@ -5,6 +5,7 @@
 
 //#include "IManager.h"
 #include "arraylist.h"
+#include "DebugDefinitions.h"
 
 class Player;
 class Obstacle;
@@ -16,13 +17,15 @@ class BoundingBox;
 class CollisionManager
 {
 public:
-	void addPlayerReference(Player*);
-	void addObstacleReference(Obstacle*);
+	CollisionManager();
+	~CollisionManager();
+	void addPlayerReference(Player&);
+	void addObstacleReference(Obstacle&);
 	void checkForCollisions();
 
 private:
-	ArrayList<Player>	players;
-	ArrayList<Obstacle> obstacles;
+	ArrayList<Player>*	 players;
+	ArrayList<Obstacle>* obstacles;
 
 	bool intersects(BoundingBox*, BoundingBox*);
 

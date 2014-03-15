@@ -12,6 +12,7 @@
 #include "Game.h"
 #include "LogObstacle.h"
 #include "RockObstacle.h"
+#include "CollisionManager.h"
 
 #define SCROLL_SPEED 0.15f
 #define NUM_LANES 6
@@ -44,6 +45,8 @@ class Playfield : public ITimedObject
 		ArrayList<GameModel>*   models;				//list of models to pass to game
 		QuadTexturedModel*		ground;				//Playfield quad
 		QuadModel*				deathArea;			//Death quad
+
+		CollisionManager*		collisionManager;
 
 		Timer timer;
 

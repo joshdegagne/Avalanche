@@ -26,6 +26,7 @@ class ModelManager;
 class Player;
 class Playfield;
 class TextureManager;
+class CollisionManager;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
@@ -49,6 +50,7 @@ class Game
 		ModelManager*			getModelManager()		{ return modelManager; }
 		TextureManager*			getTextureManager()		{ return textureManager; }
 		ID3D11Device*			getDevice()				{ return graphics->getDevice(); }
+		CollisionManager*		getCollisionManager()	{ return collisionManager; }
 
 		ArrayList<Player>* GetPlayers();
 
@@ -78,6 +80,7 @@ class Game
 		KeyInput*               keyInput; //keyboard input object from which to obtain user inputs
 		ModelManager*			modelManager;
 		TextureManager*			textureManager;
+		CollisionManager*		collisionManager;
 
 		//Game World Items
 		Playfield*		   playfield;

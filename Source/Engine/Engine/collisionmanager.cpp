@@ -3,35 +3,59 @@
 #include "Obstacle.h"
 #include "BoundingBox.h"
 
-void CollisionManager::addPlayerReference(Player* p)
+#include "DebugConsole.h"
+
+CollisionManager::CollisionManager()
 {
-	players.add(p);
+	players	  = new ArrayList<Player>;
+	obstacles = new ArrayList<Obstacle>;
 }
 
-void CollisionManager::addObstacleReference(Obstacle* o)
+CollisionManager::~CollisionManager()
 {
-	obstacles.add(o);
+	delete players;
+	delete obstacles;
+}
+
+void CollisionManager::addPlayerReference(Player& p)
+{
+	players->add(&p);
+}
+
+void CollisionManager::addObstacleReference(Obstacle& o)
+{
+	obstacles->add(&o);
 }
 
 void CollisionManager::checkForCollisions()
 {
-	for (int i = 0; i < players.size(); ++i)
+	for (int i = 0; i < players->size(); ++i)
 	{
-		for (int j = 0; j < obstacles.size(); ++j)
+		for (int j = 0; j < obstacles->size(); ++j)
 		{
-			if (intersects(players.elementAt(i)->getBound(), obstacles.elementAt(j)->getBound()))
+			if (intersects(players->elementAt(i)->getBound(), obstacles->elementAt(j)->getBound()))
 			{
+				#ifdef COLLISION_DEBUG
+				writeTextToConsole(L"Player ", false);
+				writeNumToConsole(i, false);
+				writeLabelToConsole(L" has collided with Obstacle ", j);
+				#endif
 				//players.elementAt(i)->collideWithObstacle(obstacles.elementAt(j));
-				return;
+				continue;
 			}
 		}
 
-		for (int j = 0; j < players.size(); ++j)
+		for (int j = 0; j < players->size(); ++j)
 		{
-			if (intersects(players.elementAt(i)->getBound(), players.elementAt(j)->getBound()))
+			if (intersects(players->elementAt(i)->getBound(), players->elementAt(j)->getBound()))
 			{
+				#ifdef COLLISION_DEBUG
+				writeTextToConsole(L"Player ", false);
+				writeNumToConsole(i, false);
+				writeLabelToConsole(L" has collided with Player ", j);
+				#endif
 				//players.elementAt(i)->collideWithPlayer(players.elementAt(j));
-				return;
+				continue;
 			}
 		}
 	}
@@ -47,4 +71,14 @@ bool CollisionManager::intersects(BoundingBox* boundA, BoundingBox* boundB)
 	XMFLOAT3 A_DIM = *(boundA->getDimensions());
 	XMFLOAT3 B_POS = *(boundB->getPosition());
 	XMFLOAT3 B_DIM = *(boundB->getDimensions());
+
+	if (   A_POS.x + A_DIM.x/2 > B_POS.x - B_DIM.x/2 //X axis bound check
+		&& B_POS.x + B_DIM.x/2 > A_POS.x - A_DIM.x/2 //X axis bound check
+		&& A_POS.y + A_DIM.y/2 > B_POS.y - B_DIM.y/2 //Y axis bound check
+		&& B_POS.y + B_DIM.y/2 > A_POS.y - A_DIM.y/2 //Y axis-bound check
+		&& A_POS.z + A_DIM.z/2 > B_POS.z - B_DIM.z/2 //Z axis bound check
+		&& B_POS.z + B_DIM.z/2 > A_POS.z - A_DIM.z/2)//Z axis-bound check
+		return true;
+	else
+		return false;
 }

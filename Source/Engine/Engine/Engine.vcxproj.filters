@@ -389,6 +389,9 @@
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DebugDefinitions.h">
+      <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">
