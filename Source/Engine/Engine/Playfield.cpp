@@ -13,7 +13,7 @@
 
 
 
-Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(0.0025f)
+Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(0.00025f)
 {
 	entities = new ArrayList<Entity>;
 	activePlayers = new ArrayList<Player>;
@@ -61,17 +61,6 @@ void Playfield::initialize(Game* game)
 	
 	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
 
-	//Ground Texture. (could have an enum and a switch statement for different levels)
-	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
-	ground = new QuadTexturedModel (fieldLength, fieldWidth, fieldTexture);
-	ground->worldTranslate(fieldLength/2, fieldWidth/2, -0.25f);
-	models->add(ground);
-
-	XMFLOAT4 deathAreaColour = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
-	float DAlength = fieldLength/10.0f;
-	deathArea = new QuadModel (DAlength, fieldWidth, &deathAreaColour);
-	deathArea->worldTranslate(-DAlength/2, fieldWidth/2, -0.25f);
-	models->add(deathArea);
 }
 
 
@@ -152,6 +141,8 @@ int Playfield::getLaneAlgorithm(Obstacle* obstacle)
 void Playfield::addObstacleToPlayfield()
 {
 	Obstacle* selectedObstacle = obstacleBag->pullRandomObstacle();
+	if (selectedObstacle == nullptr)
+		return;
 	int selectedLane = getLaneAlgorithm(selectedObstacle);
 	placeObstacle(selectedObstacle, selectedLane);
 }

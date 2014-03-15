@@ -28,7 +28,7 @@ void ObstacleBag::initialize(Game* game)
 
 Obstacle* ObstacleBag::pullRandomObstacle()
 {
-	while (1)
+	for (int i = 0; i < 100; ++i) 
 	{
 		Obstacle* selectedObst = getObstacleAlgorithm();
 		if (   selectedObst->getPosition().x == DEAD_X
@@ -37,8 +37,9 @@ Obstacle* ObstacleBag::pullRandomObstacle()
 		{
 			return selectedObst;
 		}
-		writeTextToConsole(L"This obstacle no workie!");
 	}
+	
+	return nullptr;
 }
 
 Obstacle* ObstacleBag::pullFinishLine() { return finishLine; }
