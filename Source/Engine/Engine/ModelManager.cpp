@@ -37,8 +37,10 @@ bool ModelManager::initialize(Game& game)
 	//create all the models
 	models->add(new PlayerViewModel(game));
 	models->add(new LogViewModel());
-	//models->add(new BoundViewModel());
 	models->add(new RockViewModel());
+#ifdef COLLISION_DEBUG
+	models->add(new BoundViewModel());
+#endif
 
 	for(int i = 0; i < models->size(); ++i)
 		if(models->elementAt(i) == nullptr)
