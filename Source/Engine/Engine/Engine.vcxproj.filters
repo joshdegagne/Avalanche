@@ -380,6 +380,9 @@
     <ClInclude Include="ObstacleBag.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">

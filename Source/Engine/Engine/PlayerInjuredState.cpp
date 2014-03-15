@@ -17,12 +17,13 @@ PlayerInjuredState::~PlayerInjuredState()
 
 void PlayerInjuredState::initialize()
 {
+	writeLabelToConsole(L"State Duration: ", stateDuration);
 	timer.initialize(stateDuration, this);
 }
 
 void PlayerInjuredState::update(float elapsedTime)
 {
-	writeLabelToConsole(L"Injured State for Player 0 progress = ", timer.getProgressPercentage());
+	writeLabelToConsole(L"Injured State for Player progress = ", timer.getProgressPercentage());
 	timer.update(elapsedTime);
 }
 
