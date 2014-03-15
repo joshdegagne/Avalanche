@@ -102,47 +102,17 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
-    <ClCompile Include="GameModel.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
     <ClCompile Include="ControllerInputManager.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="OldCamera.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
     <ClCompile Include="Playfield.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConeTexturedModel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Cubemodel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeTexturedModel.cpp">
-      <Filter>Source Files\Garbage</Filter>
-    </ClCompile>
-    <ClCompile Include="Prismmodel.cpp">
-      <Filter>Source Files\Garbage</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="ViewModel.cpp">
       <Filter>Source Files\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="LogModel.cpp">
-      <Filter>Source Files\Models\EntityModels</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerModel.cpp">
-      <Filter>Source Files\Models\EntityModels</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadTexturedModel.cpp">
-      <Filter>Source Files\Models\BasicModels</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadModel.cpp">
-      <Filter>Source Files\Models\BasicModels</Filter>
     </ClCompile>
     <ClCompile Include="XYZaxis.cpp">
       <Filter>Source Files\Models\BasicModels</Filter>
@@ -164,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="LogViewModel.cpp">
       <Filter>Source Files\Models\EntityModels</Filter>
-    </ClCompile>
-    <ClCompile Include="PrismTexturedModel.cpp">
-      <Filter>Source Files\Models\BasicModels</Filter>
     </ClCompile>
     <ClCompile Include="ModelManager.cpp">
       <Filter>Source Files\Models</Filter>
@@ -219,6 +186,9 @@
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlayfieldViewModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -254,26 +224,11 @@
     <ClInclude Include="ControllerInputManager.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="OldCamera.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
     <ClInclude Include="Playfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Arraylist.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConeTexturedModel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Cubemodel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeTexturedModel.h">
-      <Filter>Header Files\Garbage</Filter>
-    </ClInclude>
-    <ClInclude Include="Prismmodel.h">
-      <Filter>Header Files\Garbage</Filter>
     </ClInclude>
     <ClInclude Include="DirectXHelper.h">
       <Filter>Header Files\Helper Headers</Filter>
@@ -391,6 +346,10 @@
     </ClInclude>
     <ClInclude Include="DebugDefinitions.h">
       <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
+
+    <ClInclude Include="PlayfieldViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

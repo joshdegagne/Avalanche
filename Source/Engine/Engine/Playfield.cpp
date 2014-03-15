@@ -18,9 +18,6 @@ Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressP
 	entities = new ArrayList<Entity>;
 	activePlayers = new ArrayList<Player>;
 	obstacleBag = new ObstacleBag;
-	models = new ArrayList<GameModel>;
-	ground = 0;
-	deathArea = 0;
 }
 
 Playfield::~Playfield()
@@ -30,22 +27,10 @@ Playfield::~Playfield()
 
 	delete obstacleBag;
 
-	for (int i = 0; i < models->size(); ++i)
-		delete models->elementAt(i);
-	delete models;
-	
-
-	delete ground;
-
 	entities = 0;
 	activePlayers = 0;
 	obstacleBag = 0;
-	models = 0;
-	ground = 0;
-	deathArea = 0;
 }
-
-ArrayList<GameModel>* Playfield::getGameModels() { return models; }
 
 void Playfield::initialize(Game* game)
 {
@@ -71,6 +56,8 @@ void Playfield::initialize(Game* game)
 		game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
 #endif
 	}
+
+	addObstacleToPlayfield();
 	
 	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
 

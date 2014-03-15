@@ -127,7 +127,8 @@ bool Game::Initialize()
 		return false;
 	playfield->initialize(this);
 
-
+	modelManager->add(*playfield);
+	
 	
 	//gameModels->addAll(playfield->getGameModels());
 	

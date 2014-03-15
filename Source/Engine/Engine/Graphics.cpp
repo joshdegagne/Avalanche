@@ -8,10 +8,10 @@
 #include "camera.h"
 #include "ColorShader.h"
 #include "TextureShader.h"
+#include "IViewModel.h"
 #include "Graphics.h"
 
 #include "DebugDefinitions.h"
-
 
 
 Graphics::Graphics()

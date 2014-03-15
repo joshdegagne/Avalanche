@@ -7,6 +7,8 @@
 class ITexture
 {
 public:
+	virtual ~ITexture() {}
+
 	virtual ID3D11ShaderResourceView* GetTexture() = 0;
 	virtual bool Initialize(ID3D11Device*, WCHAR*) = 0;
 	virtual void Shutdown() = 0;

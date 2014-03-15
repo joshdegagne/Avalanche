@@ -15,7 +15,7 @@ public:
 	virtual ~ViewModel();
 
 	virtual bool InitializeVertexModels(ID3D11Device* d3dDevice) = 0;
-	virtual bool initializeTextures(ID3D11Device* d3dDevice) = 0;
+	
 
 	bool Render(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader);
 	
@@ -25,6 +25,8 @@ public:
 
 protected:
 	ViewModel(EntityType);
+
+	virtual bool initializeTextures(ID3D11Device* d3dDevice) = 0;
 	virtual bool RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, T* entity) = 0;
 
 	//Orientation functions

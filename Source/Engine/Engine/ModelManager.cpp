@@ -5,6 +5,7 @@
 #include "PlayerViewModel.h"
 #include "BoundViewModel.h"
 #include "RockViewModel.h"
+#include "PlayfieldViewModel.h"
 
 #include "ModelManager.h"
 
@@ -38,6 +39,8 @@ bool ModelManager::initialize(Game& game)
 	models->add(new PlayerViewModel(game));
 	models->add(new LogViewModel());
 	models->add(new RockViewModel());
+	models->add(new PlayfieldViewModel());
+
 #ifdef COLLISION_DEBUG
 	models->add(new BoundViewModel());
 #endif
