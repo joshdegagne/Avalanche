@@ -26,6 +26,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
+		keys[7] = 0;
 	}
 	else if (playerNum == 1) //Player two (WASD)
 	{
@@ -36,6 +37,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = VK_SPACE;
 		keys[5] = ascii_Q;
 		keys[6] = ascii_E;
+		keys[7] = ascii_C;
 	}
 	else if (playerNum == 2) //Player three (TFGH)
 	{
@@ -46,6 +48,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
+		keys[7] = 0;
 	}
 	else if (playerNum == 3) //Player four (IJKL)
 	{
@@ -56,6 +59,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
+		keys[7] = 0;
 	}
 
 	position.x = 0;
@@ -71,7 +75,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 
 	addState(*(new PlayerRegularState(*this)));
 
-	moveTo(1.0f, 1.0f);
+	moveTo(1.0f, 1.0f * playerNum);
 }
 
 Player::~Player()
@@ -82,11 +86,6 @@ int Player::getPlayerNum() { return playerNum; }
 
 void Player::update(float elapsed)
 {
-	//writeLabelToConsole(L"Elapsed time: ", elapsed);
-	//Needed: 
-	//  - Prioritization of actions?
-	//	- Check for buttons being released?
-
 	stop();
 
 	if (controller->isConnected(playerNum))
@@ -96,15 +95,10 @@ void Player::update(float elapsed)
 
 	for (int i = 0; i < states.size(); ++i)
 		states.elementAt(i)->update(elapsed);
-
 	///////////////////
 	//Update Position//
 	///////////////////
 	moveBy(velocity, speed);
-	//jumpArc(elapsed);
-	//position.x += velocity.x * elapsed;
-	//position.y += velocity.y * elapsed;
-	//playerModel->worldTranslate(velocity.x, velocity.y, 0.0f);
 }
 
 void Player::render()
@@ -116,10 +110,17 @@ void Player::render()
 ///////////////////////
 void Player::onCollide(Player&)
 {
+	if (!containsState(PlayerStateType::PST_INJURED))
+	{
+	}
 }
 
 void Player::onCollide(Obstacle&)
 {
+	if (!containsState(PlayerStateType::PST_INJURED))
+	{
+		addState(*new PlayerInjuredState(*this));
+	}
 }
 
 ////////////////////////////
@@ -145,7 +146,7 @@ void Player::notifyStateEnd(PlayerState& PS)
 void Player::addListener(IPlayerListener& IPL) { listeners.add(&IPL); }
 void Player::removeListener(IPlayerListener& IPL) { listeners.remove(&IPL); }
 
-//CURRENTLY INEFFICIENT. DUPLICATE TESTING SHOULD BE DONE BEFORE WE REACH THIS POINT!
+//Adds PlayerState to states. DOES NOT DO DUPLICATE STATE CHECKING. You must do this before calling addState! Use this: "!containsState(PlayerStateType)"
 void Player::addState(PlayerState& PS)
 {
 	//Loop check through all current PlayerStates (Duplicate testing)
@@ -153,13 +154,6 @@ void Player::addState(PlayerState& PS)
 	{
 		PlayerState* currentState = states.elementAt(i);
 		
-		//If we already have one of this type, return and don't add. We don't want two of the same PlayerState!
-		if (currentState->getStateType() == PS.getStateType())
-		{
-			delete &PS;
-			return;
-		}
-
 		//If there is a PlayerRegularState in here, then get rid of it
 		if (currentState->getStateType() == PlayerStateType::PST_REGULAR)
 		{
@@ -275,36 +269,47 @@ void Player::checkControllerInputs(float elapsed)
 
 void Player::checkKeyboardInputs(float elapsed)
 {
-	if (!containsState(PlayerStateType::PST_ROLL))
+	if (!containsState(PlayerStateType::PST_INJURED))
 	{
-		if (keyboard->IsKeyDown(keys[0]))
+		if (!containsState(PlayerStateType::PST_ROLL))
 		{
-			moveLeft(elapsed);
+			if (keyboard->IsKeyDown(keys[0]))
+			{
+				moveLeft(elapsed);
+			}
+			else if (keyboard->IsKeyDown(keys[1])) 
+			{
+				moveRight(elapsed);
+			}
+			if (keyboard->IsKeyDown(keys[2]))
+			{
+				moveUp(elapsed);
+			}
+			else if (keyboard->IsKeyDown(keys[3]))
+			{
+				moveDown(elapsed);
+			}
+			if (keyboard->IsKeyDown(keys[4]))
+			{
+				jump();
+			}
 		}
-		else if (keyboard->IsKeyDown(keys[1])) 
+		if (!containsState(PlayerStateType::PST_JUMP))
 		{
-			moveRight(elapsed);
+			if (keyboard->IsKeyDown(keys[5]))
+			{
+				rollLeft();
+			}
+			if (keyboard->IsKeyDown(keys[6]))
+			{
+				rollRight();
+			}
 		}
-		if (keyboard->IsKeyDown(keys[2]))
+		if (keyboard->IsKeyDown(keys[7]))
 		{
-			moveUp(elapsed);
+			if (!containsState(PlayerStateType::PST_INJURED))
+				addState(*(new PlayerInjuredState(*this)));
 		}
-		else if (keyboard->IsKeyDown(keys[3]))
-		{
-			moveDown(elapsed);
-		}
-	}
-	if (keyboard->IsKeyDown(keys[4]))
-	{
-		jump();
-	}
-	if (keyboard->IsKeyDown(keys[5]))
-	{
-		rollLeft();
-	}
-	if (keyboard->IsKeyDown(keys[6]))
-	{
-		rollRight();
 	}
 	
 }

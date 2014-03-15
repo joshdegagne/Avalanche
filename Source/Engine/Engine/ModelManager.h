@@ -1,13 +1,8 @@
 #pragma once
 
-//Collision debugging (allows for the display of bounding boxes)
-//Uncomment define to show bounding boxes (may have to rebuild)
-#ifndef COLLISION_DEBUG
-#define COLLISION_DEBUG
-#endif
-
 #include "ArrayList.h"
 #include "IManager.h"
+#include "DebugDefinitions.h"
 
 class Game;
 class Entity;

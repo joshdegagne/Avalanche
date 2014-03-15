@@ -1,58 +1,84 @@
-#include "collisionmanager.h"
+#include "CollisionManager.h"
+#include "Player.h"
+#include "Obstacle.h"
+#include "BoundingBox.h"
 
+#include "DebugConsole.h"
 
-CollisionManager::CollisionManager(void)
+CollisionManager::CollisionManager()
 {
+	players	  = new ArrayList<Player>;
+	obstacles = new ArrayList<Obstacle>;
 }
 
-
-CollisionManager::~CollisionManager(void)
+CollisionManager::~CollisionManager()
 {
+	delete players;
+	delete obstacles;
 }
 
-void CollisionManager::MoveIfNotColliding(Robot* a, Robot* b, void (Robot::*FuncPtr)(void))
+void CollisionManager::addPlayerReference(Player& p)
 {
-	// Make a copy of the robot position before it moves
-	XMFLOAT3 initialRobotPosition = a->GetPosition();
+	players->add(&p);
+}
 
-	// Move the robot
-	(a->*FuncPtr)();
+void CollisionManager::addObstacleReference(Obstacle& o)
+{
+	obstacles->add(&o);
+}
 
-	// If the move caused a collision, restore the robot to its initial position
-	if (AreColliding(a, b))	
+void CollisionManager::checkForCollisions()
+{
+	for (int i = 0; i < players->size(); ++i)
 	{
-		a->SetPosition(initialRobotPosition);
+		for (int j = 0; j < obstacles->size(); ++j)
+		{
+			if (intersects(players->elementAt(i)->getBound(), obstacles->elementAt(j)->getBound()))
+			{
+				#ifdef COLLISION_DEBUG
+				writeTextToConsole(L"Player ", false);
+				writeNumToConsole(i, false);
+				writeLabelToConsole(L" has collided with Obstacle ", j);
+				#endif
+				players->elementAt(i)->onCollide(*(obstacles->elementAt(j)));
+				continue;
+			}
+		}
+
+		for (int j = 0; j < players->size(); ++j)
+		{
+			if (intersects(players->elementAt(i)->getBound(), players->elementAt(j)->getBound()))
+			{
+				#ifdef COLLISION_DEBUG
+				writeTextToConsole(L"Player ", false);
+				writeNumToConsole(i, false);
+				writeLabelToConsole(L" has collided with Player ", j);
+				#endif
+				players->elementAt(i)->onCollide(*(players->elementAt(j)));
+				continue;
+			}
+		}
 	}
 }
 
-bool CollisionManager::AreColliding(Robot* a, Robot* b)
+
+bool CollisionManager::intersects(BoundingBox* boundA, BoundingBox* boundB)
 {
-	if (a->GetBoundaryType() == "circle")
-	{
-		float horizontal = a->GetPosition().x - b->GetPosition().x;
-		float vertical = a->GetPosition().y - b->GetPosition().y;
+	if (boundA == boundB)
+		return false;
 
-		float hypotenuse = sqrt((horizontal*horizontal) + (vertical*vertical));
+	XMFLOAT3 A_POS = *(boundA->getPosition());
+	XMFLOAT3 A_DIM = *(boundA->getDimensions());
+	XMFLOAT3 B_POS = *(boundB->getPosition());
+	XMFLOAT3 B_DIM = *(boundB->getDimensions());
 
-		return hypotenuse < a->GetHeight()*2 || hypotenuse < b->GetHeight()*2;
-	}
-	else if (a->GetBoundaryType() == "square")
-	{
-		float ATopEdge = a->GetPosition().y + a->GetHeight()/2;
-		float ABottomEdge = a->GetPosition().y - a->GetHeight()/2;
-		float ARightEdge = a->GetPosition().x + a->GetWidth()/2;
-		float ALeftEdge = a->GetPosition().x - a->GetWidth()/2;
-
-		float BTopEdge = b->GetPosition().y + b->GetHeight()/2;
-		float BBottomEdge = b->GetPosition().y - b->GetHeight()/2;
-		float BRightEdge = b->GetPosition().x + b->GetWidth()/2;
-		float BLeftEdge = b->GetPosition().x - b->GetWidth()/2;
-
-		return ALeftEdge < BRightEdge && 
-			ARightEdge > BLeftEdge && 
-			ATopEdge > BBottomEdge && 
-			ABottomEdge < BTopEdge;
-	}
-
-	return false;
+	if (   A_POS.x + A_DIM.x/2 > B_POS.x - B_DIM.x/2 //X axis bound check
+		&& B_POS.x + B_DIM.x/2 > A_POS.x - A_DIM.x/2 //X axis bound check
+		&& A_POS.y + A_DIM.y/2 > B_POS.y - B_DIM.y/2 //Y axis bound check
+		&& B_POS.y + B_DIM.y/2 > A_POS.y - A_DIM.y/2 //Y axis-bound check
+		&& A_POS.z + A_DIM.z/2 > B_POS.z - B_DIM.z/2 //Z axis bound check
+		&& B_POS.z + B_DIM.z/2 > A_POS.z - A_DIM.z/2)//Z axis-bound check
+		return true;
+	else
+		return false;
 }

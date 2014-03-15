@@ -11,6 +11,7 @@
 #include "LogObstacle.h"
 #include "RockObstacle.h"
 #include "EntityType.h"
+#include "CollisionManager.h"
 
 #define SCROLL_SPEED 0.15f
 #define NUM_LANES 6
@@ -43,6 +44,8 @@ class Playfield : public ITimedObject
 		ArrayList<Player>*		activePlayers;		//List of players in the current match
 		//ArrayList<Obstacle>*	obstacles;			//List of obstacles (Finite bag/number of obstacles)
 		ObstacleBag*			obstacleBag;
+
+		CollisionManager*		collisionManager;
 
 		Timer timer;
 

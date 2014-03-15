@@ -1,18 +1,22 @@
 #include "PlayerRegularState.h"
 #include "Player.h"
 
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 PlayerRegularState::PlayerRegularState(Player& p, float duration) 
 				   : PlayerState(p, duration, PlayerStateType::PST_REGULAR)
 {
+	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Regular State created for Player ", player.getPlayerNum());
+	#endif
 	initialize();
 }
 
 PlayerRegularState::~PlayerRegularState()
 {
+	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Regular State destroyed for Player ", player.getPlayerNum());
+	#endif
 }
 
 void PlayerRegularState::initialize()

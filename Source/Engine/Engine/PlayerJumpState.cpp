@@ -1,18 +1,22 @@
 #include "PlayerJumpState.h"
 #include "Player.h"
 
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 PlayerJumpState::PlayerJumpState(Player& p, float duration) 
 				: PlayerState(p, duration, PlayerStateType::PST_JUMP)
 {
+	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Jump State created for Player ", player.getPlayerNum());
+	#endif
 	initialize();
 }
 
 PlayerJumpState::~PlayerJumpState()
 {
+	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Jump State destroyed for Player ", player.getPlayerNum());
+	#endif
 }
 
 void PlayerJumpState::initialize()
@@ -35,8 +39,10 @@ void PlayerJumpState::timerCallback()
 void PlayerJumpState::updateJumpArc()
 {
 	player.setHeight( getJumpArc(timer.getProgressPercentage()*100) );
+	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Jump Progress% for Player = ", timer.getProgressPercentage());
 	writeLabelToConsole(L"Jump Height for Player = ", player.getPosition().z);
+	#endif
 }
 
 float PlayerJumpState::getJumpArc(float timerProgress)

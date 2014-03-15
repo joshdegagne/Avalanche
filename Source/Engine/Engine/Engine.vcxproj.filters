@@ -183,6 +183,9 @@
     <ClCompile Include="ObstacleBag.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="PlayfieldViewModel.cpp">
       <Filter>Source Files\Models\EntityModels</Filter>
     </ClCompile>
@@ -338,6 +341,13 @@
     <ClInclude Include="PlayerModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDefinitions.h">
+      <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
+
     <ClInclude Include="PlayfieldViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
