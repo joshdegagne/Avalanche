@@ -10,7 +10,6 @@ PlayerInjuredState::PlayerInjuredState(Player& p, float duration)
 	writeLabelToConsole(L"Injured State created for Player ", player.getPlayerNum());
 	#endif
 	initialize();
-	
 }
 
 PlayerInjuredState::~PlayerInjuredState()

@@ -15,7 +15,7 @@
 #include <iostream>
 
 #include "Game.h"
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 
 
@@ -60,8 +60,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	/*
 	Allocate a "side car" console so we can write some debug information out to it
 	*/
+	#ifdef ALL_DEBUG
 	AllocConsole();
 	writeTextToConsole(L"Hello World");
+	#endif
 	
 	// Create the system object.
 	game = new Game;
