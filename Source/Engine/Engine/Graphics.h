@@ -6,12 +6,12 @@
 #include "D3D.h"
 #include "Model.h"
 #include "arraylist.h"
-#include "gamemodel.h"
 #include "XYZaxis.h"
 
 class Camera;
 class ColorShader;
 class TextureShader;
+class IViewModel;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Graphics

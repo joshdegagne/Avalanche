@@ -5,13 +5,12 @@
 
 #include "arraylist.h"
 #include "Player.h"
-#include "QuadTexturedModel.h"
-#include "QuadModel.h"
 #include "Obstacle.h"
 #include "ObstacleBag.h"
 #include "Game.h"
 #include "LogObstacle.h"
 #include "RockObstacle.h"
+#include "EntityType.h"
 
 #define SCROLL_SPEED 0.15f
 #define NUM_LANES 6
@@ -32,18 +31,18 @@ class Playfield : public ITimedObject
 		void initialize(Game*);
 		void update(float); // for scrolling
 
-		ArrayList<GameModel>*	getGameModels(); 
-
 		void timerCallback();
+
+		float getLength()	{ return fieldLength; }
+		float getWidth()	{ return fieldWidth; }
+
+		EntityType getEntityType() { return EntityType::PLAYFIELD; }
 
 	private:
 		ArrayList<Entity>*		entities;			//List of entities CURRENTLY BEING UPDATED
 		ArrayList<Player>*		activePlayers;		//List of players in the current match
 		//ArrayList<Obstacle>*	obstacles;			//List of obstacles (Finite bag/number of obstacles)
 		ObstacleBag*			obstacleBag;
-		ArrayList<GameModel>*   models;				//list of models to pass to game
-		QuadTexturedModel*		ground;				//Playfield quad
-		QuadModel*				deathArea;			//Death quad
 
 		Timer timer;
 

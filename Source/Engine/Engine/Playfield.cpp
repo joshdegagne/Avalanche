@@ -18,9 +18,6 @@ Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f)
 	entities = new ArrayList<Entity>();
 	activePlayers = new ArrayList<Player>();
 	obstacleBag = new ObstacleBag;
-	models = new ArrayList<GameModel>;
-	ground = 0;
-	deathArea = 0;
 }
 
 Playfield::~Playfield()
@@ -30,22 +27,10 @@ Playfield::~Playfield()
 
 	delete obstacleBag;
 
-	for (int i = 0; i < models->size(); ++i)
-		delete models->elementAt(i);
-	delete models;
-	
-
-	delete ground;
-
 	entities = 0;
 	activePlayers = 0;
 	obstacleBag = 0;
-	models = 0;
-	ground = 0;
-	deathArea = 0;
 }
-
-ArrayList<GameModel>* Playfield::getGameModels() { return models; }
 
 void Playfield::initialize(Game* game)
 {
@@ -68,20 +53,6 @@ void Playfield::initialize(Game* game)
 	}
 
 	addObstacleToPlayfield();
-	
-	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
-
-	//Ground Texture. (could have an enum and a switch statement for different levels)
-	WCHAR* fieldTexture = L"textures/tempsnow2.dds";
-	ground = new QuadTexturedModel (fieldLength, fieldWidth, fieldTexture);
-	ground->worldTranslate(fieldLength/2, fieldWidth/2, -0.25f);
-	models->add(ground);
-
-	XMFLOAT4 deathAreaColour = XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
-	float DAlength = fieldLength/10.0f;
-	deathArea = new QuadModel (DAlength, fieldWidth, &deathAreaColour);
-	deathArea->worldTranslate(-DAlength/2, fieldWidth/2, -0.25f);
-	models->add(deathArea);
 }
 
 

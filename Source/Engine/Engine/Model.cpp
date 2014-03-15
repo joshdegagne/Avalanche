@@ -172,7 +172,7 @@ void Model::ShutdownBuffers()
 
 void Model::RenderBuffers(ID3D11DeviceContext* deviceContext)
 {
-	unsigned int stride;
+	unsigned int stride; 
 	unsigned int offset;
 
 

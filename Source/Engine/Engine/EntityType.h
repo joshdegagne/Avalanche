@@ -25,5 +25,6 @@ enum class EntityType : int
 	LOG,
 	LOG_FALLING,
 	//Debug bounding box
-	BOUNDING_BOX
+	BOUNDING_BOX,
+	PLAYFIELD
 };
