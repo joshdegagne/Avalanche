@@ -284,11 +284,11 @@ bool Game::Frame()
 	return true;
 }
 
-float Game::getElapsedTime()
+float Game::getElapsedTime(float timeModifier)
 {
 	milliseconds elapsed = duration_cast <milliseconds>(high_resolution_clock::now().time_since_epoch()) - start;
 	start += elapsed;
-	return (float)elapsed.count();
+	return (float)elapsed.count()*timeModifier;
 }
 
 ArrayList<Player>* Game::GetPlayers()

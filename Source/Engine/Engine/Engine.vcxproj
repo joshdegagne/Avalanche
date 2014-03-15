@@ -89,6 +89,8 @@
     <ClCompile Include="ControllerInputManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityBase.cpp" />
+    <ClCompile Include="FinishLineObstacle.cpp" />
+    <ClCompile Include="FinishLineViewModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="LogViewModel.cpp" />
     <ClCompile Include="ModelManager.cpp" />
@@ -134,6 +136,8 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityBase.h" />
     <ClInclude Include="EntityType.h" />
+    <ClInclude Include="FinishLineObstacle.h" />
+    <ClInclude Include="FinishLineViewModel.h" />
     <ClInclude Include="IManager.h" />
     <ClInclude Include="IPlayerListener.h" />
     <ClInclude Include="ITexture.h" />

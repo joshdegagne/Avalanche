@@ -2,6 +2,7 @@
 #include <random>
 #include "LogObstacle.h"
 #include "RockObstacle.h"
+#include "FinishLineObstacle.h"
 
 #include "DebugConsole.h"
 
@@ -12,6 +13,7 @@ ObstacleBag::~ObstacleBag()
 
 void ObstacleBag::initialize(Game* game)
 {
+	
 	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new LogObstacle(*game));
@@ -24,6 +26,8 @@ void ObstacleBag::initialize(Game* game)
 	obstacleList.add(new RockObstacle(*game));
 	obstacleList.add(new RockObstacle(*game));
 	obstacleList.add(new RockObstacle(*game));
+	
+	finishLine = new FinishLineObstacle(*game);
 }
 
 Obstacle* ObstacleBag::pullRandomObstacle()

@@ -75,7 +75,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 
 	addState(*(new PlayerRegularState(*this)));
 
-	moveTo(1.0f, 1.0f * playerNum);
+	moveTo(5.0f, 0.75f + 1.5f * playerNum);
 }
 
 Player::~Player()
@@ -99,6 +99,12 @@ void Player::update(float elapsed)
 	//Update Position//
 	///////////////////
 	moveBy(velocity, speed);
+
+	float dragSpeed = MOVEMENT_SPEED*elapsed/4;
+	if(containsState(PlayerStateType::PST_INJURED))
+		dragSpeed*=6;
+	if(position.x != DEAD_X && position.y != DEAD_Y)
+		moveBy(XMFLOAT2(-1.0f, 0.0f), dragSpeed);
 }
 
 void Player::render()

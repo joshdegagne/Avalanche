@@ -13,7 +13,7 @@
 
 
 
-Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(0.00025f)
+Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(0.0025f)
 {
 	entities = new ArrayList<Entity>;
 	activePlayers = new ArrayList<Player>;
@@ -57,7 +57,7 @@ void Playfield::initialize(Game* game)
 #endif
 	}
 
-	addObstacleToPlayfield();
+	game->getModelManager()->add(*obstacleBag->pullFinishLine());
 	
 	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
 
@@ -69,7 +69,13 @@ void Playfield::update(float elapsed)
 	//Obstacle placement based on time
 	///////////////////////////////////
 	timer.update(elapsed);
-	if (timer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles)
+
+	if (timer.getProgressPercentage() >= 1.0f)
+	{
+		placeObstacle(obstacleBag->pullFinishLine());
+	}
+
+	else if (timer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles)
 	{
 		previousProgressPercentage = timer.getProgressPercentage();
 		addObstacleToPlayfield();
