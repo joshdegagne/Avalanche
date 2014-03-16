@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Player.h"
 #include "ControllerInputManager.h"
 #include "KeyInput.h"
@@ -26,7 +28,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 	else if (playerNum == 1) //Player two (WASD)
 	{
@@ -37,7 +38,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = VK_SPACE;
 		keys[5] = ascii_Q;
 		keys[6] = ascii_E;
-		keys[7] = ascii_C;
 	}
 	else if (playerNum == 2) //Player three (TFGH)
 	{
@@ -48,7 +48,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 	else if (playerNum == 3) //Player four (IJKL)
 	{
@@ -59,7 +58,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 
 	position.x = 0;
@@ -75,7 +73,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 
 	addState(*(new PlayerRegularState(*this)));
 
-	moveTo(1.0f, 1.0f * playerNum);
+	moveTo(5.0f, 0.75f + 1.5f * playerNum);
 }
 
 Player::~Player()
@@ -99,6 +97,12 @@ void Player::update(float elapsed)
 	//Update Position//
 	///////////////////
 	moveBy(velocity, speed);
+
+	float dragSpeed = MOVEMENT_SPEED*elapsed/4;
+	if(containsState(PlayerStateType::PST_INJURED))
+		dragSpeed*=6;
+	if(position.x != DEAD_X && position.y != DEAD_Y)
+		moveBy(XMFLOAT2(-1.0f, 0.0f), dragSpeed);
 }
 
 void Player::render()
@@ -108,10 +112,57 @@ void Player::render()
 ///////////////////////
 //Collision Functions//
 ///////////////////////
-void Player::onCollide(Player&)
+void Player::onCollide(Player& p)
 {
-	if (!containsState(PlayerStateType::PST_INJURED))
+	if (p.containsState(PlayerStateType::PST_ROLL))
 	{
+		bool rollingLeft;
+		for(int i = 0; i < p.states.size(); ++i)
+		{
+			if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
+			{
+				rollingLeft = dynamic_cast<PlayerRollState*>(p.states.elementAt(i))->isRollingLeft();
+				break;
+			}
+		}
+
+		if (!containsState(PlayerStateType::PST_BUMPED))
+		{
+			addState(*new PlayerBumpState(*this,rollingLeft));
+		}
+
+		if (!containsState(PlayerStateType::PST_ROLL))
+		{
+			addState(*new PlayerInjuredState(*this));
+		}
+	}
+	else //two non rolling players
+	{
+		if (!containsState(PlayerStateType::PST_ROLL))
+		{
+			while (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
+			{
+				if(p.getPosition().x < position.x)
+				{
+					position.x += 0.1f;
+				}
+				else
+				{
+					position.x -= 0.1f;
+				}
+			}
+			while (std::abs(p.getPosition().y-position.y) < bound->getDimensions()->y)
+			{
+				if(p.getPosition().y < position.y)
+				{
+					position.y += 0.1f;
+				}
+				else
+				{
+					position.y -= 0.1f;
+				}
+			}
+		}
 	}
 }
 
@@ -304,11 +355,6 @@ void Player::checkKeyboardInputs(float elapsed)
 			{
 				rollRight();
 			}
-		}
-		if (keyboard->IsKeyDown(keys[7]))
-		{
-			if (!containsState(PlayerStateType::PST_INJURED))
-				addState(*(new PlayerInjuredState(*this)));
 		}
 	}
 	

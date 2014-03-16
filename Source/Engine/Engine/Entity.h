@@ -7,8 +7,8 @@
 #include "DirectXHelper.h"
 #include "EntityBase.h"
 
-#define DEAD_X 10.0f
-#define DEAD_Y -5.0f
+#define DEAD_X 25.0f
+#define DEAD_Y 0.0f
 #define DEAD_Z 0.0f
 
 class Game;

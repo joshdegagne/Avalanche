@@ -4,3 +4,4 @@
 #include "PlayerInjuredState.h"
 #include "PlayerJumpState.h"
 #include "PlayerRollState.h"
+#include "PlayerBumpState.h"

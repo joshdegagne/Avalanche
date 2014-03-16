@@ -2,6 +2,7 @@
 #include <random>
 #include "LogObstacle.h"
 #include "RockObstacle.h"
+#include "FinishLineObstacle.h"
 
 #include "DebugConsole.h"
 
@@ -12,17 +13,26 @@ ObstacleBag::~ObstacleBag()
 
 void ObstacleBag::initialize(Game* game)
 {
+	
+	obstacleList.add(new LogObstacle(*game));
+	obstacleList.add(new LogObstacle(*game));
+	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new LogObstacle(*game));
 	obstacleList.add(new RockObstacle(*game));
 	obstacleList.add(new RockObstacle(*game));
 	obstacleList.add(new RockObstacle(*game));
+	obstacleList.add(new RockObstacle(*game));
+	obstacleList.add(new RockObstacle(*game));
+	obstacleList.add(new RockObstacle(*game));
+	
+	finishLine = new FinishLineObstacle(*game);
 }
 
 Obstacle* ObstacleBag::pullRandomObstacle()
 {
-	while (1)
+	for (int i = 0; i < 100; ++i) 
 	{
 		Obstacle* selectedObst = getObstacleAlgorithm();
 		if (   selectedObst->getPosition().x == DEAD_X
@@ -31,8 +41,9 @@ Obstacle* ObstacleBag::pullRandomObstacle()
 		{
 			return selectedObst;
 		}
-		writeTextToConsole(L"This obstacle no workie!");
 	}
+	
+	return nullptr;
 }
 
 Obstacle* ObstacleBag::pullFinishLine() { return finishLine; }

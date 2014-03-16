@@ -13,10 +13,10 @@
 
 
 
-Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f)
+Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(0.0025f)
 {
-	entities = new ArrayList<Entity>();
-	activePlayers = new ArrayList<Player>();
+	entities = new ArrayList<Entity>;
+	activePlayers = new ArrayList<Player>;
 	obstacleBag = new ObstacleBag;
 }
 
@@ -57,13 +57,31 @@ void Playfield::initialize(Game* game)
 #endif
 	}
 
-	addObstacleToPlayfield();
+	game->getModelManager()->add(*obstacleBag->pullFinishLine());
+	
+	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
+
 }
 
 
 void Playfield::update(float elapsed) 
 {
+	//Obstacle placement based on time
+	///////////////////////////////////
 	timer.update(elapsed);
+
+	if (timer.getProgressPercentage() >= 1.0f)
+	{
+		placeObstacle(obstacleBag->pullFinishLine());
+	}
+
+	else if (timer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles)
+	{
+		previousProgressPercentage = timer.getProgressPercentage();
+		addObstacleToPlayfield();
+	}
+	///////////////////////////////////
+
 	for (int i = 0; i < entities->size(); ++i)
 	{
 		Entity* currEntity = entities->elementAt(i);
@@ -129,6 +147,8 @@ int Playfield::getLaneAlgorithm(Obstacle* obstacle)
 void Playfield::addObstacleToPlayfield()
 {
 	Obstacle* selectedObstacle = obstacleBag->pullRandomObstacle();
+	if (selectedObstacle == nullptr)
+		return;
 	int selectedLane = getLaneAlgorithm(selectedObstacle);
 	placeObstacle(selectedObstacle, selectedLane);
 }

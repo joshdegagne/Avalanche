@@ -1,13 +1,13 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Filename: LogObstacle.cpp
+// Filename: FinishLineObstacle.cpp
 ////////////////////////////////////////////////////////////////////////////////
-#include "LogObstacle.h"
+#include "FinishLineObstacle.h"
 #include "EntityType.h"
 #include "DebugConsole.h"
 
-LogObstacle::LogObstacle(Game& g) : Obstacle(g, 3.0f, 1.0f)
+FinishLineObstacle::FinishLineObstacle(Game& g) : Obstacle(g, 6.0f, 2.0f)
 {
-	type = EntityType::LOG;
+	type = EntityType::FINISH;
 
 	bound->initialize(this);
 }
