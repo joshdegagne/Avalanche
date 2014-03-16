@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Player.h"
 #include "ControllerInputManager.h"
 #include "KeyInput.h"
@@ -132,6 +134,34 @@ void Player::onCollide(Player& p)
 		if (!containsState(PlayerStateType::PST_ROLL))
 		{
 			addState(*new PlayerInjuredState(*this));
+		}
+	}
+	else //two non rolling players
+	{
+		if (!containsState(PlayerStateType::PST_ROLL))
+		{
+			while (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
+			{
+				if(p.getPosition().x < position.x)
+				{
+					position.x += 0.1f;
+				}
+				else
+				{
+					position.x -= 0.1f;
+				}
+			}
+			while (std::abs(p.getPosition().y-position.y) < bound->getDimensions()->y)
+			{
+				if(p.getPosition().y < position.y)
+				{
+					position.y += 0.1f;
+				}
+				else
+				{
+					position.y -= 0.1f;
+				}
+			}
 		}
 	}
 }
@@ -325,11 +355,6 @@ void Player::checkKeyboardInputs(float elapsed)
 			{
 				rollRight();
 			}
-		}
-		if (keyboard->IsKeyDown(keys[7]))
-		{
-			if (!containsState(PlayerStateType::PST_INJURED))
-				addState(*(new PlayerInjuredState(*this)));
 		}
 	}
 	
