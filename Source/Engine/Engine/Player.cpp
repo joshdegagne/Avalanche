@@ -86,10 +86,13 @@ void Player::update(float elapsed)
 {
 	stop();
 
-	if (controller->isConnected(playerNum))
-		checkControllerInputs(elapsed);
-	else
-		checkKeyboardInputs(elapsed);
+	if (!containsState(PlayerStateType::PST_INJURED))
+	{
+		if (controller->isConnected(playerNum))
+			checkControllerInputs(elapsed);
+		else
+			checkKeyboardInputs(elapsed);
+	}
 
 	for (int i = 0; i < states.size(); ++i)
 		states.elementAt(i)->update(elapsed);
@@ -320,41 +323,38 @@ void Player::checkControllerInputs(float elapsed)
 
 void Player::checkKeyboardInputs(float elapsed)
 {
-	if (!containsState(PlayerStateType::PST_INJURED))
+	if (!containsState(PlayerStateType::PST_ROLL))
 	{
-		if (!containsState(PlayerStateType::PST_ROLL))
+		if (keyboard->IsKeyDown(keys[0]))
 		{
-			if (keyboard->IsKeyDown(keys[0]))
-			{
-				moveLeft(elapsed);
-			}
-			else if (keyboard->IsKeyDown(keys[1])) 
-			{
-				moveRight(elapsed);
-			}
-			if (keyboard->IsKeyDown(keys[2]))
-			{
-				moveUp(elapsed);
-			}
-			else if (keyboard->IsKeyDown(keys[3]))
-			{
-				moveDown(elapsed);
-			}
-			if (keyboard->IsKeyDown(keys[4]))
-			{
-				jump();
-			}
+			moveLeft(elapsed);
 		}
-		if (!containsState(PlayerStateType::PST_JUMP))
+		else if (keyboard->IsKeyDown(keys[1])) 
 		{
-			if (keyboard->IsKeyDown(keys[5]))
-			{
-				rollLeft();
-			}
-			if (keyboard->IsKeyDown(keys[6]))
-			{
-				rollRight();
-			}
+			moveRight(elapsed);
+		}
+		if (keyboard->IsKeyDown(keys[2]))
+		{
+			moveUp(elapsed);
+		}
+		else if (keyboard->IsKeyDown(keys[3]))
+		{
+			moveDown(elapsed);
+		}
+		if (keyboard->IsKeyDown(keys[4]))
+		{
+			jump();
+		}
+	}
+	if (!containsState(PlayerStateType::PST_JUMP))
+	{
+		if (keyboard->IsKeyDown(keys[5]))
+		{
+			rollLeft();
+		}
+		if (keyboard->IsKeyDown(keys[6]))
+		{
+			rollRight();
 		}
 	}
 	
