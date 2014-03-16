@@ -184,19 +184,19 @@ void Playfield::checkPlayerBounds(Player* player)
 {
 	XMFLOAT3 position = player->getPosition(); 
 
-	if (position.y >= fieldWidth)
+	if (position.y + player->getBound()->getDimensions()->y >= fieldWidth)
 	{
 		player->lockLeftMovement();
 	}
-	else if (position.y <= 0)
+	else if (position.y - player->getBound()->getDimensions()->y <= 0)
 	{
 		player->lockRightMovement();
 	}
-	if (position.x >= fieldLength)
+	if (position.x + player->getBound()->getDimensions()->x >= fieldLength)
 	{
 		player->lockForwardMovement();
 	}
-	else if (position.x <= 0)
+	else if (position.x - player->getBound()->getDimensions()->x <= 0)
 	{
 		kill(player);
 	}

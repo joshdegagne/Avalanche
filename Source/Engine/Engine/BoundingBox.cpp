@@ -20,7 +20,7 @@ void BoundingBox::initialize(Entity* e)
 
 	if (parent->getEntityType() == EntityType::PLAYER)
 	{
-		dimensions = XMFLOAT3(0.8f, 0.8f, 0.8f);
+		dimensions = XMFLOAT3(0.6f, 0.6f, 0.8f);
 		offset     = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	}
 	else if (parent->getEntityType() == EntityType::LOG)

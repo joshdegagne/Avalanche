@@ -104,10 +104,6 @@ void Player::update(float elapsed)
 	moveBy(velocity);
 }
 
-void Player::render()
-{
-}
-
 ///////////////////////
 //Collision Functions//
 ///////////////////////
@@ -183,7 +179,6 @@ void Player::onCollide(Player& p, float elapsed)
 			{
 				
 			}
-			
 		}
 	}
 	#endif
@@ -275,19 +270,19 @@ void Player::checkControllerInputs(float elapsed)
 	{
 		if (LSX < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveLeft(elapsed);
+			moveLeft(elapsed, MOVEMENT_SPEED);
 		}
 		else if (LSX > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveRight(elapsed);
+			moveRight(elapsed, MOVEMENT_SPEED);
 		}
 		if (LSY > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveUp(elapsed);
+			moveUp(elapsed, MOVEMENT_SPEED*0.75f);
 		}
 		else if (LSY < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveDown(elapsed);
+			moveDown(elapsed, MOVEMENT_SPEED);
 		}
 	}
 

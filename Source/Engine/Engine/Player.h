@@ -28,9 +28,9 @@ class Player: public Entity {
 		//Constructors
 		Player(Game&, int);
 		~Player();
-		int			getPlayerNum();
-		void		update(float);
-		void		render(); 
+
+		int	 getPlayerNum();
+		void update(float);
 
 		void onCollide(Player&, float);
 		void onCollide(Obstacle&);
