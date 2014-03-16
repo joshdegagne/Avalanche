@@ -38,8 +38,8 @@ void Entity::moveBy(float x, float y)
 	position.y += y;
 }
 
-void Entity::moveBy(XMFLOAT2 direction, float speed)
+void Entity::moveBy(XMFLOAT2 direction)
 {
-	XMVECTOR movement = XMVectorScale( XMVector2Normalize( XMLoadFloat2(&direction) ), speed);
+	XMVECTOR movement = XMLoadFloat2(&direction);
 	moveBy(XMVectorGetX(movement), XMVectorGetY(movement));
 }

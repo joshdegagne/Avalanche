@@ -32,14 +32,14 @@ class Player: public Entity {
 		void		update(float);
 		void		render(); 
 
-		void onCollide(Player&);	//NEW
-		void onCollide(Obstacle&);	//NEW
+		void onCollide(Player&, float);
+		void onCollide(Obstacle&);
 
 		void addListener(IPlayerListener&);
 		void removeListener(IPlayerListener&);
-		void addState(PlayerState&);				//NEW
-		void removeState(PlayerState&);				//NEW
-		bool containsState(PlayerStateType PST);		//NEW
+		void addState(PlayerState&);
+		void removeState(PlayerState&);
+		bool containsState(PlayerStateType PST);
 		
 		void lockLeftMovement(bool = true);
 		void lockRightMovement(bool = true);
@@ -57,7 +57,6 @@ class Player: public Entity {
 
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
-		float		speed;
 		bool		movementLocks[3]; //Used for bounds checking in the playfield
 		float       jumpIncrement;
 

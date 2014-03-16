@@ -67,7 +67,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 	position.z = 0;
 	velocity.x = 0;
 	velocity.y = 0;
-	speed = 0;
 	lockLeftMovement(false);
 	lockRightMovement(false);
 	lockForwardMovement(false);
@@ -98,16 +97,11 @@ void Player::update(float elapsed)
 
 	for (int i = 0; i < states.size(); ++i)
 		states.elementAt(i)->update(elapsed);
+
 	///////////////////
 	//Update Position//
 	///////////////////
-	moveBy(velocity, speed);
-
-	float dragSpeed = MOVEMENT_SPEED*elapsed/4;
-	if(containsState(PlayerStateType::PST_INJURED))
-		dragSpeed*=6;
-	if(position.x != DEAD_X && position.y != DEAD_Y)
-		moveBy(XMFLOAT2(-1.0f, 0.0f), dragSpeed);
+	moveBy(velocity);
 }
 
 void Player::render()
@@ -117,7 +111,7 @@ void Player::render()
 ///////////////////////
 //Collision Functions//
 ///////////////////////
-void Player::onCollide(Player& p)
+void Player::onCollide(Player& p, float elapsed)
 {
 	if (p.containsState(PlayerStateType::PST_ROLL))
 	{
@@ -141,30 +135,38 @@ void Player::onCollide(Player& p)
 			addState(*new PlayerInjuredState(*this));
 		}
 	}
+	//What happens when jumpers collide?
+	else if (p.containsState(PlayerStateType::PST_JUMP))
+	{
+		if (containsState(PlayerStateType::PST_JUMP))
+		{
+
+		}
+	}
 	else //two non rolling players
 	{
 		if (!containsState(PlayerStateType::PST_ROLL))
 		{
-			while (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
+			if (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
 			{
 				if(p.getPosition().x < position.x)
 				{
-					position.x += 0.1f;
+					moveRight(elapsed, MOVEMENT_SPEED*0.5f);
 				}
 				else
 				{
-					position.x -= 0.1f;
+					moveLeft(elapsed, MOVEMENT_SPEED*0.5f);
 				}
 			}
-			while (std::abs(p.getPosition().y-position.y) < bound->getDimensions()->y)
+			if (std::abs(p.getPosition().y-position.y) < bound->getDimensions()->y)
 			{
 				if(p.getPosition().y < position.y)
 				{
-					position.y += 0.1f;
+					moveDown(elapsed, MOVEMENT_SPEED*0.5f);
 				}
 				else
 				{
-					position.y -= 0.1f;
+					moveUp(elapsed, MOVEMENT_SPEED*0.5f);
 				}
 			}
 		}
@@ -424,8 +426,7 @@ void Player::moveLeft(float elapsed, float sp)
 {
 	if (!movementLocks[0])
 	{
-		speed = sp*elapsed;
-		velocity.y = speed;
+		velocity.y += sp*elapsed;
 		if (movementLocks[1])
 			lockRightMovement(false);
 	}
@@ -434,16 +435,14 @@ void Player::moveRight(float elapsed, float sp)
 {
 	if (!movementLocks[1])
 	{
-		speed = sp*elapsed;
-		velocity.y = -speed;
+		velocity.y += -sp*elapsed;
 		if (movementLocks[0])
 				lockLeftMovement(false);
 	}
 }
 void Player::moveUp(float elapsed, float sp)
 {
-	speed = sp*elapsed;
-	velocity.x = -speed;
+	velocity.x += -sp*elapsed;
 	if (movementLocks[2])
 		lockForwardMovement(false);
 }
@@ -451,8 +450,7 @@ void Player::moveDown(float elapsed, float sp)
 {
 	if (!movementLocks[2])
 	{
-		speed = sp*elapsed;
-		velocity.x = speed;
+		velocity.x += sp*elapsed;
 	}
 }
 

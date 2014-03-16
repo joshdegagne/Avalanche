@@ -32,6 +32,7 @@ void PlayerInjuredState::update(float elapsedTime)
 	#ifdef STATE_DEBUG
 	writeLabelToConsole(L"Injured State for Player progress = ", timer.getProgressPercentage());
 	#endif
+	player.moveUp(elapsedTime,MOVEMENT_SPEED);
 	timer.update(elapsedTime);
 }
 

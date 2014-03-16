@@ -101,7 +101,7 @@ void Playfield::update(float elapsed)
 		}
 		currEntity->getBound()->update();
 	}
-	collisionManager->checkForCollisions();
+	collisionManager->checkForCollisions(elapsed);
 }
 
 void Playfield::timerCallback()

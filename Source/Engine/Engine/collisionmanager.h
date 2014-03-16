@@ -21,7 +21,7 @@ public:
 	~CollisionManager();
 	void addPlayerReference(Player&);
 	void addObstacleReference(Obstacle&);
-	void checkForCollisions();
+	void checkForCollisions(float);
 
 private:
 	ArrayList<Player>*	 players;
