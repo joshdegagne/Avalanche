@@ -2,10 +2,15 @@
 
 #define ALL_DEBUG
 
-#ifndef ALL_DEBUG
+#ifdef ALL_DEBUG
 
-#define COLLISION_DEBUG
-#define STATE_DEBUG
+//#define COLLISION_DEBUG
+//#define STATE_DEBUG
+
+//PLAYER DEBUGS
+#define PLAYER_DRAG_DEBUG
+#define PLAYER_COLLIDE_OBSTACLE_DEBUG
+//#define PLAYER_COLLIDE_PLAYER_DEBUG
 
 #endif
 

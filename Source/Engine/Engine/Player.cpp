@@ -5,7 +5,7 @@
 #include "KeyInput.h"
 #include "PlayerStatesList.h"
 
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 Player::Player(Game& g, int pNum) : Entity(g)
 {
@@ -56,8 +56,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[2] = ascii_I;
 		keys[3] = ascii_K;
 		keys[4] = 0;
-		keys[5] = 0;
-		keys[6] = 0;
+		keys[5] = ascii_U;
+		keys[6] = ascii_O;
 	}
 
 	A_FLAG = B_FLAG = X_FLAG = Y_FLAG = LB_FLAG = RB_FLAG = LT_FLAG = RT_FLAG =  false;
@@ -88,7 +88,7 @@ void Player::update(float elapsed)
 {
 	stop();
 
-	if (!containsState(PlayerStateType::PST_INJURED))
+	if (!containsState(PlayerStateType::PST_INJURED) && !containsState(PlayerStateType::PST_BUMPED))
 	{
 		if (controller->isConnected(playerNum))
 			checkControllerInputs(elapsed);
@@ -103,11 +103,13 @@ void Player::update(float elapsed)
 	///////////////////
 	moveBy(velocity, speed);
 
+	#ifndef PLAYER_DRAG_DEBUG
 	float dragSpeed = MOVEMENT_SPEED*elapsed/4;
 	if(containsState(PlayerStateType::PST_INJURED))
 		dragSpeed*=6;
 	if(position.x != DEAD_X && position.y != DEAD_Y)
 		moveBy(XMFLOAT2(-1.0f, 0.0f), dragSpeed);
+	#endif
 }
 
 void Player::render()
@@ -119,6 +121,7 @@ void Player::render()
 ///////////////////////
 void Player::onCollide(Player& p)
 {
+	#ifndef PLAYER_COLLIDE_PLAYER_DEBUG
 	if (p.containsState(PlayerStateType::PST_ROLL))
 	{
 		bool rollingLeft;
@@ -143,6 +146,8 @@ void Player::onCollide(Player& p)
 	}
 	else //two non rolling players
 	{
+		//This is absolutely not working correctly, and should only be implemented once properly complete.
+		/*
 		if (!containsState(PlayerStateType::PST_ROLL))
 		{
 			while (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
@@ -168,15 +173,19 @@ void Player::onCollide(Player& p)
 				}
 			}
 		}
+		*/
 	}
+	#endif
 }
 
 void Player::onCollide(Obstacle&)
 {
+	#ifndef PLAYER_COLLIDE_OBSTACLE_DEBUG
 	if (!containsState(PlayerStateType::PST_INJURED))
 	{
 		addState(*new PlayerInjuredState(*this));
 	}
+	#endif
 }
 
 ////////////////////////////
