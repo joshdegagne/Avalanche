@@ -207,6 +207,11 @@ bool FinishLineViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 }
 
+bool FinishLineViewModel::InitializeTextures(TextureManager* texMan) 
+{
+	return true;
+}
+
 bool FinishLineViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	
 	bool result;
