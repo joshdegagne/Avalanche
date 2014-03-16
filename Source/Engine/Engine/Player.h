@@ -52,6 +52,9 @@ class Player: public Entity {
 		ArrayList<PlayerState>		states;		//NEW
 		ArrayList<IPlayerListener>	listeners;	//NEW
 
+		//Flags for input
+		bool A_FLAG, B_FLAG, X_FLAG, Y_FLAG, LB_FLAG, RB_FLAG, LT_FLAG, RT_FLAG;
+
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
 		float		speed;

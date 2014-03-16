@@ -60,6 +60,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[6] = 0;
 	}
 
+	A_FLAG = B_FLAG = X_FLAG = Y_FLAG = LB_FLAG = RB_FLAG = LT_FLAG = RT_FLAG =  false;
+
 	position.x = 0;
 	position.y = 0;
 	position.z = 0;
@@ -274,28 +276,70 @@ void Player::checkControllerInputs(float elapsed)
 	/////////////////
 	if (controller->getButtonA(playerNum))
 	{
-		jump();
+		if (!A_FLAG)
+		{
+			A_FLAG = true;
+			jump();
+		}
 	}
+	else
+		A_FLAG = false;
+
 	if (controller->getButtonB(playerNum))
 	{
-		//Ability?
+		if (!B_FLAG)
+		{
+			B_FLAG = true;
+			//Ability?
+		}
 	}
+	else
+		B_FLAG = false;
+
 	if (controller->getButtonX(playerNum))
 	{
-		//Ability?
+		if (!X_FLAG)
+		{
+			X_FLAG = true;
+			//Ability?
+		}
 	}
+	else
+		X_FLAG = false;
+
 	if (controller->getButtonY(playerNum))
 	{
-		//Ability?
+		if (!Y_FLAG)
+		{
+			Y_FLAG = true;
+			//Ability?
+		}
 	}
+	else
+		Y_FLAG = false;
+
 	if (controller->getButtonLB(playerNum))
 	{
-		//Roll left? Or would that be LT?
+		if (!LB_FLAG)
+		{
+			LB_FLAG = true;
+			rollLeft();
+		}
 	}
-	if (controller->getButtonRB(playerNum))
+	else
+		LB_FLAG = false;
+
+	if (controller->getButtonRB(playerNum) && !RB_FLAG)
 	{
-		//Roll right? Or would that be RT?
+		if (!RB_FLAG)
+		{
+			RB_FLAG = true;
+			rollRight();
+		}
 	}
+	else
+		RB_FLAG = false;
+
 	if (controller->getButtonStart(playerNum))
 	{
 		//Pause game?
@@ -311,14 +355,26 @@ void Player::checkControllerInputs(float elapsed)
 	float LT = controller->getLT(playerNum);
 	if (LT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
-		rollLeft();
+		if (!LT_FLAG)
+		{
+			LT_FLAG = true;
+			rollLeft();
+		}
 	}
+	else
+		LT_FLAG = false;
 
 	float RT = controller->getRT(playerNum);
 	if (RT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
-		rollRight();
+		if (!RT_FLAG)
+		{
+			RT_FLAG = true;
+			rollRight();
+		}
 	}
+	else
+		RT_FLAG = false;
 }
 
 void Player::checkKeyboardInputs(float elapsed)
