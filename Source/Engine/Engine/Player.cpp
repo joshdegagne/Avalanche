@@ -74,7 +74,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 
 	addState(*(new PlayerRegularState(*this)));
 
-	moveTo(5.0f, 0.75f + 1.5f * playerNum);
+	moveTo(10.0f, 0.75f + 1.5f * playerNum);
 }
 
 Player::~Player()
@@ -151,8 +151,10 @@ void Player::onCollide(Player& p, float elapsed)
 					if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_JUMP)
 					{
 						if (p.states.elementAt(i)->getProgressPercentage() > 0.5f)
+						{
 							if (!containsState(PlayerStateType::PST_INJURED))
-								addState(*new PlayerInjuredState(*this));;
+								addState(*new PlayerInjuredState(*this));
+						}
 					}
 				}
 			}
@@ -160,12 +162,20 @@ void Player::onCollide(Player& p, float elapsed)
 			else
 			{
 				if (p.position.z < position.z)
+				{
+					for(int i = 0; i < p.states.size(); ++i)
 					{
-					if (!containsState(PlayerStateType::PST_INJURED))
-						addState(*new PlayerInjuredState(*this));
+						if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_JUMP)
+						{
+							if (p.states.elementAt(i)->getProgressPercentage() < 0.5f)
+							{
+								if (!containsState(PlayerStateType::PST_INJURED))
+									addState(*new PlayerInjuredState(*this));
+							}
+						}
 					}
+				}	
 			}
-		
 		}
 		else //two non rolling players
 		{
