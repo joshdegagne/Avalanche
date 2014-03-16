@@ -40,6 +40,7 @@ public:
 	virtual void update(float) = 0;
 
 	PlayerStateType getStateType();
+	float getProgressPercentage();
 
 protected:
 	Player&			player;

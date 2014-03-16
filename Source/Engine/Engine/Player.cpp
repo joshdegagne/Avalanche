@@ -113,6 +113,7 @@ void Player::render()
 ///////////////////////
 void Player::onCollide(Player& p, float elapsed)
 {
+	//Rolling Collisions
 	if (p.containsState(PlayerStateType::PST_ROLL))
 	{
 		bool rollingLeft;
@@ -135,40 +136,38 @@ void Player::onCollide(Player& p, float elapsed)
 			addState(*new PlayerInjuredState(*this));
 		}
 	}
-	//What happens when jumpers collide?
+	//Jumping collisions
 	else if (p.containsState(PlayerStateType::PST_JUMP))
 	{
-		if (containsState(PlayerStateType::PST_JUMP))
+		//Stomp
+		if (!containsState(PlayerStateType::PST_JUMP))
 		{
-
+			for(int i = 0; i < p.states.size(); ++i)
+			{
+				if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_JUMP)
+				{
+					if (p.states.elementAt(i)->getProgressPercentage() > 0.5f)
+						if (!containsState(PlayerStateType::PST_INJURED))
+							addState(*new PlayerInjuredState(*this));;
+				}
+			}
 		}
+		//Uppercut
+		else
+		{
+			if (p.position.z < position.z)
+			{
+				if (!containsState(PlayerStateType::PST_INJURED))
+					addState(*new PlayerInjuredState(*this));
+			}
+		}
+		
 	}
 	else //two non rolling players
 	{
 		if (!containsState(PlayerStateType::PST_ROLL))
 		{
-			if (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
-			{
-				if(p.getPosition().x < position.x)
-				{
-					moveRight(elapsed, MOVEMENT_SPEED*0.5f);
-				}
-				else
-				{
-					moveLeft(elapsed, MOVEMENT_SPEED*0.5f);
-				}
-			}
-			if (std::abs(p.getPosition().y-position.y) < bound->getDimensions()->y)
-			{
-				if(p.getPosition().y < position.y)
-				{
-					moveDown(elapsed, MOVEMENT_SPEED*0.5f);
-				}
-				else
-				{
-					moveUp(elapsed, MOVEMENT_SPEED*0.5f);
-				}
-			}
+			
 		}
 	}
 }
