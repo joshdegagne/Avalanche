@@ -28,9 +28,9 @@ void PlayerBumpState::update(float elapsedTime)
 {
 	updateBumpArc();
 	if (bumpedLeft)
-		player.moveLeft(elapsedTime, MOVEMENT_SPEED*1.25f);
+		player.moveLeft(elapsedTime, MOVEMENT_SPEED*0.75f);
 	else
-		player.moveRight(elapsedTime, MOVEMENT_SPEED*1.25f);
+		player.moveRight(elapsedTime, MOVEMENT_SPEED*0.75f);
 	timer.update(elapsedTime);
 }
 
