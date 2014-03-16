@@ -26,7 +26,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 	else if (playerNum == 1) //Player two (WASD)
 	{
@@ -37,7 +36,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = VK_SPACE;
 		keys[5] = ascii_Q;
 		keys[6] = ascii_E;
-		keys[7] = ascii_C;
 	}
 	else if (playerNum == 2) //Player three (TFGH)
 	{
@@ -48,7 +46,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 	else if (playerNum == 3) //Player four (IJKL)
 	{
@@ -59,7 +56,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 
 	position.x = 0;
@@ -114,10 +110,29 @@ void Player::render()
 ///////////////////////
 //Collision Functions//
 ///////////////////////
-void Player::onCollide(Player&)
+void Player::onCollide(Player& p)
 {
-	if (!containsState(PlayerStateType::PST_INJURED))
+	if (p.containsState(PlayerStateType::PST_ROLL))
 	{
+		bool rollingLeft;
+		for(int i = 0; i < p.states.size(); ++i)
+		{
+			if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
+			{
+				rollingLeft = dynamic_cast<PlayerRollState*>(p.states.elementAt(i))->isRollingLeft();
+				break;
+			}
+		}
+
+		if (!containsState(PlayerStateType::PST_BUMPED))
+		{
+			addState(*new PlayerBumpState(*this,rollingLeft));
+		}
+
+		if (!containsState(PlayerStateType::PST_ROLL))
+		{
+			addState(*new PlayerInjuredState(*this));
+		}
 	}
 }
 

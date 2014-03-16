@@ -195,6 +195,9 @@
     <ClCompile Include="FinishLineViewModel.cpp">
       <Filter>Source Files\Models\EntityModels</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerBumpState.cpp">
+      <Filter>Source Files\Entities\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -361,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="FinishLineViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBumpState.h">
+      <Filter>Header Files\Entities\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
