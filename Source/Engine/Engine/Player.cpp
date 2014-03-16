@@ -5,7 +5,7 @@
 #include "KeyInput.h"
 #include "PlayerStatesList.h"
 
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 Player::Player(Game& g, int pNum) : Entity(g)
 {
@@ -56,8 +56,8 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[2] = ascii_I;
 		keys[3] = ascii_K;
 		keys[4] = 0;
-		keys[5] = 0;
-		keys[6] = 0;
+		keys[5] = ascii_U;
+		keys[6] = ascii_O;
 	}
 
 	A_FLAG = B_FLAG = X_FLAG = Y_FLAG = LB_FLAG = RB_FLAG = LT_FLAG = RT_FLAG =  false;
@@ -87,7 +87,7 @@ void Player::update(float elapsed)
 {
 	stop();
 
-	if (!containsState(PlayerStateType::PST_INJURED))
+	if (!containsState(PlayerStateType::PST_INJURED) && !containsState(PlayerStateType::PST_BUMPED))
 	{
 		if (controller->isConnected(playerNum))
 			checkControllerInputs(elapsed);
@@ -113,71 +113,80 @@ void Player::render()
 ///////////////////////
 void Player::onCollide(Player& p, float elapsed)
 {
-	//Rolling Collisions
-	if (p.containsState(PlayerStateType::PST_ROLL))
+	
+	#ifndef PLAYER_COLLIDE_PLAYER_DEBUG
+	if (!containsState(PlayerStateType::PST_INJURED))
 	{
-		bool rollingLeft;
-		for(int i = 0; i < p.states.size(); ++i)
+		//Rolling Collisions
+		if (p.containsState(PlayerStateType::PST_ROLL))
 		{
-			if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
-			{
-				rollingLeft = dynamic_cast<PlayerRollState*>(p.states.elementAt(i))->isRollingLeft();
-				break;
-			}
-		}
-
-		if (!containsState(PlayerStateType::PST_BUMPED))
-		{
-			addState(*new PlayerBumpState(*this,rollingLeft));
-		}
-
-		if (!containsState(PlayerStateType::PST_ROLL))
-		{
-			addState(*new PlayerInjuredState(*this));
-		}
-	}
-	//Jumping collisions
-	else if (p.containsState(PlayerStateType::PST_JUMP))
-	{
-		//Stomp
-		if (!containsState(PlayerStateType::PST_JUMP))
-		{
+			bool rollingLeft;
 			for(int i = 0; i < p.states.size(); ++i)
 			{
-				if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_JUMP)
+				if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
 				{
-					if (p.states.elementAt(i)->getProgressPercentage() > 0.5f)
-						if (!containsState(PlayerStateType::PST_INJURED))
-							addState(*new PlayerInjuredState(*this));;
+					rollingLeft = dynamic_cast<PlayerRollState*>(p.states.elementAt(i))->isRollingLeft();
+					break;
 				}
 			}
-		}
-		//Uppercut
-		else
-		{
-			if (p.position.z < position.z)
+
+			if (!containsState(PlayerStateType::PST_BUMPED))
 			{
-				if (!containsState(PlayerStateType::PST_INJURED))
-					addState(*new PlayerInjuredState(*this));
+				addState(*new PlayerBumpState(*this,rollingLeft));
+			}
+
+			if (!containsState(PlayerStateType::PST_ROLL))
+			{
+				addState(*new PlayerInjuredState(*this));
 			}
 		}
-		
-	}
-	else //two non rolling players
-	{
-		if (!containsState(PlayerStateType::PST_ROLL))
+		//Jumping collisions
+		else if (p.containsState(PlayerStateType::PST_JUMP))
 		{
+			//Stomp
+			if (!containsState(PlayerStateType::PST_JUMP))
+			{
+				for(int i = 0; i < p.states.size(); ++i)
+				{
+					if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_JUMP)
+					{
+						if (p.states.elementAt(i)->getProgressPercentage() > 0.5f)
+							if (!containsState(PlayerStateType::PST_INJURED))
+								addState(*new PlayerInjuredState(*this));;
+					}
+				}
+			}
+			//Uppercut
+			else
+			{
+				if (p.position.z < position.z)
+					{
+					if (!containsState(PlayerStateType::PST_INJURED))
+						addState(*new PlayerInjuredState(*this));
+					}
+			}
+		
+		}
+		else //two non rolling players
+		{
+			if (!containsState(PlayerStateType::PST_ROLL))
+			{
+				
+			}
 			
 		}
 	}
+	#endif
 }
 
 void Player::onCollide(Obstacle&)
 {
+	#ifndef PLAYER_COLLIDE_OBSTACLE_DEBUG
 	if (!containsState(PlayerStateType::PST_INJURED))
 	{
 		addState(*new PlayerInjuredState(*this));
 	}
+	#endif
 }
 
 ////////////////////////////
