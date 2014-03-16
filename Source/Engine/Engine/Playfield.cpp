@@ -1,6 +1,6 @@
 #include "Playfield.h"
 #include <random>
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 ////////////////////////
 #include "PlayerViewModel.h"
@@ -70,6 +70,7 @@ void Playfield::update(float elapsed)
 	///////////////////////////////////
 	timer.update(elapsed);
 
+	#ifndef OBSTACLE_SPAWN_DEBUG
 	if (timer.getProgressPercentage() >= 1.0f)
 	{
 		placeObstacle(obstacleBag->pullFinishLine());
@@ -80,6 +81,7 @@ void Playfield::update(float elapsed)
 		previousProgressPercentage = timer.getProgressPercentage();
 		addObstacleToPlayfield();
 	}
+	#endif
 	///////////////////////////////////
 
 	for (int i = 0; i < entities->size(); ++i)

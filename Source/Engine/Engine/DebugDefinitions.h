@@ -12,6 +12,8 @@
 #define PLAYER_COLLIDE_OBSTACLE_DEBUG
 //#define PLAYER_COLLIDE_PLAYER_DEBUG
 
+//#define OBSTACLE_SPAWN_DEBUG
+
 #endif
 
 #include "DebugConsole.h"
