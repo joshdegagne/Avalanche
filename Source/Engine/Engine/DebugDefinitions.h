@@ -5,7 +5,7 @@
 #ifdef ALL_DEBUG
 
 //#define COLLISION_DEBUG
-//#define STATE_DEBUG
+#define STATE_DEBUG
 
 //PLAYER DEBUGS
 #define PLAYER_DRAG_DEBUG

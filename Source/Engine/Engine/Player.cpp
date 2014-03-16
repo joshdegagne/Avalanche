@@ -122,58 +122,61 @@ void Player::render()
 void Player::onCollide(Player& p)
 {
 	#ifndef PLAYER_COLLIDE_PLAYER_DEBUG
-	if (p.containsState(PlayerStateType::PST_ROLL))
+	if (!containsState(PlayerStateType::PST_INJURED))
 	{
-		bool rollingLeft;
-		for(int i = 0; i < p.states.size(); ++i)
+		if (p.containsState(PlayerStateType::PST_ROLL))
 		{
-			if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
+			bool rollingLeft;
+			for(int i = 0; i < p.states.size(); ++i)
 			{
-				rollingLeft = dynamic_cast<PlayerRollState*>(p.states.elementAt(i))->isRollingLeft();
-				break;
+				if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
+				{
+					rollingLeft = dynamic_cast<PlayerRollState*>(p.states.elementAt(i))->isRollingLeft();
+					break;
+				}
 			}
-		}
 
-		if (!containsState(PlayerStateType::PST_BUMPED))
-		{
-			addState(*new PlayerBumpState(*this,rollingLeft));
-		}
+			if (!containsState(PlayerStateType::PST_BUMPED))
+			{
+				addState(*new PlayerBumpState(*this,rollingLeft));
+			}
 
-		if (!containsState(PlayerStateType::PST_ROLL))
-		{
-			addState(*new PlayerInjuredState(*this));
-		}
-	}
-	else //two non rolling players
-	{
-		//This is absolutely not working correctly, and should only be implemented once properly complete.
-		/*
-		if (!containsState(PlayerStateType::PST_ROLL))
-		{
-			while (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
+			if (!containsState(PlayerStateType::PST_ROLL))
 			{
-				if(p.getPosition().x < position.x)
-				{
-					position.x += 0.1f;
-				}
-				else
-				{
-					position.x -= 0.1f;
-				}
-			}
-			while (std::abs(p.getPosition().y-position.y) < bound->getDimensions()->y)
-			{
-				if(p.getPosition().y < position.y)
-				{
-					position.y += 0.1f;
-				}
-				else
-				{
-					position.y -= 0.1f;
-				}
+				addState(*new PlayerInjuredState(*this));
 			}
 		}
-		*/
+		else //two non rolling players
+		{
+			//This is absolutely not working correctly, and should only be implemented once properly complete.
+			/*
+			if (!containsState(PlayerStateType::PST_ROLL))
+			{
+				while (std::abs(p.getPosition().x-position.x) < bound->getDimensions()->x)
+				{
+					if(p.getPosition().x < position.x)
+					{
+						position.x += 0.1f;
+					}
+					else
+					{
+						position.x -= 0.1f;
+					}
+				}
+				while (std::abs(p.getPosition().y-position.y) < bound->getDimensions()->y)
+				{
+					if(p.getPosition().y < position.y)
+					{
+						position.y += 0.1f;
+					}
+					else
+					{
+						position.y -= 0.1f;
+					}
+				}
+			}
+			*/
+		}
 	}
 	#endif
 }
