@@ -208,6 +208,11 @@ bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 	//writeTextToConsole(L"bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)");
 	return result;
 
+}  
+
+bool RockViewModel::InitializeTextures(TextureManager* texMan) 
+{
+	return true;
 }
 
 bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice){

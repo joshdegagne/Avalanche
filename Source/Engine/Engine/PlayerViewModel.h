@@ -1,17 +1,20 @@
 #pragma once
 
 #include "ViewModel.h"
+#include "TextureManager.h"
 
 class Player;
 class ITexture;
 class Game;
+//class TextureManager;
 
 class PlayerViewModel : public ViewModel<Player>
 {
 public:
 	PlayerViewModel(Game&);
 	virtual ~PlayerViewModel();
-
+	
+	bool InitializeTextures(TextureManager* texMan);
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:

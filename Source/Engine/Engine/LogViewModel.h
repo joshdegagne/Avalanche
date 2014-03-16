@@ -1,16 +1,19 @@
 #pragma once
 
 #include "ViewModel.h"
+#include "TextureManager.h"
 
 class LogObstacle;
 class ITexture;
+class TextureManager;
 
 class LogViewModel : public ViewModel<LogObstacle>
 {
 public:
 	LogViewModel();
 	virtual ~LogViewModel();
-
+	
+	bool InitializeTextures(TextureManager* texMan);
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:

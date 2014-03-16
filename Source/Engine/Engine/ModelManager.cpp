@@ -52,8 +52,19 @@ bool ModelManager::initialize(Game& game)
 	bool success;
 	for(int i=0; i< models->size(); i++)
 	{
-		IViewModel* viewModel = models->elementAt(i);		
+		IViewModel* viewModel = models->elementAt(i);
+
+		
+		// Textures
+		
+		//success =
 		success = viewModel->InitializeVertexModels(game.getDevice());
+
+		
+		//viewModel->InitializeTextures(game.getTextureManager());
+
+
+
 		if(!success)
 			return false;
 	}

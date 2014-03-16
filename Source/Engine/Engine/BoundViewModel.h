@@ -5,8 +5,10 @@
 
 #include "ViewModel.h"
 #include "ColorShader.h"
+#include "TextureManager.h"
 
 class BoundingBox;
+//class TextureManager;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: BoundViewModel
@@ -16,7 +18,8 @@ class BoundViewModel : public ViewModel<BoundingBox>
 public:
 	BoundViewModel();
 	virtual ~BoundViewModel();
-
+	
+	bool InitializeTextures(TextureManager* texMan);
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:

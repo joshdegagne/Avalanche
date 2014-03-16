@@ -88,6 +88,10 @@ bool BoundViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 
 	return result;
 }
+bool BoundViewModel::InitializeTextures(TextureManager* texMan) 
+{
+	return true;
+}
 
 bool BoundViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	

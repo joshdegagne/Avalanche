@@ -99,6 +99,14 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 	return result;
 }
 
+bool PlayerViewModel::InitializeTextures(TextureManager* texMan) 
+{
+	texture = texMan->loadTexture(textureFileName);
+
+	return true;
+}
+
+
 // Take in ref to game?
 bool PlayerViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	
