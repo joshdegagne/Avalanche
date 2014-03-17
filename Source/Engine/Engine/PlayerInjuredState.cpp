@@ -21,22 +21,17 @@ PlayerInjuredState::~PlayerInjuredState()
 
 void PlayerInjuredState::initialize()
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"State Duration: ", stateDuration);
-	#endif
 	timer.initialize(stateDuration, this);
 }
 
 void PlayerInjuredState::update(float elapsedTime)
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Injured State for Player progress = ", timer.getProgressPercentage());
-	#endif
-	player.moveUp(elapsedTime, MOVEMENT_SPEED*1.25f);
+	if (timer.getProgressPercentage() < 0.33f)
+		player.moveUp(elapsedTime, DRAG_SPEED*1.25f);
 	timer.update(elapsedTime);
 }
 
-void PlayerInjuredState::timerCallback()
+void PlayerInjuredState::timerCallback(Timer& t)
 {
 	player.removeState(*this);
 }

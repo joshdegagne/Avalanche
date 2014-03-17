@@ -14,5 +14,5 @@ public:
 
 	void initialize();
 	void update(float);
-	void timerCallback();
+	void timerCallback(Timer&);
 };

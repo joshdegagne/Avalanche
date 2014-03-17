@@ -12,7 +12,7 @@
 
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
-#define	 MOVEMENT_SPEED 0.004f
+#define	 MOVEMENT_SPEED 0.0075f
 #define  JUMP_HEIGHT 4.0f
 
 #define  P_WIDTH  1.0f
@@ -79,7 +79,6 @@ class Player: public Entity {
 		//Possible jump implementation (no real physics simulation here)
 		void setHeight(float);
 		void jump();
-		void jumpArc(float);
 		void rollLeft();
 		void rollRight();
 		//requestPause(); ???
