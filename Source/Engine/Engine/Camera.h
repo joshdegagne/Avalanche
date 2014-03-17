@@ -20,7 +20,6 @@ class Camera
 public:
 	Camera(int, int);
 	Camera(const Camera&);
-	~Camera();
 
 	void SetPosition(float, float, float);
 	void SetRotation(float, float, float);
@@ -34,6 +33,8 @@ public:
 	void GetViewMatrix(XMFLOAT4X4&);
 	void GetProjectionMatrix(XMFLOAT4X4&);
 	void SetProjectionMatrix(float, float, float, float);
+
+	XMFLOAT3 GetNormalVector();
 
 private:
 	XMFLOAT3 up;
@@ -51,8 +52,9 @@ private:
 
 };
 
-const float	NOMINAL_FIELD_OF_VIEW = (float)XM_PI / 4.0f;
+const float	NOMINAL_FIELD_OF_VIEW = (float)XM_PI / 16.0f;
 const float CAMERA_SCREEN_DEPTH = 1000.0f;
 const float CAMERA_SCREEN_NEAR = 0.1f;
+const float CAMERA_HEIGHT = 16.0f;
 
 #endif

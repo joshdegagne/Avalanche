@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "DebugConsole.h"
 #include "Game.h"
+#include "Camera.h"
 
 #include "PlayerViewModel.h"
 
@@ -15,6 +16,12 @@ WCHAR* TEXTURE = L"textures/iceclimberhead.dds";
 
 PlayerViewModel::PlayerViewModel(Game& game) : ViewModel<Player>(EntityType::PLAYER)
 {
+	XMVECTOR facing = XMVector3Dot( XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), XMLoadFloat3( &game.getCamera()->GetNormalVector() )) * XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
+
+	//TODO: compute angle from facing, rotate playerModel to match
+
+	//orientRotateZ();
+
 	/*
 	Create a quad consisting of 4 vertices and 2 triangles
 	*/

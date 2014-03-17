@@ -75,7 +75,7 @@ bool Game::Initialize()
 	if(!camera)
 		return false;
 
-	camera->SetPosition(22.0f, 8.0f, 13.0f);
+	camera->SetPosition(88.0f, 32.0f, 52.0f);
 	camera->SetTarget(12.0f, 3.0f, 0.0f);
 	camera->SetUpDirection(0.0f, 0.0f, 1.0f);
 
@@ -166,7 +166,7 @@ void Game::Shutdown()
 
 	if(camera)
 	{
-		delete camera;
+		//delete camera;
 		camera = 0;
 	}
 

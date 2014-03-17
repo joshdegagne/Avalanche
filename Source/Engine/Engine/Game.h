@@ -51,6 +51,7 @@ class Game
 		TextureManager*			getTextureManager()		{ return textureManager; }
 		ID3D11Device*			getDevice()				{ return graphics->getDevice(); }
 		CollisionManager*		getCollisionManager()	{ return collisionManager; }
+		Camera*					getCamera()				{ return camera; }
 
 		ArrayList<Player>* GetPlayers();
 
