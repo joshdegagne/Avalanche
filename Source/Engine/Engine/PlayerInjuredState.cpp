@@ -31,7 +31,7 @@ void PlayerInjuredState::update(float elapsedTime)
 	timer.update(elapsedTime);
 }
 
-void PlayerInjuredState::timerCallback()
+void PlayerInjuredState::timerCallback(Timer& t)
 {
 	player.removeState(*this);
 }

@@ -35,7 +35,7 @@ void PlayerBumpState::update(float elapsedTime)
 	timer.update(elapsedTime);
 }
 
-void PlayerBumpState::timerCallback()
+void PlayerBumpState::timerCallback(Timer& t)
 {
 	updateBumpArc();
 	player.removeState(*this);

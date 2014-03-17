@@ -500,19 +500,3 @@ void Player::setHeight(float height)
 {
 	position.z = height;
 }
-
-void Player::jumpArc(float elapsed)
-{
-	if (jumpIncrement > 0.0f && jumpIncrement < 4.0f)
-	{
-		jumpIncrement += elapsed;
-		float arc = (-1*(jumpIncrement - 2)*(jumpIncrement - 2))+4; //parabola
-
-		position.z += arc;
-	}
-	else
-	{
-		jumpIncrement = 0.0f;
-		position.z = 0;
-	}
-}

@@ -29,7 +29,7 @@ void PlayerRegularState::update(float elapsedTime)
 	timer.update(elapsedTime);
 }
 
-void PlayerRegularState::timerCallback()
+void PlayerRegularState::timerCallback(Timer& t)
 {
 	player.removeState(*this);
 }

@@ -36,7 +36,8 @@ void Playfield::initialize(Game* game)
 {
 	collisionManager = game->getCollisionManager();
 
-	timer.initialize(GAME_LENGTH, this);
+	playTimer.initialize(GAME_LENGTH, this);
+	endTimer.initialize(END_LENGTH, this);
 
 	populateLists(game);
 
@@ -44,17 +45,17 @@ void Playfield::initialize(Game* game)
 	{
 		game->getModelManager()->add(*activePlayers->elementAt(i));
 		collisionManager->addPlayerReference(*activePlayers->elementAt(i));
-#ifdef COLLISION_DEBUG
+		#ifdef COLLISION_DEBUG
 		game->getModelManager()->add(*activePlayers->elementAt(i)->getBound());
-#endif
+		#endif
 	}
 	for(int i = 0; i < obstacleBag->getNumObstacles(); ++i)
 	{
 		game->getModelManager()->add(*obstacleBag->getObstacle(i));
 		collisionManager->addObstacleReference(*obstacleBag->getObstacle(i));
-#ifdef COLLISION_DEBUG
+		#ifdef COLLISION_DEBUG
 		game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
-#endif
+		#endif
 	}
 
 	game->getModelManager()->add(*obstacleBag->pullFinishLine());
@@ -68,17 +69,12 @@ void Playfield::update(float elapsed)
 {
 	//Obstacle placement based on time
 	///////////////////////////////////
-	timer.update(elapsed);
+	playTimer.update(elapsed);
 
 	#ifndef OBSTACLE_SPAWN_DEBUG
-	if (timer.getProgressPercentage() >= 1.0f)
+	if (playTimer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles)
 	{
-		placeObstacle(obstacleBag->pullFinishLine());
-	}
-
-	else if (timer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles)
-	{
-		previousProgressPercentage = timer.getProgressPercentage();
+		previousProgressPercentage = playTimer.getProgressPercentage();
 		addObstacleToPlayfield();
 	}
 	#endif
@@ -106,9 +102,14 @@ void Playfield::update(float elapsed)
 	collisionManager->checkForCollisions(elapsed);
 }
 
-void Playfield::timerCallback()
+void Playfield::timerCallback(Timer& t)
 {
-	writeTextToConsole(L"Timer has finished! WHOOOOO");
+	if (t == playTimer)
+	{
+	}
+	else if (t == endTimer)
+	{
+	}
 }
 
 //////////////////////

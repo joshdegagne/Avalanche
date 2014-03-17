@@ -30,7 +30,7 @@ void PlayerJumpState::update(float elapsedTime)
 	timer.update(elapsedTime);
 }
 
-void PlayerJumpState::timerCallback()
+void PlayerJumpState::timerCallback(Timer& t)
 {
 	updateJumpArc();
 	player.removeState(*this);
