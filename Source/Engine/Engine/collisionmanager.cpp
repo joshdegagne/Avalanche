@@ -27,7 +27,7 @@ void CollisionManager::addObstacleReference(Obstacle& o)
 	obstacles->add(&o);
 }
 
-void CollisionManager::checkForCollisions()
+void CollisionManager::checkForCollisions(float elapsedTime)
 {
 	for (int i = 0; i < players->size(); ++i)
 	{
@@ -54,7 +54,7 @@ void CollisionManager::checkForCollisions()
 				writeNumToConsole(i, false);
 				writeLabelToConsole(L" has collided with Player ", j);
 				#endif
-				players->elementAt(i)->onCollide(*(players->elementAt(j)));
+				players->elementAt(i)->onCollide(*(players->elementAt(j)), elapsedTime);
 				continue;
 			}
 		}

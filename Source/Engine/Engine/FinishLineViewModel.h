@@ -5,6 +5,7 @@
 
 class FinishLineObstacle;
 class ITexture;
+class TextureManager;
 
 class FinishLineViewModel : public ViewModel<FinishLineObstacle>
 {

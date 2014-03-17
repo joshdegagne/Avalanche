@@ -39,7 +39,7 @@ class Entity : public EntityBase {
 
 		void moveTo(float, float);
 		void moveBy(float, float);
-		void moveBy(XMFLOAT2, float);
+		void moveBy(XMFLOAT2);
 		
 		virtual void update(float) = 0;
 };

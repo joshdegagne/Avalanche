@@ -209,8 +209,6 @@ bool FinishLineViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 bool FinishLineViewModel::InitializeTextures(TextureManager* texMan) 
 {
-	//texture = texMan->loadTexture(textureFileName);
-
 	return true;
 }
 
