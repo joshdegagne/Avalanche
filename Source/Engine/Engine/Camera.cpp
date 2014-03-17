@@ -27,10 +27,19 @@ Camera::Camera(int screenWidth, int screenHeight)
 
 Camera::Camera(const Camera& other)
 {
-}
+	m_viewMatrix = XMFLOAT4X4();
+	m_projectionMatrix = XMFLOAT4X4();
 
-Camera::~Camera()
-{
+	position = other.position;
+
+	target = other.target;
+
+	up = other.up;
+
+	m_screenAspect = other.m_screenAspect;
+	m_fieldOfView = other.m_fieldOfView;
+	m_screenNear = CAMERA_SCREEN_NEAR;
+	m_screenDepth = CAMERA_SCREEN_DEPTH;
 }
 
 void Camera::SetPosition(float x, float y, float z)
@@ -94,12 +103,21 @@ XMFLOAT3 Camera::GetPosition()
 
 void Camera::Render()
 {
+	XMVECTOR direction = XMLoadFloat3( &position ) - XMLoadFloat3( &target );
+
+	XMVECTOR tempUp = XMVector3Cross( XMVector3Cross( direction , XMLoadFloat3(&up)), direction );
 
 	// Create View Matrix
-	XMStoreFloat4x4( &m_viewMatrix, XMMatrixLookAtLH( XMLoadFloat3(&position), XMLoadFloat3(&target), XMLoadFloat3(&up)) );
+	XMStoreFloat4x4( &m_viewMatrix, XMMatrixLookAtLH( XMLoadFloat3(&position), XMLoadFloat3(&target), tempUp) );
 
 	// Create Projection Matrix
 	XMStoreFloat4x4(&m_projectionMatrix, XMMatrixPerspectiveFovLH(m_fieldOfView, m_screenAspect, m_screenNear, m_screenDepth));
+
+	float height = CAMERA_HEIGHT;
+	float width = CAMERA_HEIGHT * m_screenAspect;
+
+	//XMStoreFloat4x4(&m_projectionMatrix, XMMatrixOrthographicLH(width, height, m_screenNear, m_screenDepth));
+										
 
 	return;
 }
@@ -127,4 +145,11 @@ void Camera::SetProjectionMatrix(float aFieldOfView, float anAspectRatio, float 
 	XMStoreFloat4x4(&m_projectionMatrix, XMMatrixPerspectiveFovLH(m_fieldOfView, m_screenAspect, m_screenNear, m_screenDepth));
 
 	return;
+}
+
+XMFLOAT3 Camera::GetNormalVector()
+{
+	XMFLOAT3 normal;
+	XMStoreFloat3( &normal, XMLoadFloat3( &position ) - XMLoadFloat3( &target ));
+	return normal;
 }
