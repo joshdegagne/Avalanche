@@ -6,6 +6,7 @@
 #include "DebugConsole.h"
 #include "Game.h"
 #include "Camera.h"
+#include "DebugDefinitions.h"
 
 #include "PlayerViewModel.h"
 
@@ -101,14 +102,17 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 
 	if(!result) return false;
 
-	result = initializeTextures(d3dDevice);
+	//result = initializeTextures(d3dDevice); // removed for new texturing system
 
 	return result;
 }
 
 bool PlayerViewModel::InitializeTextures(TextureManager* texMan) 
 {
+	//writeTextToConsole();
 	texture = texMan->loadTexture(textureFileName);
+
+	if (!texture) return false;
 
 	return true;
 }

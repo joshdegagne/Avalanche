@@ -42,7 +42,7 @@ bool ModelManager::initialize(Game& game)
 	models->add(new PlayerViewModel(game));
 	models->add(new LogViewModel());
 	models->add(new RockViewModel());
-//	models->add(new PlayfieldViewModel());
+	models->add(new PlayfieldViewModel());
 	models->add(new FinishLineViewModel());
 
 #ifdef COLLISION_DEBUG
@@ -63,17 +63,22 @@ bool ModelManager::initialize(Game& game)
 		
 		//success =
 
+
+
 		success = viewModel->InitializeVertexModels(game.getDevice());
 
 		
-		//viewModel->InitializeTextures(game.getTextureManager());
-
-
-		//models->elementAt(i)->InitializeTextures
-
 
 		if(!success)
+			return false;		
+
+		success = models->elementAt(i)->InitializeTextures(game.getTextureManager());
+
+
+		
+		if(!success)
 			return false;
+
 	}
 
 	return true;

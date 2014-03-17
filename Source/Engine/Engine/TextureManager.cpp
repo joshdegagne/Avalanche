@@ -27,26 +27,65 @@ void TextureManager::update(float elapsedTime)
 // add error checking with returning null tex
 Texture* TextureManager::loadTexture(WCHAR* filename)
 {
+	WCHAR ext[_MAX_EXT];
+	_wsplitpath_s( filename, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 	
 	Texture* texture = new Texture;
 
-	ScratchImage* image = new ScratchImage;
+	ScratchImage image;
+
+	HRESULT result;
 
 	//unique_ptr<ScratchImage> image (new ScratchImage);
 
-	HRESULT result = LoadFromWICFile(filename, WIC_FLAGS_NONE, NULL, *image);
+	// fails atm
+	//HRESULT result = LoadFromWICFile(filename, WIC_FLAGS_NONE, NULL, *image);
+	//HRESULT result = LoadFromDDSFile(filename, WIC_FLAGS_NONE, NULL, image);
+
+	if ( _wcsicmp( ext, L".dds" ) == 0 )
+	{
+		result = LoadFromDDSFile( filename, DDS_FLAGS_NONE, NULL, image );
+	}
+	else if ( _wcsicmp( ext, L".tga" ) == 0 )
+	{
+		result = LoadFromTGAFile( filename, NULL, image );
+	}
+	else
+	{
+		result = LoadFromWICFile( filename, WIC_FLAGS_NONE, NULL, image );
+	}
 
 	
 	if (FAILED(result)) 
 	{
 		return NULL;
 	}
+
+	// metadata is supported
+	bool support = IsSupportedTexture(device, image.GetMetadata());
 	
-	ID3D11ShaderResourceView* view;
+	//ID3D11ShaderResourceView* view;
+	//CreateShaderResourceView(device, image, image->GetPixelsSize(), NULL, view);
+	//CreateShaderResourceView(device, 
 
-	result = CreateDDSTextureFromMemory(device, image->GetPixels(), image->GetPixelsSize(), NULL, &view);
+	// dds magic number problem
+	//result = CreateDDSTextureFromMemory(device, image.GetPixels(), image.GetPixelsSize(), NULL, &view);
 
-	texture->Initialize(view);
+	ID3D11ShaderResourceView*  pSRV = nullptr;
+    result = CreateShaderResourceView( device,
+        image.GetImages(), image.GetImageCount(),
+        image.GetMetadata(), &pSRV );
+
+	// hunch: doesn't work since it's not a dds in memory?
+	//result = CreateDDSTextureFromMemory(device, image.GetPixels(), image.GetPixelsSize(), NULL, &pSRV);
+
+
+	if (FAILED(result)) 
+	{
+		return NULL;
+	}
+	
+	texture->Initialize(pSRV);
 
 	return texture;
 
