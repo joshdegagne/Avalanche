@@ -206,6 +206,11 @@ bool LogViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 }
 
+bool LogViewModel::InitializeTextures(TextureManager* texMan) 
+{
+	return true;
+}
+
 bool LogViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	
 	bool result;

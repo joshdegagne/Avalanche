@@ -4,13 +4,15 @@
 
 class RockObstacle;
 class ITexture;
+class TextureManager;
 
 class RockViewModel : public ViewModel<RockObstacle>
 {
 public:
 	RockViewModel();
 	virtual ~RockViewModel();
-
+	
+	bool InitializeTextures(TextureManager* texMan);
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:

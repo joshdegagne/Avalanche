@@ -1,6 +1,6 @@
 #include "Playfield.h"
 #include <random>
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 ////////////////////////
 #include "PlayerViewModel.h"
@@ -13,10 +13,10 @@
 
 
 
-Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f)
+Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(0.0025f)
 {
-	entities = new ArrayList<Entity>();
-	activePlayers = new ArrayList<Player>();
+	entities = new ArrayList<Entity>;
+	activePlayers = new ArrayList<Player>;
 	obstacleBag = new ObstacleBag;
 }
 
@@ -57,13 +57,33 @@ void Playfield::initialize(Game* game)
 #endif
 	}
 
-	addObstacleToPlayfield();
+	game->getModelManager()->add(*obstacleBag->pullFinishLine());
+	
+	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
+
 }
 
 
 void Playfield::update(float elapsed) 
 {
+	//Obstacle placement based on time
+	///////////////////////////////////
 	timer.update(elapsed);
+
+	#ifndef OBSTACLE_SPAWN_DEBUG
+	if (timer.getProgressPercentage() >= 1.0f)
+	{
+		placeObstacle(obstacleBag->pullFinishLine());
+	}
+
+	else if (timer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles)
+	{
+		previousProgressPercentage = timer.getProgressPercentage();
+		addObstacleToPlayfield();
+	}
+	#endif
+	///////////////////////////////////
+
 	for (int i = 0; i < entities->size(); ++i)
 	{
 		Entity* currEntity = entities->elementAt(i);
@@ -83,7 +103,7 @@ void Playfield::update(float elapsed)
 		}
 		currEntity->getBound()->update();
 	}
-	collisionManager->checkForCollisions();
+	collisionManager->checkForCollisions(elapsed);
 }
 
 void Playfield::timerCallback()
@@ -129,6 +149,8 @@ int Playfield::getLaneAlgorithm(Obstacle* obstacle)
 void Playfield::addObstacleToPlayfield()
 {
 	Obstacle* selectedObstacle = obstacleBag->pullRandomObstacle();
+	if (selectedObstacle == nullptr)
+		return;
 	int selectedLane = getLaneAlgorithm(selectedObstacle);
 	placeObstacle(selectedObstacle, selectedLane);
 }
@@ -162,19 +184,19 @@ void Playfield::checkPlayerBounds(Player* player)
 {
 	XMFLOAT3 position = player->getPosition(); 
 
-	if (position.y >= fieldWidth)
+	if (position.y + player->getBound()->getDimensions()->y >= fieldWidth)
 	{
 		player->lockLeftMovement();
 	}
-	else if (position.y <= 0)
+	else if (position.y - player->getBound()->getDimensions()->y <= 0)
 	{
 		player->lockRightMovement();
 	}
-	if (position.x >= fieldLength)
+	if (position.x + player->getBound()->getDimensions()->x >= fieldLength)
 	{
 		player->lockForwardMovement();
 	}
-	else if (position.x <= 0)
+	else if (position.x - player->getBound()->getDimensions()->x <= 0)
 	{
 		kill(player);
 	}

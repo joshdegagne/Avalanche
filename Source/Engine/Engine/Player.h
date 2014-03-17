@@ -28,18 +28,18 @@ class Player: public Entity {
 		//Constructors
 		Player(Game&, int);
 		~Player();
-		int			getPlayerNum();
-		void		update(float);
-		void		render(); 
 
-		void onCollide(Player&);	//NEW
-		void onCollide(Obstacle&);	//NEW
+		int	 getPlayerNum();
+		void update(float);
+
+		void onCollide(Player&, float);
+		void onCollide(Obstacle&);
 
 		void addListener(IPlayerListener&);
 		void removeListener(IPlayerListener&);
-		void addState(PlayerState&);				//NEW
-		void removeState(PlayerState&);				//NEW
-		bool containsState(PlayerStateType PST);		//NEW
+		void addState(PlayerState&);
+		void removeState(PlayerState&);
+		bool containsState(PlayerStateType PST);
 		
 		void lockLeftMovement(bool = true);
 		void lockRightMovement(bool = true);
@@ -47,14 +47,16 @@ class Player: public Entity {
 		
 	private:
 		KeyInput*	 keyboard;
-		int			 keys[8];
+		int			 keys[7];
 		ControllerInputManager*		controller;
 		ArrayList<PlayerState>		states;		//NEW
 		ArrayList<IPlayerListener>	listeners;	//NEW
 
+		//Flags for input
+		bool A_FLAG, B_FLAG, X_FLAG, Y_FLAG, LB_FLAG, RB_FLAG, LT_FLAG, RT_FLAG;
+
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
-		float		speed;
 		bool		movementLocks[3]; //Used for bounds checking in the playfield
 		float       jumpIncrement;
 

@@ -189,6 +189,15 @@
     <ClCompile Include="PlayfieldViewModel.cpp">
       <Filter>Source Files\Models\EntityModels</Filter>
     </ClCompile>
+    <ClCompile Include="FinishLineObstacle.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="FinishLineViewModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBumpState.cpp">
+      <Filter>Source Files\Entities\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -347,9 +356,17 @@
     <ClInclude Include="DebugDefinitions.h">
       <Filter>Header Files\Helper Headers</Filter>
     </ClInclude>
-
     <ClInclude Include="PlayfieldViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="FinishLineObstacle.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="FinishLineViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBumpState.h">
+      <Filter>Header Files\Entities\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

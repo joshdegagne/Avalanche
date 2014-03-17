@@ -3,22 +3,22 @@
 #include "ViewModel.h"
 #include "TextureManager.h"
 
-class LogObstacle;
+class FinishLineObstacle;
 class ITexture;
 class TextureManager;
 
-class LogViewModel : public ViewModel<LogObstacle>
+class FinishLineViewModel : public ViewModel<FinishLineObstacle>
 {
 public:
-	LogViewModel();
-	virtual ~LogViewModel();
-	
+	FinishLineViewModel();
+	virtual ~FinishLineViewModel();
+
 	bool InitializeTextures(TextureManager* texMan);
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:
 	bool initializeTextures(ID3D11Device* d3dDevice);
-	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, LogObstacle*);
+	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, FinishLineObstacle*);
 
 private:
 	static const int NUMBER_OF_TEXTURES = 3;

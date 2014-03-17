@@ -62,7 +62,7 @@ class Game
 		bool  Frame();
 		void  InitializeWindows(int&, int&);
 		void  ShutdownWindows();
-		float getElapsedTime();
+		float getElapsedTime(float timeModifier = 1.0f);
 
 		//Member Variables
 		LPCWSTR   applicationName;

@@ -94,6 +94,18 @@ bool Game::Initialize()
 		return false;
 	}
 
+	
+	///////////////
+	// Texturing //
+	///////////////
+	textureManager = new TextureManager();
+	if (!textureManager)
+		return false;
+
+	bool initialized = textureManager->initialize(*this);
+	if(!initialized)
+		return false;
+
 	///////////////
 	//Game Models//
 	///////////////
@@ -101,11 +113,13 @@ bool Game::Initialize()
 	if(!modelManager)
 		return false;
 
-	bool initialized = modelManager->initialize(*this);
+	initialized = modelManager->initialize(*this);
 	if(!initialized)
 		return false;
 
 	gameModels->addAll(modelManager->getGameModels());
+
+	
 
 	/////////////////////
 	//Collision Manager//
@@ -272,6 +286,9 @@ bool Game::Frame()
 
 	// playfield update
 	playfield->update(getElapsedTime());
+
+	// TextureManager updating of sprites
+	textureManager->update(getElapsedTime());
 	
 
 	// Do the frame processing for the graphics object.
@@ -284,11 +301,11 @@ bool Game::Frame()
 	return true;
 }
 
-float Game::getElapsedTime()
+float Game::getElapsedTime(float timeModifier)
 {
 	milliseconds elapsed = duration_cast <milliseconds>(high_resolution_clock::now().time_since_epoch()) - start;
 	start += elapsed;
-	return (float)elapsed.count();
+	return (float)elapsed.count()*timeModifier;
 }
 
 ArrayList<Player>* Game::GetPlayers()

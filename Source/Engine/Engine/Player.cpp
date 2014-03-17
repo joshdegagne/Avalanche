@@ -1,9 +1,11 @@
+#include <cmath>
+
 #include "Player.h"
 #include "ControllerInputManager.h"
 #include "KeyInput.h"
 #include "PlayerStatesList.h"
 
-#include "DebugConsole.h"
+#include "DebugDefinitions.h"
 
 Player::Player(Game& g, int pNum) : Entity(g)
 {
@@ -26,7 +28,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 	else if (playerNum == 1) //Player two (WASD)
 	{
@@ -37,7 +38,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = VK_SPACE;
 		keys[5] = ascii_Q;
 		keys[6] = ascii_E;
-		keys[7] = ascii_C;
 	}
 	else if (playerNum == 2) //Player three (TFGH)
 	{
@@ -48,7 +48,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[4] = 0;
 		keys[5] = 0;
 		keys[6] = 0;
-		keys[7] = 0;
 	}
 	else if (playerNum == 3) //Player four (IJKL)
 	{
@@ -57,17 +56,17 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[2] = ascii_I;
 		keys[3] = ascii_K;
 		keys[4] = 0;
-		keys[5] = 0;
-		keys[6] = 0;
-		keys[7] = 0;
+		keys[5] = ascii_U;
+		keys[6] = ascii_O;
 	}
+
+	A_FLAG = B_FLAG = X_FLAG = Y_FLAG = LB_FLAG = RB_FLAG = LT_FLAG = RT_FLAG =  false;
 
 	position.x = 0;
 	position.y = 0;
 	position.z = 0;
 	velocity.x = 0;
 	velocity.y = 0;
-	speed = 0;
 	lockLeftMovement(false);
 	lockRightMovement(false);
 	lockForwardMovement(false);
@@ -75,7 +74,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 
 	addState(*(new PlayerRegularState(*this)));
 
-	moveTo(1.0f, 1.0f * playerNum);
+	moveTo(10.0f, 0.75f + 1.5f * playerNum);
 }
 
 Player::~Player()
@@ -88,39 +87,111 @@ void Player::update(float elapsed)
 {
 	stop();
 
-	if (controller->isConnected(playerNum))
-		checkControllerInputs(elapsed);
-	else
-		checkKeyboardInputs(elapsed);
+	if (!containsState(PlayerStateType::PST_INJURED) && !containsState(PlayerStateType::PST_BUMPED))
+	{
+		if (controller->isConnected(playerNum))
+			checkControllerInputs(elapsed);
+		else
+			checkKeyboardInputs(elapsed);
+	}
 
 	for (int i = 0; i < states.size(); ++i)
 		states.elementAt(i)->update(elapsed);
+
 	///////////////////
 	//Update Position//
 	///////////////////
-	moveBy(velocity, speed);
-}
-
-void Player::render()
-{
+	moveBy(velocity);
 }
 
 ///////////////////////
 //Collision Functions//
 ///////////////////////
-void Player::onCollide(Player&)
+void Player::onCollide(Player& p, float elapsed)
 {
+	
+	#ifndef PLAYER_COLLIDE_PLAYER_DEBUG
 	if (!containsState(PlayerStateType::PST_INJURED))
 	{
+		//Rolling Collisions
+		if (p.containsState(PlayerStateType::PST_ROLL))
+		{
+			bool rollingLeft;
+			for(int i = 0; i < p.states.size(); ++i)
+			{
+				if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
+				{
+					rollingLeft = dynamic_cast<PlayerRollState*>(p.states.elementAt(i))->isRollingLeft();
+					break;
+				}
+			}
+
+			if (!containsState(PlayerStateType::PST_BUMPED))
+			{
+				addState(*new PlayerBumpState(*this,rollingLeft));
+			}
+
+			if (!containsState(PlayerStateType::PST_ROLL))
+			{
+				addState(*new PlayerInjuredState(*this));
+			}
+		}
+		//Jumping collisions
+		else if (p.containsState(PlayerStateType::PST_JUMP))
+		{
+			//Stomp
+			if (!containsState(PlayerStateType::PST_JUMP))
+			{
+				for(int i = 0; i < p.states.size(); ++i)
+				{
+					if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_JUMP)
+					{
+						if (p.states.elementAt(i)->getProgressPercentage() > 0.5f)
+						{
+							if (!containsState(PlayerStateType::PST_INJURED))
+								addState(*new PlayerInjuredState(*this));
+						}
+					}
+				}
+			}
+			//Uppercut
+			else
+			{
+				if (p.position.z < position.z)
+				{
+					for(int i = 0; i < p.states.size(); ++i)
+					{
+						if (p.states.elementAt(i)->getStateType() == PlayerStateType::PST_JUMP)
+						{
+							if (p.states.elementAt(i)->getProgressPercentage() < 0.5f)
+							{
+								if (!containsState(PlayerStateType::PST_INJURED))
+									addState(*new PlayerInjuredState(*this));
+							}
+						}
+					}
+				}	
+			}
+		}
+		else //two non rolling players
+		{
+			if (!containsState(PlayerStateType::PST_ROLL))
+			{
+				
+			}
+		}
 	}
+	#endif
 }
 
 void Player::onCollide(Obstacle&)
 {
+	#ifndef PLAYER_COLLIDE_OBSTACLE_DEBUG
 	if (!containsState(PlayerStateType::PST_INJURED))
 	{
 		addState(*new PlayerInjuredState(*this));
 	}
+	#endif
 }
 
 ////////////////////////////
@@ -199,19 +270,19 @@ void Player::checkControllerInputs(float elapsed)
 	{
 		if (LSX < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveLeft(elapsed);
+			moveLeft(elapsed, MOVEMENT_SPEED);
 		}
 		else if (LSX > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveRight(elapsed);
+			moveRight(elapsed, MOVEMENT_SPEED);
 		}
 		if (LSY > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveUp(elapsed);
+			moveUp(elapsed, MOVEMENT_SPEED*0.75f);
 		}
 		else if (LSY < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveDown(elapsed);
+			moveDown(elapsed, MOVEMENT_SPEED);
 		}
 	}
 
@@ -220,28 +291,70 @@ void Player::checkControllerInputs(float elapsed)
 	/////////////////
 	if (controller->getButtonA(playerNum))
 	{
-		jump();
+		if (!A_FLAG)
+		{
+			A_FLAG = true;
+			jump();
+		}
 	}
+	else
+		A_FLAG = false;
+
 	if (controller->getButtonB(playerNum))
 	{
-		//Ability?
+		if (!B_FLAG)
+		{
+			B_FLAG = true;
+			//Ability?
+		}
 	}
+	else
+		B_FLAG = false;
+
 	if (controller->getButtonX(playerNum))
 	{
-		//Ability?
+		if (!X_FLAG)
+		{
+			X_FLAG = true;
+			//Ability?
+		}
 	}
+	else
+		X_FLAG = false;
+
 	if (controller->getButtonY(playerNum))
 	{
-		//Ability?
+		if (!Y_FLAG)
+		{
+			Y_FLAG = true;
+			//Ability?
+		}
 	}
+	else
+		Y_FLAG = false;
+
 	if (controller->getButtonLB(playerNum))
 	{
-		//Roll left? Or would that be LT?
+		if (!LB_FLAG)
+		{
+			LB_FLAG = true;
+			rollLeft();
+		}
 	}
-	if (controller->getButtonRB(playerNum))
+	else
+		LB_FLAG = false;
+
+	if (controller->getButtonRB(playerNum) && !RB_FLAG)
 	{
-		//Roll right? Or would that be RT?
+		if (!RB_FLAG)
+		{
+			RB_FLAG = true;
+			rollRight();
+		}
 	}
+	else
+		RB_FLAG = false;
+
 	if (controller->getButtonStart(playerNum))
 	{
 		//Pause game?
@@ -257,58 +370,62 @@ void Player::checkControllerInputs(float elapsed)
 	float LT = controller->getLT(playerNum);
 	if (LT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
-		rollLeft();
+		if (!LT_FLAG)
+		{
+			LT_FLAG = true;
+			rollLeft();
+		}
 	}
+	else
+		LT_FLAG = false;
 
 	float RT = controller->getRT(playerNum);
 	if (RT > TRIGGER_ACTIVATION_THRESHOLD)
 	{
-		rollRight();
+		if (!RT_FLAG)
+		{
+			RT_FLAG = true;
+			rollRight();
+		}
 	}
+	else
+		RT_FLAG = false;
 }
 
 void Player::checkKeyboardInputs(float elapsed)
 {
-	if (!containsState(PlayerStateType::PST_INJURED))
+	if (!containsState(PlayerStateType::PST_ROLL))
 	{
-		if (!containsState(PlayerStateType::PST_ROLL))
+		if (keyboard->IsKeyDown(keys[0]))
 		{
-			if (keyboard->IsKeyDown(keys[0]))
-			{
-				moveLeft(elapsed);
-			}
-			else if (keyboard->IsKeyDown(keys[1])) 
-			{
-				moveRight(elapsed);
-			}
-			if (keyboard->IsKeyDown(keys[2]))
-			{
-				moveUp(elapsed);
-			}
-			else if (keyboard->IsKeyDown(keys[3]))
-			{
-				moveDown(elapsed);
-			}
-			if (keyboard->IsKeyDown(keys[4]))
-			{
-				jump();
-			}
+			moveLeft(elapsed);
 		}
-		if (!containsState(PlayerStateType::PST_JUMP))
+		else if (keyboard->IsKeyDown(keys[1])) 
 		{
-			if (keyboard->IsKeyDown(keys[5]))
-			{
-				rollLeft();
-			}
-			if (keyboard->IsKeyDown(keys[6]))
-			{
-				rollRight();
-			}
+			moveRight(elapsed);
 		}
-		if (keyboard->IsKeyDown(keys[7]))
+		if (keyboard->IsKeyDown(keys[2]))
 		{
-			if (!containsState(PlayerStateType::PST_INJURED))
-				addState(*(new PlayerInjuredState(*this)));
+			moveUp(elapsed);
+		}
+		else if (keyboard->IsKeyDown(keys[3]))
+		{
+			moveDown(elapsed);
+		}
+		if (keyboard->IsKeyDown(keys[4]))
+		{
+			jump();
+		}
+	}
+	if (!containsState(PlayerStateType::PST_JUMP))
+	{
+		if (keyboard->IsKeyDown(keys[5]))
+		{
+			rollLeft();
+		}
+		if (keyboard->IsKeyDown(keys[6]))
+		{
+			rollRight();
 		}
 	}
 	
@@ -322,8 +439,7 @@ void Player::moveLeft(float elapsed, float sp)
 {
 	if (!movementLocks[0])
 	{
-		speed = sp*elapsed;
-		velocity.y = speed;
+		velocity.y += sp*elapsed;
 		if (movementLocks[1])
 			lockRightMovement(false);
 	}
@@ -332,16 +448,14 @@ void Player::moveRight(float elapsed, float sp)
 {
 	if (!movementLocks[1])
 	{
-		speed = sp*elapsed;
-		velocity.y = -speed;
+		velocity.y += -sp*elapsed;
 		if (movementLocks[0])
 				lockLeftMovement(false);
 	}
 }
 void Player::moveUp(float elapsed, float sp)
 {
-	speed = sp*elapsed;
-	velocity.x = -speed;
+	velocity.x += -sp*elapsed;
 	if (movementLocks[2])
 		lockForwardMovement(false);
 }
@@ -349,8 +463,7 @@ void Player::moveDown(float elapsed, float sp)
 {
 	if (!movementLocks[2])
 	{
-		speed = sp*elapsed;
-		velocity.x = speed;
+		velocity.x += sp*elapsed;
 	}
 }
 

@@ -10,6 +10,7 @@
 #define PS_INJURED_DURATION 500.0f
 #define PS_JUMP_DURATION 600.0f
 #define PS_ROLL_DURATION 300.0f
+#define PS_BUMP_DURATION 200.0f
 
 enum class PlayerStateType : int 
 {
@@ -17,7 +18,8 @@ enum class PlayerStateType : int
 	PST_REGULAR, 
 	PST_INJURED,
 	PST_JUMP,
-	PST_ROLL
+	PST_ROLL,
+	PST_BUMPED
 };
 
 // Forward Declarations
@@ -38,6 +40,7 @@ public:
 	virtual void update(float) = 0;
 
 	PlayerStateType getStateType();
+	float getProgressPercentage();
 
 protected:
 	Player&			player;

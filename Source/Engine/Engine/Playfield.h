@@ -48,6 +48,8 @@ class Playfield : public ITimedObject
 		CollisionManager*		collisionManager;
 
 		Timer timer;
+		float previousProgressPercentage;
+		float percentageBetweenObstacles;
 
 		const float fieldLength;
 		const float fieldWidth;

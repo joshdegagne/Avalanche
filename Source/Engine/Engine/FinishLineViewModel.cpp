@@ -1,13 +1,12 @@
 
 #include "EntityType.h"
-#include "RockObstacle.h"
-#include "RockViewModel.h"
+#include "FinishLineObstacle.h"
+#include "FinishLineViewModel.h"
 #include "TextureShader.h"
 #include "ViewModel.cpp"
-#include "DebugConsole.h"
 
 
-RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_BIG)
+FinishLineViewModel::FinishLineViewModel() : ViewModel<FinishLineObstacle>(EntityType::FINISH)
 {
 	/*
 	pTextureFileNames is expected to be an array of 3 items
@@ -17,7 +16,7 @@ RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_BIG)
 	*/
 
 	int   numberOfFaces = 4;
-	float width = 1.0f;
+	float width = 6.0f;
 	float radius = 1.0f;
 	
 	m_textureFileNames = new WCHAR*[3];
@@ -152,11 +151,10 @@ RockViewModel::RockViewModel() : ViewModel<RockObstacle>(EntityType::ROCK_BIG)
 				 D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	orientRotateY(XM_PIDIV4);
-	orientRotateZ(XM_PIDIV2);
-	orientTranslate(0.0f, radius/2, radius/2);
+	orientTranslate(0.0f, width/2, 0.0f);
 }
 
-RockViewModel::~RockViewModel()
+FinishLineViewModel::~FinishLineViewModel()
 {
 	if(m_textureVertices)
 	{
@@ -194,7 +192,7 @@ RockViewModel::~RockViewModel()
 	}
 }
 
-bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
+bool FinishLineViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 	bool result = false;
 
@@ -205,17 +203,16 @@ bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 	result = initializeTextures(d3dDevice);
 
-	//writeTextToConsole(L"bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)");
 	return result;
 
-}  
+}
 
-bool RockViewModel::InitializeTextures(TextureManager* texMan) 
+bool FinishLineViewModel::InitializeTextures(TextureManager* texMan) 
 {
 	return true;
 }
 
-bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice){
+bool FinishLineViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	
 	bool result;
 
@@ -236,14 +233,12 @@ bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	      }
 	}
 
-	//writeTextToConsole(L"bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice)");
-
 	return true;
 }
 
-bool RockViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, RockObstacle* entity){
+bool FinishLineViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, FinishLineObstacle* entity){
 
-	if(!textureShader) return false; //we were not provided with a shader
+	if(!textureShader) return false; //we were not provided with a shader'
 
 	XMFLOAT3 positionVector = entity->getPosition();
 	positionVector.z +=0.2f;

@@ -4,13 +4,15 @@
 class Game;
 class Model;
 class Playfield;
+class TextureManager;
 
 class PlayfieldViewModel : public ViewModel<Playfield>
 {
 public:
 	PlayfieldViewModel();
 	~PlayfieldViewModel();
-
+	
+	bool InitializeTextures(TextureManager* texMan);
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:

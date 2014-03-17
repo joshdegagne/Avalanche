@@ -6,6 +6,7 @@
 #include "BoundViewModel.h"
 #include "RockViewModel.h"
 #include "PlayfieldViewModel.h"
+#include "FinishLineViewModel.h"
 
 #include "ModelManager.h"
 
@@ -40,6 +41,7 @@ bool ModelManager::initialize(Game& game)
 	models->add(new LogViewModel());
 	models->add(new RockViewModel());
 	models->add(new PlayfieldViewModel());
+	models->add(new FinishLineViewModel());
 
 #ifdef COLLISION_DEBUG
 	models->add(new BoundViewModel());
@@ -52,8 +54,19 @@ bool ModelManager::initialize(Game& game)
 	bool success;
 	for(int i=0; i< models->size(); i++)
 	{
-		IViewModel* viewModel = models->elementAt(i);		
+		IViewModel* viewModel = models->elementAt(i);
+
+		
+		// Textures
+		
+		//success =
 		success = viewModel->InitializeVertexModels(game.getDevice());
+
+		
+		//viewModel->InitializeTextures(game.getTextureManager());
+
+
+
 		if(!success)
 			return false;
 	}

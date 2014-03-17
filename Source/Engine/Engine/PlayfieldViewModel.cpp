@@ -78,6 +78,12 @@ bool PlayfieldViewModel::InitializeVertexModels(ID3D11Device* device)
 	return true;
 }
 
+bool PlayfieldViewModel::InitializeTextures(TextureManager* texMan) 
+{
+	return true;
+}
+
+
 bool PlayfieldViewModel::initializeTextures(ID3D11Device* device)
 {
 	int success;
