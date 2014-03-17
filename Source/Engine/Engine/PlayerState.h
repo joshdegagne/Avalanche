@@ -7,10 +7,10 @@
 #include "ITimedObject.h"
 
 #define PS_REGULAR_DURATION -1.0f
-#define PS_INJURED_DURATION 500.0f
+#define PS_INJURED_DURATION 800.0f
 #define PS_JUMP_DURATION 600.0f
-#define PS_ROLL_DURATION 300.0f
-#define PS_BUMP_DURATION 200.0f
+#define PS_ROLL_DURATION 100.0f
+#define PS_BUMP_DURATION 300.0f
 
 enum class PlayerStateType : int 
 {

@@ -103,7 +103,7 @@ void Player::update(float elapsed)
 	///////////////////
 	//Drag
 	#ifndef PLAYER_DRAG_DEBUG
-	moveUp(elapsed, MOVEMENT_SPEED*0.5f);
+	moveUp(elapsed, DRAG_SPEED/4);
 	#endif
 
 	moveBy(velocity);

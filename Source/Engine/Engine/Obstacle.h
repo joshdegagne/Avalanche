@@ -6,7 +6,6 @@
 #include "DirectXHelper.h"
 #include "Entity.h"
 
-#define OBSTACLE_DRAG_SPEED 0.0135f
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Obstacle

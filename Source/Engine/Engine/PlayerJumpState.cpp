@@ -39,10 +39,6 @@ void PlayerJumpState::timerCallback()
 void PlayerJumpState::updateJumpArc()
 {
 	player.setHeight( getJumpArc(timer.getProgressPercentage()*100) );
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Jump Progress% for Player = ", timer.getProgressPercentage());
-	writeLabelToConsole(L"Jump Height for Player = ", player.getPosition().z);
-	#endif
 }
 
 float PlayerJumpState::getJumpArc(float timerProgress)
