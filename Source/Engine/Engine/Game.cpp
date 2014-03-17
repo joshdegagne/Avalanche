@@ -98,6 +98,7 @@ bool Game::Initialize()
 	///////////////
 	// Texturing //
 	///////////////
+	
 	textureManager = new TextureManager();
 	if (!textureManager)
 		return false;
@@ -105,7 +106,7 @@ bool Game::Initialize()
 	bool initialized = textureManager->initialize(*this);
 	if(!initialized)
 		return false;
-
+	
 	///////////////
 	//Game Models//
 	///////////////
@@ -188,6 +189,12 @@ void Game::Shutdown()
 	{
 		delete modelManager;
 		modelManager = nullptr;
+	}
+
+	if (textureManager)
+	{
+		delete textureManager;
+		textureManager = nullptr;
 	}
 
 	if(players)
