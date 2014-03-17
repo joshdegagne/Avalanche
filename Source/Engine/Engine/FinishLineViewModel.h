@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ViewModel.h"
+#include "TextureManager.h"
 
 class FinishLineObstacle;
 class ITexture;
@@ -11,6 +12,7 @@ public:
 	FinishLineViewModel();
 	virtual ~FinishLineViewModel();
 
+	bool InitializeTextures(TextureManager* texMan);
 	bool InitializeVertexModels(ID3D11Device* d3dDevice);
 
 protected:
