@@ -26,7 +26,6 @@ void PlayerRegularState::initialize()
 
 void PlayerRegularState::update(float elapsedTime)
 {
-	player.moveUp(elapsedTime, MOVEMENT_SPEED*0.5f);
 	timer.update(elapsedTime);
 }
 

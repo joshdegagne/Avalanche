@@ -101,6 +101,11 @@ void Player::update(float elapsed)
 	///////////////////
 	//Update Position//
 	///////////////////
+	//Drag
+	#ifndef PLAYER_DRAG_DEBUG
+	moveUp(elapsed, MOVEMENT_SPEED*0.5f);
+	#endif
+
 	moveBy(velocity);
 }
 
