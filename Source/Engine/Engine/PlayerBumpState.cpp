@@ -1,5 +1,6 @@
 #include "PlayerBumpState.h"
 #include "Player.h"
+#include "PlayerInjuredState.h"
 
 #include "DebugDefinitions.h"
 
@@ -28,25 +29,23 @@ void PlayerBumpState::update(float elapsedTime)
 {
 	updateBumpArc();
 	if (bumpedLeft)
-		player.moveLeft(elapsedTime, MOVEMENT_SPEED*3.5f);
+		player.moveLeft(elapsedTime, MOVEMENT_SPEED);
 	else
-		player.moveRight(elapsedTime, MOVEMENT_SPEED*3.5f);
+		player.moveRight(elapsedTime, MOVEMENT_SPEED);
 	timer.update(elapsedTime);
 }
 
-void PlayerBumpState::timerCallback()
+void PlayerBumpState::timerCallback(Timer& t)
 {
 	updateBumpArc();
+	if(!player.containsState(PlayerStateType::PST_INJURED))
+		player.addState(*new PlayerInjuredState(player));
 	player.removeState(*this);
 }
 
 void PlayerBumpState::updateBumpArc()
 {
 	player.setHeight( getBumpArc(timer.getProgressPercentage()*100) );
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Bump Progress% for Player = ", timer.getProgressPercentage());
-	writeLabelToConsole(L"Bump Height for Player = ", player.getPosition().z);
-	#endif
 }
 
 float PlayerBumpState::getBumpArc(float timerProgress)

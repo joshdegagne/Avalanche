@@ -201,7 +201,7 @@ bool FinishLineViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 		if(!result) return false;
 	}
 
-	result = initializeTextures(d3dDevice);
+	//result = initializeTextures(d3dDevice); // removed for new texture system
 
 	return result;
 
@@ -209,6 +209,37 @@ bool FinishLineViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 bool FinishLineViewModel::InitializeTextures(TextureManager* texMan) 
 {
+	bool result;
+
+	// Create quad texture object.
+	const int NUMBER_OF_TEXTURES = 3; //one for the sides and one each for top and bottom
+	m_faceTextures = new Texture*[NUMBER_OF_TEXTURES];
+	if(!m_faceTextures)
+	{
+		return false;
+	}
+	// Initialize the textures on six faces of the cube model.
+	for(int i=0; i<NUMBER_OF_TEXTURES; i++){
+		  m_faceTextures[i] = new Texture;
+
+		  /*
+	      result = m_faceTextures[i]->Initialize(d3dDevice, m_textureFileNames[i]);
+	      if(!result)
+	      {
+		     return false;
+	      }
+
+		  */
+
+		  m_faceTextures[i] = texMan->loadTexture(m_textureFileNames[i]);
+		  if (!m_faceTextures[i])
+		  {
+			  return false;
+		  }
+	}
+
+	//writeTextToConsole(L"bool RockViewModel::initializeTextures(ID3D11Device* d3dDevice)");
+
 	return true;
 }
 

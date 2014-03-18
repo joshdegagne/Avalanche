@@ -6,28 +6,31 @@
 
 #include "DebugConsole.h"
 
-ObstacleBag::~ObstacleBag()
-{
-	delete finishLine;
+ObstacleBag::ObstacleBag()  { obstacleList = new ArrayList<Obstacle>; }
+ObstacleBag::~ObstacleBag() 
+{ 
+	while (obstacleList->size() > 0)
+	{
+		Obstacle* delObst = obstacleList->removeFirst();
+		delete delObst;
+	}
+	delete obstacleList; 
 }
 
 void ObstacleBag::initialize(Game* game)
 {
-	
-	obstacleList.add(new LogObstacle(*game));
-	obstacleList.add(new LogObstacle(*game));
-	obstacleList.add(new LogObstacle(*game));
-	obstacleList.add(new LogObstacle(*game));
-	obstacleList.add(new LogObstacle(*game));
-	obstacleList.add(new LogObstacle(*game));
-	obstacleList.add(new RockObstacle(*game));
-	obstacleList.add(new RockObstacle(*game));
-	obstacleList.add(new RockObstacle(*game));
-	obstacleList.add(new RockObstacle(*game));
-	obstacleList.add(new RockObstacle(*game));
-	obstacleList.add(new RockObstacle(*game));
-	
-	finishLine = new FinishLineObstacle(*game);
+	obstacleList->add(new LogObstacle(*game));
+	obstacleList->add(new LogObstacle(*game));
+	obstacleList->add(new LogObstacle(*game));
+	obstacleList->add(new LogObstacle(*game));
+	obstacleList->add(new LogObstacle(*game));
+	obstacleList->add(new LogObstacle(*game));
+	obstacleList->add(new RockObstacle(*game));
+	obstacleList->add(new RockObstacle(*game));
+	obstacleList->add(new RockObstacle(*game));
+	obstacleList->add(new RockObstacle(*game));
+	obstacleList->add(new RockObstacle(*game));
+	obstacleList->add(new RockObstacle(*game));
 }
 
 Obstacle* ObstacleBag::pullRandomObstacle()
@@ -46,8 +49,6 @@ Obstacle* ObstacleBag::pullRandomObstacle()
 	return nullptr;
 }
 
-Obstacle* ObstacleBag::pullFinishLine() { return finishLine; }
-
 Obstacle* ObstacleBag::getObstacleAlgorithm()
 {
 	std::random_device rd;
@@ -57,11 +58,5 @@ Obstacle* ObstacleBag::getObstacleAlgorithm()
 	return getObstacle(dis(gen));
 }
 
-Obstacle* ObstacleBag::getObstacle(int i) 
-{ 
-	return obstacleList.elementAt(i); 
-}
-int ObstacleBag::getNumObstacles() 
-{ 
-	return obstacleList.size(); 
-}
+Obstacle* ObstacleBag::getObstacle(int i) { return obstacleList->elementAt(i); }
+int ObstacleBag::getNumObstacles() { return obstacleList->size(); }

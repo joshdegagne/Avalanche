@@ -1,4 +1,5 @@
 #include "Timer.h"
+#include "DebugDefinitions.h"
 
 void Timer::initialize(float iTime, ITimedObject* object)
 {
@@ -14,11 +15,7 @@ void Timer::update(float elapsedTime)
 
 	time -= elapsedTime;
 	if (time <= 0)
-	{
-		time = 0;
-		originalObject->timerCallback(); //Calls callback function (NO IT DOES NOT NEED PARENTHESES)
-		//time = initialTime;
-	}
+		forceTimerEnd();
 }
 
 float Timer::getProgressPercentage()
@@ -27,4 +24,18 @@ float Timer::getProgressPercentage()
 	if (t < 0.0f)
 		t = 0.0f;
 	return 1.0f - t/initialTime;
+}
+
+void Timer::forceTimerEnd()
+{
+	time = 0;
+	originalObject->timerCallback(*this);
+}
+
+bool Timer::operator==(Timer& otherTimer)
+{
+	if (this == &otherTimer)
+		return true;
+	else
+		return false;
 }

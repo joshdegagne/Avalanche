@@ -33,7 +33,7 @@ void PlayerRollState::update(float elapsedTime)
 	timer.update(elapsedTime);
 }
 
-void PlayerRollState::timerCallback()
+void PlayerRollState::timerCallback(Timer& t)
 {
 	player.removeState(*this);
 }

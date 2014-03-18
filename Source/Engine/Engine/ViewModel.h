@@ -4,6 +4,7 @@
 #include "Model.h"
 #include "ViewModelBase.h"
 #include "Texture.h"
+#include "TextureManager.h"
 
 class Model;
 enum class EntityType;
@@ -22,6 +23,8 @@ public:
 	void Add(T* entity);
 
 	const std::type_info& GetType();
+
+	virtual void cleanUpArrayMemory();
 
 protected:
 	ViewModel(EntityType);

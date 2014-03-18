@@ -6,6 +6,7 @@
 #include "DebugConsole.h"
 #include "Game.h"
 #include "Camera.h"
+#include "DebugDefinitions.h"
 
 #include "PlayerViewModel.h"
 
@@ -89,7 +90,7 @@ PlayerViewModel::~PlayerViewModel()
 	//	delete [] textures;
 	//	textures = 0;
 	//}
-}
+	}
 
 bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 {
@@ -135,7 +136,7 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 
 	if(!result) return false;
 
-	result = initializeTextures(d3dDevice);
+	result = initializeTextures(d3dDevice); // removed for new texturing system
 
 	return result;
 }
@@ -143,6 +144,8 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 bool PlayerViewModel::InitializeTextures(TextureManager* texMan) 
 {
 	//texture = texMan->loadTexture(textureFileName);
+
+	//if (!texture) return false;
 
 	return true;
 }
@@ -158,7 +161,7 @@ bool PlayerViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	{
 		textures[i] = new Texture;
 		if(!textures)
-			return false;
+		return false;
 	
 	}
 
@@ -192,6 +195,8 @@ bool PlayerViewModel::initializeTextures(ID3D11Device* d3dDevice){
 
 bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, Player* entity)
 {
+	bool result = true;
+
 	if(!textureShader) return false; //we were not provided with a shader
 
 	XMFLOAT4X4 worldMatrix;
@@ -209,7 +214,7 @@ bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X
 	vertexModel->Render(deviceContext);
 
 	//render the game model
-	bool result = textureShader->Render(deviceContext, 
+	result = textureShader->Render(deviceContext, 
 										vertexModel->GetIndexCount(), 
 										worldMatrix, 
 										viewMatrix, 

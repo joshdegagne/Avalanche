@@ -7,6 +7,7 @@
 #include "RockViewModel.h"
 #include "PlayfieldViewModel.h"
 #include "FinishLineViewModel.h"
+#include "BoundViewModel.h"
 
 #include "ModelManager.h"
 
@@ -37,6 +38,7 @@ bool ModelManager::initialize(Game& game)
 		return false;
 
 	//create all the models
+	
 	models->add(new PlayerViewModel(game));
 	models->add(new LogViewModel());
 	models->add(new RockViewModel());
@@ -60,18 +62,32 @@ bool ModelManager::initialize(Game& game)
 		// Textures
 		
 		//success =
+
+
+
 		success = viewModel->InitializeVertexModels(game.getDevice());
 
 		
-		//viewModel->InitializeTextures(game.getTextureManager());
-
-
 
 		if(!success)
+			return false;		
+
+		success = models->elementAt(i)->InitializeTextures(game.getTextureManager());
+
+
+		
+		if(!success)
 			return false;
+
 	}
 
 	return true;
+}
+
+void ModelManager::cleanUpArrayMemory()
+{
+	for (int i = 0; i < models->size(); ++i)
+		models->elementAt(i)->cleanUpArrayMemory();
 }
 
 void ModelManager::update(float elapsedTime)

@@ -62,7 +62,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	*/
 	#ifdef ALL_DEBUG
 	AllocConsole();
-	writeTextToConsole(L"Hello World");
+	//writeTextToConsole(L"Hello World");
 	#endif
 	
 	// Create the system object.

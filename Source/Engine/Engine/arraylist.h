@@ -146,8 +146,10 @@ public:
 
 	void printOn(ostream & ostr) const
 	{
+		/*
 		for( int i = 0; i < numberOfElements; ++i )
 			cout << *(elements[i]) << endl;
+		*/
 	}
 
 
@@ -158,7 +160,7 @@ private:
 		if( numberOfElements == 0 ) 
 		{
 			const char* msg = "List is empty.";
-			cout << msg << endl;
+			//cout << msg << endl;
 			throw exception(msg);
 		}
 	}

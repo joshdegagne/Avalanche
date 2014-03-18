@@ -13,7 +13,7 @@
 
 
 
-Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(0.0025f)
+Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(1/(GAME_LENGTH/1000.0f)), endFlag(false)
 {
 	entities = new ArrayList<Entity>;
 	activePlayers = new ArrayList<Player>;
@@ -22,9 +22,10 @@ Playfield::Playfield() : fieldLength(20.0f), fieldWidth(6.0f), previousProgressP
 
 Playfield::~Playfield()
 {
+	game->getModelManager()->cleanUpArrayMemory();
+	collisionManager->cleanUpArrayMemory();
 	delete entities;
 	delete activePlayers;
-
 	delete obstacleBag;
 
 	entities = 0;
@@ -32,11 +33,13 @@ Playfield::~Playfield()
 	obstacleBag = 0;
 }
 
-void Playfield::initialize(Game* game)
+void Playfield::initialize(Game* g)
 {
+	game = g;
 	collisionManager = game->getCollisionManager();
 
-	timer.initialize(GAME_LENGTH, this);
+	playTimer.initialize(GAME_LENGTH, this);
+	endTimer.initialize(END_LENGTH, this);
 
 	populateLists(game);
 
@@ -44,71 +47,96 @@ void Playfield::initialize(Game* game)
 	{
 		game->getModelManager()->add(*activePlayers->elementAt(i));
 		collisionManager->addPlayerReference(*activePlayers->elementAt(i));
-#ifdef COLLISION_DEBUG
+		#ifdef COLLISION_DEBUG
 		game->getModelManager()->add(*activePlayers->elementAt(i)->getBound());
-#endif
+		#endif
 	}
 	for(int i = 0; i < obstacleBag->getNumObstacles(); ++i)
 	{
 		game->getModelManager()->add(*obstacleBag->getObstacle(i));
 		collisionManager->addObstacleReference(*obstacleBag->getObstacle(i));
-#ifdef COLLISION_DEBUG
+		#ifdef COLLISION_DEBUG
 		game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
-#endif
+		#endif
 	}
-
-	game->getModelManager()->add(*obstacleBag->pullFinishLine());
-	
-	writeLabelToConsole(L"Number of players connected: ", activePlayers->size());
-
 }
 
 
 void Playfield::update(float elapsed) 
 {
-	//Obstacle placement based on time
-	///////////////////////////////////
-	timer.update(elapsed);
-
-	#ifndef OBSTACLE_SPAWN_DEBUG
-	if (timer.getProgressPercentage() >= 1.0f)
+	if (!endFlag)
 	{
-		placeObstacle(obstacleBag->pullFinishLine());
-	}
+		//Obstacle placement based on time
+		///////////////////////////////////
+		playTimer.update(elapsed);
 
-	else if (timer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles)
-	{
-		previousProgressPercentage = timer.getProgressPercentage();
-		addObstacleToPlayfield();
-	}
-	#endif
-	///////////////////////////////////
-
-	for (int i = 0; i < entities->size(); ++i)
-	{
-		Entity* currEntity = entities->elementAt(i);
-
-		if (currEntity->getEntityType() == EntityType::PLAYER)
+		#ifndef OBSTACLE_SPAWN_DEBUG
+		if (playTimer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles && playTimer.getProgressPercentage() < 1.0f-(2.0f*percentageBetweenObstacles) )
 		{
-			checkPlayerBounds((Player*)currEntity);
-			currEntity->update(elapsed);
+			previousProgressPercentage = playTimer.getProgressPercentage();
+			addObstacleToPlayfield();
 		}
-		else
+		#endif
+		///////////////////////////////////
+
+		//This for loop is backwards because for SOME REASON, putting it the other way doesn't work with tie-breakers.
+		for (int i = entities->size()-1; i >=0 ; --i) 
 		{
-			currEntity->update(elapsed);
-			if (currEntity->getX() < -2.0f)
+			Entity* currEntity = entities->elementAt(i);
+
+			if (currEntity->getEntityType() == EntityType::PLAYER)
 			{
-				kill(currEntity);
+				checkPlayerBounds((Player*)currEntity);
+				currEntity->update(elapsed);
 			}
+			else
+			{
+				currEntity->update(elapsed);
+				if (currEntity->getX() < -2.0f)
+					kill(currEntity);
+			}
+			currEntity->getBound()->update();
 		}
-		currEntity->getBound()->update();
+		collisionManager->checkForCollisions(elapsed);
+
+		int counter = 0;
+		for (int i = 0; i < activePlayers->size(); ++i)
+			if (activePlayers->elementAt(i)->isDead())
+				++counter;
+		if (counter >= 3)
+			playTimer.forceTimerEnd();
 	}
-	collisionManager->checkForCollisions(elapsed);
+	else
+	{
+		for (int i = 0; i < activePlayers->size(); ++i)
+		{
+			if (!activePlayers->elementAt(i)->isDead())
+				activePlayers->elementAt(i)->moveBy(XMFLOAT2(MOVEMENT_SPEED*elapsed, 0.0f));
+		}
+
+		for (int i = 0; i < obstacleBag->getNumObstacles(); ++i)
+		{
+			Obstacle* currObst = obstacleBag->getObstacle(i);
+			if (!currObst->isDead())
+				currObst->update(elapsed);
+			if (currObst->getX() < -2.0f)
+				kill(currObst);
+		}
+		
+		endTimer.update(elapsed);
+	}
 }
 
-void Playfield::timerCallback()
+void Playfield::timerCallback(Timer& t)
 {
-	writeTextToConsole(L"Timer has finished! WHOOOOO");
+	if (t == playTimer)
+	{
+		endFlag = true;
+		for (int i = 0; i < activePlayers->size(); ++i)
+			activePlayers->elementAt(i)->lockForwardMovement(false);
+	}
+	else if (t == endTimer)
+		game->MarkPlayfieldEnd();
 }
 
 //////////////////////
@@ -159,22 +187,22 @@ void Playfield::kill(Entity* entity)
 {
 	entities->remove(entity);
 	entity->moveTo(DEAD_X, DEAD_Y); //Moves off to the side (should only be visible for testing)
+	entity->setDead(true);
 }
 
 
 //Places input obstacle at the "beginning" of the playfield. Optional: Specific lane input
 void Playfield::placeObstacle(Obstacle* obstacle, int lane)
 {
-	if (lane == -1) //Then randomize based on algorithm! :D
-		lane = 0;	//This should be the randomization call (temp value for testing)
+	if (lane == -1)
+		lane = 0;
 	else if (lane >= NUM_LANES)
 		lane = NUM_LANES - 1;
 
 	float laneLength = fieldWidth/NUM_LANES;
 	obstacle->moveTo(fieldLength, (laneLength)*(lane));
 	entities->add(obstacle);
-	writeTextToConsole(L"Moved obstacle to end of lane");
-
+	obstacle->setDead(false);
 }
 
 ///////////////
@@ -192,7 +220,7 @@ void Playfield::checkPlayerBounds(Player* player)
 	{
 		player->lockRightMovement();
 	}
-	if (position.x + player->getBound()->getDimensions()->x >= fieldLength)
+	if (position.x + player->getBound()->getDimensions()->x >= (fieldLength - 3.0f))
 	{
 		player->lockForwardMovement();
 	}

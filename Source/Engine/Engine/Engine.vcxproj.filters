@@ -296,9 +296,6 @@
     <ClInclude Include="BoundingBox.h">
       <Filter>Header Files\Entities\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="BoundViewModel.h">
-      <Filter>Header Files\Models\EntityModels</Filter>
-    </ClInclude>
     <ClInclude Include="RockViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
@@ -367,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="PlayerBumpState.h">
       <Filter>Header Files\Entities\States</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,8 @@
 
 #define SCROLL_SPEED 0.15f
 #define NUM_LANES 6
-#define GAME_LENGTH 300000.0f //5 Minutes
+#define GAME_LENGTH 60000.0f //1 Minute
+#define END_LENGTH  5000.0f //5 Seconds
 
 class Player; //Foward declaration needed in order to satisfy compiler
 class Game;
@@ -32,7 +33,7 @@ class Playfield : public ITimedObject
 		void initialize(Game*);
 		void update(float); // for scrolling
 
-		void timerCallback();
+		void timerCallback(Timer& t);
 
 		float getLength()	{ return fieldLength; }
 		float getWidth()	{ return fieldWidth; }
@@ -40,16 +41,19 @@ class Playfield : public ITimedObject
 		EntityType getEntityType() { return EntityType::PLAYFIELD; }
 
 	private:
+		Game* game;
 		ArrayList<Entity>*		entities;			//List of entities CURRENTLY BEING UPDATED
 		ArrayList<Player>*		activePlayers;		//List of players in the current match
-		//ArrayList<Obstacle>*	obstacles;			//List of obstacles (Finite bag/number of obstacles)
 		ObstacleBag*			obstacleBag;
 
 		CollisionManager*		collisionManager;
 
-		Timer timer;
+		Timer playTimer;
 		float previousProgressPercentage;
 		float percentageBetweenObstacles;
+
+		bool  endFlag;
+		Timer endTimer;
 
 		const float fieldLength;
 		const float fieldWidth;
@@ -58,9 +62,9 @@ class Playfield : public ITimedObject
 
 		int getLaneAlgorithm(Obstacle*);
 		void addObstacleToPlayfield();
-		//void addObstacleToPlayfield(Obstacle*, int lane = -1);
 		void kill(Entity*);
 		void placeObstacle(Obstacle*, int lane = -1);
 
 		void checkPlayerBounds(Player*);
+
 };

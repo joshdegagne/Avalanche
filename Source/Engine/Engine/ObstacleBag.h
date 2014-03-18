@@ -12,20 +12,17 @@
 class ObstacleBag
 {
 public:
+	ObstacleBag();
 	~ObstacleBag();
 	void initialize(Game*);
 
 	Obstacle*	pullRandomObstacle();
-	Obstacle*   pullFinishLine();
 
 	Obstacle*	getObstacle(int);
 	int			getNumObstacles();
 
 private:
-	ArrayList<Obstacle> obstacleList;
-	Obstacle*			finishLine;
+	ArrayList<Obstacle>* obstacleList;
 
 	Obstacle* getObstacleAlgorithm();
-
-
 };
