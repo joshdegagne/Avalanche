@@ -4,6 +4,7 @@
 #include "Model.h"
 #include "ViewModelBase.h"
 #include "Texture.h"
+#include "TextureManager.h"
 
 class Model;
 enum class EntityType;

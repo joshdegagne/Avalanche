@@ -71,7 +71,7 @@ bool PlayfieldViewModel::InitializeVertexModels(ID3D11Device* device)
 	if(!success) return false;
 
 	//INITIALIZE TEXTURES
-	success = initializeTextures(device);
+	//success = initializeTextures(device); // removed for new texture system
 
 	if(!success) return false;
 
@@ -80,6 +80,7 @@ bool PlayfieldViewModel::InitializeVertexModels(ID3D11Device* device)
 
 bool PlayfieldViewModel::InitializeTextures(TextureManager* texMan) 
 {
+	fieldTexture = texMan->loadTexture(L"textures/tempsnow2.dds");
 	return true;
 }
 

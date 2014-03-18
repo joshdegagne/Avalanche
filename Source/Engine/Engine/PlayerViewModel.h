@@ -28,4 +28,3 @@ private:
 	unsigned long*		indices;
 	Model*				vertexModel;
 };
-
