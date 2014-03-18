@@ -42,7 +42,7 @@ class Game
 		void Shutdown();
 		void Run();
 		void HandlePlayfieldEnd();
-		void HandlePauseRequest();	
+		void HandlePauseRequest(int);	
 
 		// Manager Getter/Setters
 		KeyInput*               getKeyInput()			{ return keyInput; }

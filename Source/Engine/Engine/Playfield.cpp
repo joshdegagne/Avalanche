@@ -68,9 +68,9 @@ void Playfield::update(float elapsed)
 	{
 		for (int i = 0; i < activePlayers->size(); ++i)
 		{
-			if (activePlayers->elementAt(i)->requestingPause())
+			if (activePlayers->elementAt(i)->requestingPause() && !activePlayers->elementAt(i)->isDead())
 			{
-				game->HandlePauseRequest();
+				game->HandlePauseRequest(i);
 				return;
 			}
 		}

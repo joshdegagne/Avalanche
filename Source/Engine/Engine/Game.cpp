@@ -350,10 +350,10 @@ void Game::HandlePlayfieldEnd()
 	writeTextToConsole(L"Press B (or ESCAPE) to end the program.");
 }
 
-void Game::HandlePauseRequest()
+void Game::HandlePauseRequest(int playerNum)
 {
 	//implementation pending
-	writeTextToConsole(L"Pause requested.");
+	writeLabelToConsole(L"Pause requested by Player: ", playerNum);
 }
 
 float Game::getElapsedTime(float timeModifier)
