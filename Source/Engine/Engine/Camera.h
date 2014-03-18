@@ -52,7 +52,7 @@ private:
 
 };
 
-const float	NOMINAL_FIELD_OF_VIEW = (float)XM_PI / 16.0f;
+const float	NOMINAL_FIELD_OF_VIEW = (float)XM_PI / 16.0f * 0.9f;
 const float CAMERA_SCREEN_DEPTH = 1000.0f;
 const float CAMERA_SCREEN_NEAR = 0.1f;
 const float CAMERA_HEIGHT = 16.0f;
