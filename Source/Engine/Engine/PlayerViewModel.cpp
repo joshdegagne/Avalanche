@@ -13,7 +13,10 @@
 const float WIDTH	= 1.0f;
 const float HEIGHT	= 1.0f;
 
-WCHAR* TEXTURE = L"textures/iceclimberhead.dds";
+WCHAR* TEXTURE = L"textures/iceclimberblue.png";
+WCHAR* TEXTURE_RED = L"textures/iceclimberred.png";
+WCHAR* TEXTURE_GREEN = L"textures/iceclimbergreen.png";
+WCHAR* TEXTURE_YELLOW = L"textures/iceclimberyellow.png";
 
 PlayerViewModel::PlayerViewModel(Game& game) : ViewModel<Player>(EntityType::PLAYER)
 {
@@ -35,6 +38,7 @@ PlayerViewModel::PlayerViewModel(Game& game) : ViewModel<Player>(EntityType::PLA
 
 	//potentially dangerous, we should probably make a copy of the string and
 	//release it ourselves later
+	//if (game.GetPlayers()->elementAt(0)->getPlayerNum
 	textureFileName = TEXTURE;
 
 	//Quad Face

@@ -56,12 +56,8 @@ bool ModelManager::initialize(Game& game)
 	bool success;
 	for(int i=0; i< models->size(); i++)
 	{
-		IViewModel* viewModel = models->elementAt(i);
-
-		
-		// Textures
-		
-		//success =
+		//IViewModel* viewModel = models->elementAt(i);
+		ViewModelBase* viewModel = models->elementAt(i);
 
 
 
@@ -72,8 +68,11 @@ bool ModelManager::initialize(Game& game)
 		if(!success)
 			return false;		
 
-		success = models->elementAt(i)->InitializeTextures(game.getTextureManager());
-
+		//if (game.GetPlayers()->)
+		//{
+		//success = models->elementAt(i)->InitializeTextures(game.getTextureManager());
+		success = viewModel->InitializeTextures(game.getTextureManager());
+		//}
 
 		
 		if(!success)
