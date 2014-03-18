@@ -284,11 +284,12 @@ bool Game::Frame()
 
 	if (playfield)
 	{
+		float time = getElapsedTime();
 		// playfield update
-		playfield->update(getElapsedTime());
+		playfield->update(time);
 
 		// TextureManager updating of sprites
-		textureManager->update(getElapsedTime());
+		textureManager->update(time);
 	
 
 		// Do the frame processing for the graphics object.
@@ -330,7 +331,7 @@ bool Game::InitializePlayfield()
 	return true;
 }
 
-void Game::MarkPlayfieldEnd()
+void Game::HandlePlayfieldEnd()
 {
 	delete playfield;
 	playfield = 0;
@@ -347,6 +348,12 @@ void Game::MarkPlayfieldEnd()
 	writeTextToConsole(L"Game has ended!");
 	writeTextToConsole(L"Press A (or SPACE) to play again!");
 	writeTextToConsole(L"Press B (or ESCAPE) to end the program.");
+}
+
+void Game::HandlePauseRequest()
+{
+	//implementation pending
+	writeTextToConsole(L"Pause requested.");
 }
 
 float Game::getElapsedTime(float timeModifier)

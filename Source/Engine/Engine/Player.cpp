@@ -66,7 +66,7 @@ Player::~Player()
 
 void Player::initialize()
 {
-	A_FLAG = B_FLAG = X_FLAG = Y_FLAG = LB_FLAG = RB_FLAG = LT_FLAG = RT_FLAG =  false;
+	A_FLAG = B_FLAG = X_FLAG = Y_FLAG = LB_FLAG = RB_FLAG = LT_FLAG = RT_FLAG = START_FLAG =  false;
 
 	position.x = 0;
 	position.y = 0;
@@ -85,7 +85,6 @@ void Player::initialize()
 	moveTo(10.0f, 5.5f - 1.5f * playerNum);
 }
 
-int Player::getPlayerNum() { return playerNum; }
 
 void Player::update(float elapsed)
 {
@@ -111,6 +110,25 @@ void Player::update(float elapsed)
 	#endif
 
 	moveBy(velocity);
+}
+
+int Player::getPlayerNum() { return playerNum; }
+
+bool Player::requestingPause()
+{
+	if (controller->getButtonStart(playerNum))
+	{
+		if (!START_FLAG)
+		{
+			START_FLAG = true;
+			return true;
+		}
+	}
+	else
+		START_FLAG = false;
+
+	return false;
+
 }
 
 ///////////////////////

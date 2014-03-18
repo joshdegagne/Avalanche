@@ -66,6 +66,14 @@ void Playfield::update(float elapsed)
 {
 	if (!endFlag)
 	{
+		for (int i = 0; i < activePlayers->size(); ++i)
+		{
+			if (activePlayers->elementAt(i)->requestingPause())
+			{
+				game->HandlePauseRequest();
+				return;
+			}
+		}
 		//Obstacle placement based on time
 		///////////////////////////////////
 		playTimer.update(elapsed);
@@ -136,7 +144,7 @@ void Playfield::timerCallback(Timer& t)
 			activePlayers->elementAt(i)->lockForwardMovement(false);
 	}
 	else if (t == endTimer)
-		game->MarkPlayfieldEnd();
+		game->HandlePlayfieldEnd();
 }
 
 //////////////////////

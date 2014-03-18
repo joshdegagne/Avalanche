@@ -30,9 +30,10 @@ class Player: public Entity {
 		~Player();
 
 		void initialize();
-
-		int	 getPlayerNum();
 		void update(float);
+		
+		int	 getPlayerNum();
+		bool requestingPause();
 
 		void onCollide(Player&, float);
 		void onCollide(Obstacle&);
@@ -55,7 +56,7 @@ class Player: public Entity {
 		ArrayList<IPlayerListener>	listeners;	//NEW
 
 		//Flags for input
-		bool A_FLAG, B_FLAG, X_FLAG, Y_FLAG, LB_FLAG, RB_FLAG, LT_FLAG, RT_FLAG;
+		bool A_FLAG, B_FLAG, X_FLAG, Y_FLAG, LB_FLAG, RB_FLAG, LT_FLAG, RT_FLAG, START_FLAG;
 
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;

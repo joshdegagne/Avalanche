@@ -33,8 +33,6 @@ class CollisionManager;
 ////////////////////////////////////////////////////////////////////////////////
 class Game
 {
-	friend class Playfield;
-
 	public:
 		Game(); 
 		Game(const Game&);
@@ -43,7 +41,8 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
-		void MarkPlayfieldEnd();
+		void HandlePlayfieldEnd();
+		void HandlePauseRequest();	
 
 		// Manager Getter/Setters
 		KeyInput*               getKeyInput()			{ return keyInput; }
