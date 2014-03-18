@@ -113,8 +113,8 @@ void Camera::Render()
 	// Create Projection Matrix
 	XMStoreFloat4x4(&m_projectionMatrix, XMMatrixPerspectiveFovLH(m_fieldOfView, m_screenAspect, m_screenNear, m_screenDepth));
 
-	float height = CAMERA_HEIGHT;
-	float width = CAMERA_HEIGHT * m_screenAspect;
+	//float height = CAMERA_HEIGHT;
+	//float width = CAMERA_HEIGHT * m_screenAspect;
 
 	//XMStoreFloat4x4(&m_projectionMatrix, XMMatrixOrthographicLH(width, height, m_screenNear, m_screenDepth));
 										

@@ -23,9 +23,11 @@ protected:
 
 private:
 	WCHAR*				textureFileName;
-	ITexture*			texture;
+	ITexture*			textures[4];
+	ITexture*			shadowTexture;
 	TextureVertexType*	textureVertices;
 	unsigned long*		indices;
 	Model*				vertexModel;
+	Model*				shadowVertexModel;
 };
 
