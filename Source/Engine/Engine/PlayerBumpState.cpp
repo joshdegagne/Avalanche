@@ -38,18 +38,14 @@ void PlayerBumpState::update(float elapsedTime)
 void PlayerBumpState::timerCallback(Timer& t)
 {
 	updateBumpArc();
-	player.removeState(*this);
 	if(!player.containsState(PlayerStateType::PST_INJURED))
 		player.addState(*new PlayerInjuredState(player));
+	player.removeState(*this);
 }
 
 void PlayerBumpState::updateBumpArc()
 {
 	player.setHeight( getBumpArc(timer.getProgressPercentage()*100) );
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Bump Progress% for Player = ", timer.getProgressPercentage());
-	writeLabelToConsole(L"Bump Height for Player = ", player.getPosition().z);
-	#endif
 }
 
 float PlayerBumpState::getBumpArc(float timerProgress)

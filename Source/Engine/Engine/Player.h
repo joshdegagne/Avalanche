@@ -29,6 +29,8 @@ class Player: public Entity {
 		Player(Game&, int);
 		~Player();
 
+		void initialize();
+
 		int	 getPlayerNum();
 		void update(float);
 
@@ -58,7 +60,6 @@ class Player: public Entity {
 		int			playerNum; //This was created for use with the ControllerInputManager. Valid nums are [0-3]
 		XMFLOAT2	velocity;
 		bool		movementLocks[3]; //Used for bounds checking in the playfield
-		float       jumpIncrement;
 
 		void checkControllerInputs(float);
 		void checkKeyboardInputs(float);

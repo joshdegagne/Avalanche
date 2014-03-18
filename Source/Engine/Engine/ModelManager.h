@@ -21,6 +21,7 @@ public:
 	ArrayList<IViewModel>* getGameModels() { return (ArrayList<IViewModel>*) models; }
 
 	template<class T> void add(T& entity);
+	void cleanUpArrayMemory();
 private:
 	ArrayList<ViewModelBase>* models;
 };

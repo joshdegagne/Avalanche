@@ -9,6 +9,7 @@ Entity::Entity(Game& g, float x, float y)
 	position.x = x;
 	position.y = y;
 	position.z = 0;
+	dead = false;
 
 	bound = new BoundingBox();
 }
@@ -16,6 +17,9 @@ Entity::~Entity()
 {
 	delete bound;
 }
+
+bool Entity::isDead() { return dead; }
+void Entity::setDead(bool d) { dead = d; }
 
 float Entity::getX() { return position.x; }
 float Entity::getY() { return position.y; }

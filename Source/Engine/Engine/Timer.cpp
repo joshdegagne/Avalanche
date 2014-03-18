@@ -15,11 +15,7 @@ void Timer::update(float elapsedTime)
 
 	time -= elapsedTime;
 	if (time <= 0)
-	{
-		time = 0;
-		originalObject->timerCallback(*this);
-		//time = initialTime;
-	}
+		forceTimerEnd();
 }
 
 float Timer::getProgressPercentage()
@@ -28,6 +24,12 @@ float Timer::getProgressPercentage()
 	if (t < 0.0f)
 		t = 0.0f;
 	return 1.0f - t/initialTime;
+}
+
+void Timer::forceTimerEnd()
+{
+	time = 0;
+	originalObject->timerCallback(*this);
 }
 
 bool Timer::operator==(Timer& otherTimer)

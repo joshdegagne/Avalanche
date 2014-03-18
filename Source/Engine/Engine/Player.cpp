@@ -12,9 +12,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 	type = EntityType::PLAYER;
 
 	bound->initialize(this);
-
-	writeLabelToConsole(L"Bottom of the player's bounding box: ",bound->getPosition()->z);
-
+	
 	controller	= g.getControllerManager();
 	keyboard	= g.getKeyInput();
 
@@ -60,6 +58,14 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[6] = ascii_O;
 	}
 
+}
+
+Player::~Player()
+{
+}
+
+void Player::initialize()
+{
 	A_FLAG = B_FLAG = X_FLAG = Y_FLAG = LB_FLAG = RB_FLAG = LT_FLAG = RT_FLAG =  false;
 
 	position.x = 0;
@@ -70,15 +76,13 @@ Player::Player(Game& g, int pNum) : Entity(g)
 	lockLeftMovement(false);
 	lockRightMovement(false);
 	lockForwardMovement(false);
-	jumpIncrement = 0.0f;
+	setDead(false);
 
-	addState(*(new PlayerRegularState(*this)));
+	
+	while (states.size() > 0 && !containsState(PlayerStateType::PST_REGULAR))
+		states.removeFirst();
 
-	moveTo(10.0f, 0.75f + 1.5f * playerNum);
-}
-
-Player::~Player()
-{
+	moveTo(10.0f, 5.5f - 1.5f * playerNum);
 }
 
 int Player::getPlayerNum() { return playerNum; }

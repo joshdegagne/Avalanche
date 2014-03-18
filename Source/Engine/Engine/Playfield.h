@@ -41,6 +41,7 @@ class Playfield : public ITimedObject
 		EntityType getEntityType() { return EntityType::PLAYFIELD; }
 
 	private:
+		Game* game;
 		ArrayList<Entity>*		entities;			//List of entities CURRENTLY BEING UPDATED
 		ArrayList<Player>*		activePlayers;		//List of players in the current match
 		ObstacleBag*			obstacleBag;
@@ -48,9 +49,11 @@ class Playfield : public ITimedObject
 		CollisionManager*		collisionManager;
 
 		Timer playTimer;
-		Timer endTimer;
 		float previousProgressPercentage;
 		float percentageBetweenObstacles;
+
+		bool  endFlag;
+		Timer endTimer;
 
 		const float fieldLength;
 		const float fieldWidth;
@@ -63,4 +66,5 @@ class Playfield : public ITimedObject
 		void placeObstacle(Obstacle*, int lane = -1);
 
 		void checkPlayerBounds(Player*);
+
 };

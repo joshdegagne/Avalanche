@@ -43,6 +43,7 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
+		void MarkPlayfieldEnd();
 
 		// Manager Getter/Setters
 		KeyInput*               getKeyInput()			{ return keyInput; }
@@ -63,6 +64,7 @@ class Game
 		void  InitializeWindows(int&, int&);
 		void  ShutdownWindows();
 		float getElapsedTime(float timeModifier = 1.0f);
+		bool  InitializePlayfield();
 
 		//Member Variables
 		LPCWSTR   applicationName;

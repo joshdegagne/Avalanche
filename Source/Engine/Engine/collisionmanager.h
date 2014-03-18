@@ -19,6 +19,7 @@ class CollisionManager
 public:
 	CollisionManager();
 	~CollisionManager();
+	void cleanUpArrayMemory();
 	void addPlayerReference(Player&);
 	void addObstacleReference(Obstacle&);
 	void checkForCollisions(float);

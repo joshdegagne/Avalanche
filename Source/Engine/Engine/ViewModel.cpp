@@ -45,6 +45,13 @@ const std::type_info& ViewModel<T>::GetType()
 }
 
 template <class T>
+void ViewModel<T>::cleanUpArrayMemory()
+{
+	while (entityList->size() > 0)
+		entityList->removeFirst();
+}
+
+template <class T>
 XMFLOAT4X4 ViewModel<T>::GetOrientation()
 {
     

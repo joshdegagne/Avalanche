@@ -74,6 +74,12 @@ bool ModelManager::initialize(Game& game)
 	return true;
 }
 
+void ModelManager::cleanUpArrayMemory()
+{
+	for (int i = 0; i < models->size(); ++i)
+		models->elementAt(i)->cleanUpArrayMemory();
+}
+
 void ModelManager::update(float elapsedTime)
 {
 	// nothing to update

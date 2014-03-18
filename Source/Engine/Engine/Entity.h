@@ -7,7 +7,7 @@
 #include "DirectXHelper.h"
 #include "EntityBase.h"
 
-#define DEAD_X 25.0f
+#define DEAD_X 50.0f
 #define DEAD_Y 0.0f
 #define DEAD_Z 0.0f
 #define DRAG_SPEED 0.0135f
@@ -23,10 +23,13 @@ class Entity : public EntityBase {
 		//Constructors
 		Entity(Game&, float = DEAD_X, float = DEAD_Y);
 		~Entity();
+		bool isDead();
+		void setDead(bool);
 
 	protected:
 		XMFLOAT3	 position;
 		BoundingBox* bound;
+		bool dead;
 
 	public:
 		float getX();

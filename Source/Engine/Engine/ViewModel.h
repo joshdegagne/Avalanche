@@ -23,6 +23,8 @@ public:
 
 	const std::type_info& GetType();
 
+	virtual void cleanUpArrayMemory();
+
 protected:
 	ViewModel(EntityType);
 

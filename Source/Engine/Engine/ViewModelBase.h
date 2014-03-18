@@ -16,6 +16,7 @@ public:
 	EntityType	GetAssociatedType();
 
 	const virtual std::type_info& GetType() = 0;
+	virtual void cleanUpArrayMemory() = 0;
 
 protected:
 	ViewModelBase(EntityType);

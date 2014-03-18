@@ -136,17 +136,10 @@ bool Game::Initialize()
 		players->add(player);
 	}
 
-	playfield = new Playfield();
-	if (!playfield)
+	bool pResult = InitializePlayfield();
+	if (!pResult)
 		return false;
-	playfield->initialize(this);
 
-	modelManager->add(*playfield);
-	
-	
-	//gameModels->addAll(playfield->getGameModels());
-	
-	
 	return true;
 }
 
@@ -280,25 +273,73 @@ bool Game::Frame()
 
 	// Check if the user pressed the back button and wants to exit the application.
 	if (conInput->getButtonBack(0))
-	{
 		return false;
-	}
 
-	// playfield update
-	playfield->update(getElapsedTime());
+	if (playfield)
+	{
+		// playfield update
+		playfield->update(getElapsedTime());
 
-	// TextureManager updating of sprites
-	textureManager->update(getElapsedTime());
+		// TextureManager updating of sprites
+		textureManager->update(getElapsedTime());
 	
 
-	// Do the frame processing for the graphics object.
-	result = graphics->Render(gameModels);
-	if(!result)
+		// Do the frame processing for the graphics object.
+		result = graphics->Render(gameModels);
+		if(!result)
+		{
+			return false;
+		}
+	}
+	else
 	{
-		return false;
+		if (conInput->getButtonB(0) || conInput->getButtonB(1) || conInput->getButtonB(2) || conInput->getButtonB(3) || keyInput->IsKeyDown(VK_ESCAPE))
+		{
+			return false;
+		}
+		if (conInput->getButtonA(0) || conInput->getButtonA(1) || conInput->getButtonA(2) || conInput->getButtonA(3) || keyInput->IsKeyDown(VK_SPACE))
+		{
+			bool pResult = InitializePlayfield();
+			getElapsedTime();
+			return pResult;
+		}
 	}
 
 	return true;
+}
+
+bool Game::InitializePlayfield()
+{
+	for (int i = 0; i < NUMPLAYERS; ++i)
+		players->elementAt(i)->initialize();
+	
+	playfield = new Playfield();
+	if (!playfield)
+		return false;
+	playfield->initialize(this);
+
+	modelManager->add(*playfield);
+	
+	return true;
+}
+
+void Game::MarkPlayfieldEnd()
+{
+	delete playfield;
+	playfield = 0;
+	writeTextToConsole(L"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	for (int i = 0; i < players->size(); ++i)
+	{
+		writeTextToConsole(L"Player ", false);
+		writeNumToConsole(players->elementAt(i)->getPlayerNum(), false);
+		if (!players->elementAt(i)->isDead())
+			writeTextToConsole(L" survived!");
+		else
+			writeTextToConsole(L" died...");
+	}
+	writeTextToConsole(L"Game has ended!");
+	writeTextToConsole(L"Press A (or SPACE) to play again!");
+	writeTextToConsole(L"Press B (or ESCAPE) to end the program.");
 }
 
 float Game::getElapsedTime(float timeModifier)
