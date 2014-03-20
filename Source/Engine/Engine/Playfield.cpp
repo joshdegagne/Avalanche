@@ -59,6 +59,8 @@ void Playfield::initialize(Game* g)
 		game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
 		#endif
 	}
+
+	scrollAmount = 0;
 }
 
 
@@ -133,6 +135,10 @@ void Playfield::update(float elapsed)
 		
 		endTimer.update(elapsed);
 	}
+
+	scrollAmount += DRAG_SPEED*elapsed / getLength();
+	if(scrollAmount > 1.0f)
+		scrollAmount -= 1.0f;
 }
 
 void Playfield::timerCallback(Timer& t)

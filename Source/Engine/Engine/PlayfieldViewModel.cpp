@@ -108,11 +108,33 @@ bool PlayfieldViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOA
 
 	//SNOWFIELD MODEL RENDER
 	XMFLOAT4X4 snowFieldMatrix;
-	XMStoreFloat4x4(&snowFieldMatrix, XMLoadFloat4x4( &worldMatrix) * XMMatrixScaling(entity->getLength(), entity->getWidth(), 0.0f));
+	XMStoreFloat4x4(&snowFieldMatrix, XMLoadFloat4x4( &worldMatrix) * XMMatrixTranslation(-entity->getScrollAmount(), 0.0f, 0.0f) * XMMatrixScaling(entity->getLength(), entity->getWidth(), 0.0f));
 
 	fieldVertexModel->Render(deviceContext);
 
 	bool result = textureShader->Render(deviceContext, 
+										fieldVertexModel->GetIndexCount(), 
+										snowFieldMatrix, 
+										viewMatrix, 
+										projectionMatrix,
+										fieldTexture->GetTexture()); //get the texture to render
+
+	XMStoreFloat4x4(&snowFieldMatrix, XMLoadFloat4x4( &worldMatrix) * XMMatrixTranslation(-entity->getScrollAmount() + 1.0f, 0.0f, 0.0f) * XMMatrixScaling(entity->getLength(), entity->getWidth(), 0.0f));
+
+	fieldVertexModel->Render(deviceContext);
+
+	result = textureShader->Render(deviceContext, 
+										fieldVertexModel->GetIndexCount(), 
+										snowFieldMatrix, 
+										viewMatrix, 
+										projectionMatrix,
+										fieldTexture->GetTexture()); //get the texture to render
+
+	XMStoreFloat4x4(&snowFieldMatrix, XMLoadFloat4x4( &worldMatrix) * XMMatrixTranslation(-entity->getScrollAmount() - 1.0f, 0.0f, 0.0f) * XMMatrixScaling(entity->getLength(), entity->getWidth(), 0.0f));
+
+	fieldVertexModel->Render(deviceContext);
+
+	result = textureShader->Render(deviceContext, 
 										fieldVertexModel->GetIndexCount(), 
 										snowFieldMatrix, 
 										viewMatrix, 
