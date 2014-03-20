@@ -38,6 +38,8 @@ class Playfield : public ITimedObject
 		float getLength()	{ return fieldLength; }
 		float getWidth()	{ return fieldWidth; }
 
+		float getScrollAmount() { return scrollAmount; }
+
 		EntityType getEntityType() { return EntityType::PLAYFIELD; }
 
 	private:
@@ -47,6 +49,8 @@ class Playfield : public ITimedObject
 		ObstacleBag*			obstacleBag;
 
 		CollisionManager*		collisionManager;
+
+		float scrollAmount;
 
 		Timer playTimer;
 		float previousProgressPercentage;
