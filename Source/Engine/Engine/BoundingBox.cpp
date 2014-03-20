@@ -33,6 +33,12 @@ void BoundingBox::initialize(Entity* e)
 		dimensions = XMFLOAT3(1.1f, 1.5f, 1.45f);
 		offset     = XMFLOAT3(0.0f, 0.5f, 0.0f);
 	}
+	else if (parent->getEntityType() == EntityType::TREE)
+	{
+		
+		dimensions = XMFLOAT3(1.0f, 1.0f, 6.0f);
+		offset     = XMFLOAT3(0.0f, 0.5f, 0.0f);
+	}
 	else
 	{
 		dimensions = XMFLOAT3(1.0f, 1.0f, 1.0f);
