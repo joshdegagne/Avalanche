@@ -198,6 +198,12 @@
     <ClCompile Include="PlayerBumpState.cpp">
       <Filter>Source Files\Entities\States</Filter>
     </ClCompile>
+    <ClCompile Include="TreeViewModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeObstacle.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -367,6 +373,12 @@
     </ClInclude>
     <ClInclude Include="BoundViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeObstacle.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

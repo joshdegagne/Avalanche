@@ -1,14 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Filename: LogObstacle.h
+// Filename: TreeObstacle.h
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
 #include "Obstacle.h"
 
-class LogObstacle : public Obstacle
+class TreeObstacle : public Obstacle
 {
 public:
-	LogObstacle(Game&);
+	TreeObstacle(Game&);
 
 private:
 

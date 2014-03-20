@@ -121,6 +121,8 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TextureShader.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TreeObstacle.cpp" />
+    <ClCompile Include="TreeViewModel.cpp" />
     <ClCompile Include="ViewModel.cpp" />
     <ClCompile Include="ViewModelBase.cpp" />
     <ClCompile Include="XYZaxis.cpp" />
@@ -178,6 +180,8 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TextureShader.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TreeObstacle.h" />
+    <ClInclude Include="TreeViewModel.h" />
     <ClInclude Include="vertextype.h" />
     <ClInclude Include="ViewModel.h" />
     <ClInclude Include="ViewModelBase.h" />
