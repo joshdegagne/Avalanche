@@ -3,6 +3,7 @@
 #include "LogObstacle.h"
 #include "RockObstacle.h"
 #include "TreeObstacle.h"
+#include "IcePatchObstacle.h"
 #include "FinishLineObstacle.h"
 
 #include "DebugConsole.h"
@@ -20,18 +21,13 @@ ObstacleBag::~ObstacleBag()
 
 void ObstacleBag::initialize(Game* game)
 {
-	obstacleList->add(new LogObstacle(*game));
-	obstacleList->add(new LogObstacle(*game));
-	obstacleList->add(new LogObstacle(*game));
-	obstacleList->add(new LogObstacle(*game));
-	obstacleList->add(new RockObstacle(*game));
-	obstacleList->add(new RockObstacle(*game));
-	obstacleList->add(new RockObstacle(*game));
-	obstacleList->add(new RockObstacle(*game));
-	obstacleList->add(new TreeObstacle(*game));
-	obstacleList->add(new TreeObstacle(*game));
-	obstacleList->add(new TreeObstacle(*game));
-	obstacleList->add(new TreeObstacle(*game));
+	for (int i = 0; i < 4; ++i)
+	{
+		obstacleList->add(new LogObstacle(*game));
+		obstacleList->add(new RockObstacle(*game));
+		obstacleList->add(new TreeObstacle(*game));
+		obstacleList->add(new IcePatchObstacle(*game));
+	}
 
 }
 

@@ -6,6 +6,7 @@
 #include "BoundViewModel.h"
 #include "RockViewModel.h"
 #include "TreeViewModel.h"
+#include "IcePatchViewModel.h"
 #include "PlayfieldViewModel.h"
 #include "FinishLineViewModel.h"
 #include "BoundViewModel.h"
@@ -44,6 +45,7 @@ bool ModelManager::initialize(Game& game)
 	models->add(new LogViewModel());
 	models->add(new RockViewModel());
 	models->add(new TreeViewModel());
+	models->add(new IcePatchViewModel());
 	models->add(new PlayfieldViewModel());
 	models->add(new FinishLineViewModel());
 

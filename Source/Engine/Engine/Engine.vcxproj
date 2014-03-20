@@ -91,6 +91,8 @@
     <ClCompile Include="EntityBase.cpp" />
     <ClCompile Include="FinishLineObstacle.cpp" />
     <ClCompile Include="FinishLineViewModel.cpp" />
+    <ClCompile Include="IcePatchObstacle.cpp" />
+    <ClCompile Include="IcePatchViewModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="LogViewModel.cpp" />
     <ClCompile Include="ModelManager.cpp" />
@@ -141,6 +143,8 @@
     <ClInclude Include="EntityType.h" />
     <ClInclude Include="FinishLineObstacle.h" />
     <ClInclude Include="FinishLineViewModel.h" />
+    <ClInclude Include="IcePatchObstacle.h" />
+    <ClInclude Include="IcePatchViewModel.h" />
     <ClInclude Include="IManager.h" />
     <ClInclude Include="IPlayerListener.h" />
     <ClInclude Include="ITexture.h" />
