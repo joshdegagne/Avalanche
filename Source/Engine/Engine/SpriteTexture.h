@@ -30,8 +30,9 @@ public:
 	void update(float); 
 	// Modify current frame by framerate, add equals, multiply elapsed time by framerate
 	// Loops with frames
+	// Called in render functions?
 
-	ID3D11ShaderResourceView* GetCurrentTexture(); // Return current frame
+	ID3D11ShaderResourceView* GetTexture(); // Return current frame - called when rendering the current texture; TextureManager will update index?
 	// Swappable with Texture
 	// Framerate getter and setter
 

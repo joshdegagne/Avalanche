@@ -28,6 +28,9 @@ SpriteTexture::~SpriteTexture()
 
 bool SpriteTexture::Initialize(ID3D11Device*, WCHAR*)
 {
+	HRESULT result;
+
+
 	return false;
 }
 
@@ -41,9 +44,10 @@ void SpriteTexture::Shutdown()
 	return;
 }
 
-ID3D11ShaderResourceView* SpriteTexture::GetCurrentTexture()
+ID3D11ShaderResourceView* SpriteTexture::GetTexture()
 {
 	// Use index for current frame
 	// Return the corresponding texture (for displaying)
+	//ID3D11ShaderResourceView[index];
 	return NULL;
 }

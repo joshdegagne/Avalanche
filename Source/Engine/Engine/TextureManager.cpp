@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 #include "ITexture.h"
 #include "Texture.h"
+#include "SpriteTexture.h"
 #include <memory>
 #include "Game.h"
 #include "Graphics.h"
@@ -27,6 +28,8 @@ void TextureManager::update(float elapsedTime)
 // add error checking with returning null tex
 Texture* TextureManager::loadTexture(WCHAR* filename)
 {
+
+	
 	WCHAR ext[_MAX_EXT];
 	_wsplitpath_s( filename, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
 	
@@ -35,12 +38,6 @@ Texture* TextureManager::loadTexture(WCHAR* filename)
 	ScratchImage image;
 
 	HRESULT result;
-
-	//unique_ptr<ScratchImage> image (new ScratchImage);
-
-	// fails atm
-	//HRESULT result = LoadFromWICFile(filename, WIC_FLAGS_NONE, NULL, *image);
-	//HRESULT result = LoadFromDDSFile(filename, WIC_FLAGS_NONE, NULL, image);
 
 	if ( _wcsicmp( ext, L".dds" ) == 0 )
 	{
@@ -54,22 +51,11 @@ Texture* TextureManager::loadTexture(WCHAR* filename)
 	{
 		result = LoadFromWICFile( filename, WIC_FLAGS_NONE, NULL, image );
 	}
-
 	
 	if (FAILED(result)) 
 	{
 		return NULL;
 	}
-
-	// metadata is supported
-	bool support = IsSupportedTexture(device, image.GetMetadata());
-	
-	//ID3D11ShaderResourceView* view;
-	//CreateShaderResourceView(device, image, image->GetPixelsSize(), NULL, view);
-	//CreateShaderResourceView(device, 
-
-	// dds magic number problem
-	//result = CreateDDSTextureFromMemory(device, image.GetPixels(), image.GetPixelsSize(), NULL, &view);
 
 	ID3D11ShaderResourceView*  pSRV = nullptr;
     result = CreateShaderResourceView( device,
@@ -79,7 +65,6 @@ Texture* TextureManager::loadTexture(WCHAR* filename)
 	// hunch: doesn't work since it's not a dds in memory?
 	//result = CreateDDSTextureFromMemory(device, image.GetPixels(), image.GetPixelsSize(), NULL, &pSRV);
 
-
 	if (FAILED(result)) 
 	{
 		return NULL;
@@ -88,42 +73,148 @@ Texture* TextureManager::loadTexture(WCHAR* filename)
 	texture->Initialize(pSRV);
 
 	return texture;
+	
 
-	// Attempting to work like Texture's Initialize method or ViewModel initializeTexture?
-	//Texture texture = new Texture();
-	// Save or load into memory from file path?
-	/*    HRESULT LoadFromWICFile( _In_z_ LPCWSTR szFile, _In_ DWORD flags,
-                             _Out_opt_ TexMetadata* metadata, _Out_ ScratchImage& image );*/
-	//unique_ptr<ScratchImage> image (new ScratchImage);
-	//__RPC_unique_pointer
-	//ScratchImage* image = new ScratchImage;
+
+
 	/*
-	    HRESULT SaveToDDSMemory( _In_ const Image& image, _In_ DWORD flags,
-                             _Out_ Blob& blob );
-    HRESULT SaveToDDSMemory( _In_reads_(nimages) const Image* images, _In_ size_t nimages, _In_ const TexMetadata& metadata, _In_ DWORD flags,
-                             _Out_ Blob& blob );*/
-	//char blob[1000];
-	//hr = SaveToWICMemory(*image, DDS_FLAGS_NONE, blob);
-	//hr = SaveToWICMemory(*image, DDS_FLAGS_NONE, nullptr, nullptr);
-	//hr = SaveToWICMemory(*image, WIC_FLAGS_NONE, GetWICCodec(WIC_CODEC_PNG), new Blob);
-	/*
-	if (FAILED(hr)) 
+	Texture* texture = new Texture;
+	HRESULT result;
+	ScratchImage DxImage;
+
+	WCHAR ext[_MAX_EXT];
+	_wsplitpath_s( filename, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
+
+	if ( _wcsicmp( ext, L".dds" ) == 0 )
+	{
+		result = LoadFromDDSFile( filename, DDS_FLAGS_NONE, NULL, DxImage );
+	}
+	else if ( _wcsicmp( ext, L".tga" ) == 0 )
+	{
+		result = LoadFromTGAFile( filename, NULL, DxImage );
+	}
+	else
+	{
+		result = LoadFromWICFile( filename, WIC_FLAGS_NONE, NULL, DxImage );
+	}
+	
+	if (FAILED(result)) 
 	{
 		return NULL;
 	}
+
+
+	const Image* Image_1 = DxImage.GetImages();
+
+	TexMetadata mdata = DxImage.GetMetadata();
+	mdata.width /= 2;
+	mdata.height /= 2; // height of the sprite sheet itself
+	//	mdata.height
+
+	ScratchImage CropImage;
+	result = CropImage.Initialize(mdata);
+
+	if (FAILED(result)) 
+	{
+		return NULL;
+	}
+
+	const Image* Image_2 = CropImage.GetImages();
+
+	Rect rect(0, 0, mdata.width, mdata.height);
+
+	result = CopyRectangle(*Image_1, rect, *Image_2, TEX_FILTER_DEFAULT, 0, 0);
+
+	if (FAILED(result)) 
+	{
+		return NULL;
+	}
+
+	ID3D11ShaderResourceView*  pSRV = nullptr;
+
+    result = CreateShaderResourceView( device,
+		Image_2, CropImage.GetImageCount(),
+		CropImage.GetMetadata(), &pSRV );
+
+	texture->Initialize(pSRV);
+
+	return texture;
 	*/
-	//CreateDDSTextureFromMemory(device, NULL, NULL, NULL, texture->GetTexture, NULL);
-	//return &texture;
 }
 
 SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float width) 
 {
 	//SpriteTexture* spriteTexture;
-	// Set float index
-	// Set float frameRate
-	// set int maxFrame
+	// Set float index to be 0?
+	// Set float frameRate to be something...
+	// set int maxFrame... how to decide?
 
 	// Use CopyRectangle to get Images from a larger sheet using width value
+
+	SpriteTexture* spriteTex = new SpriteTexture;
+
+	HRESULT result;
+	ScratchImage DxImage;
+
+	WCHAR ext[_MAX_EXT];
+	_wsplitpath_s( filename, nullptr, 0, nullptr, 0, nullptr, 0, ext, _MAX_EXT );
+
+	if ( _wcsicmp( ext, L".dds" ) == 0 )
+	{
+		result = LoadFromDDSFile( filename, DDS_FLAGS_NONE, NULL, DxImage );
+	}
+	else if ( _wcsicmp( ext, L".tga" ) == 0 )
+	{
+		result = LoadFromTGAFile( filename, NULL, DxImage );
+	}
+	else
+	{
+		result = LoadFromWICFile( filename, WIC_FLAGS_NONE, NULL, DxImage );
+	}
+	
+	if (FAILED(result)) 
+	{
+		return NULL;
+	}
+
+
+	const Image* Image_1 = DxImage.GetImages();
+
+	TexMetadata mdata = DxImage.GetMetadata();
+	mdata.width = width;
+	mdata.height; // height of the sprite sheet itself
+	//	mdata.height
+
+	ScratchImage CropImage;
+	result = CropImage.Initialize(mdata);
+
+	if (FAILED(result)) 
+	{
+		return NULL;
+	}
+
+	const Image* Image_2 = CropImage.GetImages();
+
+	Rect rect(0, 0, width, mdata.height);
+
+	result = CopyRectangle(*Image_1, rect, *Image_2, TEX_FILTER_DEFAULT, 0, 0);
+
+	if (FAILED(result)) 
+	{
+		return NULL;
+	}
+
+
+
+	//DxImage.GetImages();
+
+		//CaptureTexture(device,
+
+	//Rect rect(0, 0, width, width);
+	//DxImage.Initialize2D
+
+	//result = CopyRectangle(NULL, NULL, NULL, TEX_FILTER_DEFAULT, 0, 0);
+
 	return NULL;
 }
 

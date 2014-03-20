@@ -84,7 +84,7 @@ bool PlayfieldViewModel::InitializeTextures(TextureManager* texMan)
 	return true;
 }
 
-
+// deprecated
 bool PlayfieldViewModel::initializeTextures(ID3D11Device* device)
 {
 	int success;

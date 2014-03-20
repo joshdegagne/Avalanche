@@ -59,11 +59,7 @@ bool ModelManager::initialize(Game& game)
 		//IViewModel* viewModel = models->elementAt(i);
 		ViewModelBase* viewModel = models->elementAt(i);
 
-
-
 		success = viewModel->InitializeVertexModels(game.getDevice());
-
-		
 
 		if(!success)
 			return false;		

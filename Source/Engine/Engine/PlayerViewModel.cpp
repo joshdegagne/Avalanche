@@ -136,17 +136,29 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 
 	if(!result) return false;
 
-	result = initializeTextures(d3dDevice); // removed for new texturing system
+	//result = initializeTextures(d3dDevice); // removed for new texturing system
 
 	return result;
 }
 
 bool PlayerViewModel::InitializeTextures(TextureManager* texMan) 
 {
-	//texture = texMan->loadTexture(textureFileName);
+	
+	if (!(textures[0] = texMan->loadTexture(L"textures/player_red.dds")))
+		return false;
 
-	//if (!texture) return false;
+	if (!(textures[1] = texMan->loadTexture(L"textures/player_purple.dds")))
+		return false;
 
+	if (!(textures[2] = texMan->loadTexture(L"textures/player_green.dds")))
+		return false;
+
+	if (!(textures[3] = texMan->loadTexture(L"textures/player_yellow.dds")))
+		return false;
+
+	if (!(shadowTexture = texMan->loadTexture(L"textures/shadow.dds")))
+		return false;
+	
 	return true;
 }
 

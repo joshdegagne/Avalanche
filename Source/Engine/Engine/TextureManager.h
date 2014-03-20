@@ -10,6 +10,9 @@
 
 //class Entity;
 //class ViewModelBase;
+
+//#define  SPRITE_UPDATE_RATE 1.0f
+
 class Game;
 
 using namespace DirectX;
@@ -19,8 +22,8 @@ class TextureManager : public IManager
 public:
 	TextureManager();
 
-	bool initialize(Game&); // What for, again?
-	void update(float);  // For SpriteTextures?
+	bool initialize(Game&); 
+	void update(float);  // For SpriteTextures? Use elapsed time
 
 	Texture* loadTexture(WCHAR*); // Create new Texture, save pointer, initialize Texture, return pointer to Texture... Ref to D3D device?
 	SpriteTexture* loadSpriteTexture(WCHAR*, float); // Takes in width... Should it take in the number of cells? Or columns and rows?

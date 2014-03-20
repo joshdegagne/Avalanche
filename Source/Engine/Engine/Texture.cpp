@@ -33,7 +33,6 @@ bool Texture::Initialize(ID3D11Device* device, WCHAR* filename)
 	}
 
 	return true;
-
 	
 	//unique_ptr<ScratchImage> image (new ScratchImage);
 	//ScratchImage

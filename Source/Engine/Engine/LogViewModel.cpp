@@ -200,7 +200,7 @@ bool LogViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 		if(!result) return false;
 	}
 
-	result = initializeTextures(d3dDevice);
+	//result = initializeTextures(d3dDevice); // removed because of new texture manager
 
 	return result;
 
