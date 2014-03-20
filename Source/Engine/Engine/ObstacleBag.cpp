@@ -2,6 +2,7 @@
 #include <random>
 #include "LogObstacle.h"
 #include "RockObstacle.h"
+#include "TreeObstacle.h"
 #include "FinishLineObstacle.h"
 
 #include "DebugConsole.h"
@@ -23,14 +24,15 @@ void ObstacleBag::initialize(Game* game)
 	obstacleList->add(new LogObstacle(*game));
 	obstacleList->add(new LogObstacle(*game));
 	obstacleList->add(new LogObstacle(*game));
-	obstacleList->add(new LogObstacle(*game));
-	obstacleList->add(new LogObstacle(*game));
 	obstacleList->add(new RockObstacle(*game));
 	obstacleList->add(new RockObstacle(*game));
 	obstacleList->add(new RockObstacle(*game));
 	obstacleList->add(new RockObstacle(*game));
-	obstacleList->add(new RockObstacle(*game));
-	obstacleList->add(new RockObstacle(*game));
+	obstacleList->add(new TreeObstacle(*game));
+	obstacleList->add(new TreeObstacle(*game));
+	obstacleList->add(new TreeObstacle(*game));
+	obstacleList->add(new TreeObstacle(*game));
+
 }
 
 Obstacle* ObstacleBag::pullRandomObstacle()
