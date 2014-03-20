@@ -116,6 +116,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="RockObstacle.cpp" />
     <ClCompile Include="RockViewModel.cpp" />
+    <ClCompile Include="SmallRockObstacle.cpp" />
+    <ClCompile Include="SmallRockViewModel.cpp" />
     <ClCompile Include="SpriteTexture.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -173,6 +175,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="RockObstacle.h" />
     <ClInclude Include="RockViewModel.h" />
+    <ClInclude Include="SmallRockObstacle.h" />
+    <ClInclude Include="SmallRockViewModel.h" />
     <ClInclude Include="SpriteTexture.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />

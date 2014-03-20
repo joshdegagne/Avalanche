@@ -198,6 +198,12 @@
     <ClCompile Include="PlayerBumpState.cpp">
       <Filter>Source Files\Entities\States</Filter>
     </ClCompile>
+    <ClCompile Include="SmallRockObstacle.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallRockViewModel.cpp">
+      <Filter>Source Files\Models\EntityModels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -366,6 +372,12 @@
       <Filter>Header Files\Entities\States</Filter>
     </ClInclude>
     <ClInclude Include="BoundViewModel.h">
+      <Filter>Header Files\Models\EntityModels</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallRockObstacle.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallRockViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
   </ItemGroup>

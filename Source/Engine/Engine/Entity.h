@@ -34,11 +34,9 @@ class Entity : public EntityBase {
 	public:
 		float getX();
 		float getY();
-		void setX(float);
-		void setY(float);
 
 		XMFLOAT3	getPosition();
-		
+
 		BoundingBox* getBound();
 
 		void moveTo(float, float);
