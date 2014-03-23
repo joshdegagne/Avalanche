@@ -34,8 +34,21 @@ float getNextFloat(ifstream& in)
 	string readline;
 	in.ignore(256, TILDE); 
 	getline(in, readline, TILDECHAR);
-	writeNumToConsole(stof(readline));
-	return stof(readline);
+	if (readline == "OFF")
+	{
+		writeStringToConsole(readline);
+		return 0.0f;
+	}
+	else if (readline == "ON")
+	{
+		writeStringToConsole(readline);
+		return 1.0f;
+	}
+	else
+	{
+		writeNumToConsole(stof(readline));
+		return stof(readline);
+	}
 }
 
 void setAllGlobalVars()
