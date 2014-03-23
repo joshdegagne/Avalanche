@@ -43,11 +43,12 @@ void CollisionManager::checkForCollisions(float elapsedTime)
 		{
 			if (intersects(players->elementAt(i)->getBound(), obstacles->elementAt(j)->getBound()))
 			{
-				#ifdef COLLISION_DEBUG
-				writeTextToConsole(L"Player ", false);
-				writeNumToConsole(i, false);
-				writeLabelToConsole(L" has collided with Obstacle ", j);
-				#endif
+				if(COLLISION_DEBUG)
+				{
+					writeTextToConsole(L"Player ", false);
+					writeNumToConsole(i, false);
+					writeLabelToConsole(L" has collided with Obstacle ", j);
+				}
 				players->elementAt(i)->onCollide(*(obstacles->elementAt(j)));
 				continue;
 			}
@@ -57,11 +58,12 @@ void CollisionManager::checkForCollisions(float elapsedTime)
 		{
 			if (intersects(players->elementAt(i)->getBound(), players->elementAt(j)->getBound()))
 			{
-				#ifdef COLLISION_DEBUG
-				writeTextToConsole(L"Player ", false);
-				writeNumToConsole(i, false);
-				writeLabelToConsole(L" has collided with Player ", j);
-				#endif
+				if(COLLISION_DEBUG)
+				{
+					writeTextToConsole(L"Player ", false);
+					writeNumToConsole(i, false);
+					writeLabelToConsole(L" has collided with Player ", j);
+				}
 				players->elementAt(i)->onCollide(*(players->elementAt(j)), elapsedTime);
 				continue;
 			}

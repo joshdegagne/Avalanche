@@ -49,9 +49,10 @@ bool ModelManager::initialize(Game& game)
 	models->add(new PlayfieldViewModel());
 	models->add(new FinishLineViewModel());
 
-#ifdef COLLISION_DEBUG
-	models->add(new BoundViewModel());
-#endif
+	if (COLLISION_DEBUG)
+	{
+		models->add(new BoundViewModel());
+	}
 
 	for(int i = 0; i < models->size(); ++i)
 		if(models->elementAt(i) == nullptr)

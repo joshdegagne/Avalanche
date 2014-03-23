@@ -404,6 +404,9 @@
     <ClInclude Include="SmallRockViewModel.h">
       <Filter>Header Files\Models\EntityModels</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalDebugInitialization.h">
+      <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">

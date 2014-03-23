@@ -40,7 +40,7 @@ void BoundingBox::initialize(Entity* e)
 	}
 	else if (parent->getEntityType() == EntityType::ICE_PATCH)
 	{
-		dimensions = XMFLOAT3(3.0f, 6.0f, 0.2f);
+		dimensions = XMFLOAT3(1.5f, 6.0f, 0.2f);
 		offset     = XMFLOAT3(0.0f, 3.0f, 0.01f); 
 	}
 	else

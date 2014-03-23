@@ -80,7 +80,7 @@ bool IcePatchViewModel::InitializeVertexModels(ID3D11Device* device)
 
 bool IcePatchViewModel::InitializeTextures(TextureManager* texMan) 
 {
-	icePatchTexture = texMan->loadTexture(L"textures/tempsnow2.dds");
+	icePatchTexture = texMan->loadTexture(L"textures/tempice.dds");
 	return true;
 }
 
@@ -92,7 +92,7 @@ bool IcePatchViewModel::initializeTextures(ID3D11Device* device)
 	//SNOWFIELD TEXTURE
 	icePatchTexture = new Texture();
 
-	success = icePatchTexture->Initialize(device, L"textures/tempsnow2.dds");
+	success = icePatchTexture->Initialize(device, L"textures/tempice.dds");
 
 	if(!success) return false;
 

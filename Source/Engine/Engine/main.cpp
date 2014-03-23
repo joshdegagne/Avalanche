@@ -13,11 +13,8 @@
 ///////////////////////////
 
 #include <iostream>
-
+#include "GlobalDebugInitialization.h"
 #include "Game.h"
-#include "DebugDefinitions.h"
-
-
 
 /*
 The following demonstration code contains a lot of comments on what the various parts do
@@ -47,12 +44,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	/*
      HINSTANCE hInstance  : handle of the applications current instance
 	 HINSTANCE hPrevInstance : handle of the applications previous instance (should be NULL according to MSDN) 
-	 PSTR pScmdline : commandline arguments invoked with main (we won't use this)
+	 PSTR pScmdline : commandline arguments invoked with main (we won't use this) 
 	 int iCmdshow : An ID that specifies how the window should be shown
 
 	 There is also a wWinMain(...) version with the same arguments that passes unicode characters for
 	 the pScmdline argument rather than ANSI as WinMain does
 	*/
+
+	AllocConsole();
+	setAllGlobalVars();
 
 	Game* game; //system class encapsulates our overall app
 	bool result;
@@ -60,11 +60,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	/*
 	Allocate a "side car" console so we can write some debug information out to it
 	*/
-	#ifdef ALL_DEBUG
-	AllocConsole();
-	//writeTextToConsole(L"Hello World");
-	#endif
-	
 	// Create the system object.
 	game = new Game;
 	if(!game)

@@ -9,6 +9,6 @@ void Obstacle::setPresent(bool p) { present = p; }
 
 void Obstacle::update(float elapsedTime)
 {
-	position.x-= DRAG_SPEED*elapsedTime; 
+	position.x-= ENTITY_DRAG_SPEED*elapsedTime; 
 }
 

@@ -18,8 +18,8 @@ const float HEIGHT	= 2.0f;
 PlayerViewModel::PlayerViewModel(Game& game) : ViewModel<Player>(EntityType::PLAYER)
 {
 
-	orientRotateY(-0.1);
-	orientRotateZ(0.2);
+	orientRotateY(-0.1f);
+	orientRotateZ(0.2f);
 
 	/*
 	Create a quad consisting of 4 vertices and 2 triangles
@@ -103,16 +103,16 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 	unsigned long* indices = new unsigned long[indexCount];
 
 	//Quad Face
-	textureVertices[0].position = XMFLOAT3(-WIDTH * 0.4, -WIDTH * 0.4, 0.01f); // Top left.
+	textureVertices[0].position = XMFLOAT3(-WIDTH * 0.4f, -WIDTH * 0.4f, 0.01f); // Top left.
 	textureVertices[0].texture = XMFLOAT2(1.0f, 1.0f);
 	
-	textureVertices[1].position = XMFLOAT3(-WIDTH * 0.4, WIDTH * 0.4, 0.01f);  // Bottom left.
+	textureVertices[1].position = XMFLOAT3(-WIDTH * 0.4f, WIDTH * 0.4f, 0.01f);  // Bottom left.
 	textureVertices[1].texture = XMFLOAT2(0.0f, 1.0f);
 
-	textureVertices[2].position = XMFLOAT3(WIDTH * 0.4, -WIDTH * 0.4, 0.01f);  // Top right.
+	textureVertices[2].position = XMFLOAT3(WIDTH * 0.4f, -WIDTH * 0.4f, 0.01f);  // Top right.
 	textureVertices[2].texture = XMFLOAT2(1.0f, 0.0f);
 	
-	textureVertices[3].position = XMFLOAT3(WIDTH * 0.4, WIDTH * 0.4, 0.01f);   // Bottom right.
+	textureVertices[3].position = XMFLOAT3(WIDTH * 0.4f, WIDTH * 0.4f, 0.01f);   // Bottom right.
 	textureVertices[3].texture = XMFLOAT2(0.0f, 0.0f);
 
 	//initialize vertices and textures for rendering to d3dDevice

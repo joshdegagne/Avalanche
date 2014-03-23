@@ -13,7 +13,7 @@
 
 
 
-Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(1/(GAME_LENGTH/1000.0f)), endFlag(false)
+Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(1/((GAME_LENGTH/1000.0f)*OBSTACLE_SPAWN_RATE)), endFlag(false)
 {
 	entities = new ArrayList<Entity>;
 	activePlayers = new ArrayList<Player>;
@@ -47,17 +47,16 @@ void Playfield::initialize(Game* g)
 	{
 		game->getModelManager()->add(*activePlayers->elementAt(i));
 		collisionManager->addPlayerReference(*activePlayers->elementAt(i));
-		#ifdef COLLISION_DEBUG
-		game->getModelManager()->add(*activePlayers->elementAt(i)->getBound());
-		#endif
+		
+		if(COLLISION_DEBUG)
+			game->getModelManager()->add(*activePlayers->elementAt(i)->getBound());
 	}
 	for(int i = 0; i < obstacleBag->getNumObstacles(); ++i)
 	{
 		game->getModelManager()->add(*obstacleBag->getObstacle(i));
 		collisionManager->addObstacleReference(*obstacleBag->getObstacle(i));
-		#ifdef COLLISION_DEBUG
-		game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
-		#endif
+		if(COLLISION_DEBUG)
+			game->getModelManager()->add(*obstacleBag->getObstacle(i)->getBound());
 	}
 
 	scrollAmount = 0;
@@ -80,13 +79,14 @@ void Playfield::update(float elapsed)
 		///////////////////////////////////
 		playTimer.update(elapsed);
 
-		#ifndef OBSTACLE_SPAWN_DEBUG
-		if (playTimer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles && playTimer.getProgressPercentage() < 1.0f-(2.0f*percentageBetweenObstacles) )
+		if(OBSTACLE_SPAWN)
 		{
-			previousProgressPercentage = playTimer.getProgressPercentage();
-			addObstacleToPlayfield();
+			if (playTimer.getProgressPercentage() - previousProgressPercentage > percentageBetweenObstacles && playTimer.getProgressPercentage() < 1.0f-(2.0f*percentageBetweenObstacles) )
+			{
+				previousProgressPercentage = playTimer.getProgressPercentage();
+				addObstacleToPlayfield();
+			}
 		}
-		#endif
 		///////////////////////////////////
 
 		//This for loop is backwards because for SOME REASON, putting it the other way doesn't work with tie-breakers.
@@ -121,7 +121,7 @@ void Playfield::update(float elapsed)
 		for (int i = 0; i < activePlayers->size(); ++i)
 		{
 			if (!activePlayers->elementAt(i)->isDead())
-				activePlayers->elementAt(i)->moveBy(XMFLOAT2(MOVEMENT_SPEED*elapsed, 0.0f));
+				activePlayers->elementAt(i)->moveBy(XMFLOAT2(PLAYER_MOVEMENT_SPEED*elapsed, 0.0f));
 		}
 
 		for (int i = 0; i < obstacleBag->getNumObstacles(); ++i)
@@ -136,7 +136,7 @@ void Playfield::update(float elapsed)
 		endTimer.update(elapsed);
 	}
 
-	scrollAmount += DRAG_SPEED*elapsed / getLength();
+	scrollAmount += ENTITY_DRAG_SPEED*elapsed / getLength();
 	if(scrollAmount > 1.0f)
 		scrollAmount -= 1.0f;
 }

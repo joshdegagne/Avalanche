@@ -9,11 +9,10 @@
 #include "Obstacle.h"
 #include "IPlayerListener.h"
 #include "PlayerState.h"
+#include "DebugDefinitions.h"
 
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
-#define	 MOVEMENT_SPEED 0.0075f
-#define  JUMP_HEIGHT 4.0f
 
 #define  P_WIDTH  1.0f
 #define  P_LENGTH 1.0f
@@ -72,10 +71,10 @@ class Player: public Entity {
 	public: //TEMPORARILY PUBLIC FOR KEYBOARD TESTING
 
 		//Movement
-		void moveLeft(float elapsed, float speed = MOVEMENT_SPEED);
-		void moveRight(float elapsed, float speed = MOVEMENT_SPEED);
-		void moveUp(float elapsed, float speed = MOVEMENT_SPEED);
-		void moveDown(float elapsed, float speed = MOVEMENT_SPEED);
+		void moveLeft(float elapsed, float speed = PLAYER_MOVEMENT_SPEED);
+		void moveRight(float elapsed, float speed = PLAYER_MOVEMENT_SPEED);
+		void moveUp(float elapsed, float speed = PLAYER_MOVEMENT_SPEED);
+		void moveDown(float elapsed, float speed = PLAYER_MOVEMENT_SPEED);
 		void stop();
 	
 		//Possible jump implementation (no real physics simulation here)

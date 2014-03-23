@@ -7,17 +7,15 @@
 PlayerBumpState::PlayerBumpState(Player& p, bool isLeft, float duration) 
 				: PlayerState(p, duration, PlayerStateType::PST_BUMPED), bumpedLeft(isLeft)
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Bump State created for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Bump State created for Player ", player.getPlayerNum());
 	initialize();
 }
 
 PlayerBumpState::~PlayerBumpState()
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Bump State destroyed for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Bump State destroyed for Player ", player.getPlayerNum());
 }
 
 void PlayerBumpState::initialize()
@@ -29,9 +27,9 @@ void PlayerBumpState::update(float elapsedTime)
 {
 	updateBumpArc();
 	if (bumpedLeft)
-		player.moveLeft(elapsedTime, MOVEMENT_SPEED);
+		player.moveLeft(elapsedTime, PLAYER_MOVEMENT_SPEED);
 	else
-		player.moveRight(elapsedTime, MOVEMENT_SPEED);
+		player.moveRight(elapsedTime, PLAYER_MOVEMENT_SPEED);
 	timer.update(elapsedTime);
 }
 
@@ -50,7 +48,7 @@ void PlayerBumpState::updateBumpArc()
 
 float PlayerBumpState::getBumpArc(float timerProgress)
 {
-	float arc = ( ( -((timerProgress - 50.0f)/57.735f)*((timerProgress - 50.0f)/57.735f) ) + 0.75f);
+	float arc = ( ( -((timerProgress - 50.0f)/50.0f)*((timerProgress - 50.0f)/50.0f) ) + 1) * PS_BUMP_HEIGHT;
 	if (arc < 0)
 		arc = 0;
 	return arc;

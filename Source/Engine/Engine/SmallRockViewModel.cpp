@@ -68,7 +68,7 @@ bool SmallRockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 
 bool SmallRockViewModel::InitializeTextures(TextureManager* texMan) 
 {
-	bool result;
+	//bool result;
 
 	textureFileName = new WCHAR;
 	textureFileName = L"textures/temprock1.dds";

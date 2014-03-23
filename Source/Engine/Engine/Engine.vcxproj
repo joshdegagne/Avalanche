@@ -145,6 +145,7 @@
     <ClInclude Include="EntityType.h" />
     <ClInclude Include="FinishLineObstacle.h" />
     <ClInclude Include="FinishLineViewModel.h" />
+    <ClInclude Include="GlobalDebugInitialization.h" />
     <ClInclude Include="IcePatchObstacle.h" />
     <ClInclude Include="IcePatchViewModel.h" />
     <ClInclude Include="IManager.h" />

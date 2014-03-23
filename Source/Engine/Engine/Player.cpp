@@ -1,11 +1,10 @@
 #include <cmath>
 
+#include "DebugDefinitions.h"
 #include "Player.h"
 #include "ControllerInputManager.h"
 #include "KeyInput.h"
 #include "PlayerStatesList.h"
-
-#include "DebugDefinitions.h"
 
 Player::Player(Game& g, int pNum) : Entity(g)
 {
@@ -105,9 +104,8 @@ void Player::update(float elapsed)
 	//Update Position//
 	///////////////////
 	//Drag
-	#ifndef PLAYER_DRAG_DEBUG
-	moveUp(elapsed, DRAG_SPEED/4);
-	#endif
+	if(PLAYER_DRAG)
+		moveUp(elapsed, ENTITY_DRAG_SPEED/4);
 
 	moveBy(velocity);
 }
@@ -213,12 +211,13 @@ void Player::onCollide(Player& p, float elapsed)
 
 void Player::onCollide(Obstacle&)
 {
-	#ifndef PLAYER_COLLIDE_OBSTACLE_DEBUG
-	if (!containsState(PlayerStateType::PST_INJURED))
+	if(PLAYER_COLLIDE_OBSTACLE)
 	{
-		addState(*new PlayerInjuredState(*this));
+		if (!containsState(PlayerStateType::PST_INJURED))
+		{
+			addState(*new PlayerInjuredState(*this));
+		}
 	}
-	#endif
 }
 
 ////////////////////////////
@@ -297,19 +296,19 @@ void Player::checkControllerInputs(float elapsed)
 	{
 		if (LSX < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveLeft(elapsed, MOVEMENT_SPEED);
+			moveLeft(elapsed, PLAYER_MOVEMENT_SPEED);
 		}
 		else if (LSX > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveRight(elapsed, MOVEMENT_SPEED);
+			moveRight(elapsed, PLAYER_MOVEMENT_SPEED);
 		}
 		if (LSY > STICK_MOVEMENT_THRESHOLD)
 		{
-			moveUp(elapsed, MOVEMENT_SPEED*0.75f);
+			moveUp(elapsed, PLAYER_MOVEMENT_SPEED*0.75f);
 		}
 		else if (LSY < -STICK_MOVEMENT_THRESHOLD)
 		{
-			moveDown(elapsed, MOVEMENT_SPEED);
+			moveDown(elapsed, PLAYER_MOVEMENT_SPEED);
 		}
 	}
 
