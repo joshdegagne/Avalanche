@@ -42,16 +42,16 @@ bool PlayfieldViewModel::InitializeVertexModels(ID3D11Device* device)
 
 	//Quad Face
 	textureVertices[0].position = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	textureVertices[0].texture = XMFLOAT2(0.0f, 0.0f);
+	textureVertices[0].texture = XMFLOAT2(0.0f, 0.3f);
 	
 	textureVertices[1].position = XMFLOAT3(1.0f, 0.0f, 0.0f);
-	textureVertices[1].texture = XMFLOAT2(1.0f, 0.0f);
+	textureVertices[1].texture = XMFLOAT2(1.0f, 0.3f);
 
 	textureVertices[2].position = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	textureVertices[2].texture = XMFLOAT2(0.0f, 1.0f);
+	textureVertices[2].texture = XMFLOAT2(0.0f, 0.7f);
 	
 	textureVertices[3].position = XMFLOAT3(1.0f, 1.0f, 0.0f); 
-	textureVertices[3].texture = XMFLOAT2(1.0f, 1.0f);
+	textureVertices[3].texture = XMFLOAT2(1.0f, 0.7f);
 
 	//Quad Face
 	indices[0] = 0;  // Top left.
@@ -80,7 +80,7 @@ bool PlayfieldViewModel::InitializeVertexModels(ID3D11Device* device)
 
 bool PlayfieldViewModel::InitializeTextures(TextureManager* texMan) 
 {
-	fieldTexture = texMan->loadTexture(L"textures/tempsnow2.dds");
+	fieldTexture = texMan->loadTexture(L"textures/tiledsnow.dds");
 	return true;
 }
 
@@ -92,7 +92,7 @@ bool PlayfieldViewModel::initializeTextures(ID3D11Device* device)
 	//SNOWFIELD TEXTURE
 	fieldTexture = new Texture();
 
-	success = fieldTexture->Initialize(device, L"textures/tempsnow2.dds");
+	success = fieldTexture->Initialize(device, L"textures/tiledsnow.dds");
 
 	if(!success) return false;
 
