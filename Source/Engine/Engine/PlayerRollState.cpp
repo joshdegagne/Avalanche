@@ -6,17 +6,15 @@
 PlayerRollState::PlayerRollState(Player& p, bool isLeft, float duration) 
 				: PlayerState(p, duration, PlayerStateType::PST_ROLL), rollingLeft(isLeft)
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Roll State created for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Roll State created for Player ", player.getPlayerNum());
 	initialize();
 }
 
 PlayerRollState::~PlayerRollState()
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Roll State destroyed for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Roll State destroyed for Player ", player.getPlayerNum());
 }
 
 void PlayerRollState::initialize()
@@ -27,9 +25,9 @@ void PlayerRollState::initialize()
 void PlayerRollState::update(float elapsedTime)
 {
 	if (rollingLeft)
-		player.moveLeft(elapsedTime, MOVEMENT_SPEED*1.75f);
+		player.moveLeft(elapsedTime, PLAYER_MOVEMENT_SPEED*1.75f);
 	else
-		player.moveRight(elapsedTime, MOVEMENT_SPEED*1.75f);
+		player.moveRight(elapsedTime, PLAYER_MOVEMENT_SPEED*1.75f);
 	timer.update(elapsedTime);
 }
 

@@ -5,7 +5,9 @@
 #include "PlayerViewModel.h"
 #include "BoundViewModel.h"
 #include "RockViewModel.h"
+#include "SmallRockViewModel.h"
 #include "TreeViewModel.h"
+#include "IcePatchViewModel.h"
 #include "PlayfieldViewModel.h"
 #include "FinishLineViewModel.h"
 #include "BoundViewModel.h"
@@ -42,14 +44,17 @@ bool ModelManager::initialize(Game& game)
 	
 	models->add(new PlayerViewModel(game));
 	models->add(new LogViewModel());
-	models->add(new RockViewModel());
+	models->add(new RockViewModel(game));
+	models->add(new SmallRockViewModel(game));
 	models->add(new TreeViewModel());
+	models->add(new IcePatchViewModel());
 	models->add(new PlayfieldViewModel());
 	models->add(new FinishLineViewModel());
 
-#ifdef COLLISION_DEBUG
-	models->add(new BoundViewModel());
-#endif
+	if (COLLISION_DEBUG)
+	{
+		models->add(new BoundViewModel());
+	}
 
 	for(int i = 0; i < models->size(); ++i)
 		if(models->elementAt(i) == nullptr)

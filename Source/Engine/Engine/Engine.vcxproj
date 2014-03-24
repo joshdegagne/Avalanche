@@ -91,6 +91,8 @@
     <ClCompile Include="EntityBase.cpp" />
     <ClCompile Include="FinishLineObstacle.cpp" />
     <ClCompile Include="FinishLineViewModel.cpp" />
+    <ClCompile Include="IcePatchObstacle.cpp" />
+    <ClCompile Include="IcePatchViewModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="LogViewModel.cpp" />
     <ClCompile Include="ModelManager.cpp" />
@@ -116,6 +118,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="RockObstacle.cpp" />
     <ClCompile Include="RockViewModel.cpp" />
+    <ClCompile Include="SmallRockObstacle.cpp" />
+    <ClCompile Include="SmallRockViewModel.cpp" />
     <ClCompile Include="SpriteTexture.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -141,6 +145,9 @@
     <ClInclude Include="EntityType.h" />
     <ClInclude Include="FinishLineObstacle.h" />
     <ClInclude Include="FinishLineViewModel.h" />
+    <ClInclude Include="GlobalDebugInitialization.h" />
+    <ClInclude Include="IcePatchObstacle.h" />
+    <ClInclude Include="IcePatchViewModel.h" />
     <ClInclude Include="IManager.h" />
     <ClInclude Include="IPlayerListener.h" />
     <ClInclude Include="ITexture.h" />
@@ -175,6 +182,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="RockObstacle.h" />
     <ClInclude Include="RockViewModel.h" />
+    <ClInclude Include="SmallRockObstacle.h" />
+    <ClInclude Include="SmallRockViewModel.h" />
     <ClInclude Include="SpriteTexture.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />

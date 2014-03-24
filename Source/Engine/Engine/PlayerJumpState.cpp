@@ -6,17 +6,15 @@
 PlayerJumpState::PlayerJumpState(Player& p, float duration) 
 				: PlayerState(p, duration, PlayerStateType::PST_JUMP)
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Jump State created for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Jump State created for Player ", player.getPlayerNum());
 	initialize();
 }
 
 PlayerJumpState::~PlayerJumpState()
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Jump State destroyed for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Jump State destroyed for Player ", player.getPlayerNum());
 }
 
 void PlayerJumpState::initialize()
@@ -43,7 +41,7 @@ void PlayerJumpState::updateJumpArc()
 
 float PlayerJumpState::getJumpArc(float timerProgress)
 {
-	float arc = ( ( -((timerProgress - 50.0f)/35.3535f)*((timerProgress - 50.0f)/35.3535f) ) +2);
+	float arc = ( ( -((timerProgress - 50.0f)/50.0f)*((timerProgress - 50.0f)/50.0f) ) + 1) * PS_JUMP_HEIGHT;
 	if (arc < 0)
 		arc = 0;
 	return arc;

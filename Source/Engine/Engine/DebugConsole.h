@@ -2,8 +2,11 @@
 
 #define WIN32_LEAN_AND_MEAN 
 #include <windows.h>
+#include <string>
 #include <sstream>
 #include <vector>
+
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //writes new line to Console. Very straight forward, but shouldn't be necessary to use.
@@ -59,6 +62,11 @@ static void writeTextToConsole(const wchar_t* theString, bool printNewLineAfter 
 	WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), theString, wcslen(theString), NULL, NULL);
 	if (printNewLineAfter)
 		writeNewLineToConsole();
+}
+//Text (in string format)
+static void writeStringToConsole(string input, bool printNewLineAfter = true)
+{
+	writeTextToConsole(wstring(input.begin(), input.end()).c_str(), printNewLineAfter);
 }
 
 /////////////////////////////////////////////////////////////////////////////

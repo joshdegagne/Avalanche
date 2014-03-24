@@ -6,11 +6,11 @@
 #include "BoundingBox.h"
 #include "DirectXHelper.h"
 #include "EntityBase.h"
+#include "DebugDefinitions.h"
 
 #define DEAD_X 50.0f
 #define DEAD_Y 0.0f
 #define DEAD_Z 0.0f
-#define DRAG_SPEED 0.0135f
 
 class Game;
 
@@ -34,11 +34,9 @@ class Entity : public EntityBase {
 	public:
 		float getX();
 		float getY();
-		void setX(float);
-		void setY(float);
 
 		XMFLOAT3	getPosition();
-		
+
 		BoundingBox* getBound();
 
 		void moveTo(float, float);

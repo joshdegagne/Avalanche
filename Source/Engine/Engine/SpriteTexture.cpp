@@ -34,6 +34,12 @@ bool SpriteTexture::Initialize(ID3D11Device*, WCHAR*)
 	return false;
 }
 
+void SpriteTexture::AddSpriteView(ID3D11ShaderResourceView* spriteView)
+{
+	
+
+}
+
 void SpriteTexture::Shutdown()
 {
 	if (textures) 

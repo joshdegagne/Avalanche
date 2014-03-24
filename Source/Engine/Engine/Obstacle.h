@@ -17,7 +17,6 @@ class Obstacle : public Entity
 		float getLength();
 		bool  isPresent();
 		void  setPresent(bool);
-		void  setProgress(float);
 		void  update(float);
 	
 	protected:

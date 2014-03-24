@@ -6,17 +6,15 @@
 PlayerRegularState::PlayerRegularState(Player& p, float duration) 
 				   : PlayerState(p, duration, PlayerStateType::PST_REGULAR)
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Regular State created for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Regular State created for Player ", player.getPlayerNum());
 	initialize();
 }
 
 PlayerRegularState::~PlayerRegularState()
 {
-	#ifdef STATE_DEBUG
-	writeLabelToConsole(L"Regular State destroyed for Player ", player.getPlayerNum());
-	#endif
+	if(STATE_DEBUG)
+		writeLabelToConsole(L"Regular State destroyed for Player ", player.getPlayerNum());
 }
 
 void PlayerRegularState::initialize()

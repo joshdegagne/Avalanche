@@ -45,13 +45,15 @@ class Game
 		void HandlePauseRequest(int);	
 
 		// Manager Getter/Setters
-		KeyInput*               getKeyInput()			{ return keyInput; }
-		ControllerInputManager* getControllerManager()	{ return conInput; }
-		ModelManager*			getModelManager()		{ return modelManager; }
-		TextureManager*			getTextureManager()		{ return textureManager; }
-		ID3D11Device*			getDevice()				{ return graphics->getDevice(); }
-		CollisionManager*		getCollisionManager()	{ return collisionManager; }
-		Camera*					getCamera()				{ return camera; }
+		KeyInput*                 getKeyInput()			    { return keyInput; }
+		ControllerInputManager*   getControllerManager()	{ return conInput; }
+		ModelManager*			  getModelManager()		    { return modelManager; }
+		TextureManager*			  getTextureManager()		{ return textureManager; }
+		ID3D11Device*			  getDevice()				{ return graphics->getDevice(); }
+		ID3D11DeviceContext*      getContext()			    { return graphics->getContext(); }
+		ID3D11BlendState*         getBlendState()			{ return graphics->getBlendState(); }
+		CollisionManager*		  getCollisionManager()	    { return collisionManager; }
+		Camera*					  getCamera()				{ return camera; }
 
 		ArrayList<Player>* GetPlayers();
 

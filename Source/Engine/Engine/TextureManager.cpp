@@ -142,7 +142,7 @@ Texture* TextureManager::loadTexture(WCHAR* filename)
 	*/
 }
 
-SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float width) 
+SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float spriteWidth) 
 {
 	//SpriteTexture* spriteTexture;
 	// Set float index to be 0?
@@ -181,7 +181,10 @@ SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float width)
 	const Image* Image_1 = DxImage.GetImages();
 
 	TexMetadata mdata = DxImage.GetMetadata();
-	mdata.width = width;
+
+	int spriteSheetWidth = mdata.width;
+
+	//mdata.width = spriteWidth;
 	mdata.height; // height of the sprite sheet itself
 	//	mdata.height
 
@@ -193,15 +196,48 @@ SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float width)
 		return NULL;
 	}
 
-	const Image* Image_2 = CropImage.GetImages();
+	//int numFrames 
 
-	Rect rect(0, 0, width, mdata.height);
+	int numFrames = 1;
 
-	result = CopyRectangle(*Image_1, rect, *Image_2, TEX_FILTER_DEFAULT, 0, 0);
-
-	if (FAILED(result)) 
+	for (numFrames; spriteWidth == spriteSheetWidth/numFrames; numFrames++) 
 	{
-		return NULL;
+	}
+
+	//const int framez = numFrames;
+
+	//ID3D11ShaderResourceView* frames [numFrames];
+
+	//vector<ID3D11ShaderResourceView*>
+
+	//**double pointer to view thing, dynamic so with new and delete
+
+
+
+	for (numFrames; spriteWidth == spriteSheetWidth/numFrames; numFrames++) 
+	{
+
+		const Image* Image_2 = CropImage.GetImages();
+
+		// shift the rect x and y - for player, move the x positively by every spritewidth (100)
+		// origin (topleft) - for player with 6 frames, goes 0, 100, 200, 300, 400, 500
+		Rect rect(numFrames*spriteWidth, 0, spriteWidth, mdata.height);
+
+		result = CopyRectangle(*Image_1, rect, *Image_2, TEX_FILTER_DEFAULT, 0, 0);
+
+		if (FAILED(result)) 
+		{
+			return NULL;
+		}
+
+		ID3D11ShaderResourceView*  pSRV = nullptr;
+
+		result = CreateShaderResourceView( device, Image_2, CropImage.GetImageCount(), CropImage.GetMetadata(), &pSRV );
+
+
+
+		// initialize or add to *array of psrv in spritetexture*
+
 	}
 
 
@@ -215,7 +251,11 @@ SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float width)
 
 	//result = CopyRectangle(NULL, NULL, NULL, TEX_FILTER_DEFAULT, 0, 0);
 
-	return NULL;
+
+
+	// set other spritetexture members
+
+	return spriteTex;
 }
 
 // Deletes pointer to ITexture

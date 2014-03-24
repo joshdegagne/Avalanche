@@ -25,6 +25,7 @@ public:
 	~SpriteTexture();
 
 	bool Initialize(ID3D11Device*, WCHAR*);
+	void AddSpriteView(ID3D11ShaderResourceView*);
 	void Shutdown();
 
 	void update(float); 

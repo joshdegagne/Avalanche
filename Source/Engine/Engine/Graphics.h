@@ -23,7 +23,9 @@ public:
 	Graphics(const Graphics&);
 	~Graphics();
 
-	ID3D11Device* getDevice() { return d3D->GetDevice(); }
+	ID3D11Device*        getDevice()     { return d3D->GetDevice(); }
+	ID3D11DeviceContext* getContext()    { return d3D->GetContext();}
+	ID3D11BlendState*    getBlendState() { return d3D->GetBlendState(); }
 
 	bool Initialize(int, int, HWND, Camera*);
 	void Shutdown();

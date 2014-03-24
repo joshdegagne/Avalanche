@@ -248,7 +248,7 @@ bool Graphics::Render(ArrayList<IViewModel>* viewModels)
 		   // view and projection matrices, and
 		   // shaders and ask them to render themselves
 
-		  result = viewModel->Render(d3D->GetDeviceContext(), 
+		  result = viewModel->Render(d3D->GetContext(), 
 								          viewMatrix, 
 								          projectionMatrix,
 										  colorShader,
@@ -262,8 +262,8 @@ bool Graphics::Render(ArrayList<IViewModel>* viewModels)
 
 	// Set up the model for axis scale
 	#ifdef ALL_DEBUG
-	axisModel->Render(d3D->GetDeviceContext());
-	result = colorShader->Render(d3D->GetDeviceContext(), axisModel->GetIndexCount(), axisWorld, viewMatrix, projectionMatrix);
+	axisModel->Render(d3D->GetContext());
+	result = colorShader->Render(d3D->GetContext(), axisModel->GetIndexCount(), axisWorld, viewMatrix, projectionMatrix);
 	
 	if(!result)
 	{

@@ -23,8 +23,6 @@ void Entity::setDead(bool d) { dead = d; }
 
 float Entity::getX() { return position.x; }
 float Entity::getY() { return position.y; }
-void Entity::setX(float x) { position.x = x; }
-void Entity::setY(float y) { position.y = y; }
 
 XMFLOAT3 Entity::getPosition() { return position; }
 
