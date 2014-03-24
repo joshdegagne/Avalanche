@@ -4,7 +4,7 @@ Use surrounding tildes to denote a value you wish to store.
 //Valid values: ON, OFF, any float value
 [NAME]				[VALUE] 	DEFAULT
 COLLISION_DEBUG 		~OFF~		OFF
-STATE_DEBUG 			~OFF~  	OFF
+STATE_DEBUG 			~OFF~		OFF
 PLAYER_DRAG	 		~ON~		ON
 PLAYER_COLLIDE_OBSTACLE		~ON~		ON
 OBSTACLE_SPAWN	 		~ON~		ON

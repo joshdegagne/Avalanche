@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ViewModel.h"
+#include "GeometricPrimitive.h"
+#include "CommonStates.h"
 
 class SmallRockObstacle;
 class ITexture;
@@ -9,7 +11,7 @@ class TextureManager;
 class SmallRockViewModel : public ViewModel<SmallRockObstacle>
 {
 public:
-	SmallRockViewModel();
+	SmallRockViewModel(Game&);
 	virtual ~SmallRockViewModel();
 	
 	bool InitializeTextures(TextureManager* texMan);
@@ -20,9 +22,9 @@ protected:
 	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, SmallRockObstacle*);
 
 private:
-	static const int NUMBER_OF_TEXTURES = 3;
-
+	ID3D11DeviceContext* context;
+	ID3D11BlendState* blendState;
+	unique_ptr<GeometricPrimitive> sphere;
 	WCHAR*   textureFileName;
 	Texture* faceTexture;
-	Model*   vertexModel;
 };

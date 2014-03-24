@@ -209,8 +209,6 @@ bool FinishLineViewModel::InitializeVertexModels(ID3D11Device* d3dDevice){
 
 bool FinishLineViewModel::InitializeTextures(TextureManager* texMan) 
 {
-	//bool result;
-
 	// Create quad texture object.
 	const int NUMBER_OF_TEXTURES = 3; //one for the sides and one each for top and bottom
 	m_faceTextures = new Texture*[NUMBER_OF_TEXTURES];

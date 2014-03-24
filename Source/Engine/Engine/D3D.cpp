@@ -648,10 +648,12 @@ ID3D11Device* D3D::GetDevice()
 }
 
 
-ID3D11DeviceContext* D3D::GetDeviceContext()
+ID3D11DeviceContext* D3D::GetContext()
 {
 	return deviceContext;
 }
+
+ID3D11BlendState* D3D::GetBlendState() { return alphaEnableBlendingState; }
 /*
 The next three helper functions give copies of the projection, world, and orthographic matrices to calling functions. 
 Most shaders will need these matrices for rendering so there needed to be an easy way for outside objects 

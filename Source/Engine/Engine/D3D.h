@@ -28,8 +28,9 @@ public:
 	void BeginScene(float, float, float, float); //clear back buffer and depth  and get it ready to render on
 	void EndScene(); //present back buffer to the screen
 
-	ID3D11Device* GetDevice();
-	ID3D11DeviceContext* GetDeviceContext();
+	ID3D11Device*        GetDevice();
+	ID3D11DeviceContext* GetContext();
+	ID3D11BlendState*    GetBlendState();
 
 	void GetProjectionMatrix(XMFLOAT4X4&);
 	void GetWorldMatrix(XMFLOAT4X4&);

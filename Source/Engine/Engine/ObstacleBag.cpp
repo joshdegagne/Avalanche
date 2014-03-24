@@ -2,6 +2,7 @@
 #include <random>
 #include "LogObstacle.h"
 #include "RockObstacle.h"
+#include "SmallRockObstacle.h"
 #include "TreeObstacle.h"
 #include "IcePatchObstacle.h"
 #include "FinishLineObstacle.h"
@@ -25,6 +26,7 @@ void ObstacleBag::initialize(Game* game)
 	{
 		obstacleList->add(new LogObstacle(*game));
 		obstacleList->add(new RockObstacle(*game));
+		obstacleList->add(new SmallRockObstacle(*game));
 		obstacleList->add(new TreeObstacle(*game));
 		obstacleList->add(new IcePatchObstacle(*game));
 	}
