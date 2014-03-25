@@ -19,7 +19,7 @@ RockViewModel::~RockViewModel()
 		delete faceTexture;
 		faceTexture = 0;
 	}
-	}
+}
 
 bool RockViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 	{

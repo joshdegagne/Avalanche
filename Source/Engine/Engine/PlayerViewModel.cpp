@@ -144,7 +144,10 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 bool PlayerViewModel::InitializeTextures(TextureManager* texMan) 
 {
 	
-	if (!(textures[0] = texMan->loadTexture(L"textures/player_red.dds")))
+	//if (!(textures[0] = texMan->loadTexture(L"textures/player_red.dds")))
+	//	return false;
+
+	if (!(textures[0] = texMan->loadSpriteTexture(L"textures/player_sprite_test.dds", 100)))
 		return false;
 
 	if (!(textures[1] = texMan->loadTexture(L"textures/player_purple.dds")))
@@ -158,12 +161,15 @@ bool PlayerViewModel::InitializeTextures(TextureManager* texMan)
 
 	if (!(shadowTexture = texMan->loadTexture(L"textures/shadow.dds")))
 		return false;
+
+	
+	// pass in the intended width of each cell
 	
 	return true;
+
 }
 
-
-// Take in ref to game?
+// DEPRECATED!
 bool PlayerViewModel::initializeTextures(ID3D11Device* d3dDevice){
 	
 	bool result;
@@ -231,7 +237,7 @@ bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X
 										worldMatrix, 
 										viewMatrix, 
 										projectionMatrix,
-										textures[entity->getPlayerNum()]->GetTexture()); //get the texture to render
+										textures[entity->getPlayerNum()]->GetTexture()); //get the texture to render... size 12 for some reason?
 
 
 	//RENDER SHADOW

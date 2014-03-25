@@ -7,11 +7,12 @@
 #include "SpriteTexture.h"
 #include "DirectXTex.h"
 #include "Game.h"
+#include <vector>
 
 //class Entity;
 //class ViewModelBase;
 
-//#define  SPRITE_UPDATE_RATE 1.0f
+#define  SPRITE_UPDATE_RATE 1.0f
 
 class Game;
 
@@ -35,4 +36,6 @@ public:
 private:
 	//ArrayList<ViewModelBase>* models;
 	ID3D11Device* device;
+	std::vector<SpriteTexture*> spriteTextures;
+
 };
