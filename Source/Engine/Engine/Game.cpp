@@ -289,6 +289,8 @@ bool Game::Frame()
 		playfield->update(time);
 
 		// TextureManager updating of sprites
+
+
 		textureManager->update(time);
 	
 

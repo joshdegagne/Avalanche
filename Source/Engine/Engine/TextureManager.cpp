@@ -37,6 +37,9 @@ void TextureManager::update(float elapsedTime)
 	{
     /* std::cout << someVector[i]; ... */
 		//spriteTextures[i]->update(elapsedTime * 0.00075f);
+
+
+
 		spriteTextures[i]->update(elapsedTime);
 	}
 }

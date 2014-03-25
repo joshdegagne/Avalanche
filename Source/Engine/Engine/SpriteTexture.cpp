@@ -86,7 +86,9 @@ void SpriteTexture::update(float elapsed) // doesnt even use elapsed yet
 		return;
 	}
 
-	if (index + elapsed * 0.025f > maxFrame) 
+	float speed = 0.0075f;
+
+	if (index + elapsed * speed > maxFrame) 
 	{
 		index = 0;
 		return;
@@ -94,7 +96,9 @@ void SpriteTexture::update(float elapsed) // doesnt even use elapsed yet
 	else
 		//index += elapsed * 0.0075f;
 		//index += elapsed * 0.033f;
-		index += elapsed * 0.025f;
+		//index += elapsed * 0.025f;
+		//index += elapsed * 0.01f;
+		index += elapsed * speed;
 
 	//else
 		//index += frameRate * floor(elapsed + 0.5);
