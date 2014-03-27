@@ -17,6 +17,7 @@
 #include "ModelManager-inl.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
+#include "MenuManager.h"
 #include "AudioManager.h"
 
 Game::Game()
@@ -28,11 +29,15 @@ Game::Game()
 	camera    = 0;
 	playfield = 0;
 
-	textureManager	 = nullptr;
-	modelManager	 = nullptr;
-	collisionManager = nullptr;
+	textureManager	= nullptr;
+	modelManager	= nullptr;
+	collisionManager= nullptr;
+	menuManager		= nullptr;
 	audioManager     = nullptr;
-	players			 = nullptr;
+	players			= nullptr;
+	
+
+	PAUSE_FLAG = false;
 
 	gameModels = new ArrayList<IViewModel>();
 }
@@ -101,7 +106,7 @@ bool Game::Initialize()
 	// Texturing //
 	///////////////
 	
-	textureManager = new TextureManager();
+	textureManager = new TextureManager;
 	if (!textureManager)
 		return false;
 
@@ -112,7 +117,7 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	modelManager = new ModelManager();
+	modelManager = new ModelManager;
 	if(!modelManager)
 		return false;
 
@@ -128,7 +133,7 @@ bool Game::Initialize()
 	audioManager = new AudioManager();
 	if(!audioManager)
 		return false;
-
+	
 	initialized = audioManager->initialize(hwnd);
 	if(!initialized)
 		return false;
@@ -137,6 +142,8 @@ bool Game::Initialize()
 	//Collision Manager//
 	/////////////////////
 	collisionManager = new CollisionManager;
+	if(!collisionManager)
+		return false;
 
 	/////////////////////
 	//Players/Playfield//
@@ -153,6 +160,20 @@ bool Game::Initialize()
 	if (!pResult)
 		return false;
 
+	////////////////
+	//Menu Manager//
+	////////////////
+	menuManager = new MenuManager;
+	if (!menuManager)
+		return false;
+
+	initialized = menuManager->initialize(*this);
+	if(!initialized)
+		return false;
+
+	//////////////////////
+	//End Initialization//
+	//////////////////////
 	return true;
 }
 
@@ -298,19 +319,12 @@ bool Game::Frame()
 	{
 		float time = getElapsedTime();
 		// playfield update
+		if (!PAUSE_FLAG)
+		{
 		playfield->update(time);
 
 		// TextureManager updating of sprites
-
-
 		textureManager->update(time);
-	
-
-		// Do the frame processing for the graphics object.
-		result = graphics->Render(gameModels);
-		if(!result)
-		{
-			return false;
 		}
 	}
 	else
@@ -325,6 +339,12 @@ bool Game::Frame()
 			getElapsedTime();
 			return pResult;
 		}
+	}
+	// Do the frame processing for the graphics object.
+	result = graphics->Render(gameModels);
+	if(!result)
+	{
+		return false;
 	}
 
 	return true;
@@ -367,7 +387,14 @@ void Game::HandlePlayfieldEnd()
 void Game::HandlePauseRequest(int playerNum)
 {
 	//implementation pending
+	PAUSE_FLAG = true;
 	writeLabelToConsole(L"Pause requested by Player: ", playerNum);
+}
+void Game::HandleUnpauseRequest()
+{
+	//implementation pending
+	PAUSE_FLAG = false;
+	writeTextToConsole(L"Game Un-paused!");
 }
 
 float Game::getElapsedTime(float timeModifier)

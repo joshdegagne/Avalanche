@@ -11,8 +11,6 @@
 #include "PlayerState.h"
 #include "DebugDefinitions.h"
 
-#define  STICK_MOVEMENT_THRESHOLD 0.3f
-#define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
 
 #define  P_WIDTH  1.0f
 #define  P_LENGTH 1.0f
