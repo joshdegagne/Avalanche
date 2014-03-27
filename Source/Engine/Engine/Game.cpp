@@ -30,7 +30,10 @@ Game::Game()
 	textureManager	= nullptr;
 	modelManager	= nullptr;
 	collisionManager= nullptr;
+	menuManager		= nullptr;
 	players			= nullptr;
+
+	PAUSE_FLAG = false;
 
 	gameModels = new ArrayList<IViewModel>();
 }
@@ -286,21 +289,23 @@ bool Game::Frame()
 	{
 		float time = getElapsedTime();
 		// playfield update
-		playfield->update(time);
-
-		// TextureManager updating of sprites
-
-
-		textureManager->update(time);
-	
-
-		// Do the frame processing for the graphics object.
-		result = graphics->Render(gameModels);
-		if(!result)
+		if (!PAUSE_FLAG)
 		{
-			return false;
+			playfield->update(time);
+
+			// TextureManager updating of sprites
+			textureManager->update(time);
 		}
 	}
+	
+
+	// Do the frame processing for the graphics object.
+	result = graphics->Render(gameModels);
+	if(!result)
+	{
+		return false;
+	}
+
 	else
 	{
 		if (conInput->getButtonB(0) || conInput->getButtonB(1) || conInput->getButtonB(2) || conInput->getButtonB(3) || keyInput->IsKeyDown(VK_ESCAPE))
@@ -355,7 +360,14 @@ void Game::HandlePlayfieldEnd()
 void Game::HandlePauseRequest(int playerNum)
 {
 	//implementation pending
+	PAUSE_FLAG = true;
 	writeLabelToConsole(L"Pause requested by Player: ", playerNum);
+}
+void Game::HandleUnpauseRequest()
+{
+	//implementation pending
+	PAUSE_FLAG = false;
+	writeTextToConsole(L"Game Un-paused!");
 }
 
 float Game::getElapsedTime(float timeModifier)

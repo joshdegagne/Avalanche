@@ -27,6 +27,7 @@ class Player;
 class Playfield;
 class TextureManager;
 class CollisionManager;
+class MenuManager;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
@@ -43,6 +44,7 @@ class Game
 		void Run();
 		void HandlePlayfieldEnd();
 		void HandlePauseRequest(int);	
+		void HandleUnpauseRequest();
 
 		// Manager Getter/Setters
 		KeyInput*                 getKeyInput()			    { return keyInput; }
@@ -72,7 +74,7 @@ class Game
 		HINSTANCE hinstance;
 		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
-		ArrayList<Player>* players;
+		ArrayList<Player>*		players;
 		ArrayList<KeyInput>*    playerKeys;
 		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world
@@ -85,11 +87,16 @@ class Game
 		ModelManager*			modelManager;
 		TextureManager*			textureManager;
 		CollisionManager*		collisionManager;
+		MenuManager*			menuManager;
 
 		//Game World Items
-		Playfield*		   playfield;
+		Playfield*				playfield;
 
-		ArrayList<IViewModel>* gameModels; //container to hold all our game world models - change to be in modelmanager class?
+		ArrayList<IViewModel>*	gameModels; //container to hold all our game world models - change to be in modelmanager class?
+
+		bool PAUSE_FLAG;
+		bool isPaused() { return PAUSE_FLAG; }
+
 
 
 };

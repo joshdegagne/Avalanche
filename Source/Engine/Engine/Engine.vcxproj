@@ -96,6 +96,8 @@
     <ClCompile Include="IcePatchViewModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="LogViewModel.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleBag.cpp" />
@@ -157,6 +159,8 @@
     <ClInclude Include="IViewModel.h" />
     <ClInclude Include="LogObstacle.h" />
     <ClInclude Include="LogViewModel.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuManager.h" />
     <ClInclude Include="ModelManager-inl.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Obstacle.h" />
