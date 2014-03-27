@@ -23,6 +23,7 @@ float PS_REGULAR_DURATION;
 float PS_INJURED_DURATION;
 float PS_JUMP_DURATION;
 float PS_JUMP_HEIGHT;
+float PS_FLOAT_TO_VICTORY;
 float PS_ROLL_DURATION;
 float PS_BUMP_DURATION;
 float PS_BUMP_HEIGHT;
@@ -59,25 +60,26 @@ void setAllGlobalVars()
 	ifstream varValueFile("GlobalVariableValues.txt");
 	if (varValueFile.is_open())
 	{
-		COLLISION_DEBUG = getNextFloat(varValueFile);
-		STATE_DEBUG = getNextFloat(varValueFile);
-		AUDIO_DEBUG = getNextFloat(varValueFile);
-		PLAYER_DRAG = getNextFloat(varValueFile);
+		COLLISION_DEBUG			= getNextFloat(varValueFile);
+		STATE_DEBUG				= getNextFloat(varValueFile);
+		AUDIO_DEBUG				= getNextFloat(varValueFile);
+		PLAYER_DRAG				= getNextFloat(varValueFile);
 		PLAYER_COLLIDE_OBSTACLE = getNextFloat(varValueFile);
-		OBSTACLE_SPAWN = getNextFloat(varValueFile);
+		OBSTACLE_SPAWN			= getNextFloat(varValueFile);
 		
-		ENTITY_DRAG_SPEED = getNextFloat(varValueFile);
-		PLAYER_MOVEMENT_SPEED = getNextFloat(varValueFile);
-		OBSTACLE_SPAWN_RATE = getNextFloat(varValueFile);
+		ENTITY_DRAG_SPEED		= getNextFloat(varValueFile);
+		PLAYER_MOVEMENT_SPEED	= getNextFloat(varValueFile);
+		OBSTACLE_SPAWN_RATE		= getNextFloat(varValueFile);
 
-		PS_REGULAR_DURATION = getNextFloat(varValueFile);
+		PS_REGULAR_DURATION	= getNextFloat(varValueFile);
 		PS_INJURED_DURATION = getNextFloat(varValueFile);
-		PS_JUMP_DURATION = getNextFloat(varValueFile);
-		PS_JUMP_HEIGHT = getNextFloat(varValueFile);
-		PS_ROLL_DURATION = getNextFloat(varValueFile);
-		PS_BUMP_DURATION = getNextFloat(varValueFile);
-		PS_BUMP_HEIGHT = getNextFloat(varValueFile);
+		PS_JUMP_DURATION	= getNextFloat(varValueFile);
+		PS_JUMP_HEIGHT		= getNextFloat(varValueFile);
+		PS_FLOAT_TO_VICTORY = getNextFloat(varValueFile);
+		PS_ROLL_DURATION	= getNextFloat(varValueFile);
+		PS_BUMP_DURATION	= getNextFloat(varValueFile);
+		PS_BUMP_HEIGHT		= getNextFloat(varValueFile);
 
-		SPRITE_UPDATE_SPEED	 = getNextFloat(varValueFile);
+		SPRITE_UPDATE_SPEED	= getNextFloat(varValueFile);
 	}
 }

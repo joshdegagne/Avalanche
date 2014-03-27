@@ -16,6 +16,7 @@ extern float PS_REGULAR_DURATION;
 extern float PS_INJURED_DURATION;
 extern float PS_JUMP_DURATION;
 extern float PS_JUMP_HEIGHT;
+extern float PS_FLOAT_TO_VICTORY;
 extern float PS_ROLL_DURATION;
 extern float PS_BUMP_DURATION;
 extern float PS_BUMP_HEIGHT;

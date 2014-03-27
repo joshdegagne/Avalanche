@@ -44,6 +44,8 @@ class Player: public Entity {
 		void lockLeftMovement(bool = true);
 		void lockRightMovement(bool = true);
 		void lockForwardMovement(bool = true);
+
+		ArrayList<PlayerState>* getPlayerStates() { return &states; }
 		
 	private:
 		KeyInput*	 keyboard;

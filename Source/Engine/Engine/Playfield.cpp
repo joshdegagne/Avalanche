@@ -120,8 +120,17 @@ void Playfield::update(float elapsed)
 	{
 		for (int i = 0; i < activePlayers->size(); ++i)
 		{
-			if (!activePlayers->elementAt(i)->isDead())
-				activePlayers->elementAt(i)->moveBy(XMFLOAT2(PLAYER_MOVEMENT_SPEED*elapsed, 0.0f));
+			Player* currentPlayer = activePlayers->elementAt(i);
+			if (!currentPlayer->isDead())
+			{
+				if (!PS_FLOAT_TO_VICTORY)
+				{
+					if (currentPlayer->containsState(PlayerStateType::PST_JUMP))
+						for (int i = 0; i < currentPlayer->getPlayerStates()->size(); ++i)
+							currentPlayer->getPlayerStates()->elementAt(i)->update(elapsed);
+				}
+				currentPlayer->moveBy(XMFLOAT2(PLAYER_MOVEMENT_SPEED*elapsed, 0.0f));
+			}
 		}
 
 		for (int i = 0; i < obstacleBag->getNumObstacles(); ++i)
