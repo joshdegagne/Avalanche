@@ -10,6 +10,7 @@ using namespace std;
 
 float COLLISION_DEBUG;			//Shows bounding boxes when on
 float STATE_DEBUG;				//Prints state info when on
+float AUDIO_DEBUG;              //Prints audio info when on
 float PLAYER_DRAG;				//Eliminates drag when off
 float PLAYER_COLLIDE_OBSTACLE;	//No collision with obstacles when off
 float OBSTACLE_SPAWN;			//No obstacle spawning when off
@@ -58,6 +59,7 @@ void setAllGlobalVars()
 	{
 		COLLISION_DEBUG = getNextFloat(varValueFile);
 		STATE_DEBUG = getNextFloat(varValueFile);
+		AUDIO_DEBUG = getNextFloat(varValueFile);
 		PLAYER_DRAG = getNextFloat(varValueFile);
 		PLAYER_COLLIDE_OBSTACLE = getNextFloat(varValueFile);
 		OBSTACLE_SPAWN = getNextFloat(varValueFile);

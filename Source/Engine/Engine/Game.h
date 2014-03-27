@@ -27,6 +27,7 @@ class Player;
 class Playfield;
 class TextureManager;
 class CollisionManager;
+class AudioManager;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: Game
@@ -85,6 +86,7 @@ class Game
 		ModelManager*			modelManager;
 		TextureManager*			textureManager;
 		CollisionManager*		collisionManager;
+		AudioManager*           audioManager;
 
 		//Game World Items
 		Playfield*		   playfield;

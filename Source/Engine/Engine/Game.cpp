@@ -17,6 +17,7 @@
 #include "ModelManager-inl.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
+#include "AudioManager.h"
 
 Game::Game()
 {
@@ -27,10 +28,11 @@ Game::Game()
 	camera    = 0;
 	playfield = 0;
 
-	textureManager	= nullptr;
-	modelManager	= nullptr;
-	collisionManager= nullptr;
-	players			= nullptr;
+	textureManager	 = nullptr;
+	modelManager	 = nullptr;
+	collisionManager = nullptr;
+	audioManager     = nullptr;
+	players			 = nullptr;
 
 	gameModels = new ArrayList<IViewModel>();
 }
@@ -120,7 +122,16 @@ bool Game::Initialize()
 
 	gameModels->addAll(modelManager->getGameModels());
 
-	
+	/////////////////
+	//Audio Manager//
+	/////////////////
+	audioManager = new AudioManager();
+	if(!audioManager)
+		return false;
+
+	initialized = audioManager->initialize(hwnd);
+	if(!initialized)
+		return false;
 
 	/////////////////////
 	//Collision Manager//
@@ -133,8 +144,9 @@ bool Game::Initialize()
 	players = new ArrayList<Player>();
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
-		Player* player = new Player(*this, i);
-		players->add(player);
+		Player* player = new Player(*this, i); //Create player object
+		player->addListener(*audioManager);    //Register the audio Manager for that player
+		players->add(player);                  //
 	}
 
 	bool pResult = InitializePlayfield();
