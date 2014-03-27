@@ -42,9 +42,10 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
-		void HandlePlayfieldEnd();
+		void HandleStartGameSignal();
+		void HandleEndGameSignal();
+		void HandleEndProgramSignal();
 		void HandlePauseRequest(int);	
-		void HandleUnpauseRequest();
 
 		// Manager Getter/Setters
 		KeyInput*                 getKeyInput()			    { return keyInput; }
@@ -94,7 +95,7 @@ class Game
 
 		ArrayList<IViewModel>*	gameModels; //container to hold all our game world models - change to be in modelmanager class?
 
-		bool PAUSE_FLAG;
+		bool PAUSE_FLAG, END_PROGRAM_FLAG;
 		bool isPaused() { return PAUSE_FLAG; }
 
 

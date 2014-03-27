@@ -7,6 +7,11 @@
 #include "Menu.h"
 #include <stack>
 
+class MainMenu;
+class PauseMenu;
+class ControlsMenu;
+class CreditsMenu;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Class Name: MenuManager
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,10 +35,12 @@ private:
 	Game* game;
 	std::stack<Menu*> menuOrderStack;
 	//List of menus go here
-	//MainMenu* mainMenu;
-	//PauseMenu* pauseMenu;
-	//ControlsMenu* controlsMenu;
-	//CreditsMenu* creditsMenu;
+	MainMenu* mainMenu;
+	PauseMenu* pauseMenu;
+	ControlsMenu* controlsMenu;
+	CreditsMenu* creditsMenu;
 
 	bool UP_FLAG, DOWN_FLAG, CONFIRM_FLAG, CLOSE_FLAG;
+
+	void addMenu(Menu*);
 };
