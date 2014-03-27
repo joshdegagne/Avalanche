@@ -19,6 +19,9 @@ extern float PS_ROLL_DURATION;
 extern float PS_BUMP_DURATION;
 extern float PS_BUMP_HEIGHT;
 
+#define  STICK_MOVEMENT_THRESHOLD 0.3f
+#define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
+
 #include "DebugConsole.h"
 
 

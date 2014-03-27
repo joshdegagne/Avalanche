@@ -17,6 +17,7 @@
 #include "ModelManager-inl.h"
 #include "TextureManager.h"
 #include "CollisionManager.h"
+#include "MenuManager.h"
 
 Game::Game()
 {
@@ -102,7 +103,7 @@ bool Game::Initialize()
 	// Texturing //
 	///////////////
 	
-	textureManager = new TextureManager();
+	textureManager = new TextureManager;
 	if (!textureManager)
 		return false;
 
@@ -113,7 +114,7 @@ bool Game::Initialize()
 	///////////////
 	//Game Models//
 	///////////////
-	modelManager = new ModelManager();
+	modelManager = new ModelManager;
 	if(!modelManager)
 		return false;
 
@@ -129,6 +130,8 @@ bool Game::Initialize()
 	//Collision Manager//
 	/////////////////////
 	collisionManager = new CollisionManager;
+	if(!collisionManager)
+		return false;
 
 	/////////////////////
 	//Players/Playfield//
@@ -144,6 +147,20 @@ bool Game::Initialize()
 	if (!pResult)
 		return false;
 
+	////////////////
+	//Menu Manager//
+	////////////////
+	menuManager = new MenuManager;
+	if (!menuManager)
+		return false;
+
+	initialized = menuManager->initialize(*this);
+	if(!initialized)
+		return false;
+
+	//////////////////////
+	//End Initialization//
+	//////////////////////
 	return true;
 }
 
