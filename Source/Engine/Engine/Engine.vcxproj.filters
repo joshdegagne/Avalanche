@@ -216,6 +216,9 @@
     <ClCompile Include="SmallRockViewModel.cpp">
       <Filter>Source Files\Models\EntityModels</Filter>
     </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="GlobalDebugInitialization.h">
       <Filter>Header Files\Helper Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

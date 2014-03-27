@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="BoundViewModel.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -133,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arraylist.h" />
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="BoundViewModel.h" />
     <ClInclude Include="Camera.h" />
