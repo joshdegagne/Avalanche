@@ -21,6 +21,7 @@
 //#include "PlayerSounds.h"
 #include "Player.h"
 #include "ArrayList.h"
+#include "DebugDefinitions.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Class name: AudioManager
@@ -50,10 +51,9 @@ public:
 	AudioManager(const AudioManager&);
 	~AudioManager();
 
-	bool Initialize(HWND);
-	bool PlayWave(IDirectSoundBuffer8*);
+	bool initialize(HWND);
+	bool PlayWave(IDirectSoundBuffer8*, int);
 	void Shutdown();
-	void update();
 
 	void onStateStart(PlayerState&);
 	void onStateEnd(PlayerState&);
@@ -62,7 +62,7 @@ private:
 	bool InitializeDirectSound(HWND);
 	void ShutdownDirectSound();
  
-	bool LoadWaveFile(char*, IDirectSoundBuffer8**);
+	bool LoadWaveFile(const char*, IDirectSoundBuffer8**);
 	void ShutdownWaveFile(IDirectSoundBuffer8**);
  
  
@@ -70,8 +70,7 @@ private:
 	IDirectSound8* directSound;
 	IDirectSoundBuffer* primaryBuffer;
 	IDirectSoundBuffer8* song01;
-	IDirectSoundBuffer8* jumpSound;
-	ArrayList<Player*> players;
-	ArrayList<IDirectSoundBuffer8*> playingSounds;
+	string* jumpSoundPath;
+	ArrayList<IDirectSoundBuffer8>* jumpSounds;
 	
 };

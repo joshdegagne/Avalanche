@@ -2,12 +2,14 @@
 // Filename: AudioManager.cpp
 ///////////////////////////////////////////////////////////////////////////////
 #include "AudioManager.h"
+#include "DebugDefinitions.h"
 
 AudioManager::AudioManager()
 {
 	directSound = 0;
 	primaryBuffer = 0;
-	jumpSound = 0;
+	jumpSounds = new ArrayList<IDirectSoundBuffer8>;
+	jumpSoundPath = new string;
 }
  
  
@@ -21,7 +23,7 @@ AudioManager::~AudioManager()
 }
  
  
-bool AudioManager::Initialize(HWND hwnd)
+bool AudioManager::initialize(HWND hwnd)
 {
 	bool result;
 	bool result2;
@@ -38,16 +40,19 @@ bool AudioManager::Initialize(HWND hwnd)
 	{
 		return false;
 	}
+
+	//Set paths to sounds
+	*jumpSoundPath = "audio/tempjump.wav";
  
 	// Load a wave audio file onto a secondary buffer.
-	//result = LoadWaveFile("../Engine/data/sound01.wav", &jumpSound);
+	//result = LoadWaveFile("../Engine/Audio/song01.wav", &song01);
 	if(!result)
 	{
 		return false;
 	}
  
 	// Play the wave file now that it has been loaded.
-	//result2 = PlaySong();
+	//result2 = PlaySong(song01, -10);
 	if(!result)
 	{
 		return false;
@@ -59,7 +64,19 @@ bool AudioManager::Initialize(HWND hwnd)
 void AudioManager::Shutdown()
 {
 	// Release the secondary buffers.
-	ShutdownWaveFile(&jumpSound);
+	ShutdownWaveFile(&song01);
+
+	// Release path names
+	if (jumpSoundPath)
+	{
+		delete jumpSoundPath;
+		jumpSoundPath = 0;
+	}
+	if (jumpSounds)
+	{
+		delete jumpSounds;
+		jumpSounds = 0;
+	}
 
 	// Shutdown the Direct Sound API.
 	ShutdownDirectSound();
@@ -141,7 +158,7 @@ void AudioManager::ShutdownDirectSound()
 	return;
 }
 
-bool AudioManager::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuffer)
+bool AudioManager::LoadWaveFile(const char* filename, IDirectSoundBuffer8** secondaryBuffer)
 {
 	int error;
 	FILE* filePtr;
@@ -301,7 +318,7 @@ void AudioManager::ShutdownWaveFile(IDirectSoundBuffer8** secondaryBuffer)
 	return;
 }
 
-bool AudioManager::PlayWave(IDirectSoundBuffer8* sound)
+bool AudioManager::PlayWave(IDirectSoundBuffer8* sound, int gain)
 {
 	HRESULT result;
  
@@ -312,8 +329,8 @@ bool AudioManager::PlayWave(IDirectSoundBuffer8* sound)
 		return false;
 	}
  
-	// Set volume of the buffer to 100%.
-	result = sound->SetVolume(DSBVOLUME_MAX);
+	// Set volume of the buffer
+	result = sound->SetVolume(DSBVOLUME_MAX + gain);
 	if(FAILED(result))
 	{
 		return false;
@@ -332,10 +349,21 @@ bool AudioManager::PlayWave(IDirectSoundBuffer8* sound)
 
 void AudioManager::onStateStart(PlayerState& state)
 {
-
+	
+	if (state.getStateType() == PlayerStateType::PST_JUMP)
+	{
+		if (AUDIO_DEBUG) writeTextToConsole(L"Jump!");
+		IDirectSoundBuffer8* jumpSound;
+		LoadWaveFile(jumpSoundPath->c_str(), &jumpSound);
+		jumpSounds->add(jumpSound);
+		PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-30);
+	}
 }
 
 void AudioManager::onStateEnd(PlayerState& state)
 {
+	if (state.getStateType() == PlayerStateType::PST_JUMP)
+	{
 
+	}
 }

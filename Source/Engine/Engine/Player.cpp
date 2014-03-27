@@ -255,15 +255,19 @@ void Player::addState(PlayerState& PS)
 		if (currentState->getStateType() == PlayerStateType::PST_REGULAR)
 		{
 			states.remove(currentState);
+			notifyStateEnd(*currentState);
+			
 			delete currentState;
 		}
 	}
 
 	states.add(&PS);
+	notifyStateStart(PS);
 }
 void Player::removeState(PlayerState& PS)
 {
 	states.remove(&PS);
+	notifyStateEnd(PS);
 	delete &PS;
 	if (states.size() == 0)
 		states.add(new PlayerRegularState(*this));

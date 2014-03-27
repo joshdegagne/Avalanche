@@ -3,6 +3,7 @@
 
 extern float COLLISION_DEBUG;			//Shows bounding boxes when on
 extern float STATE_DEBUG;				//Prints state info when on
+extern float AUDIO_DEBUG;               //Prints audio info when on
 extern float PLAYER_DRAG;				//Eliminates drag when off
 extern float PLAYER_COLLIDE_OBSTACLE;	//No collision with obstacles when off
 extern float OBSTACLE_SPAWN;			//No obstacle spawning when off

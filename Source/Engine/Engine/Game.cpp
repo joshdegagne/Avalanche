@@ -18,6 +18,7 @@
 #include "TextureManager.h"
 #include "CollisionManager.h"
 #include "MenuManager.h"
+#include "AudioManager.h"
 
 Game::Game()
 {
@@ -32,6 +33,7 @@ Game::Game()
 	modelManager	= nullptr;
 	collisionManager= nullptr;
 	menuManager		= nullptr;
+	audioManager     = nullptr;
 	players			= nullptr;
 
 	PAUSE_FLAG = END_PROGRAM_FLAG = false;
@@ -124,7 +126,16 @@ bool Game::Initialize()
 
 	gameModels->addAll(modelManager->getGameModels());
 
+	/////////////////
+	//Audio Manager//
+	/////////////////
+	audioManager = new AudioManager();
+	if(!audioManager)
+		return false;
 	
+	initialized = audioManager->initialize(hwnd);
+	if(!initialized)
+		return false;
 
 	/////////////////////
 	//Collision Manager//
@@ -139,8 +150,9 @@ bool Game::Initialize()
 	players = new ArrayList<Player>();
 	for (int i = 0; i < NUMPLAYERS; i++)
 	{
-		Player* player = new Player(*this, i);
-		players->add(player);
+		Player* player = new Player(*this, i); //Create player object
+		player->addListener(*audioManager);    //Register the audio Manager for that player
+		players->add(player);                  //
 	}
 
 	/*
@@ -303,10 +315,10 @@ bool Game::Frame()
 	float time = getElapsedTime();
 
 	if (playfield && !PAUSE_FLAG)
-	{
-		playfield->update(time);
-		textureManager->update(time);
-	}
+		{
+			playfield->update(time);
+			textureManager->update(time);
+		}
 	
 	menuManager->update(time); //Will not do anything if no menu is present
 
