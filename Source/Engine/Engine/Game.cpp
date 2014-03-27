@@ -35,9 +35,8 @@ Game::Game()
 	menuManager		= nullptr;
 	audioManager     = nullptr;
 	players			= nullptr;
-	
 
-	PAUSE_FLAG = false;
+	PAUSE_FLAG = END_PROGRAM_FLAG = false;
 
 	gameModels = new ArrayList<IViewModel>();
 }
@@ -156,9 +155,11 @@ bool Game::Initialize()
 		players->add(player);                  //
 	}
 
+	/*
 	bool pResult = InitializePlayfield();
 	if (!pResult)
 		return false;
+	*/
 
 	////////////////
 	//Menu Manager//
@@ -308,25 +309,21 @@ bool Game::Frame()
 	bool result;
 
 	// Check if the user pressed escape and wants to exit the application.
-	if (keyInput->IsKeyDown(VK_ESCAPE))
+	if (keyInput->IsKeyDown(VK_ESCAPE) || END_PROGRAM_FLAG)
 		return false;
 
-	// Check if the user pressed the back button and wants to exit the application.
-	if (conInput->getButtonBack(0))
-		return false;
+	float time = getElapsedTime();
 
-	if (playfield)
-	{
-		float time = getElapsedTime();
-		// playfield update
-		if (!PAUSE_FLAG)
+	if (playfield && !PAUSE_FLAG)
 		{
-		playfield->update(time);
-
-		// TextureManager updating of sprites
-		textureManager->update(time);
+			playfield->update(time);
+			textureManager->update(time);
 		}
-	}
+	
+	menuManager->update(time); //Will not do anything if no menu is present
+
+
+	/*
 	else
 	{
 		if (conInput->getButtonB(0) || conInput->getButtonB(1) || conInput->getButtonB(2) || conInput->getButtonB(3) || keyInput->IsKeyDown(VK_ESCAPE))
@@ -340,12 +337,11 @@ bool Game::Frame()
 			return pResult;
 		}
 	}
+	*/
 	// Do the frame processing for the graphics object.
 	result = graphics->Render(gameModels);
 	if(!result)
-	{
 		return false;
-	}
 
 	return true;
 }
@@ -365,7 +361,19 @@ bool Game::InitializePlayfield()
 	return true;
 }
 
-void Game::HandlePlayfieldEnd()
+///////////////////
+//Signal Handlers//
+///////////////////
+void Game::HandleStartGameSignal()
+{
+	bool pResult = InitializePlayfield();
+	if (!pResult)
+		HandleEndProgramSignal();
+	menuManager->removeCurrentMenu();
+	getElapsedTime();
+}
+
+void Game::HandleEndGameSignal()
 {
 	delete playfield;
 	playfield = 0;
@@ -382,6 +390,12 @@ void Game::HandlePlayfieldEnd()
 	writeTextToConsole(L"Game has ended!");
 	writeTextToConsole(L"Press A (or SPACE) to play again!");
 	writeTextToConsole(L"Press B (or ESCAPE) to end the program.");
+	menuManager->addMainMenu();
+}
+
+void Game::HandleEndProgramSignal()
+{
+	END_PROGRAM_FLAG = true;
 }
 
 void Game::HandlePauseRequest(int playerNum)
@@ -390,13 +404,9 @@ void Game::HandlePauseRequest(int playerNum)
 	PAUSE_FLAG = true;
 	writeLabelToConsole(L"Pause requested by Player: ", playerNum);
 }
-void Game::HandleUnpauseRequest()
-{
-	//implementation pending
-	PAUSE_FLAG = false;
-	writeTextToConsole(L"Game Un-paused!");
-}
 
+
+///////////////////////////
 float Game::getElapsedTime(float timeModifier)
 {
 	milliseconds elapsed = duration_cast <milliseconds>(high_resolution_clock::now().time_since_epoch()) - start;
