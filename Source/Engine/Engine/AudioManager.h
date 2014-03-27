@@ -53,6 +53,7 @@ public:
 
 	bool initialize(HWND);
 	bool PlayWave(IDirectSoundBuffer8*, int);
+	bool PlaySong01();
 	void Shutdown();
 
 	void onStateStart(PlayerState&);

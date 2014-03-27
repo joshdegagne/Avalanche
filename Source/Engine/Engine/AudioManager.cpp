@@ -26,7 +26,6 @@ AudioManager::~AudioManager()
 bool AudioManager::initialize(HWND hwnd)
 {
 	bool result;
-	bool result2;
 
 	// Initialize direct sound and the primary sound buffer.
 	result = InitializeDirectSound(hwnd);
@@ -35,24 +34,17 @@ bool AudioManager::initialize(HWND hwnd)
 		return false;
 	}
 
-    result2 = InitializeDirectSound(hwnd);
-	if(!result2)
+    result = InitializeDirectSound(hwnd);
+	if(!result)
 	{
 		return false;
 	}
 
 	//Set paths to sounds
 	*jumpSoundPath = "audio/tempjump.wav";
- 
+     
 	// Load a wave audio file onto a secondary buffer.
-	//result = LoadWaveFile("../Engine/Audio/song01.wav", &song01);
-	if(!result)
-	{
-		return false;
-	}
- 
-	// Play the wave file now that it has been loaded.
-	//result2 = PlaySong(song01, -10);
+	result = LoadWaveFile("audio/Avalanche.wav", &song01);
 	if(!result)
 	{
 		return false;
@@ -318,6 +310,32 @@ void AudioManager::ShutdownWaveFile(IDirectSoundBuffer8** secondaryBuffer)
 	return;
 }
 
+bool AudioManager::PlaySong01()
+{
+	HRESULT result;
+
+	result = song01->SetCurrentPosition(0);
+	if(FAILED(result))
+	{
+		return false;
+	}
+
+	result = song01->SetVolume(DSBVOLUME_MAX - 700);
+	if(FAILED(result))
+	{
+		return false;
+	}
+
+	result = song01->Play(0, 0, 1);
+
+	if(FAILED(result))
+	{
+		return false;
+	}
+ 
+	return true;
+}
+
 bool AudioManager::PlayWave(IDirectSoundBuffer8* sound, int gain)
 {
 	HRESULT result;
@@ -356,7 +374,7 @@ void AudioManager::onStateStart(PlayerState& state)
 		IDirectSoundBuffer8* jumpSound;
 		LoadWaveFile(jumpSoundPath->c_str(), &jumpSound);
 		jumpSounds->add(jumpSound);
-		PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-30);
+		PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-1000);
 	}
 }
 

@@ -358,6 +358,8 @@ bool Game::InitializePlayfield(int numPlayers)
 
 	modelManager->add(*playfield);
 	
+	audioManager->PlaySong01();
+
 	return true;
 }
 
