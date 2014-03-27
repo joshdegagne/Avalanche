@@ -72,7 +72,7 @@ ID3D11ShaderResourceView* SpriteTexture::GetTexture()
 	//ID3D11ShaderResourceView[index];
 
 
-	return textures[index];
+	return textures[(int)index];
 	//return textures[floor(index + .5)]; 
 }
 
@@ -80,25 +80,18 @@ void SpriteTexture::update(float elapsed) // doesnt even use elapsed yet
 {
 	//if (index + frameRate * elapsed * 0.00345f > maxFrame)
 	//if (index + frameRate > maxFrame)
-	if (index > maxFrame) 
-	{
-		index = 0;
-		return;
-	}
-
 	float speed = 0.0075f;
 
-	if (index + elapsed * speed > maxFrame) 
+	index += elapsed * speed;
+
+	while (index > maxFrame) 
 	{
-		index = 0;
-		return;
+		index -= maxFrame;
 	}
-	else
-		//index += elapsed * 0.0075f;
-		//index += elapsed * 0.033f;
-		//index += elapsed * 0.025f;
-		//index += elapsed * 0.01f;
-		index += elapsed * speed;
+
+	if(index < 0)
+		index = 0;
+
 
 	//else
 		//index += frameRate * floor(elapsed + 0.5);
