@@ -48,6 +48,8 @@ public:
 
 	bool IsKeyDown(unsigned int);
 
+	int playerKeys[4][7];
+
 private:
 	bool keys[256];
 };

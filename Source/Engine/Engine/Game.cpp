@@ -148,7 +148,7 @@ bool Game::Initialize()
 	//Players/Playfield//
 	/////////////////////
 	players = new ArrayList<Player>();
-	for (int i = 0; i < NUMPLAYERS; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		Player* player = new Player(*this, i); //Create player object
 		player->addListener(*audioManager);    //Register the audio Manager for that player
@@ -346,9 +346,9 @@ bool Game::Frame()
 	return true;
 }
 
-bool Game::InitializePlayfield()
+bool Game::InitializePlayfield(int numPlayers)
 {
-	for (int i = 0; i < NUMPLAYERS; ++i)
+	for (int i = 0; i < numPlayers; ++i)
 		players->elementAt(i)->initialize();
 	
 	playfield = new Playfield();
@@ -366,6 +366,7 @@ bool Game::InitializePlayfield()
 ///////////////////
 void Game::HandleStartGameSignal()
 {
+
 	bool pResult = InitializePlayfield();
 	if (!pResult)
 		HandleEndProgramSignal();

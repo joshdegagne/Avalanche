@@ -14,7 +14,7 @@ public:
 	virtual void confirmSelection() {};
 	void setActive(bool);
 	bool isActive();
-	void scrollUp(); // 
+	void scrollUp(); 
 	void scrollDown();
 
 protected:
