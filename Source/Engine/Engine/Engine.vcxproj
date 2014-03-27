@@ -88,6 +88,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="ControllerInputManager.cpp" />
+    <ClCompile Include="ControlsMenu.cpp" />
+    <ClCompile Include="CreditsMenu.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityBase.cpp" />
     <ClCompile Include="FinishLineObstacle.cpp" />
@@ -96,6 +98,7 @@
     <ClCompile Include="IcePatchViewModel.cpp" />
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="LogViewModel.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="ModelManager.cpp" />
@@ -108,6 +111,7 @@
     <ClCompile Include="KeyInput.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBumpState.cpp" />
     <ClCompile Include="PlayerInjuredState.cpp" />
@@ -142,6 +146,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="ControllerInputManager.h" />
+    <ClInclude Include="ControlsMenu.h" />
+    <ClInclude Include="CreditsMenu.h" />
     <ClInclude Include="DebugConsole.h" />
     <ClInclude Include="DebugDefinitions.h" />
     <ClInclude Include="Entity.h" />
@@ -159,6 +165,7 @@
     <ClInclude Include="IViewModel.h" />
     <ClInclude Include="LogObstacle.h" />
     <ClInclude Include="LogViewModel.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="ModelManager-inl.h" />
@@ -172,6 +179,7 @@
     <ClInclude Include="CineCamera.h" />
     <ClInclude Include="KeyInput.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBumpState.h" />
     <ClInclude Include="PlayerInjuredState.h" />

@@ -1,0 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+// Filename: MainMenu.h
+////////////////////////////////////////////////////////////////////////////////
+#pragma once
+
+#include "Menu.h"
+#include "MenuManager.h"
+
+class MainMenu : public Menu
+{
+public:
+	MainMenu(MenuManager* menuManager, bool active = false);
+	void confirmSelection();
+};
