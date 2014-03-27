@@ -47,7 +47,7 @@ bool AudioManager::Initialize(HWND hwnd)
 	}
  
 	// Play the wave file now that it has been loaded.
-	result2 = PlaySong();
+	//result2 = PlaySong();
 	if(!result)
 	{
 		return false;
