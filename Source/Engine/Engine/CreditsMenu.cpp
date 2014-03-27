@@ -10,6 +10,7 @@ CreditsMenu::CreditsMenu(MenuManager* menuMan, bool activity)
 	active = activity;
 	selection = 0;
 	numSelections = 0;
+	entityType = EntityType::MENU;
 }
 
 void CreditsMenu::confirmSelection()

@@ -146,7 +146,6 @@ bool PlayerViewModel::InitializeTextures(TextureManager* texMan)
 	
 	//if (!(textures[0] = texMan->loadTexture(L"textures/player_red.dds")))
 	if (!(textures[0] = texMan->loadSpriteTexture(L"textures/player_sprite_test.dds", 100)))
-	//	return false;
 		return false;
 
 	if (!(textures[1] = texMan->loadTexture(L"textures/player_purple.dds")))
@@ -161,9 +160,6 @@ bool PlayerViewModel::InitializeTextures(TextureManager* texMan)
 	if (!(shadowTexture = texMan->loadTexture(L"textures/shadow.dds")))
 		return false;
 
-	
-	// pass in the intended width of each cell
-	
 	return true;
 
 }

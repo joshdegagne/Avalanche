@@ -3,6 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
+#include "EntityType.h"
+
 class MenuManager;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -16,10 +18,12 @@ public:
 	bool isActive();
 	void scrollUp(); 
 	void scrollDown();
+	EntityType getEntityType();
 
 protected:
 	MenuManager* menuManager;
 	bool active;
 	int selection;
 	int numSelections;
+	EntityType entityType; // To align with ViewModel template system
 };

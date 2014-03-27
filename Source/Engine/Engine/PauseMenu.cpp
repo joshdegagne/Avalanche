@@ -10,6 +10,7 @@ PauseMenu::PauseMenu(MenuManager* menuMan, bool activity)
 	active = activity;
 	selection = 0;
 	numSelections = 3;
+	entityType = EntityType::MENU;
 }
 
 void PauseMenu::confirmSelection()

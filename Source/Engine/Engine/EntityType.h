@@ -26,5 +26,7 @@ enum class EntityType : int
 	TREE,
 	//Debug bounding box
 	BOUNDING_BOX,
-	PLAYFIELD
+	PLAYFIELD,
+	//Menu
+	MENU
 };

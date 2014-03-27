@@ -11,6 +11,7 @@ MainMenu::MainMenu(MenuManager* menuMan, bool activity)
 	active = activity;
 	selection = 0;
 	numSelections = 4;
+	entityType = EntityType::MENU;
 }
 
 void MainMenu::confirmSelection()

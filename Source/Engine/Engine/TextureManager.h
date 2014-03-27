@@ -9,10 +9,7 @@
 #include "Game.h"
 #include <vector>
 
-//class Entity;
-//class ViewModelBase;
-
-#define  SPRITE_UPDATE_RATE 1.0f
+//#define  SPRITE_UPDATE_RATE 1.0f
 
 class Game;
 
@@ -24,18 +21,16 @@ public:
 	TextureManager();
 
 	bool initialize(Game&); 
-	void update(float);  // For SpriteTextures? Use elapsed time
+	void update(float);  // For SpriteTextures
 
-	Texture* loadTexture(WCHAR*); // Create new Texture, save pointer, initialize Texture, return pointer to Texture... Ref to D3D device?
-	SpriteTexture* loadSpriteTexture(WCHAR*, float); // Takes in width... Should it take in the number of cells? Or columns and rows?
+	Texture* loadTexture(WCHAR*); 
+	SpriteTexture* loadSpriteTexture(WCHAR*, float); 
 	void unloadTexture(ITexture*); // Makes deletion
 
-	// initialize texture taking in reference to game?
-
-	//template<class T> void add(T* entity);
 private:
-	//ArrayList<ViewModelBase>* models;
 	ID3D11Device* device;
 	std::vector<SpriteTexture*> spriteTextures;
+
+	ScratchImage* loadTextureFile(WCHAR*);
 
 };

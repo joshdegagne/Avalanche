@@ -82,6 +82,12 @@
     <Filter Include="Source Files\Graphics\Texturing">
       <UniqueIdentifier>{07aba99e-05f1-49ca-9b81-6db2adb7b7ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Models\MenuModels">
+      <UniqueIdentifier>{004ec601-2749-4d3f-814c-b75f0d212bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models\MenuModels">
+      <UniqueIdentifier>{b6866bff-120f-481c-ac27-3ebf2b8eb4af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -248,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuViewModel.cpp">
+      <Filter>Source Files\Models\MenuModels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -460,6 +469,9 @@
     </ClInclude>
     <ClInclude Include="CreditsMenu.h">
       <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuViewModel.h">
+      <Filter>Header Files\Models\MenuModels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

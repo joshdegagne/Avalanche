@@ -4,12 +4,13 @@
 #include "ControlsMenu.h"
 #include "MenuManager.h"
 
-ControlsMenu::ControlsMenu(MenuManager* menuMan, bool activity)
+ControlsMenu::ControlsMenu(MenuManager* menuMan, bool activity) 
 {
 	menuManager = menuMan;
 	active = activity;
 	selection = 0;
 	numSelections = 0;
+	entityType = EntityType::MENU;
 }
 
 void ControlsMenu::confirmSelection()
