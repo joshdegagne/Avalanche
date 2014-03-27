@@ -2,6 +2,7 @@
 // Filename: ControlsMenu.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "ControlsMenu.h"
+#include "MenuManager.h"
 
 ControlsMenu::ControlsMenu(MenuManager* menuMan, bool activity)
 {

@@ -2,6 +2,7 @@
 // Filename: CreditsMenu.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "CreditsMenu.h"
+#include "MenuManager.h"
 
 CreditsMenu::CreditsMenu(MenuManager* menuMan, bool activity)
 {

@@ -2,6 +2,7 @@
 // Filename: PauseMenu.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "PauseMenu.h"
+#include "MenuManager.h"
 
 PauseMenu::PauseMenu(MenuManager* menuMan, bool activity)
 {

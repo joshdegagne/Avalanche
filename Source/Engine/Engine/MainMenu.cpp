@@ -2,6 +2,7 @@
 // Filename: MainMenu.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "MainMenu.h"
+#include "MenuManager.h"
 
 
 MainMenu::MainMenu(MenuManager* menuMan, bool activity)

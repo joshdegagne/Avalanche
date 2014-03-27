@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include "MenuManager.h"
+class MenuManager;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Class Name: Menu
@@ -11,7 +11,7 @@
 class Menu
 {
 public:
-	virtual void confirmSelection() {}
+	virtual void confirmSelection() {};
 	void setActive(bool);
 	bool isActive();
 	void scrollUp(); // 

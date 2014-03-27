@@ -4,7 +4,8 @@
 #pragma once
 
 #include "Menu.h"
-#include "MenuManager.h"
+
+class MenuManager;
 
 class ControlsMenu : public Menu
 {

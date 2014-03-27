@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "MenuManager.h"
 
 void Menu::scrollDown()
 {
