@@ -16,6 +16,10 @@ Player::Player(Game& g, int pNum) : Entity(g)
 	keyboard	= g.getKeyInput();
 
 	playerNum = pNum;
+	for(int i = 0; i < 7; ++i)
+		keys[i] = keyboard->playerKeys[playerNum][i];
+
+	/*
 	if (playerNum == 0) //Player one (Arrow Keys)
 	{
 		keys[0] = VK_LEFT;
@@ -56,6 +60,7 @@ Player::Player(Game& g, int pNum) : Entity(g)
 		keys[5] = ascii_U;
 		keys[6] = ascii_O;
 	}
+	*/
 
 }
 

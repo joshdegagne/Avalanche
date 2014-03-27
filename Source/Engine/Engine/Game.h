@@ -10,8 +10,6 @@
 #include "Arraylist.h"
 #include "Graphics.h"
 
-#define  NUMPLAYERS 4 //USED FOR POTENTIAL PLAYER LOOPS ONLY
-
 using namespace std::chrono;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +67,7 @@ class Game
 		void  InitializeWindows(int&, int&);
 		void  ShutdownWindows();
 		float getElapsedTime(float timeModifier = 1.0f);
-		bool  InitializePlayfield();
+		bool  InitializePlayfield(int numPlayers = 4);
 
 		//Member Variables
 		LPCWSTR   applicationName;

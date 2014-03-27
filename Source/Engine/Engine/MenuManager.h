@@ -33,12 +33,12 @@ public:
 
 private:
 	Game* game;
-	std::stack<Menu*> menuOrderStack;
-	//List of menus go here
-	MainMenu* mainMenu;
-	PauseMenu* pauseMenu;
-	ControlsMenu* controlsMenu;
-	CreditsMenu* creditsMenu;
+
+	std::stack<Menu*>	menuOrderStack;
+	MainMenu*			mainMenu;
+	PauseMenu*			pauseMenu;
+	ControlsMenu*		controlsMenu;
+	CreditsMenu*		creditsMenu;
 
 	bool UP_FLAG, DOWN_FLAG, CONFIRM_FLAG, CLOSE_FLAG;
 
