@@ -145,7 +145,7 @@ bool PlayerViewModel::InitializeTextures(TextureManager* texMan)
 {
 	
 	//if (!(textures[0] = texMan->loadTexture(L"textures/player_red.dds")))
-	if (!(textures[0] = texMan->loadSpriteTexture(L"textures/player_sprite_test.dds", 100)))
+	if (!(textures[0] = texMan->loadSpriteTexture(L"textures/player_red_running.png", 100)))
 	//	return false;
 		return false;
 
