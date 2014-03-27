@@ -297,15 +297,6 @@ bool Game::Frame()
 			textureManager->update(time);
 		}
 	}
-	
-
-	// Do the frame processing for the graphics object.
-	result = graphics->Render(gameModels);
-	if(!result)
-	{
-		return false;
-	}
-
 	else
 	{
 		if (conInput->getButtonB(0) || conInput->getButtonB(1) || conInput->getButtonB(2) || conInput->getButtonB(3) || keyInput->IsKeyDown(VK_ESCAPE))
@@ -318,6 +309,12 @@ bool Game::Frame()
 			getElapsedTime();
 			return pResult;
 		}
+	}
+	// Do the frame processing for the graphics object.
+	result = graphics->Render(gameModels);
+	if(!result)
+	{
+		return false;
 	}
 
 	return true;
