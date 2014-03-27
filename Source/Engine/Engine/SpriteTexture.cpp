@@ -2,6 +2,7 @@
 // Filename: SpriteTexture.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "SpriteTexture.h"
+#include "DebugDefinitions.h"
 
 SpriteTexture::SpriteTexture()
 {
@@ -82,7 +83,8 @@ void SpriteTexture::update(float elapsed) // doesnt even use elapsed yet
 	//if (index + frameRate > maxFrame)
 	float speed = 0.0075f;
 
-	index += elapsed * speed;
+	//index += elapsed * speed;
+	index += elapsed * SPRITE_UPDATE_SPEED; // Can change this value via GlobalVariableValues.txt
 
 	while (index > maxFrame) 
 	{

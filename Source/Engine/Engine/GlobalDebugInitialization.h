@@ -27,6 +27,8 @@ float PS_ROLL_DURATION;
 float PS_BUMP_DURATION;
 float PS_BUMP_HEIGHT;
 
+float SPRITE_UPDATE_SPEED;
+
 #define TILDE 126
 #define TILDECHAR '~'
 
@@ -75,5 +77,7 @@ void setAllGlobalVars()
 		PS_ROLL_DURATION = getNextFloat(varValueFile);
 		PS_BUMP_DURATION = getNextFloat(varValueFile);
 		PS_BUMP_HEIGHT = getNextFloat(varValueFile);
+
+		SPRITE_UPDATE_SPEED	 = getNextFloat(varValueFile);
 	}
 }
