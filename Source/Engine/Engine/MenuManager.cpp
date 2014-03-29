@@ -3,6 +3,7 @@
 #include "ControllerInputManager.h"
 #include "KeyInput.h"
 #include "ModelManager.h"
+#include "AudioManager.h"
 #include "MainMenu.h"
 #include "PlayerSelectMenu.h"
 #include "PauseMenu.h"
@@ -203,6 +204,7 @@ void MenuManager::addMainMenu()
 	if (MENU_DEBUG)
 		writeTextToConsole(L"MAIN MENU ADDED");
 	addMenu(mainMenu);
+	game->getAudioManager()->StopSong01();
 }
 void MenuManager::addPlayerSelectMenu()
 {

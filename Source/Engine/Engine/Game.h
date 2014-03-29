@@ -52,6 +52,7 @@ class Game
 		ControllerInputManager*   getControllerManager()	{ return conInput; }
 		ModelManager*			  getModelManager()		    { return modelManager; }
 		TextureManager*			  getTextureManager()		{ return textureManager; }
+		AudioManager*             getAudioManager()         { return audioManager; }
 		ID3D11Device*			  getDevice()				{ return graphics->getDevice(); }
 		ID3D11DeviceContext*      getContext()			    { return graphics->getContext(); }
 		ID3D11BlendState*         getBlendState()			{ return graphics->getBlendState(); }

@@ -405,7 +405,6 @@ void Game::HandleEndGameSignal(int numPlayers)
 	delete playfield;
 	playfield = 0;
 	writeTextToConsole(L"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	menuManager->addMainMenu();
 	if (numPlayers > 0)
 		menuManager->addResultsMenu();
 
@@ -423,7 +422,6 @@ void Game::HandleEndGameSignal(int numPlayers)
 	////////////////////////////
 
 	PAUSE_FLAG = false;
-	audioManager->StopSong01();
 }
 void Game::HandleEndProgramSignal()
 {
