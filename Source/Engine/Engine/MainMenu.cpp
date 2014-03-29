@@ -18,7 +18,7 @@ void MainMenu::confirmSelection()
 {
 	switch(selection)
 	{
-	case 0: menuManager->sendStartGameSignal(); // Start Game
+	case 0: menuManager->addPlayerSelectMenu(); // Start Game
 			break;
 	case 1: menuManager->addControlsMenu(); // Controls
 			break;

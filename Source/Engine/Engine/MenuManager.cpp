@@ -4,6 +4,7 @@
 #include "KeyInput.h"
 #include "ModelManager.h"
 #include "MainMenu.h"
+#include "PlayerSelectMenu.h"
 #include "PauseMenu.h"
 #include "ControlsMenu.h"
 #include "CreditsMenu.h"
@@ -11,14 +12,24 @@
 
 #include "DebugDefinitions.h"
 
+MenuManager::~MenuManager()
+{
+	delete mainMenu;
+	delete playerSelectMenu;
+	delete pauseMenu;
+	delete controlsMenu;
+	delete creditsMenu;
+}
+
 bool MenuManager::initialize(Game& g)
 {
 	game = &g;
 
-	mainMenu	 = new MainMenu(this);
-	pauseMenu	 = new PauseMenu(this);
-	controlsMenu = new ControlsMenu(this);
-	creditsMenu	 = new CreditsMenu(this);
+	mainMenu		 = new MainMenu(this);
+	playerSelectMenu = new PlayerSelectMenu(this);
+	pauseMenu		 = new PauseMenu(this);
+	controlsMenu	 = new ControlsMenu(this);
+	creditsMenu		 = new CreditsMenu(this);
 
 	mmvm		 = new MainMenuViewModel(g);
 
@@ -165,10 +176,27 @@ void MenuManager::removeCurrentMenu()
 	
 	writeTextToConsole(L"CURRENT MENU REMOVED");
 }
+void MenuManager::removeAllMenus()
+{
+	while (!menuOrderStack.empty())
+		removeCurrentMenu();
+}
 void MenuManager::addMainMenu()
 {
 	writeTextToConsole(L"MAIN MENU ADDED");
 	addMenu(mainMenu);
+}
+void MenuManager::addPlayerSelectMenu()
+{
+	if (PLAYER_NUMBER_OVERRIDE)
+	{
+		sendStartGameSignal(PLAYER_NUMBER_OVERRIDE);
+	}
+	else
+	{
+		writeTextToConsole(L"PLAYER SELECT MENU ADDED");
+		addMenu(playerSelectMenu);
+	}
 }
 void MenuManager::addPauseMenu()
 {
@@ -196,10 +224,10 @@ void MenuManager::addMenu(Menu* newMenu)
 //////////////////////////////
 //Signals from Menus to Game//
 //////////////////////////////
-void MenuManager::sendStartGameSignal()
+void MenuManager::sendStartGameSignal(int numPlayers)
 {
-	removeCurrentMenu();
-	game->HandleStartGameSignal();
+	removeAllMenus();
+	game->HandleStartGameSignal(numPlayers);
 }
 void MenuManager::sendEndGameSignal()
 {

@@ -119,6 +119,7 @@
     <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerRegularState.cpp" />
     <ClCompile Include="PlayerRollState.cpp" />
+    <ClCompile Include="PlayerSelectMenu.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerViewModel.cpp" />
     <ClCompile Include="Playfield.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="PlayerModel.h" />
     <ClInclude Include="PlayerRegularState.h" />
     <ClInclude Include="PlayerRollState.h" />
+    <ClInclude Include="PlayerSelectMenu.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerStatesList.h" />
     <ClInclude Include="PlayerViewModel.h" />

@@ -39,7 +39,7 @@ Playfield::~Playfield()
 	obstacleBag = 0;
 }
 
-void Playfield::initialize(Game* g)
+void Playfield::initialize(Game* g, int numPlayers)
 {
 	game = g;
 	collisionManager = game->getCollisionManager();
@@ -47,7 +47,7 @@ void Playfield::initialize(Game* g)
 	playTimer.initialize(GAME_LENGTH, this);
 	endTimer.initialize(END_LENGTH, this);
 
-	populateLists(game);
+	populateLists(game, numPlayers);
 
 	for(int i = 0; i < activePlayers->size(); ++i)
 	{
@@ -81,8 +81,7 @@ void Playfield::update(float elapsed)
 				return;
 			}
 		}
-		//Obstacle placement based on time
-		///////////////////////////////////
+
 		playTimer.update(elapsed);
 
 		if(OBSTACLE_SPAWN)
@@ -93,7 +92,6 @@ void Playfield::update(float elapsed)
 				addObstacleToPlayfield();
 			}
 		}
-		///////////////////////////////////
 
 		//This for loop is backwards because for SOME REASON, putting it the other way doesn't work with tie-breakers.
 		for (int i = entities->size()-1; i >=0 ; --i) 
@@ -119,7 +117,7 @@ void Playfield::update(float elapsed)
 		for (int i = 0; i < activePlayers->size(); ++i)
 			if (activePlayers->elementAt(i)->isDead())
 				++counter;
-		if (counter >= 3)
+		if (counter >= activePlayers->size()-1)
 			playTimer.forceTimerEnd();
 	}
 	else
@@ -173,9 +171,9 @@ void Playfield::timerCallback(Timer& t)
 //////////////////////
 
 //Creates obstacles and places them in the obstacles arraylist
-void Playfield::populateLists(Game* game)
+void Playfield::populateLists(Game* game, int numPlayers)
 {
-	for(int i = 0; i < game->GetPlayers()->size(); ++i)
+	for(int i = 0; i < numPlayers; ++i)
 	{
 			Player* player = game->GetPlayers()->elementAt(i);
 			activePlayers->add(player);
