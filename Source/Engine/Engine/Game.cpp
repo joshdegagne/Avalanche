@@ -19,6 +19,7 @@
 #include "CollisionManager.h"
 #include "MenuManager.h"
 #include "AudioManager.h"
+#include "MainMenuViewModel.h"
 
 Game::Game()
 {
@@ -125,6 +126,8 @@ bool Game::Initialize()
 		return false;
 
 	gameModels->addAll(modelManager->getGameModels());
+
+
 
 	/////////////////
 	//Audio Manager//
@@ -340,6 +343,14 @@ bool Game::Frame()
 	*/
 	// Do the frame processing for the graphics object.
 	result = graphics->Render(gameModels);
+
+
+	//gameModels->
+
+	//MainMenuViewModel* mainMenuViewModel = new MainMenuViewModel(*this);
+	//mainMenuViewModel->RenderEntity(getContext(), nullptr, nullptr, nullptr, nullptr, menuManager->mainMenu);
+
+
 	if(!result)
 		return false;
 
