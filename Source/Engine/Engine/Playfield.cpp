@@ -25,7 +25,10 @@ Playfield::~Playfield()
 	if (game->getModelManager())
 		game->getModelManager()->cleanUpArrayMemory();
 	if (collisionManager)
+	{
 		collisionManager->cleanUpArrayMemory();
+		collisionManager = nullptr;
+	}
 
 	delete entities;
 	delete activePlayers;

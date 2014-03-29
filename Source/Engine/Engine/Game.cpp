@@ -30,23 +30,21 @@ Game::Game()
 	camera    = 0;
 	playfield = 0;
 
-	textureManager	= nullptr;
-	modelManager	= nullptr;
-	collisionManager= nullptr;
-	menuManager		= nullptr;
+	textureManager	 = nullptr;
+	modelManager	 = nullptr;
+	collisionManager = nullptr;
+	menuManager		 = nullptr;
 	audioManager     = nullptr;
-	players			= nullptr;
+	players			 = nullptr;
 
 	PAUSE_FLAG = END_PROGRAM_FLAG = false;
 
 	gameModels = new ArrayList<IViewModel>();
 }
 
-
 Game::Game(const Game& other)
 {
 }
-
 
 Game::~Game()
 {
@@ -132,7 +130,7 @@ bool Game::Initialize()
 	/////////////////
 	//Audio Manager//
 	/////////////////
-	audioManager = new AudioManager();
+	audioManager = new AudioManager;
 	if(!audioManager)
 		return false;
 	
@@ -150,12 +148,13 @@ bool Game::Initialize()
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
-	players = new ArrayList<Player>();
+	players = new ArrayList<Player>;
+
 	for (int i = 0; i < 4; i++)
 	{
 		Player* player = new Player(*this, i); //Create player object
 		player->addListener(*audioManager);    //Register the audio Manager for that player
-		players->add(player);                  //
+		players->add(player);                  //Add players to active players list
 	}
 
 	/*
@@ -181,18 +180,9 @@ bool Game::Initialize()
 	return true;
 }
 
-
 void Game::Shutdown()
 {
 	
-	if(players)
-	{
-		for(int i = 0; i < players->size(); ++i)
-			delete players->elementAt(i);
-
-		delete players;
-		players = nullptr;
-	}
 
 	if(graphics)
 	{
@@ -231,11 +221,6 @@ void Game::Shutdown()
 		textureManager = nullptr;
 	}
 
-	if (collisionManager)
-	{
-		delete collisionManager;
-		collisionManager = nullptr;
-	}
 
 	if (menuManager)
 	{
@@ -254,6 +239,21 @@ void Game::Shutdown()
 		delete playfield;
 		playfield = nullptr;
 	}
+	
+	if (collisionManager)
+	{
+		delete collisionManager;
+		collisionManager = nullptr;
+	}
+
+	if(players)
+	{
+		for(int i = 0; i < players->size(); ++i)
+			delete players->elementAt(i);
+
+		delete players;
+		players = nullptr;
+	}
 
 	if(gameModels)
 	{
@@ -265,7 +265,6 @@ void Game::Shutdown()
 	
 	return;
 }
-
 
 void Game::Run()
 {
@@ -321,7 +320,6 @@ void Game::Run()
 
 	return;
 }
-
 
 bool Game::Frame()
 {
@@ -395,7 +393,6 @@ void Game::HandleStartGameSignal()
 	menuManager->removeCurrentMenu();
 	getElapsedTime();
 }
-
 void Game::HandleEndGameSignal()
 {
 	delete playfield;
@@ -416,12 +413,10 @@ void Game::HandleEndGameSignal()
 	menuManager->addMainMenu();
 	PAUSE_FLAG = false;
 }
-
 void Game::HandleEndProgramSignal()
 {
 	END_PROGRAM_FLAG = true;
 }
-
 void Game::HandlePauseSignal(int playerNum)
 {
 	//implementation pending
@@ -435,7 +430,6 @@ void Game::HandleUnPauseSignal()
 	PAUSE_FLAG = false;
 	writeTextToConsole(L"Game UnPaused!");
 }
-
 
 ///////////////////////////
 float Game::getElapsedTime(float timeModifier)
@@ -485,7 +479,6 @@ LRESULT CALLBACK Game::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARA
 		}
 	}
 }
-
 
 void Game::InitializeWindows(int& screenWidth, int& screenHeight)
 {
@@ -596,7 +589,6 @@ void Game::InitializeWindows(int& screenWidth, int& screenHeight)
 	return;
 }
 
-
 void Game::ShutdownWindows()
 {
 	// Show the mouse cursor again.
@@ -621,7 +613,6 @@ void Game::ShutdownWindows()
 
 	return;
 }
-
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 {
