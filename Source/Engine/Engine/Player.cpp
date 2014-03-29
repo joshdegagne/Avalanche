@@ -43,7 +43,7 @@ void Player::initialize()
 	while (states.size() > 0 && !containsState(PlayerStateType::PST_REGULAR))
 		states.removeFirst();
 
-	moveTo(10.0f, 5.5f - 1.5f * playerNum);
+	moveTo(15.0f, 5.5f - 1.5f * playerNum);
 }
 
 
@@ -324,37 +324,6 @@ void Player::checkControllerInputs(float elapsed)
 	}
 	else
 		Y_FLAG = false;
-
-	if (controller->getButtonLB(playerNum))
-	{
-		if (!LB_FLAG)
-		{
-			LB_FLAG = true;
-			rollLeft();
-		}
-	}
-	else
-		LB_FLAG = false;
-
-	if (controller->getButtonRB(playerNum) && !RB_FLAG)
-	{
-		if (!RB_FLAG)
-		{
-			RB_FLAG = true;
-			rollRight();
-		}
-	}
-	else
-		RB_FLAG = false;
-
-	if (controller->getButtonStart(playerNum))
-	{
-		//Pause game?
-	}
-	if (controller->getButtonBack(playerNum))
-	{
-		//????
-	}
 
 	//////////////////
 	//Trigger Checks//

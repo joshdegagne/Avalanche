@@ -390,7 +390,7 @@ void AudioManager::onStateStart(PlayerState& state)
 		IDirectSoundBuffer8* rollSound;
 		LoadWaveFile(rollSoundPath->c_str(), &rollSound);
 		rollSounds->add(rollSound);
-		PlayWave(rollSounds->elementAt(rollSounds->size()-1),-2500);
+		PlayWave(rollSounds->elementAt(rollSounds->size()-1),-1500);
 	}
 	else if (state.getStateType() == PlayerStateType::PST_INJURED)
 	{
