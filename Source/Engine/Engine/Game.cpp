@@ -386,8 +386,6 @@ bool Game::InitializePlayfield(int numPlayers)
 	playfield->initialize(this, numPlayers);
 
 	modelManager->add(*playfield);
-	
-	audioManager->PlaySong01();
 
 	return true;
 }
@@ -400,6 +398,7 @@ void Game::HandleStartGameSignal(int numPlayers)
 	bool pResult = InitializePlayfield(numPlayers);
 	if (!pResult)
 		HandleEndProgramSignal();
+	audioManager->PlaySong01();
 	getElapsedTime();
 }
 void Game::HandleEndGameSignal(int numPlayers)
@@ -425,6 +424,7 @@ void Game::HandleEndGameSignal(int numPlayers)
 	////////////////////////////
 
 	PAUSE_FLAG = false;
+	audioManager->StopSong01();
 }
 void Game::HandleEndProgramSignal()
 {

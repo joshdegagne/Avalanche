@@ -53,6 +53,7 @@ public:
 
 	bool initialize(HWND);
 	bool PlaySong01();
+	bool StopSong01();
 	void Shutdown();
 
 	void onStateStart(PlayerState&);

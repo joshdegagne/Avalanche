@@ -344,6 +344,20 @@ bool AudioManager::PlaySong01()
 	return true;
 }
 
+bool AudioManager::StopSong01()
+{
+	HRESULT result;
+
+	result = song01->Stop();
+
+	if(FAILED(result))
+	{
+		return false;
+	}
+ 
+	return true;
+}
+
 bool AudioManager::PlayWave(IDirectSoundBuffer8* sound, int gain = 0)
 {
 	HRESULT result;
