@@ -20,7 +20,7 @@ MainMenuViewModel::MainMenuViewModel(Game& g) : ViewModel<MainMenu>(EntityType::
 
 
 	sprites = new SpriteBatch(g.getContext());
-	font.reset(new SpriteFont(g.getDevice(), L"italic.spritefont"));
+	font.reset(new SpriteFont(g.getDevice(), L"tempesta7_menu.spritefont"));
 
 	if (!sprites)
 		writeTextToConsole(L"spritebatch not ok");
@@ -91,7 +91,12 @@ bool MainMenuViewModel::Draw(MainMenu* menu)
 		//sprites->Begin(SpriteSortMode_Deferred);
 		sprites->Begin();
 
-		font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(0, 0), Colors::Purple);
+		//font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(278, 85), Colors::Purple);
+		game->getGraphics()->getSpriteFontBig()->DrawString(sprites, L"AVALANCHE", XMFLOAT2(200, 75), Colors::Purple);
+		font->DrawString(sprites, L"start game", XMFLOAT2(275, 190), Colors::Purple);
+		font->DrawString(sprites, L"view controls", XMFLOAT2(255, 240), Colors::Purple);
+		font->DrawString(sprites, L"view credits", XMFLOAT2(270, 290), Colors::Purple);
+		font->DrawString(sprites, L"quit game", XMFLOAT2(293, 340), Colors::Purple);
 
 		//writeLabelToConsole(
 		//writeTextToConsole(L"MainMenuViewModel::RenderEntity");
