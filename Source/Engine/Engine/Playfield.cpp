@@ -22,8 +22,11 @@ Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressP
 
 Playfield::~Playfield()
 {
-	game->getModelManager()->cleanUpArrayMemory();
-	collisionManager->cleanUpArrayMemory();
+	if (game->getModelManager())
+		game->getModelManager()->cleanUpArrayMemory();
+	if (collisionManager)
+		collisionManager->cleanUpArrayMemory();
+
 	delete entities;
 	delete activePlayers;
 	delete obstacleBag;
@@ -71,7 +74,7 @@ void Playfield::update(float elapsed)
 		{
 			if (activePlayers->elementAt(i)->requestingPause() && !activePlayers->elementAt(i)->isDead())
 			{
-				game->HandlePauseRequest(i);
+				game->HandlePauseSignal(i);
 				return;
 			}
 		}
