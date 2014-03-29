@@ -30,6 +30,7 @@ public:
 	void sendStartGameSignal();
 	void sendEndGameSignal();
 	void sendEndProgramSignal();
+	void sendUnPauseSignal();
 
 private:
 	Game* game;

@@ -181,35 +181,39 @@ bool Game::Initialize()
 
 void Game::Shutdown()
 {
-	if(gameModels)
+	
+	if(players)
 	{
-		delete gameModels;
-		gameModels = 0;
+		for(int i = 0; i < players->size(); ++i)
+			delete players->elementAt(i);
+
+		delete players;
+		players = nullptr;
 	}
 
 	if(graphics)
 	{
 		graphics->Shutdown();
 		delete graphics;
-		graphics = 0;
+		graphics = nullptr;
 	}
 
-	if(keyInput)
+	if(camera)
 	{
-		delete keyInput;
-		keyInput = 0;
+		delete camera;
+		camera =nullptr;
 	}
 
 	if(conInput)
 	{
 		delete conInput;
-		conInput = 0;
+		conInput = nullptr;
 	}
 
-	if(camera)
+	if(keyInput)
 	{
-		//delete camera;
-		camera = 0;
+		delete keyInput;
+		keyInput = nullptr;
 	}
 
 	if(modelManager)
@@ -224,15 +228,36 @@ void Game::Shutdown()
 		textureManager = nullptr;
 	}
 
-	if(players)
+	if (collisionManager)
 	{
-		for(int i = 0; i < players->size(); ++i)
-			delete players->elementAt(i);
-
-		delete players;
-		players = nullptr;
+		delete collisionManager;
+		collisionManager = nullptr;
 	}
 
+	if (menuManager)
+	{
+		delete menuManager;
+		menuManager = nullptr;
+	}
+
+	if (audioManager)
+	{
+		delete audioManager;
+		audioManager = nullptr;
+	}
+
+	if (playfield)
+	{
+		delete playfield;
+		playfield = nullptr;
+	}
+
+	if(gameModels)
+	{
+		delete gameModels;
+		gameModels = nullptr;
+	}
+	
 	ShutdownWindows();
 	
 	return;
@@ -309,35 +334,19 @@ bool Game::Frame()
 	bool result;
 
 	// Check if the user pressed escape and wants to exit the application.
-	if (keyInput->IsKeyDown(VK_ESCAPE) || END_PROGRAM_FLAG)
+	if (keyInput->IsKeyDown(VK_ESCAPE) || END_PROGRAM_FLAG || conInput->getButtonBack(0))
 		return false;
 
 	float time = getElapsedTime();
 
 	if (playfield && !PAUSE_FLAG)
-		{
-			playfield->update(time);
-			textureManager->update(time);
-		}
+	{
+		playfield->update(time);
+		textureManager->update(time);
+	}
 	
 	menuManager->update(time); //Will not do anything if no menu is present
 
-
-	/*
-	else
-	{
-		if (conInput->getButtonB(0) || conInput->getButtonB(1) || conInput->getButtonB(2) || conInput->getButtonB(3) || keyInput->IsKeyDown(VK_ESCAPE))
-		{
-			return false;
-		}
-		if (conInput->getButtonA(0) || conInput->getButtonA(1) || conInput->getButtonA(2) || conInput->getButtonA(3) || keyInput->IsKeyDown(VK_SPACE))
-		{
-			bool pResult = InitializePlayfield();
-			getElapsedTime();
-			return pResult;
-		}
-	}
-	*/
 	// Do the frame processing for the graphics object.
 	result = graphics->Render(gameModels);
 	if(!result)
@@ -394,6 +403,7 @@ void Game::HandleEndGameSignal()
 	writeTextToConsole(L"Press A (or SPACE) to play again!");
 	writeTextToConsole(L"Press B (or ESCAPE) to end the program.");
 	menuManager->addMainMenu();
+	PAUSE_FLAG = false;
 }
 
 void Game::HandleEndProgramSignal()
@@ -401,11 +411,18 @@ void Game::HandleEndProgramSignal()
 	END_PROGRAM_FLAG = true;
 }
 
-void Game::HandlePauseRequest(int playerNum)
+void Game::HandlePauseSignal(int playerNum)
 {
 	//implementation pending
+	menuManager->addPauseMenu();
 	PAUSE_FLAG = true;
 	writeLabelToConsole(L"Pause requested by Player: ", playerNum);
+}
+void Game::HandleUnPauseSignal()
+{
+	//implementation pending
+	PAUSE_FLAG = false;
+	writeTextToConsole(L"Game UnPaused!");
 }
 
 

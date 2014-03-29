@@ -76,7 +76,7 @@ void MenuManager::update(float elapsedTime)
 			/////////////////
 			//Button Checks//
 			/////////////////
-			if (controller->getButtonA(i) || controller->getButtonStart(i))
+			if (controller->getButtonA(i))
 			{
 				if (!CONFIRM_FLAG)
 				{
@@ -88,7 +88,7 @@ void MenuManager::update(float elapsedTime)
 			else
 				CONFIRM_FLAG = false;
 
-			if (controller->getButtonB(i) || controller->getButtonBack(i))
+			if (controller->getButtonB(i))
 			{
 				if (!CLOSE_FLAG)
 				{
@@ -156,6 +156,7 @@ void MenuManager::removeCurrentMenu()
 		return;
 
 	menuOrderStack.top()->setActive(false);
+	menuOrderStack.top()->resetSelection();
 	menuOrderStack.pop();
 	if (!menuOrderStack.empty())
 		menuOrderStack.top()->setActive(true);
@@ -190,9 +191,9 @@ void MenuManager::addMenu(Menu* newMenu)
 	menuOrderStack.top()->setActive(true);
 }
 
-///////////////////
-//Signals to Game//
-///////////////////
+//////////////////////////////
+//Signals from Menus to Game//
+//////////////////////////////
 void MenuManager::sendStartGameSignal()
 {
 	removeCurrentMenu();
@@ -205,4 +206,9 @@ void MenuManager::sendEndGameSignal()
 void MenuManager::sendEndProgramSignal()
 {
 	game->HandleEndProgramSignal();
+}
+void MenuManager::sendUnPauseSignal()
+{
+	removeCurrentMenu();
+	game->HandleUnPauseSignal();
 }
