@@ -9,17 +9,26 @@
 #include "SpriteFont.h"
 #include "MainMenu.h"'
 #include "Player.h"
+#include "Game.h"
 
-MainMenuViewModel::MainMenuViewModel(Game& game) : ViewModel<MainMenu>(EntityType::MENU)
+MainMenuViewModel::MainMenuViewModel(Game& g) : ViewModel<MainMenu>(EntityType::MENU)
 {
 	//spriteFont = new SpriteFont(game.getContext(), "italic.spritefont");
 
 
 	//font.reset(new SpriteFont(game.getContext(), "italic.spritefont"));
 
-	writeTextToConsole(L"MainMenuViewModel::MainMenuViewModel");
-	sprites = new SpriteBatch(game.getContext());
-	font.reset(new SpriteFont(game.getDevice(), L"italic.spritefont"));
+
+	sprites = new SpriteBatch(g.getContext());
+	font.reset(new SpriteFont(g.getDevice(), L"italic.spritefont"));
+
+	if (!sprites)
+		writeTextToConsole(L"spritebatch not ok");
+
+	if (!font)
+		writeTextToConsole(L"spritefont not ok");
+
+	game = &g;
 }
 
 MainMenuViewModel::~MainMenuViewModel()
@@ -66,4 +75,31 @@ bool MainMenuViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOA
 
 void MainMenuViewModel::cleanUpArrayMemory()
 {
+}
+
+bool MainMenuViewModel::Draw(MainMenu* menu)
+{
+	//if(!textureShader) return false; //we were not provided with a shader
+	
+	//writeTextToConsole(L"MainMenuViewModel::Draw");z
+
+	//game.getContext()->ClearRenderTargetView(
+
+	if (menu->isActive())
+	{
+		//writeTextToConsole(L"menu->isActive()");
+		//sprites->Begin(SpriteSortMode_Deferred);
+		sprites->Begin();
+
+		font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(0, 0), Colors::Purple);
+
+		//writeLabelToConsole(
+		//writeTextToConsole(L"MainMenuViewModel::RenderEntity");
+
+		sprites->End();
+
+		game->getGraphics()->getD3D()->getSwapChain()->Present(0,0);
+	}
+
+	return true;
 }

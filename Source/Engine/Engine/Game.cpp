@@ -352,6 +352,17 @@ bool Game::Frame()
 	result = graphics->Render(gameModels);
 
 
+
+	//getContext()->ClearRenderTargetView(graphics.getD3D()->getRenderTargetView(), Colors::White);
+	getContext()->ClearRenderTargetView(graphics->getD3D()->getRenderTargetView(), Colors::White);
+	getContext()->ClearDepthStencilView(graphics->getD3D()->getDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+
+	menuManager->draw(*this);
+
+	//graphics->getD3D()->getSwapChain()->Present(0,0);
+
+
 	//gameModels->
 
 	//MainMenuViewModel* mainMenuViewModel = new MainMenuViewModel(*this);

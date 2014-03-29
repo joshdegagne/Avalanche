@@ -57,6 +57,7 @@ class Game
 		ID3D11BlendState*         getBlendState()			{ return graphics->getBlendState(); }
 		CollisionManager*		  getCollisionManager()	    { return collisionManager; }
 		Camera*					  getCamera()				{ return camera; }
+		Graphics*				  getGraphics()				{ return graphics; }
 
 		ArrayList<Player>* GetPlayers();
 

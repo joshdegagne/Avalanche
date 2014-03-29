@@ -26,6 +26,7 @@ public:
 	ID3D11Device*        getDevice()     { return d3D->GetDevice(); }
 	ID3D11DeviceContext* getContext()    { return d3D->GetContext();}
 	ID3D11BlendState*    getBlendState() { return d3D->GetBlendState(); }
+	D3D*				 getD3D()		 { return d3D; }
 
 	bool Initialize(int, int, HWND, Camera*);
 	void Shutdown();

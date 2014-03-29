@@ -13,6 +13,7 @@
 #include "Effects.h"
 #include "VertexTypes.h"
 
+class Game;
 class MainMenu;
 class TextureManager;
 
@@ -29,8 +30,8 @@ public:
 	bool initializeTextures(ID3D11Device* d3dDevice) { return true; } // Deprecated
 	virtual void cleanUpArrayMemory();
 
-protected:
 	bool RenderEntity(ID3D11DeviceContext*, XMFLOAT4X4, XMFLOAT4X4, ColorShader*, TextureShader*, MainMenu*); // Draw with SpriteBatch if the main menu is active; also highlight selected item
+	bool Draw(MainMenu*);
 
 private:
 	//std::unique_ptr<SpriteBatch> spriteBatch;
@@ -42,4 +43,5 @@ private:
 	std::unique_ptr<PrimitiveBatch<VertexPositionColor>>    batch;
 	std::unique_ptr<SpriteFont>                             font;
 	SpriteBatch*				                            sprites;
+	Game*													game;
 };
