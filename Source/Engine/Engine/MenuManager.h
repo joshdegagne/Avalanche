@@ -10,6 +10,7 @@
 class MainMenu;
 class PlayerSelectMenu;
 class PauseMenu;
+class ResultsMenu;
 class ControlsMenu;
 class CreditsMenu;
 
@@ -28,7 +29,8 @@ public:
 	void removeAllMenus();
 	void addMainMenu();
 	void addPlayerSelectMenu();
-	void addPauseMenu();
+	void addPauseMenu(int);
+	void addResultsMenu();
 	void addControlsMenu();
 	void addCreditsMenu();
 
@@ -44,9 +46,11 @@ private:
 	MainMenu*			mainMenu;
 	PlayerSelectMenu*	playerSelectMenu;
 	PauseMenu*			pauseMenu;
+	ResultsMenu*		resultsMenu;
 	ControlsMenu*		controlsMenu;
 	CreditsMenu*		creditsMenu;
 
+	int controlPlayer;
 	bool UP_FLAG, DOWN_FLAG, CONFIRM_FLAG, CLOSE_FLAG;
 
 	void addMenu(Menu*);

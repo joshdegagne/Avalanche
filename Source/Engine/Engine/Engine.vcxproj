@@ -125,6 +125,7 @@
     <ClCompile Include="Playfield.cpp" />
     <ClCompile Include="PlayfieldViewModel.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ResultsMenu.cpp" />
     <ClCompile Include="RockObstacle.cpp" />
     <ClCompile Include="RockViewModel.cpp" />
     <ClCompile Include="SmallRockObstacle.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="PlayfieldViewModel.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ResultsMenu.h" />
     <ClInclude Include="RockObstacle.h" />
     <ClInclude Include="RockViewModel.h" />
     <ClInclude Include="SmallRockObstacle.h" />

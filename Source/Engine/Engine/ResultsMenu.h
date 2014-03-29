@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Filename: ControlsMenu.h
+// Filename: ResultsMenu.h
 ////////////////////////////////////////////////////////////////////////////////
 #pragma once
 
@@ -7,9 +7,9 @@
 
 class MenuManager;
 
-class ControlsMenu : public Menu
+class ResultsMenu : public Menu
 {
 public:
-	ControlsMenu(MenuManager*, bool = false);
+	ResultsMenu(MenuManager* menuManager, bool active = false);
 	void confirmSelection();
 };

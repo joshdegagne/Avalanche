@@ -385,19 +385,17 @@ void Game::HandleEndGameSignal()
 	delete playfield;
 	playfield = 0;
 	writeTextToConsole(L"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	menuManager->addResultsMenu();
 	for (int i = 0; i < players->size(); ++i)
 	{
 		writeTextToConsole(L"Player ", false);
 		writeNumToConsole(players->elementAt(i)->getPlayerNum(), false);
 		if (!players->elementAt(i)->isDead())
-			writeTextToConsole(L" survived!");
+			writeTextToConsole(L" survived! (Or isn't playing...)");
 		else
 			writeTextToConsole(L" died...");
 	}
 	writeTextToConsole(L"Game has ended!");
-	writeTextToConsole(L"Press A (or SPACE) to play again!");
-	writeTextToConsole(L"Press B (or ESCAPE) to end the program.");
-	menuManager->addMainMenu();
 	PAUSE_FLAG = false;
 }
 void Game::HandleEndProgramSignal()
@@ -407,7 +405,7 @@ void Game::HandleEndProgramSignal()
 void Game::HandlePauseSignal(int playerNum)
 {
 	//implementation pending
-	menuManager->addPauseMenu();
+	menuManager->addPauseMenu(playerNum);
 	PAUSE_FLAG = true;
 	writeLabelToConsole(L"Pause requested by Player: ", playerNum);
 }

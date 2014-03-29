@@ -6,6 +6,7 @@ Use surrounding tildes to denote a value you wish to store.
 COLLISION_DEBUG 		~OFF~		OFF
 STATE_DEBUG 			~OFF~		OFF
 AUDIO_DEBUG 			~OFF~		OFF
+MENU_DEBUG			~ON~		OFF
 PLAYER_DRAG	 		~ON~		ON
 PLAYER_COLLIDE_OBSTACLE		~ON~		ON
 PLAYER_NUMBER_OVERRIDE		~OFF~		OFF (2.0f, 3.0f, 4.0f also valid)

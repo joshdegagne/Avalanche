@@ -11,6 +11,7 @@ using namespace std;
 float COLLISION_DEBUG;			//Shows bounding boxes when on
 float STATE_DEBUG;				//Prints state info when on
 float AUDIO_DEBUG;              //Prints audio info when on
+float MENU_DEBUG;				//Prints menu info when on
 float PLAYER_DRAG;				//Eliminates drag when off
 float PLAYER_COLLIDE_OBSTACLE;	//No collision with obstacles when off
 float PLAYER_NUMBER_OVERRIDE;   //Manually set number of players
@@ -64,6 +65,7 @@ void setAllGlobalVars()
 		COLLISION_DEBUG			= getNextFloat(varValueFile);
 		STATE_DEBUG				= getNextFloat(varValueFile);
 		AUDIO_DEBUG				= getNextFloat(varValueFile);
+		MENU_DEBUG				= getNextFloat(varValueFile);
 		PLAYER_DRAG				= getNextFloat(varValueFile);
 		PLAYER_COLLIDE_OBSTACLE = getNextFloat(varValueFile);
 		PLAYER_NUMBER_OVERRIDE  = getNextFloat(varValueFile);

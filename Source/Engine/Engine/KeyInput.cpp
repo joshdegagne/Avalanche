@@ -10,13 +10,13 @@ KeyInput::KeyInput()
 	for(int i=0; i<256; i++)
 		keys[i] = false;
 
-	playerKeys[0][0] = VK_LEFT;
-	playerKeys[0][1] = VK_RIGHT;
-	playerKeys[0][2] = VK_UP;
-	playerKeys[0][3] = VK_DOWN;
-	playerKeys[0][4] = 0;
-	playerKeys[0][5] = 0;
-	playerKeys[0][6] = 0;
+	playerKeys[0][0] = VK_LEFT;		//Left
+	playerKeys[0][1] = VK_RIGHT;	//Right
+	playerKeys[0][2] = VK_UP;		//Up
+	playerKeys[0][3] = VK_DOWN;		//Down
+	playerKeys[0][4] = 0;			//A
+	playerKeys[0][5] = 0;			//Left Trigger
+	playerKeys[0][6] = 0;			//Right Trigger
 
 	playerKeys[1][0] = ascii_A;
 	playerKeys[1][1] = ascii_D;

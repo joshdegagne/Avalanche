@@ -19,49 +19,6 @@ Player::Player(Game& g, int pNum) : Entity(g)
 	for(int i = 0; i < 7; ++i)
 		keys[i] = keyboard->playerKeys[playerNum][i];
 
-	/*
-	if (playerNum == 0) //Player one (Arrow Keys)
-	{
-		keys[0] = VK_LEFT;
-		keys[1] = VK_RIGHT;
-		keys[2] = VK_UP;
-		keys[3] = VK_DOWN;
-		keys[4] = 0;
-		keys[5] = 0;
-		keys[6] = 0;
-	}
-	else if (playerNum == 1) //Player two (WASD)
-	{
-		keys[0] = ascii_A;
-		keys[1] = ascii_D;
-		keys[2] = ascii_W;
-		keys[3] = ascii_S;
-		keys[4] = VK_SPACE;
-		keys[5] = ascii_Q;
-		keys[6] = ascii_E;
-	}
-	else if (playerNum == 2) //Player three (TFGH)
-	{
-		keys[0] = ascii_F;
-		keys[1] = ascii_H;
-		keys[2] = ascii_T;
-		keys[3] = ascii_G;
-		keys[4] = 0;
-		keys[5] = 0;
-		keys[6] = 0;
-	}
-	else if (playerNum == 3) //Player four (IJKL)
-	{
-		keys[0] = ascii_J;
-		keys[1] = ascii_L;
-		keys[2] = ascii_I;
-		keys[3] = ascii_K;
-		keys[4] = 0;
-		keys[5] = ascii_U;
-		keys[6] = ascii_O;
-	}
-	*/
-
 }
 
 Player::~Player()

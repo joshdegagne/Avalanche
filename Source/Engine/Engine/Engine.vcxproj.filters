@@ -261,6 +261,9 @@
     <ClCompile Include="PlayerSelectMenu.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="ResultsMenu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -477,6 +480,9 @@
       <Filter>Header Files\Models\MenuModels</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSelectMenu.h">
+      <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsMenu.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
   </ItemGroup>
