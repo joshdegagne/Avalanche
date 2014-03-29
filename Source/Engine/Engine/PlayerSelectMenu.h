@@ -1,0 +1,15 @@
+///////////////////////////////////////////////////////////////////////////////
+// Filename: PlayerSelectMenu.h
+////////////////////////////////////////////////////////////////////////////////
+#pragma once
+
+#include "Menu.h"
+
+class MenuManager;
+
+class PlayerSelectMenu : public Menu
+{
+public:
+	PlayerSelectMenu(MenuManager*, bool = false);
+	void confirmSelection();
+};

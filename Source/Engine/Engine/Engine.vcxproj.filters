@@ -258,6 +258,9 @@
     <ClCompile Include="MainMenuViewModel.cpp">
       <Filter>Source Files\Models\MenuModels</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerSelectMenu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -472,6 +475,9 @@
     </ClInclude>
     <ClInclude Include="MainMenuViewModel.h">
       <Filter>Header Files\Models\MenuModels</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSelectMenu.h">
+      <Filter>Header Files\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

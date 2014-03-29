@@ -30,10 +30,10 @@ class Playfield : public ITimedObject
 		Playfield(); //Game pointer can come out of here when we no longer have test players
 		~Playfield();
 
-		void initialize(Game*);
+		void initialize(Game*, int);
 		void update(float); // for scrolling
 
-		void timerCallback(Timer& t);
+		void timerCallback(Timer&);
 
 		float getLength()	{ return fieldLength; }
 		float getWidth()	{ return fieldWidth; }
@@ -62,7 +62,7 @@ class Playfield : public ITimedObject
 		const float fieldLength;
 		const float fieldWidth;
 
-		void populateLists(Game* game);
+		void populateLists(Game*, int);
 
 		int getLaneAlgorithm(Obstacle*);
 		void addObstacleToPlayfield();
