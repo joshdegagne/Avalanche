@@ -16,8 +16,7 @@ ResultsMenu::ResultsMenu(MenuManager* menuMan, bool activity)
 
 void ResultsMenu::confirmSelection()
 {
-	menuManager->removeAllMenus();
-	menuManager->addMainMenu();
+	menuManager->removeCurrentMenu();
 	/*
 	switch(selection)
 	{

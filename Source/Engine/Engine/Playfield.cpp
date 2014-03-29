@@ -163,7 +163,7 @@ void Playfield::timerCallback(Timer& t)
 			activePlayers->elementAt(i)->lockForwardMovement(false);
 	}
 	else if (t == endTimer)
-		game->HandleEndGameSignal();
+		game->HandleEndGameSignal(activePlayers->size());
 }
 
 //////////////////////

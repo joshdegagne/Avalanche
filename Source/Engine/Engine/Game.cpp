@@ -402,22 +402,28 @@ void Game::HandleStartGameSignal(int numPlayers)
 		HandleEndProgramSignal();
 	getElapsedTime();
 }
-void Game::HandleEndGameSignal()
+void Game::HandleEndGameSignal(int numPlayers)
 {
 	delete playfield;
 	playfield = 0;
 	writeTextToConsole(L"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	menuManager->addResultsMenu();
-	for (int i = 0; i < players->size(); ++i)
+	menuManager->addMainMenu();
+	if (numPlayers > 0)
+		menuManager->addResultsMenu();
+
+	//////////////////////////
+	for (int i = 0; i < numPlayers; ++i)
 	{
 		writeTextToConsole(L"Player ", false);
 		writeNumToConsole(players->elementAt(i)->getPlayerNum(), false);
 		if (!players->elementAt(i)->isDead())
-			writeTextToConsole(L" survived! (Or isn't playing...)");
+			writeTextToConsole(L" survived!");
 		else
 			writeTextToConsole(L" died...");
 	}
 	writeTextToConsole(L"Game has ended!");
+	////////////////////////////
+
 	PAUSE_FLAG = false;
 }
 void Game::HandleEndProgramSignal()
