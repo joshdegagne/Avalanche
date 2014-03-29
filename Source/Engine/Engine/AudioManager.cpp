@@ -51,7 +51,7 @@ bool AudioManager::initialize(HWND hwnd)
 	*injuredSoundPath = "audio/hit.wav";
      
 	// Load a wave audio file onto a secondary buffer.
-	result = LoadWaveFile("audio/Song.wav", &song01);
+	result = LoadWaveFile("audio/Avalanche.wav", &song01);
 	if(!result)
 	{
 		return false;
