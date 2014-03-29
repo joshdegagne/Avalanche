@@ -117,7 +117,7 @@ void MenuManager::update(float elapsedTime)
 					writeTextToConsole(L"CLOSE!");
 
 				CLOSE_FLAG = true;
-				if (menuOrderStack.top() != mainMenu && menuOrderStack.top() != resultsMenu)
+				if (menuOrderStack.top() != mainMenu)
 					removeCurrentMenu();
 			}
 		}
@@ -261,7 +261,7 @@ void MenuManager::sendStartGameSignal(int numPlayers)
 }
 void MenuManager::sendEndGameSignal()
 {
-	game->HandleEndGameSignal();
+	game->HandleEndGameSignal(0);
 }
 void MenuManager::sendEndProgramSignal()
 {
