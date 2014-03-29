@@ -24,6 +24,7 @@ protected:
 private:
 	WCHAR*				textureFileName;
 	ITexture*			textures[4];
+	ITexture*			rollingTextures[4];
 	ITexture*			shadowTexture;
 	TextureVertexType*	textureVertices;
 	unsigned long*		indices;

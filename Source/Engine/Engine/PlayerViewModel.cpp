@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "Camera.h"
 #include "DebugDefinitions.h"
+#include "PlayerState.h"
 
 #include "PlayerViewModel.h"
 
@@ -62,6 +63,9 @@ PlayerViewModel::PlayerViewModel(Game& game) : ViewModel<Player>(EntityType::PLA
 
 	//Create the ModelClass object that will be used to deliver these vertices to the graphics pipeline
 	vertexModel = new Model(textureVertices, vertexCount, indices, indexCount, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	for(int i = 0; i < 4; ++i)
+		rollingTextures[i] = nullptr;
 }
 
 PlayerViewModel::~PlayerViewModel()
@@ -90,7 +94,11 @@ PlayerViewModel::~PlayerViewModel()
 	//	delete [] textures;
 	//	textures = 0;
 	//}
-	}
+
+	for(int i = 0; i < 4; ++i)
+		if(rollingTextures[i])
+			delete rollingTextures[i];
+}
 
 bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 {
@@ -161,6 +169,18 @@ bool PlayerViewModel::InitializeTextures(TextureManager* texMan)
 	if (!(shadowTexture = texMan->loadTexture(L"textures/shadow.dds")))
 		return false;
 
+	if (!(rollingTextures[0] = texMan->loadSpriteTexture(L"textures/player_red_rolling.png", 100)))
+		return false;
+
+	if (!(rollingTextures[1] = texMan->loadSpriteTexture(L"textures/player_purple_rolling.png", 100)))
+		return false;
+
+	if (!(rollingTextures[2] = texMan->loadSpriteTexture(L"textures/player_green_rolling.png", 100)))
+		return false;
+
+	if (!(rollingTextures[3] = texMan->loadSpriteTexture(L"textures/player_pink_rolling.png", 100)))
+		return false;
+
 	
 	// pass in the intended width of each cell
 	
@@ -227,6 +247,24 @@ bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X
 	XMFLOAT4X4 shadowMatrix;
 	XMStoreFloat4x4(&shadowMatrix, XMMatrixTranslationFromVector( XMLoadFloat3( &shadowPosition )));
 
+	ITexture* texture = nullptr;
+
+	ArrayList<PlayerState>* playerStates = entity->getPlayerStates();
+
+	for(int i = 0; i < playerStates->size(); ++i)
+	{
+		if(playerStates->elementAt(i)->getStateType() == PlayerStateType::PST_ROLL)
+		{
+			texture = rollingTextures[entity->getPlayerNum()];
+			break;
+		}
+	}
+
+	if(!texture)
+		texture = textures[entity->getPlayerNum()];
+
+
+
 	// Put the game model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	vertexModel->Render(deviceContext);
 
@@ -236,7 +274,7 @@ bool PlayerViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X
 										worldMatrix, 
 										viewMatrix, 
 										projectionMatrix,
-										textures[entity->getPlayerNum()]->GetTexture()); //get the texture to render... size 12 for some reason?
+										texture->GetTexture()); //get the texture to render... size 12 for some reason?
 
 
 	//RENDER SHADOW
