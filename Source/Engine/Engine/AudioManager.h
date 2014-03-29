@@ -73,5 +73,9 @@ private:
 	IDirectSoundBuffer8* song01;
 	string* jumpSoundPath;
 	ArrayList<IDirectSoundBuffer8>* jumpSounds;
+	string* rollSoundPath;
+	ArrayList<IDirectSoundBuffer8>* rollSounds;
+	string* injuredSoundPath;
+	ArrayList<IDirectSoundBuffer8>* injuredSounds;
 	
 };

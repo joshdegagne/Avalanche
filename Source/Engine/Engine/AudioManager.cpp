@@ -41,7 +41,9 @@ bool AudioManager::initialize(HWND hwnd)
 	}
 
 	//Set paths to sounds
-	*jumpSoundPath = "audio/tempjump.wav";
+	*jumpSoundPath    = "audio/tempjump.wav";
+	*rollSoundPath    = "audio/roll.wav";
+	*injuredSoundPath = "audio/hit.wav";
      
 	// Load a wave audio file onto a secondary buffer.
 	result = LoadWaveFile("audio/Avalanche.wav", &song01);
@@ -64,6 +66,7 @@ void AudioManager::Shutdown()
 		delete jumpSoundPath;
 		jumpSoundPath = 0;
 	}
+	// Release arrays of playing sounds
 	if (jumpSounds)
 	{
 		delete jumpSounds;
@@ -376,12 +379,36 @@ void AudioManager::onStateStart(PlayerState& state)
 		jumpSounds->add(jumpSound);
 		PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-1000);
 	}
+	if (state.getStateType() == PlayerStateType::PST_ROLL)
+	{
+		if (AUDIO_DEBUG) writeTextToConsole(L"Roll!");
+		IDirectSoundBuffer8* rollSound;
+		LoadWaveFile(rollSoundPath->c_str(), &rollSound);
+		jumpSounds->add(rollSound);
+		PlayWave(rollSounds->elementAt(rollSounds->size()-1),-1000);
+	}
+	if (state.getStateType() == PlayerStateType::PST_INJURED)
+	{
+		if (AUDIO_DEBUG) writeTextToConsole(L"Injured!");
+		IDirectSoundBuffer8* injuredSound;
+		LoadWaveFile(rollSoundPath->c_str(), &injuredSound);
+		jumpSounds->add(injuredSound);
+		PlayWave(injuredSounds->elementAt(injuredSounds->size()-1),-1000);
+	}
 }
 
 void AudioManager::onStateEnd(PlayerState& state)
 {
 	if (state.getStateType() == PlayerStateType::PST_JUMP)
 	{
-
+		delete jumpSounds->removeFirst();
+	}
+	if (state.getStateType() == PlayerStateType::PST_ROLL)
+	{
+		delete rollSounds->removeFirst();
+	}
+	if (state.getStateType() == PlayerStateType::PST_INJURED)
+	{
+		delete injuredSounds->removeFirst();
 	}
 }
