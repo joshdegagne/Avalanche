@@ -67,6 +67,7 @@ bool RockViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4
 
 	XMFLOAT3 positionVector = entity->getPosition();
 	positionVector.z +=0.2f;
+	positionVector.y +=1.0f;
 	XMFLOAT4X4 worldMatrix;
 	XMStoreFloat4x4(&worldMatrix, XMLoadFloat4x4( &GetOrientation() ) * XMMatrixTranslationFromVector( XMLoadFloat3( &positionVector )));
 
