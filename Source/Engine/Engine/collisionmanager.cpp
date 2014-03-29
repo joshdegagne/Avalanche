@@ -13,16 +13,20 @@ CollisionManager::CollisionManager()
 
 CollisionManager::~CollisionManager()
 {
-	delete players;
-	delete obstacles;
+	if (players)
+		delete players;
+	if (obstacles)
+		delete obstacles;
 }
 
 void CollisionManager::cleanUpArrayMemory()
 {
-	while (players->size() > 0)
-		players->removeFirst();
-	while (obstacles->size() > 0)
-		obstacles->removeFirst();
+	if (players)
+		while (players->size() > 0)
+			players->removeFirst();
+	if (obstacles)
+		while (obstacles->size() > 0)
+			obstacles->removeFirst();
 }
 
 void CollisionManager::addPlayerReference(Player& p)
