@@ -149,13 +149,13 @@ bool PlayerViewModel::InitializeTextures(TextureManager* texMan)
 	//	return false;
 		return false;
 
-	if (!(textures[1] = texMan->loadTexture(L"textures/player_purple.dds")))
+	if (!(textures[1] = texMan->loadSpriteTexture(L"textures/player_purple_running.png", 100)))
 		return false;
 
-	if (!(textures[2] = texMan->loadTexture(L"textures/player_green.dds")))
+	if (!(textures[2] = texMan->loadSpriteTexture(L"textures/player_green_running.png", 100)))
 		return false;
 
-	if (!(textures[3] = texMan->loadTexture(L"textures/player_yellow.dds")))
+	if (!(textures[3] = texMan->loadSpriteTexture(L"textures/player_pink_running.png", 100)))
 		return false;
 
 	if (!(shadowTexture = texMan->loadTexture(L"textures/shadow.dds")))
