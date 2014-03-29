@@ -41,7 +41,7 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
-		void HandleStartGameSignal();
+		void HandleStartGameSignal(int);
 		void HandleEndGameSignal();
 		void HandleEndProgramSignal();
 		void HandlePauseSignal(int);	

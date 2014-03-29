@@ -361,7 +361,7 @@ bool Game::InitializePlayfield(int numPlayers)
 	playfield = new Playfield();
 	if (!playfield)
 		return false;
-	playfield->initialize(this);
+	playfield->initialize(this, numPlayers);
 
 	modelManager->add(*playfield);
 	
@@ -373,13 +373,11 @@ bool Game::InitializePlayfield(int numPlayers)
 ///////////////////
 //Signal Handlers//
 ///////////////////
-void Game::HandleStartGameSignal()
+void Game::HandleStartGameSignal(int numPlayers)
 {
-
-	bool pResult = InitializePlayfield();
+	bool pResult = InitializePlayfield(numPlayers);
 	if (!pResult)
 		HandleEndProgramSignal();
-	menuManager->removeCurrentMenu();
 	getElapsedTime();
 }
 void Game::HandleEndGameSignal()
