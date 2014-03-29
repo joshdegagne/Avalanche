@@ -1,13 +1,10 @@
 #include "Menu.h"
 #include "MenuManager.h"
 
-void Menu::scrollDown()
-{
-	if (selection == numSelections - 1)
-		selection = 0;
-	else
-		selection++;
-}
+bool Menu::isActive() { return active; }
+void Menu::setActive(bool a) { active = a; }
+int  Menu::getCurrentSelection() { return selection; }
+void Menu::resetSelection() { selection = 0; }
 
 void Menu::scrollUp()
 {
@@ -17,6 +14,11 @@ void Menu::scrollUp()
 		selection--;
 }
 
-void Menu::setActive(bool a) { active = a; }
+void Menu::scrollDown()
+{
+	if (selection == numSelections - 1)
+		selection = 0;
+	else
+		selection++;
+}
 
-bool Menu::isActive() { return active; }

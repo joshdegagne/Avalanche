@@ -101,6 +101,8 @@ bool IcePatchViewModel::initializeTextures(ID3D11Device* device)
 
 bool IcePatchViewModel::RenderEntity(ID3D11DeviceContext* deviceContext, XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, IcePatchObstacle* entity)
 {
+	//writeTextToConsole(L"IcePatchViewModel::RenderEntity");
+
 	if(!textureShader) return false; //we were not provided with a shader
 
 	XMFLOAT3 positionVector = entity->getPosition();

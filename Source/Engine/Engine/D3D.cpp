@@ -689,3 +689,7 @@ void D3D::GetVideoCardInfo(char* cardName, int& memory)
 	memory = videoCardMemory;
 	return;
 }
+
+ID3D11RenderTargetView* D3D::getRenderTargetView() { return renderTargetView; }
+ID3D11DepthStencilView* D3D::getDepthStencilView() { return depthStencilView; }
+IDXGISwapChain*			D3D::getSwapChain()		   { return swapChain; }

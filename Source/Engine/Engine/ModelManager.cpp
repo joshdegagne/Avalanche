@@ -11,6 +11,7 @@
 #include "PlayfieldViewModel.h"
 #include "FinishLineViewModel.h"
 #include "BoundViewModel.h"
+#include "MainMenuViewModel.h"
 
 #include "ModelManager.h"
 
@@ -50,6 +51,8 @@ bool ModelManager::initialize(Game& game)
 	models->add(new IcePatchViewModel());
 	models->add(new PlayfieldViewModel());
 	models->add(new FinishLineViewModel());
+
+	//models->add(new MainMenuViewModel(game));
 
 	if (COLLISION_DEBUG)
 	{

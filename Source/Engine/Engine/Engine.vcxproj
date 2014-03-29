@@ -119,11 +119,13 @@
     <ClCompile Include="PlayerJumpState.cpp" />
     <ClCompile Include="PlayerRegularState.cpp" />
     <ClCompile Include="PlayerRollState.cpp" />
+    <ClCompile Include="PlayerSelectMenu.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="PlayerViewModel.cpp" />
     <ClCompile Include="Playfield.cpp" />
     <ClCompile Include="PlayfieldViewModel.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ResultsMenu.cpp" />
     <ClCompile Include="RockObstacle.cpp" />
     <ClCompile Include="RockViewModel.cpp" />
     <ClCompile Include="SmallRockObstacle.cpp" />
@@ -189,6 +191,7 @@
     <ClInclude Include="PlayerModel.h" />
     <ClInclude Include="PlayerRegularState.h" />
     <ClInclude Include="PlayerRollState.h" />
+    <ClInclude Include="PlayerSelectMenu.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayerStatesList.h" />
     <ClInclude Include="PlayerViewModel.h" />
@@ -196,6 +199,7 @@
     <ClInclude Include="PlayfieldViewModel.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ResultsMenu.h" />
     <ClInclude Include="RockObstacle.h" />
     <ClInclude Include="RockViewModel.h" />
     <ClInclude Include="SmallRockObstacle.h" />
@@ -230,6 +234,9 @@
     <ProjectReference Include="..\..\..\DirectXTK\DirectXTK_Desktop_2012.vcxproj">
       <Project>{e0b52ae7-e160-4d32-bf3f-910b785e5a8e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GlobalVariableValues.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,27 +4,43 @@
 #include "KeyInput.h"
 #include "ModelManager.h"
 #include "MainMenu.h"
+#include "PlayerSelectMenu.h"
 #include "PauseMenu.h"
+#include "ResultsMenu.h"
 #include "ControlsMenu.h"
 #include "CreditsMenu.h"
-
+#include "MainMenuViewModel.h"
 
 #include "DebugDefinitions.h"
+
+MenuManager::~MenuManager()
+{
+	delete mainMenu;
+	delete playerSelectMenu;
+	delete pauseMenu;
+	delete controlsMenu;
+	delete creditsMenu;
+}
 
 bool MenuManager::initialize(Game& g)
 {
 	game = &g;
 
-	mainMenu	 = new MainMenu(this);
-	pauseMenu	 = new PauseMenu(this);
-	controlsMenu = new ControlsMenu(this);
-	creditsMenu	 = new CreditsMenu(this);
+	mainMenu		 = new MainMenu(this);
+	playerSelectMenu = new PlayerSelectMenu(this);
+	pauseMenu		 = new PauseMenu(this);
+	resultsMenu		 = new ResultsMenu(this);
+	controlsMenu	 = new ControlsMenu(this);
+	creditsMenu		 = new CreditsMenu(this);
+
+	mmvm		 = new MainMenuViewModel(g);
 
 	//game->getModelManager()->add(*mainMenu);
 	//game->getModelManager()->add(*pauseMenu);
 	//game->getModelManager()->add(*controlsMenu);
 	//game->getModelManager()->add(*creditsMenu);
 
+	controlPlayer = 0;
 	UP_FLAG = DOWN_FLAG = CONFIRM_FLAG = CLOSE_FLAG = false;
 
 	addMainMenu();
@@ -41,66 +57,72 @@ void MenuManager::update(float elapsedTime)
 	//Controller Input//
 	////////////////////
 	ControllerInputManager* controller = game->getControllerManager();
-	if (controller->isConnected(0))
+	
+	if (controller->isConnected(controlPlayer))
 	{
-		for (int i = 0; i < 1; ++i)
+		////////////////
+		//Stick Checks//
+		////////////////
+		float LSY = controller->getLS_Y(controlPlayer);
+		if (LSY > STICK_MOVEMENT_THRESHOLD)
 		{
-			////////////////
-			//Stick Checks//
-			////////////////
-			float LSY = controller->getLS_Y(i);
-			if (LSY > STICK_MOVEMENT_THRESHOLD)
+			if (!UP_FLAG)
 			{
-				if (!UP_FLAG)
-				{
+				if (MENU_DEBUG)
 					writeTextToConsole(L"UP!");
-					UP_FLAG = true;
-					menuOrderStack.top()->scrollUp();
-				}
-			}
-			else
-				UP_FLAG = false;
 
-			if (LSY < -STICK_MOVEMENT_THRESHOLD)
-			{
-				if (!DOWN_FLAG)
-				{
-					writeTextToConsole(L"DOWN!");
-					DOWN_FLAG = true;
-					menuOrderStack.top()->scrollDown();
-				}
+				UP_FLAG = true;
+				menuOrderStack.top()->scrollUp();
 			}
-			else
-				DOWN_FLAG = false;
-
-			/////////////////
-			//Button Checks//
-			/////////////////
-			if (controller->getButtonA(i) || controller->getButtonStart(i))
-			{
-				if (!CONFIRM_FLAG)
-				{
-					writeTextToConsole(L"CONFIRM!");
-					CONFIRM_FLAG = true;
-					menuOrderStack.top()->confirmSelection();
-				}
-			}
-			else
-				CONFIRM_FLAG = false;
-
-			if (controller->getButtonB(i) || controller->getButtonBack(i))
-			{
-				if (!CLOSE_FLAG)
-				{
-					writeTextToConsole(L"CLOSE!");
-					CLOSE_FLAG = true;
-					if (menuOrderStack.top() != mainMenu)
-						removeCurrentMenu();
-				}
-			}
-			else
-				CLOSE_FLAG = false;
 		}
+		else
+			UP_FLAG = false;
+
+		if (LSY < -STICK_MOVEMENT_THRESHOLD)
+		{
+			if (!DOWN_FLAG)
+			{
+				if (MENU_DEBUG)
+					writeTextToConsole(L"DOWN!");
+
+				DOWN_FLAG = true;
+				menuOrderStack.top()->scrollDown();
+			}
+		}
+		else
+			DOWN_FLAG = false;
+
+		/////////////////
+		//Button Checks//
+		/////////////////
+		if (controller->getButtonA(controlPlayer))
+		{
+			if (!CONFIRM_FLAG)
+			{
+				if (MENU_DEBUG)
+					writeTextToConsole(L"CONFIRM!");
+
+				CONFIRM_FLAG = true;
+				menuOrderStack.top()->confirmSelection();
+			}
+		}
+		else
+			CONFIRM_FLAG = false;
+
+		if (controller->getButtonB(controlPlayer))
+		{
+			if (!CLOSE_FLAG)
+			{
+				if (MENU_DEBUG)
+					writeTextToConsole(L"CLOSE!");
+
+				CLOSE_FLAG = true;
+				if (menuOrderStack.top() != mainMenu)
+					removeCurrentMenu();
+			}
+		}
+		else
+			CLOSE_FLAG = false;
 	}
 	/////////////
 	//Key Input//
@@ -108,35 +130,40 @@ void MenuManager::update(float elapsedTime)
 	else
 	{
 		KeyInput* keyboard = game->getKeyInput();
-		for (int i = 1; i < 2; ++i)
-		{
-			if (keyboard->IsKeyDown(keyboard->playerKeys[i][2])) //UP
+		
+			if (keyboard->IsKeyDown(keyboard->playerKeys[controlPlayer][2])) //UP
 			{
 				if(!UP_FLAG)
 				{
-					writeTextToConsole(L"UP!");
+					if (MENU_DEBUG)
+						writeTextToConsole(L"UP!");
+
 					UP_FLAG = true;
 					menuOrderStack.top()->scrollUp();
 				}
 			}
 			else
 				UP_FLAG = false;
-			if (keyboard->IsKeyDown(keyboard->playerKeys[i][3])) //DOWN
+			if (keyboard->IsKeyDown(keyboard->playerKeys[controlPlayer][3])) //DOWN
 			{
 				if(!DOWN_FLAG)
 				{
-					writeTextToConsole(L"DOWN!");
+					if (MENU_DEBUG)
+						writeTextToConsole(L"DOWN!");
+
 					DOWN_FLAG = true;
 					menuOrderStack.top()->scrollDown();
 				}
 			}
 			else
 				DOWN_FLAG = false;
-			if (keyboard->IsKeyDown(keyboard->playerKeys[i][4])) //CONFIRM
+			if (keyboard->IsKeyDown(keyboard->playerKeys[controlPlayer][4])) //CONFIRM
 			{
 				if(!CONFIRM_FLAG)
 				{
-					writeTextToConsole(L"CONFIRM!");
+					if (MENU_DEBUG)
+						writeTextToConsole(L"CONFIRM!");
+
 					CONFIRM_FLAG = true;
 					menuOrderStack.top()->confirmSelection();
 				}
@@ -144,7 +171,6 @@ void MenuManager::update(float elapsedTime)
 			else
 				CONFIRM_FLAG = false;
 		}
-	}
 }
 
 ///////////////////////////
@@ -156,30 +182,65 @@ void MenuManager::removeCurrentMenu()
 		return;
 
 	menuOrderStack.top()->setActive(false);
+	menuOrderStack.top()->resetSelection();
 	menuOrderStack.pop();
 	if (!menuOrderStack.empty())
 		menuOrderStack.top()->setActive(true);
 	
-	writeTextToConsole(L"CURRENT MENU REMOVED");
+	if (MENU_DEBUG)
+		writeTextToConsole(L"CURRENT MENU REMOVED");
+}
+void MenuManager::removeAllMenus()
+{
+	while (!menuOrderStack.empty())
+		removeCurrentMenu();
 }
 void MenuManager::addMainMenu()
 {
-	writeTextToConsole(L"MAIN MENU ADDED");
+	if (MENU_DEBUG)
+		writeTextToConsole(L"MAIN MENU ADDED");
 	addMenu(mainMenu);
 }
-void MenuManager::addPauseMenu()
+void MenuManager::addPlayerSelectMenu()
 {
-	writeTextToConsole(L"PAUSE MENU ADDED");
+	if (PLAYER_NUMBER_OVERRIDE)
+	{
+		sendStartGameSignal((int)PLAYER_NUMBER_OVERRIDE);
+	}
+	else
+	{
+		if (MENU_DEBUG)
+			writeTextToConsole(L"PLAYER SELECT MENU ADDED");
+		addMenu(playerSelectMenu);
+	}
+}
+void MenuManager::addPauseMenu(int requestPlayerNumber)
+{
+	if (MENU_DEBUG)
+		writeLabelToConsole(L"PAUSE MENU ADDED FOR PLAYER ", requestPlayerNumber);
+
+	controlPlayer = requestPlayerNumber;
 	addMenu(pauseMenu);
+}
+void MenuManager::addResultsMenu()
+{
+	if (MENU_DEBUG)
+		writeTextToConsole(L"RESULTS MENU ADDED");
+
+	addMenu(resultsMenu);
 }
 void MenuManager::addControlsMenu()
 {
-	writeTextToConsole(L"CONTROLS MENU ADDED");
+	if (MENU_DEBUG)
+		writeTextToConsole(L"CONTROLS MENU ADDED");
+
 	addMenu(controlsMenu);
 }
 void MenuManager::addCreditsMenu()
 {
-	writeTextToConsole(L"CREDITS MENU ADDED");
+	if (MENU_DEBUG)
+		writeTextToConsole(L"CREDITS MENU ADDED");
+
 	addMenu(creditsMenu);
 }
 void MenuManager::addMenu(Menu* newMenu)
@@ -190,19 +251,31 @@ void MenuManager::addMenu(Menu* newMenu)
 	menuOrderStack.top()->setActive(true);
 }
 
-///////////////////
-//Signals to Game//
-///////////////////
-void MenuManager::sendStartGameSignal()
+//////////////////////////////
+//Signals from Menus to Game//
+//////////////////////////////
+void MenuManager::sendStartGameSignal(int numPlayers)
 {
-	removeCurrentMenu();
-	game->HandleStartGameSignal();
+	removeAllMenus();
+	game->HandleStartGameSignal(numPlayers);
 }
 void MenuManager::sendEndGameSignal()
 {
-	game->HandleEndGameSignal();
+	game->HandleEndGameSignal(0);
 }
 void MenuManager::sendEndProgramSignal()
 {
 	game->HandleEndProgramSignal();
+}
+void MenuManager::sendUnPauseSignal()
+{
+	removeAllMenus();
+	controlPlayer = 0;
+	game->HandleUnPauseSignal();
+}
+
+void MenuManager::draw(Game& g)
+{
+	mmvm->Draw(mainMenu);
+	//g.getGraphics()->getD3D()->getSwapChain()->Present(0,0);
 }

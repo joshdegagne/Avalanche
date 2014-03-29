@@ -258,6 +258,12 @@
     <ClCompile Include="MainMenuViewModel.cpp">
       <Filter>Source Files\Models\MenuModels</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerSelectMenu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultsMenu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -473,6 +479,12 @@
     <ClInclude Include="MainMenuViewModel.h">
       <Filter>Header Files\Models\MenuModels</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerSelectMenu.h">
+      <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsMenu.h">
+      <Filter>Header Files\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps">
@@ -487,5 +499,10 @@
     <None Include="texture.vs">
       <Filter>zShader Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GlobalVariableValues.txt">
+      <Filter>Header Files\Helper Headers</Filter>
+    </Text>
   </ItemGroup>
 </Project>

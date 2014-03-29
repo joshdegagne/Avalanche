@@ -39,6 +39,10 @@ public:
 
 	void GetVideoCardInfo(char*, int&);
 
+	ID3D11RenderTargetView* getRenderTargetView();
+	ID3D11DepthStencilView* getDepthStencilView();
+	IDXGISwapChain*			getSwapChain();
+
 
 private:
 	bool vsync_enabled;

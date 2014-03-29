@@ -41,10 +41,11 @@ class Game
 		bool Initialize();
 		void Shutdown();
 		void Run();
-		void HandleStartGameSignal();
-		void HandleEndGameSignal();
+		void HandleStartGameSignal(int);
+		void HandleEndGameSignal(int);
 		void HandleEndProgramSignal();
-		void HandlePauseRequest(int);	
+		void HandlePauseSignal(int);	
+		void HandleUnPauseSignal();
 
 		// Manager Getter/Setters
 		KeyInput*                 getKeyInput()			    { return keyInput; }
@@ -56,6 +57,7 @@ class Game
 		ID3D11BlendState*         getBlendState()			{ return graphics->getBlendState(); }
 		CollisionManager*		  getCollisionManager()	    { return collisionManager; }
 		Camera*					  getCamera()				{ return camera; }
+		Graphics*				  getGraphics()				{ return graphics; }
 
 		ArrayList<Player>* GetPlayers();
 
@@ -75,7 +77,7 @@ class Game
 		HWND      hwnd;  //handle to the Windows window (client window for the application)
 
 		ArrayList<Player>*		players;
-		ArrayList<KeyInput>*    playerKeys;
+		//ArrayList<KeyInput>*    playerKeys;
 		Graphics*               graphics; //our graphics object that encapsulates the graphics pipeline
 		Camera*					camera; //our encapsulation of where the camera is looking at our world
 		milliseconds            start;

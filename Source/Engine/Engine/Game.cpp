@@ -19,6 +19,7 @@
 #include "CollisionManager.h"
 #include "MenuManager.h"
 #include "AudioManager.h"
+#include "MainMenuViewModel.h"
 
 Game::Game()
 {
@@ -29,23 +30,21 @@ Game::Game()
 	camera    = 0;
 	playfield = 0;
 
-	textureManager	= nullptr;
-	modelManager	= nullptr;
-	collisionManager= nullptr;
-	menuManager		= nullptr;
+	textureManager	 = nullptr;
+	modelManager	 = nullptr;
+	collisionManager = nullptr;
+	menuManager		 = nullptr;
 	audioManager     = nullptr;
-	players			= nullptr;
+	players			 = nullptr;
 
 	PAUSE_FLAG = END_PROGRAM_FLAG = false;
 
 	gameModels = new ArrayList<IViewModel>();
 }
 
-
 Game::Game(const Game& other)
 {
 }
-
 
 Game::~Game()
 {
@@ -126,10 +125,12 @@ bool Game::Initialize()
 
 	gameModels->addAll(modelManager->getGameModels());
 
+
+
 	/////////////////
 	//Audio Manager//
 	/////////////////
-	audioManager = new AudioManager();
+	audioManager = new AudioManager;
 	if(!audioManager)
 		return false;
 	
@@ -147,12 +148,13 @@ bool Game::Initialize()
 	/////////////////////
 	//Players/Playfield//
 	/////////////////////
-	players = new ArrayList<Player>();
+	players = new ArrayList<Player>;
+
 	for (int i = 0; i < 4; i++)
 	{
 		Player* player = new Player(*this, i); //Create player object
 		player->addListener(*audioManager);    //Register the audio Manager for that player
-		players->add(player);                  //
+		players->add(player);                  //Add players to active players list
 	}
 
 	/*
@@ -178,38 +180,33 @@ bool Game::Initialize()
 	return true;
 }
 
-
 void Game::Shutdown()
 {
-	if(gameModels)
-	{
-		delete gameModels;
-		gameModels = 0;
-	}
+	
 
 	if(graphics)
 	{
 		graphics->Shutdown();
 		delete graphics;
-		graphics = 0;
+		graphics = nullptr;
 	}
 
-	if(keyInput)
+	if(camera)
 	{
-		delete keyInput;
-		keyInput = 0;
+		delete camera;
+		camera =nullptr;
 	}
 
 	if(conInput)
 	{
 		delete conInput;
-		conInput = 0;
+		conInput = nullptr;
 	}
 
-	if(camera)
+	if(keyInput)
 	{
-		//delete camera;
-		camera = 0;
+		delete keyInput;
+		keyInput = nullptr;
 	}
 
 	if(modelManager)
@@ -224,6 +221,31 @@ void Game::Shutdown()
 		textureManager = nullptr;
 	}
 
+
+	if (menuManager)
+	{
+		delete menuManager;
+		menuManager = nullptr;
+	}
+
+	if (audioManager)
+	{
+		delete audioManager;
+		audioManager = nullptr;
+	}
+
+	if (playfield)
+	{
+		delete playfield;
+		playfield = nullptr;
+	}
+	
+	if (collisionManager)
+	{
+		delete collisionManager;
+		collisionManager = nullptr;
+	}
+
 	if(players)
 	{
 		for(int i = 0; i < players->size(); ++i)
@@ -233,11 +255,16 @@ void Game::Shutdown()
 		players = nullptr;
 	}
 
+	if(gameModels)
+	{
+		delete gameModels;
+		gameModels = nullptr;
+	}
+	
 	ShutdownWindows();
 	
 	return;
 }
-
 
 void Game::Run()
 {
@@ -294,7 +321,6 @@ void Game::Run()
 	return;
 }
 
-
 bool Game::Frame()
 {
 	/*
@@ -309,37 +335,40 @@ bool Game::Frame()
 	bool result;
 
 	// Check if the user pressed escape and wants to exit the application.
-	if (keyInput->IsKeyDown(VK_ESCAPE) || END_PROGRAM_FLAG)
+	if (keyInput->IsKeyDown(VK_ESCAPE) || END_PROGRAM_FLAG || conInput->getButtonBack(0))
 		return false;
 
 	float time = getElapsedTime();
 
 	if (playfield && !PAUSE_FLAG)
-		{
-			playfield->update(time);
-			textureManager->update(time);
-		}
+	{
+		playfield->update(time);
+		textureManager->update(time);
+	}
 	
 	menuManager->update(time); //Will not do anything if no menu is present
 
-
-	/*
-	else
-	{
-		if (conInput->getButtonB(0) || conInput->getButtonB(1) || conInput->getButtonB(2) || conInput->getButtonB(3) || keyInput->IsKeyDown(VK_ESCAPE))
-		{
-			return false;
-		}
-		if (conInput->getButtonA(0) || conInput->getButtonA(1) || conInput->getButtonA(2) || conInput->getButtonA(3) || keyInput->IsKeyDown(VK_SPACE))
-		{
-			bool pResult = InitializePlayfield();
-			getElapsedTime();
-			return pResult;
-		}
-	}
-	*/
 	// Do the frame processing for the graphics object.
 	result = graphics->Render(gameModels);
+
+
+
+	//getContext()->ClearRenderTargetView(graphics.getD3D()->getRenderTargetView(), Colors::White);
+	getContext()->ClearRenderTargetView(graphics->getD3D()->getRenderTargetView(), Colors::White);
+	getContext()->ClearDepthStencilView(graphics->getD3D()->getDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+
+	menuManager->draw(*this);
+
+	//graphics->getD3D()->getSwapChain()->Present(0,0);
+
+
+	//gameModels->
+
+	//MainMenuViewModel* mainMenuViewModel = new MainMenuViewModel(*this);
+	//mainMenuViewModel->RenderEntity(getContext(), nullptr, nullptr, nullptr, nullptr, menuManager->mainMenu);
+
+
 	if(!result)
 		return false;
 
@@ -354,7 +383,7 @@ bool Game::InitializePlayfield(int numPlayers)
 	playfield = new Playfield();
 	if (!playfield)
 		return false;
-	playfield->initialize(this);
+	playfield->initialize(this, numPlayers);
 
 	modelManager->add(*playfield);
 	
@@ -366,22 +395,24 @@ bool Game::InitializePlayfield(int numPlayers)
 ///////////////////
 //Signal Handlers//
 ///////////////////
-void Game::HandleStartGameSignal()
+void Game::HandleStartGameSignal(int numPlayers)
 {
-
-	bool pResult = InitializePlayfield();
+	bool pResult = InitializePlayfield(numPlayers);
 	if (!pResult)
 		HandleEndProgramSignal();
-	menuManager->removeCurrentMenu();
 	getElapsedTime();
 }
-
-void Game::HandleEndGameSignal()
+void Game::HandleEndGameSignal(int numPlayers)
 {
 	delete playfield;
 	playfield = 0;
 	writeTextToConsole(L"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	for (int i = 0; i < players->size(); ++i)
+	menuManager->addMainMenu();
+	if (numPlayers > 0)
+		menuManager->addResultsMenu();
+
+	//////////////////////////
+	for (int i = 0; i < numPlayers; ++i)
 	{
 		writeTextToConsole(L"Player ", false);
 		writeNumToConsole(players->elementAt(i)->getPlayerNum(), false);
@@ -391,23 +422,27 @@ void Game::HandleEndGameSignal()
 			writeTextToConsole(L" died...");
 	}
 	writeTextToConsole(L"Game has ended!");
-	writeTextToConsole(L"Press A (or SPACE) to play again!");
-	writeTextToConsole(L"Press B (or ESCAPE) to end the program.");
-	menuManager->addMainMenu();
-}
+	////////////////////////////
 
+	PAUSE_FLAG = false;
+}
 void Game::HandleEndProgramSignal()
 {
 	END_PROGRAM_FLAG = true;
 }
-
-void Game::HandlePauseRequest(int playerNum)
+void Game::HandlePauseSignal(int playerNum)
 {
 	//implementation pending
+	menuManager->addPauseMenu(playerNum);
 	PAUSE_FLAG = true;
 	writeLabelToConsole(L"Pause requested by Player: ", playerNum);
 }
-
+void Game::HandleUnPauseSignal()
+{
+	//implementation pending
+	PAUSE_FLAG = false;
+	writeTextToConsole(L"Game UnPaused!");
+}
 
 ///////////////////////////
 float Game::getElapsedTime(float timeModifier)
@@ -457,7 +492,6 @@ LRESULT CALLBACK Game::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARA
 		}
 	}
 }
-
 
 void Game::InitializeWindows(int& screenWidth, int& screenHeight)
 {
@@ -568,7 +602,6 @@ void Game::InitializeWindows(int& screenWidth, int& screenHeight)
 	return;
 }
 
-
 void Game::ShutdownWindows()
 {
 	// Show the mouse cursor again.
@@ -593,7 +626,6 @@ void Game::ShutdownWindows()
 
 	return;
 }
-
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 {

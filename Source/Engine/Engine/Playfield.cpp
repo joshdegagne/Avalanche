@@ -13,7 +13,7 @@
 
 
 
-Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(1/((GAME_LENGTH/1000.0f)*OBSTACLE_SPAWN_RATE)), endFlag(false)
+Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(1/((GAME_PLAY_LENGTH)*OBSTACLE_SPAWN_RATE)), endFlag(false)
 {
 	entities = new ArrayList<Entity>;
 	activePlayers = new ArrayList<Player>;
@@ -22,8 +22,14 @@ Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressP
 
 Playfield::~Playfield()
 {
-	game->getModelManager()->cleanUpArrayMemory();
-	collisionManager->cleanUpArrayMemory();
+	if (game->getModelManager())
+		game->getModelManager()->cleanUpArrayMemory();
+	if (collisionManager)
+	{
+		collisionManager->cleanUpArrayMemory();
+		collisionManager = nullptr;
+	}
+
 	delete entities;
 	delete activePlayers;
 	delete obstacleBag;
@@ -33,15 +39,15 @@ Playfield::~Playfield()
 	obstacleBag = 0;
 }
 
-void Playfield::initialize(Game* g)
+void Playfield::initialize(Game* g, int numPlayers)
 {
 	game = g;
 	collisionManager = game->getCollisionManager();
 
-	playTimer.initialize(GAME_LENGTH, this);
-	endTimer.initialize(END_LENGTH, this);
+	playTimer.initialize(GAME_PLAY_LENGTH * 1000.0f, this);
+	endTimer.initialize(GAME_END_ANIMATION_LENGTH * 1000.0f, this);
 
-	populateLists(game);
+	populateLists(game, numPlayers);
 
 	for(int i = 0; i < activePlayers->size(); ++i)
 	{
@@ -71,12 +77,11 @@ void Playfield::update(float elapsed)
 		{
 			if (activePlayers->elementAt(i)->requestingPause() && !activePlayers->elementAt(i)->isDead())
 			{
-				game->HandlePauseRequest(i);
+				game->HandlePauseSignal(i);
 				return;
 			}
 		}
-		//Obstacle placement based on time
-		///////////////////////////////////
+
 		playTimer.update(elapsed);
 
 		if(OBSTACLE_SPAWN)
@@ -87,7 +92,6 @@ void Playfield::update(float elapsed)
 				addObstacleToPlayfield();
 			}
 		}
-		///////////////////////////////////
 
 		//This for loop is backwards because for SOME REASON, putting it the other way doesn't work with tie-breakers.
 		for (int i = entities->size()-1; i >=0 ; --i) 
@@ -113,7 +117,7 @@ void Playfield::update(float elapsed)
 		for (int i = 0; i < activePlayers->size(); ++i)
 			if (activePlayers->elementAt(i)->isDead())
 				++counter;
-		if (counter >= 3)
+		if (counter >= activePlayers->size()-1)
 			playTimer.forceTimerEnd();
 	}
 	else
@@ -159,7 +163,7 @@ void Playfield::timerCallback(Timer& t)
 			activePlayers->elementAt(i)->lockForwardMovement(false);
 	}
 	else if (t == endTimer)
-		game->HandleEndGameSignal();
+		game->HandleEndGameSignal(activePlayers->size());
 }
 
 //////////////////////
@@ -167,9 +171,9 @@ void Playfield::timerCallback(Timer& t)
 //////////////////////
 
 //Creates obstacles and places them in the obstacles arraylist
-void Playfield::populateLists(Game* game)
+void Playfield::populateLists(Game* game, int numPlayers)
 {
-	for(int i = 0; i < game->GetPlayers()->size(); ++i)
+	for(int i = 0; i < numPlayers; ++i)
 	{
 			Player* player = game->GetPlayers()->elementAt(i);
 			activePlayers->add(player);

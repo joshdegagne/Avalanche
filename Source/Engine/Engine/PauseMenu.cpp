@@ -17,11 +17,11 @@ void PauseMenu::confirmSelection()
 {
 	switch(selection)
 	{
-	case 0: menuManager->removeCurrentMenu(); // Resume
+	case 0: menuManager->sendUnPauseSignal();	// Resume
 			break;
-	case 1: menuManager->addControlsMenu(); // Controls
+	case 1: menuManager->addControlsMenu();		// Controls
 			break;
-	case 2: menuManager->sendEndGameSignal(); // Exit Program
+	case 2: menuManager->sendEndGameSignal();	// Exit Program
 			break;
 	}
 }

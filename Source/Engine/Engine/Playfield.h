@@ -15,8 +15,6 @@
 
 #define SCROLL_SPEED 0.15f
 #define NUM_LANES 6
-#define GAME_LENGTH 60000.0f //1 Minute
-#define END_LENGTH  5000.0f //5 Seconds
 
 class Player; //Foward declaration needed in order to satisfy compiler
 class Game;
@@ -30,10 +28,10 @@ class Playfield : public ITimedObject
 		Playfield(); //Game pointer can come out of here when we no longer have test players
 		~Playfield();
 
-		void initialize(Game*);
+		void initialize(Game*, int);
 		void update(float); // for scrolling
 
-		void timerCallback(Timer& t);
+		void timerCallback(Timer&);
 
 		float getLength()	{ return fieldLength; }
 		float getWidth()	{ return fieldWidth; }
@@ -62,7 +60,7 @@ class Playfield : public ITimedObject
 		const float fieldLength;
 		const float fieldWidth;
 
-		void populateLists(Game* game);
+		void populateLists(Game*, int);
 
 		int getLaneAlgorithm(Obstacle*);
 		void addObstacleToPlayfield();

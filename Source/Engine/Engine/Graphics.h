@@ -7,6 +7,9 @@
 #include "Model.h"
 #include "arraylist.h"
 #include "XYZaxis.h"
+#include "SpriteBatch.h"
+#include "SpriteFont.h"
+#include "Effects.h"
 
 class Camera;
 class ColorShader;
@@ -26,6 +29,10 @@ public:
 	ID3D11Device*        getDevice()     { return d3D->GetDevice(); }
 	ID3D11DeviceContext* getContext()    { return d3D->GetContext();}
 	ID3D11BlendState*    getBlendState() { return d3D->GetBlendState(); }
+	D3D*				 getD3D()		 { return d3D; }
+	SpriteFont* getSpriteFontBig() { return spriteFontBig.get(); }
+	SpriteFont* getSpriteFontNormal() { return spriteFontNormal.get(); }
+	SpriteBatch* getSpriteBatch() { return spriteBatch; }
 
 	bool Initialize(int, int, HWND, Camera*);
 	void Shutdown();
@@ -42,6 +49,10 @@ private:
 
 	ColorShader*   colorShader;
 	TextureShader* textureShader;
+
+	std::unique_ptr<SpriteFont> spriteFontBig;
+	std::unique_ptr<SpriteFont> spriteFontNormal;
+	SpriteBatch* spriteBatch;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

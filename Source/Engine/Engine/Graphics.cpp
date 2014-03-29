@@ -10,6 +10,9 @@
 #include "TextureShader.h"
 #include "IViewModel.h"
 #include "Graphics.h"
+#include "SpriteBatch.h"
+#include "SpriteFont.h"
+#include "Effects.h"
 
 #include "DebugDefinitions.h"
 
@@ -131,6 +134,12 @@ bool Graphics::Initialize(int screenWidth, int screenHeight, HWND hwnd, Camera* 
 		return false;
 	}
 
+	spriteBatch = new SpriteBatch(getContext());
+	spriteFontBig.reset(new SpriteFont(getDevice(), L"tempesta7_title.spritefont"));
+	spriteFontNormal.reset(new SpriteFont(getDevice(), L"tempesta7_menu.spritefont"));
+
+	if (!spriteBatch || !spriteFontBig || !spriteFontNormal) return false;
+
 	return true;
 }
 
@@ -175,6 +184,24 @@ void Graphics::Shutdown()
 		d3D->Shutdown();
 		delete d3D;
 		d3D = 0;
+	}
+
+	if (spriteBatch)
+	{
+		delete spriteBatch;
+		spriteBatch = 0;
+	}
+
+	if (spriteFontBig)
+	{
+		spriteFontBig.release();
+		spriteBatch = 0;
+	}
+
+	if (spriteFontNormal)
+	{
+		spriteFontNormal.release();
+		spriteBatch = 0;
 	}
 
 	return;
