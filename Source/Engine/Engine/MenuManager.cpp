@@ -9,7 +9,7 @@
 #include "ResultsMenu.h"
 #include "ControlsMenu.h"
 #include "CreditsMenu.h"
-
+#include "MainMenuViewModel.h"
 
 #include "DebugDefinitions.h"
 
@@ -32,6 +32,8 @@ bool MenuManager::initialize(Game& g)
 	resultsMenu		 = new ResultsMenu(this);
 	controlsMenu	 = new ControlsMenu(this);
 	creditsMenu		 = new CreditsMenu(this);
+
+	mmvm		 = new MainMenuViewModel(g);
 
 	//game->getModelManager()->add(*mainMenu);
 	//game->getModelManager()->add(*pauseMenu);
@@ -270,4 +272,10 @@ void MenuManager::sendUnPauseSignal()
 	removeAllMenus();
 	controlPlayer = 0;
 	game->HandleUnPauseSignal();
+}
+
+void MenuManager::draw(Game& g)
+{
+	mmvm->Draw(mainMenu);
+	//g.getGraphics()->getD3D()->getSwapChain()->Present(0,0);
 }

@@ -6,13 +6,29 @@
 #include "Texture.h"
 #include "ViewModel.cpp"
 #include "DebugConsole.h"
+#include "SpriteFont.h"
+#include "MainMenu.h"'
+#include "Player.h"
+#include "Game.h"
 
-MainMenuViewModel::MainMenuViewModel(Game& game) : ViewModel<MainMenu>(EntityType::MENU)
+MainMenuViewModel::MainMenuViewModel(Game& g) : ViewModel<MainMenu>(EntityType::MENU)
 {
 	//spriteFont = new SpriteFont(game.getContext(), "italic.spritefont");
 
 
 	//font.reset(new SpriteFont(game.getContext(), "italic.spritefont"));
+
+
+	sprites = new SpriteBatch(g.getContext());
+	font.reset(new SpriteFont(g.getDevice(), L"italic.spritefont"));
+
+	if (!sprites)
+		writeTextToConsole(L"spritebatch not ok");
+
+	if (!font)
+		writeTextToConsole(L"spritefont not ok");
+
+	game = &g;
 }
 
 MainMenuViewModel::~MainMenuViewModel()
@@ -21,11 +37,13 @@ MainMenuViewModel::~MainMenuViewModel()
 
 bool MainMenuViewModel::InitializeTextures(TextureManager* texMan)
 {
+	//writeTextToConsole(L"MainMenuViewModel::InitializeTextures");
 	return true;
 }
 
 bool MainMenuViewModel::InitializeVertexModels(ID3D11Device* device)
 {
+	//writeTextToConsole(L"MainMenuViewModel::InitializeVertexModels");
 	return true;
 }
 /*
@@ -34,11 +52,54 @@ bool MainMenuViewModel::initializeTextures(ID3D11Device* device)
 	return true;
 }
 */
+
 bool MainMenuViewModel::RenderEntity(ID3D11DeviceContext* deviceContext,  XMFLOAT4X4 viewMatrix, XMFLOAT4X4 projectionMatrix, ColorShader* colorShader, TextureShader* textureShader, MainMenu* menu)
 {
+	writeTextToConsole(L"MainMenuViewModel::RenderEntity");
+	if(!textureShader) return false; //we were not provided with a shader
+
+	//if (menu->isActive())
+	//{
+		sprites->Begin(SpriteSortMode_Deferred);
+
+		font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(200, 200), Colors::Purple);
+
+		//writeLabelToConsole(
+		//writeTextToConsole(L"MainMenuViewModel::RenderEntity");
+
+		sprites->End();
+	//}
+
 	return true;
 }
 
 void MainMenuViewModel::cleanUpArrayMemory()
 {
+}
+
+bool MainMenuViewModel::Draw(MainMenu* menu)
+{
+	//if(!textureShader) return false; //we were not provided with a shader
+	
+	//writeTextToConsole(L"MainMenuViewModel::Draw");z
+
+	//game.getContext()->ClearRenderTargetView(
+
+	if (menu->isActive())
+	{
+		//writeTextToConsole(L"menu->isActive()");
+		//sprites->Begin(SpriteSortMode_Deferred);
+		sprites->Begin();
+
+		font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(0, 0), Colors::Purple);
+
+		//writeLabelToConsole(
+		//writeTextToConsole(L"MainMenuViewModel::RenderEntity");
+
+		sprites->End();
+
+		game->getGraphics()->getD3D()->getSwapChain()->Present(0,0);
+	}
+
+	return true;
 }

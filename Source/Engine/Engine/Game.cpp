@@ -19,6 +19,7 @@
 #include "CollisionManager.h"
 #include "MenuManager.h"
 #include "AudioManager.h"
+#include "MainMenuViewModel.h"
 
 Game::Game()
 {
@@ -123,6 +124,8 @@ bool Game::Initialize()
 		return false;
 
 	gameModels->addAll(modelManager->getGameModels());
+
+
 
 	/////////////////
 	//Audio Manager//
@@ -347,6 +350,25 @@ bool Game::Frame()
 
 	// Do the frame processing for the graphics object.
 	result = graphics->Render(gameModels);
+
+
+
+	//getContext()->ClearRenderTargetView(graphics.getD3D()->getRenderTargetView(), Colors::White);
+	getContext()->ClearRenderTargetView(graphics->getD3D()->getRenderTargetView(), Colors::White);
+	getContext()->ClearDepthStencilView(graphics->getD3D()->getDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+
+	menuManager->draw(*this);
+
+	//graphics->getD3D()->getSwapChain()->Present(0,0);
+
+
+	//gameModels->
+
+	//MainMenuViewModel* mainMenuViewModel = new MainMenuViewModel(*this);
+	//mainMenuViewModel->RenderEntity(getContext(), nullptr, nullptr, nullptr, nullptr, menuManager->mainMenu);
+
+
 	if(!result)
 		return false;
 
