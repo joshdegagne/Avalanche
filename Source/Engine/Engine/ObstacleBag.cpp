@@ -24,11 +24,11 @@ void ObstacleBag::initialize(Game* game)
 {
 	for (int i = 0; i < 4; ++i)
 	{
-		//obstacleList->add(new LogObstacle(*game));
+		obstacleList->add(new LogObstacle(*game));
 		obstacleList->add(new RockObstacle(*game));
 		obstacleList->add(new SmallRockObstacle(*game));
-		//obstacleList->add(new TreeObstacle(*game));
-		//obstacleList->add(new IcePatchObstacle(*game));
+		obstacleList->add(new TreeObstacle(*game));
+		obstacleList->add(new IcePatchObstacle(*game));
 	}
 
 }
