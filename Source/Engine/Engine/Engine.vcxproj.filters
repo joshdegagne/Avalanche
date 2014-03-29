@@ -82,10 +82,10 @@
     <Filter Include="Source Files\Graphics\Texturing">
       <UniqueIdentifier>{07aba99e-05f1-49ca-9b81-6db2adb7b7ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Models\MenuModels">
+    <Filter Include="Header Files\Menus\MenuViews">
       <UniqueIdentifier>{004ec601-2749-4d3f-814c-b75f0d212bff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Models\MenuModels">
+    <Filter Include="Source Files\Menus\MenuViews">
       <UniqueIdentifier>{b6866bff-120f-481c-ac27-3ebf2b8eb4af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -256,13 +256,16 @@
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuViewModel.cpp">
-      <Filter>Source Files\Models\MenuModels</Filter>
+      <Filter>Source Files\Menus\MenuViews</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSelectMenu.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="ResultsMenu.cpp">
       <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSelectMenuView.cpp">
+      <Filter>Source Files\Menus\MenuViews</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -477,13 +480,16 @@
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuViewModel.h">
-      <Filter>Header Files\Models\MenuModels</Filter>
+      <Filter>Header Files\Menus\MenuViews</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSelectMenu.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
     <ClInclude Include="ResultsMenu.h">
       <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSelectMenuView.h">
+      <Filter>Header Files\Menus\MenuViews</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

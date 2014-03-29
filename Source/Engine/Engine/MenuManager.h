@@ -14,6 +14,7 @@ class ResultsMenu;
 class ControlsMenu;
 class CreditsMenu;
 class MainMenuViewModel;
+class PlayerSelectMenuView;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Class Name: MenuManager
@@ -40,6 +41,8 @@ public:
 	void sendEndProgramSignal();
 	void sendUnPauseSignal();
 
+	void shutdown();
+
 	//std::stack<Menu*> getMenuOrderStack();
 	void draw(Game&);
 
@@ -47,6 +50,7 @@ private:
 	Game* game;
 
 	std::stack<Menu*>	menuOrderStack;
+
 	MainMenu*			mainMenu;
 	PlayerSelectMenu*	playerSelectMenu;
 	PauseMenu*			pauseMenu;
@@ -54,7 +58,8 @@ private:
 	ControlsMenu*		controlsMenu;
 	CreditsMenu*		creditsMenu;
 
-	MainMenuViewModel*	mmvm;
+	MainMenuViewModel*		mainMenuView;
+	PlayerSelectMenuView*	playerSelectView;
 
 	int controlPlayer;
 	bool UP_FLAG, DOWN_FLAG, CONFIRM_FLAG, CLOSE_FLAG;

@@ -10,6 +10,7 @@
 #include "ControlsMenu.h"
 #include "CreditsMenu.h"
 #include "MainMenuViewModel.h"
+#include "PlayerSelectMenuView.h"
 
 #include "DebugDefinitions.h"
 
@@ -33,7 +34,9 @@ bool MenuManager::initialize(Game& g)
 	controlsMenu	 = new ControlsMenu(this);
 	creditsMenu		 = new CreditsMenu(this);
 
-	mmvm		 = new MainMenuViewModel(g);
+	mainMenuView	 = new MainMenuViewModel(g);
+	playerSelectView = new PlayerSelectMenuView(g);
+
 
 	//game->getModelManager()->add(*mainMenu);
 	//game->getModelManager()->add(*pauseMenu);
@@ -276,6 +279,12 @@ void MenuManager::sendUnPauseSignal()
 
 void MenuManager::draw(Game& g)
 {
-	mmvm->Draw(mainMenu);
+	mainMenuView->Draw(mainMenu);
+	playerSelectView->Draw(playerSelectMenu);
 	//g.getGraphics()->getD3D()->getSwapChain()->Present(0,0);
+}
+
+void MenuManager::shutdown()
+{
+	
 }

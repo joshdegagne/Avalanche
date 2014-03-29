@@ -221,13 +221,6 @@ void Game::Shutdown()
 		textureManager = nullptr;
 	}
 
-
-	if (menuManager)
-	{
-		delete menuManager;
-		menuManager = nullptr;
-	}
-
 	if (audioManager)
 	{
 		delete audioManager;
@@ -259,6 +252,12 @@ void Game::Shutdown()
 	{
 		delete gameModels;
 		gameModels = nullptr;
+	}
+
+	if (menuManager)
+	{
+		delete menuManager;
+		menuManager = nullptr;
 	}
 	
 	ShutdownWindows();

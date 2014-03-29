@@ -1,4 +1,4 @@
-#include "MainMenuViewModel.h"
+﻿#include "MainMenuViewModel.h"
 #include "EntityType.h"
 #include "SmallRockObstacle.h"
 #include "SmallRockViewModel.h"
@@ -101,10 +101,10 @@ bool MainMenuViewModel::Draw(MainMenu* menu)
 
 
 		
-		font->DrawString(sprites, L"start game", XMFLOAT2(275, 200), Colors::Silver);
-		font->DrawString(sprites, L"view controls", XMFLOAT2(255, 250), Colors::Silver);
-		font->DrawString(sprites, L"view credits", XMFLOAT2(270, 300), Colors::Silver);
-		font->DrawString(sprites, L"quit game", XMFLOAT2(293, 350), Colors::Silver);
+		font->DrawString(sprites, L"start game", XMFLOAT2(280, 200), Colors::Silver);
+		font->DrawString(sprites, L"view controls", XMFLOAT2(260, 250), Colors::Silver);
+		font->DrawString(sprites, L"view credits", XMFLOAT2(280, 300), Colors::Silver);
+		font->DrawString(sprites, L"quit game", XMFLOAT2(298, 350), Colors::Silver);
 
 		
 
@@ -112,10 +112,10 @@ bool MainMenuViewModel::Draw(MainMenu* menu)
 
 		switch(menu->getCurrentSelection())
 		{
-		case 0: font->DrawString(sprites, L"start game", XMFLOAT2(275, 200), Colors::Purple); break;
-		case 1: font->DrawString(sprites, L"view controls", XMFLOAT2(255, 250), Colors::Purple); break;
-		case 2: font->DrawString(sprites, L"view credits", XMFLOAT2(270, 300), Colors::Purple); break;
-		case 3: font->DrawString(sprites, L"quit game", XMFLOAT2(293, 350), Colors::Purple); break;
+		case 0: font->DrawString(sprites, L"start game", XMFLOAT2(280, 200), Colors::Purple); break;
+		case 1: font->DrawString(sprites, L"view controls", XMFLOAT2(260, 250), Colors::Purple); break;
+		case 2: font->DrawString(sprites, L"view credits", XMFLOAT2(280, 300), Colors::Purple); break;
+		case 3: font->DrawString(sprites, L"quit game", XMFLOAT2(298, 350), Colors::Purple); break;
 		}
 
 		//writeLabelToConsole(
