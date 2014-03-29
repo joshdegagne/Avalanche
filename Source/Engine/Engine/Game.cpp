@@ -180,14 +180,6 @@ bool Game::Initialize()
 void Game::Shutdown()
 {
 	
-	if(players)
-	{
-		for(int i = 0; i < players->size(); ++i)
-			delete players->elementAt(i);
-
-		delete players;
-		players = nullptr;
-	}
 
 	if(graphics)
 	{
@@ -226,11 +218,6 @@ void Game::Shutdown()
 		textureManager = nullptr;
 	}
 
-	if (collisionManager)
-	{
-		delete collisionManager;
-		collisionManager = nullptr;
-	}
 
 	if (menuManager)
 	{
@@ -248,6 +235,21 @@ void Game::Shutdown()
 	{
 		delete playfield;
 		playfield = nullptr;
+	}
+	
+	if (collisionManager)
+	{
+		delete collisionManager;
+		collisionManager = nullptr;
+	}
+
+	if(players)
+	{
+		for(int i = 0; i < players->size(); ++i)
+			delete players->elementAt(i);
+
+		delete players;
+		players = nullptr;
 	}
 
 	if(gameModels)
