@@ -52,7 +52,6 @@ public:
 	~AudioManager();
 
 	bool initialize(HWND);
-	bool PlayWave(IDirectSoundBuffer8*, int);
 	bool PlaySong01();
 	void Shutdown();
 
@@ -65,7 +64,8 @@ private:
  
 	bool LoadWaveFile(const char*, IDirectSoundBuffer8**);
 	void ShutdownWaveFile(IDirectSoundBuffer8**);
- 
+
+	bool PlayWave(IDirectSoundBuffer8*, int);
  
 private:
 	IDirectSound8* directSound;
