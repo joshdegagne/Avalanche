@@ -500,4 +500,9 @@
       <Filter>zShader Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="GlobalVariableValues.txt">
+      <Filter>Header Files\Helper Headers</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
