@@ -15,8 +15,6 @@
 
 #define SCROLL_SPEED 0.15f
 #define NUM_LANES 6
-#define GAME_LENGTH 60000.0f //1 Minute
-#define END_LENGTH  5000.0f //5 Seconds
 
 class Player; //Foward declaration needed in order to satisfy compiler
 class Game;
