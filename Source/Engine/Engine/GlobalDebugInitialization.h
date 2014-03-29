@@ -21,6 +21,9 @@ float ENTITY_DRAG_SPEED;		//Speed that entities will automatically move towards 
 float PLAYER_MOVEMENT_SPEED;	//Speed of player characters
 float OBSTACLE_SPAWN_RATE;		//Multiplier for obstacle spawn rates
 
+float GAME_PLAY_LENGTH;			//Length of game
+float GAME_END_ANIMATION_LENGTH;//Length of "end game animation"
+
 float PS_REGULAR_DURATION;		//Duration of PlayerRegularState
 float PS_INJURED_DURATION;		//Duration of PlayerInjuredState
 float PS_JUMP_DURATION;			//Duration of PlayerJumpState
@@ -74,6 +77,9 @@ void setAllGlobalVars()
 		ENTITY_DRAG_SPEED		= getNextFloat(varValueFile);
 		PLAYER_MOVEMENT_SPEED	= getNextFloat(varValueFile);
 		OBSTACLE_SPAWN_RATE		= getNextFloat(varValueFile);
+
+		GAME_PLAY_LENGTH			= getNextFloat(varValueFile);
+		GAME_END_ANIMATION_LENGTH	= getNextFloat(varValueFile);
 
 		PS_REGULAR_DURATION	= getNextFloat(varValueFile);
 		PS_INJURED_DURATION = getNextFloat(varValueFile);

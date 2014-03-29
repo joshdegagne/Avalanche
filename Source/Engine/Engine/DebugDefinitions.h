@@ -14,6 +14,9 @@ extern float ENTITY_DRAG_SPEED;			//Speed that entities will automatically move 
 extern float PLAYER_MOVEMENT_SPEED;		//Speed of player characters
 extern float OBSTACLE_SPAWN_RATE;		//Multiplier for obstacle spawn rates
 
+extern float GAME_PLAY_LENGTH;			//Length of game
+extern float GAME_END_ANIMATION_LENGTH; //Length of "end game animation"
+
 extern float PS_REGULAR_DURATION;		//Duration of PlayerRegularState
 extern float PS_INJURED_DURATION;		//Duration of PlayerInjuredState
 extern float PS_JUMP_DURATION;			//Duration of PlayerJumpState

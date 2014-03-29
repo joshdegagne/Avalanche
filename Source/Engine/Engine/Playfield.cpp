@@ -13,7 +13,7 @@
 
 
 
-Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(1/((GAME_LENGTH/1000.0f)*OBSTACLE_SPAWN_RATE)), endFlag(false)
+Playfield::Playfield() : fieldLength(30.0f), fieldWidth(6.0f), previousProgressPercentage(0.0f), percentageBetweenObstacles(1/((GAME_PLAY_LENGTH)*OBSTACLE_SPAWN_RATE)), endFlag(false)
 {
 	entities = new ArrayList<Entity>;
 	activePlayers = new ArrayList<Player>;
@@ -44,8 +44,8 @@ void Playfield::initialize(Game* g, int numPlayers)
 	game = g;
 	collisionManager = game->getCollisionManager();
 
-	playTimer.initialize(GAME_LENGTH, this);
-	endTimer.initialize(END_LENGTH, this);
+	playTimer.initialize(GAME_PLAY_LENGTH * 1000.0f, this);
+	endTimer.initialize(GAME_END_ANIMATION_LENGTH * 1000.0f, this);
 
 	populateLists(game, numPlayers);
 
