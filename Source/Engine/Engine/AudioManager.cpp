@@ -328,7 +328,7 @@ bool AudioManager::PlaySong01()
 		return false;
 	}
 
-	result = song01->SetVolume(DSBVOLUME_MAX - 1000);
+	result = song01->SetVolume(DSBVOLUME_MAX - 1500);
 	if(FAILED(result))
 	{
 		return false;
@@ -382,7 +382,7 @@ void AudioManager::onStateStart(PlayerState& state)
 		IDirectSoundBuffer8* jumpSound;
 		LoadWaveFile(jumpSoundPath->c_str(), &jumpSound);
 		jumpSounds->add(jumpSound);
-		PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-1000);
+		PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-1500);
 	}
 	else if (state.getStateType() == PlayerStateType::PST_ROLL)
 	{
@@ -390,7 +390,7 @@ void AudioManager::onStateStart(PlayerState& state)
 		IDirectSoundBuffer8* rollSound;
 		LoadWaveFile(rollSoundPath->c_str(), &rollSound);
 		rollSounds->add(rollSound);
-		PlayWave(rollSounds->elementAt(rollSounds->size()-1),-1000);
+		PlayWave(rollSounds->elementAt(rollSounds->size()-1),-2500);
 	}
 	else if (state.getStateType() == PlayerStateType::PST_INJURED)
 	{
@@ -398,7 +398,7 @@ void AudioManager::onStateStart(PlayerState& state)
 		IDirectSoundBuffer8* injuredSound;
 		LoadWaveFile(injuredSoundPath->c_str(), &injuredSound);
 		injuredSounds->add(injuredSound);
-		PlayWave(injuredSounds->elementAt(injuredSounds->size()-1),-1000);
+		PlayWave(injuredSounds->elementAt(injuredSounds->size()-1),-1500);
 	}
 }
 
