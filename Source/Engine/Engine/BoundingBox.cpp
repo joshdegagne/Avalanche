@@ -31,12 +31,12 @@ void BoundingBox::initialize(Entity* e)
 	else if (parent->getEntityType() == EntityType::ROCK_BIG)
 	{
 		dimensions = XMFLOAT3(2.0f, 2.0f, 1.0f);
-		offset     = XMFLOAT3(0.0f, 0.0f, 0.0f);
+		offset     = XMFLOAT3(0.0f, 1.0f, 0.0f);
 	}
 	else if (parent->getEntityType() == EntityType::ROCK_SMALL)
 	{
 		dimensions = XMFLOAT3(1.0f, 1.0f, 0.5f);
-		offset     = XMFLOAT3(0.0f, 0.0f, 0.0f);
+		offset     = XMFLOAT3(0.0f, 0.5f, 0.0f);
 	}
 	else if (parent->getEntityType() == EntityType::TREE)
 	{

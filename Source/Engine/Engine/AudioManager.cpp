@@ -412,7 +412,7 @@ void AudioManager::onStateStart(PlayerState& state)
 		IDirectSoundBuffer8* injuredSound;
 		LoadWaveFile(injuredSoundPath->c_str(), &injuredSound);
 		injuredSounds->add(injuredSound);
-		PlayWave(injuredSounds->elementAt(injuredSounds->size()-1),-1500);
+		PlayWave(injuredSounds->elementAt(injuredSounds->size()-1),-1100);
 	}
 }
 
