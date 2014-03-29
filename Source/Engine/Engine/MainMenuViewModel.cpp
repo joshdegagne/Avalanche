@@ -93,10 +93,30 @@ bool MainMenuViewModel::Draw(MainMenu* menu)
 
 		//font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(278, 85), Colors::Purple);
 		game->getGraphics()->getSpriteFontBig()->DrawString(sprites, L"AVALANCHE", XMFLOAT2(200, 75), Colors::Purple);
-		font->DrawString(sprites, L"start game", XMFLOAT2(275, 190), Colors::Purple);
-		font->DrawString(sprites, L"view controls", XMFLOAT2(255, 240), Colors::Purple);
-		font->DrawString(sprites, L"view credits", XMFLOAT2(270, 290), Colors::Purple);
-		font->DrawString(sprites, L"quit game", XMFLOAT2(293, 340), Colors::Purple);
+
+
+
+
+
+
+
+		
+		font->DrawString(sprites, L"start game", XMFLOAT2(275, 200), Colors::Silver);
+		font->DrawString(sprites, L"view controls", XMFLOAT2(255, 250), Colors::Silver);
+		font->DrawString(sprites, L"view credits", XMFLOAT2(270, 300), Colors::Silver);
+		font->DrawString(sprites, L"quit game", XMFLOAT2(293, 350), Colors::Silver);
+
+		
+
+		//menu->getCurrentSelection();
+
+		switch(menu->getCurrentSelection())
+		{
+		case 0: font->DrawString(sprites, L"start game", XMFLOAT2(275, 200), Colors::Purple); break;
+		case 1: font->DrawString(sprites, L"view controls", XMFLOAT2(255, 250), Colors::Purple); break;
+		case 2: font->DrawString(sprites, L"view credits", XMFLOAT2(270, 300), Colors::Purple); break;
+		case 3: font->DrawString(sprites, L"quit game", XMFLOAT2(293, 350), Colors::Purple); break;
+		}
 
 		//writeLabelToConsole(
 		//writeTextToConsole(L"MainMenuViewModel::RenderEntity");
