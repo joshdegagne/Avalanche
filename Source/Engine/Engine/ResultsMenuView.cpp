@@ -31,11 +31,11 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(MENU_TITLE_X, MENU_TITLE_Y), Colors::Purple);
 
 
-		int x = 218;
-		int x2 = 180;
+		float x = 218.0f;
+		float x2 = 180.0f;
 
 
-		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"GAME OVER", XMFLOAT2(295, 155), Colors::Purple);
+		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"GAME OVER", XMFLOAT2(295.0f, 155.0f), Colors::Purple);
 
 
 		// terribly hardcoded for the final presentation, i'm sorry
@@ -44,30 +44,30 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 			if (i == 0)
 			{
 				if(menu->getSurvivors()[i])
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1 survived!", XMFLOAT2(x, 213), Colors::DarkRed);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1 survived!", XMFLOAT2(x, 213.0f), Colors::DarkRed);
 				else
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1  went missing", XMFLOAT2(x2, 213), Colors::Silver);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1  went missing", XMFLOAT2(x2, 213.0f), Colors::Silver);
 			}
 			else if (i == 1)
 			{
 				if(menu->getSurvivors()[i])
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 2 survived!", XMFLOAT2(x, 263), Colors::DarkSlateBlue);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 2 survived!", XMFLOAT2(x, 263.0f), Colors::DarkSlateBlue);
 				else
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 2 went missing", XMFLOAT2(x2, 263), Colors::Silver);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 2 went missing", XMFLOAT2(x2, 263.0f), Colors::Silver);
 			}
 			else if (i == 2)
 			{
 				if(menu->getSurvivors()[i])
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 3 survived!", XMFLOAT2(x, 313), Colors::DarkOliveGreen);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 3 survived!", XMFLOAT2(x, 313.0f), Colors::DarkOliveGreen);
 				else
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 3 went missing", XMFLOAT2(x2, 313), Colors::Silver);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 3 went missing", XMFLOAT2(x2, 313.0f), Colors::Silver);
 			}
 			else if (i == 3)
 			{
 				if(menu->getSurvivors()[i])
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 4 survived!", XMFLOAT2(x, 363), Colors::Purple);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 4 survived!", XMFLOAT2(x, 363.0f), Colors::Purple);
 				else
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 4 went missing", XMFLOAT2(x2, 363), Colors::Silver);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 4 went missing", XMFLOAT2(x2, 363.0f), Colors::Silver);
 			}
 		}
 

@@ -7,7 +7,7 @@
 #include "ViewModel.cpp"
 #include "DebugConsole.h"
 #include "SpriteFont.h"
-#include "MainMenu.h"'
+#include "MainMenu.h"
 #include "Player.h"
 #include "Game.h"
 #include "DebugDefinitions.h"
@@ -30,19 +30,19 @@ bool ControlsMenuView::Draw(ControlsMenu* menu)
 
 		spriteBatch->Begin();
 
-		int xPos = 190;
+		float xPos = 190.0f;
 
 		//font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(278, 85), Colors::Purple);
 		spriteFontBig->DrawString(spriteBatch, L"AVALANCHE", XMFLOAT2(MENU_TITLE_X, MENU_TITLE_Y), Colors::Purple);
-		spriteFontNormal->DrawString(spriteBatch, L"HOW TO PLAY", XMFLOAT2(260, 150), Colors::Purple);
+		spriteFontNormal->DrawString(spriteBatch, L"HOW TO PLAY", XMFLOAT2(260.0f, 150.0f), Colors::Purple);
 		
-		spriteFontNormal->DrawString(spriteBatch, L"1.  dodge obstacles", XMFLOAT2(xPos, 213), Colors::MediumPurple);
-		spriteFontNormal->DrawString(spriteBatch, L"2. tackle friends", XMFLOAT2(xPos, 263), Colors::MediumPurple);
-		spriteFontNormal->DrawString(spriteBatch, L"3. don't fall behind", XMFLOAT2(xPos, 313), Colors::MediumPurple);
+		spriteFontNormal->DrawString(spriteBatch, L"1.  dodge obstacles", XMFLOAT2(xPos, 213.0f), Colors::MediumPurple);
+		spriteFontNormal->DrawString(spriteBatch, L"2. tackle friends", XMFLOAT2(xPos, 263.0f), Colors::MediumPurple);
+		spriteFontNormal->DrawString(spriteBatch, L"3. don't fall behind", XMFLOAT2(xPos, 313.0f), Colors::MediumPurple);
 
-		spriteFontNormal->DrawString(spriteBatch, L"move:  left analog stick", XMFLOAT2(xPos, 380), Colors::DarkGreen);
-		spriteFontNormal->DrawString(spriteBatch, L"roll:     left or right trigger", XMFLOAT2(xPos, 430), Colors::DarkGreen);
-		spriteFontNormal->DrawString(spriteBatch, L"jump:   A button", XMFLOAT2(xPos, 480), Colors::DarkGreen);
+		spriteFontNormal->DrawString(spriteBatch, L"move:  left analog stick", XMFLOAT2(xPos, 380.0f), Colors::DarkGreen);
+		spriteFontNormal->DrawString(spriteBatch, L"roll:     left or right trigger", XMFLOAT2(xPos, 430.0f), Colors::DarkGreen);
+		spriteFontNormal->DrawString(spriteBatch, L"jump:   A button", XMFLOAT2(xPos, 480.0f), Colors::DarkGreen);
 
 		/*
 		spriteFontNormal->DrawString(spriteBatch, L"left analog to move", XMFLOAT2(195, 380), Colors::DarkGreen);

@@ -29,7 +29,6 @@ SpriteTexture::~SpriteTexture()
 
 bool SpriteTexture::Initialize(ID3D11Device*, WCHAR*)
 {
-	HRESULT result;
 	return false;
 }
 /*

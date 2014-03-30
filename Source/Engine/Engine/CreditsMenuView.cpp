@@ -7,7 +7,7 @@
 #include "ViewModel.cpp"
 #include "DebugConsole.h"
 #include "SpriteFont.h"
-#include "MainMenu.h"'
+#include "MainMenu.h"
 #include "Player.h"
 #include "Game.h"
 #include "DebugDefinitions.h"
