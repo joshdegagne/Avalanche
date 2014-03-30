@@ -12,6 +12,8 @@
 #include "CreditsMenu.h"
 #include "MainMenuViewModel.h"
 #include "PlayerSelectMenuView.h"
+#include "ResultsMenuView.h"
+#include <vector>
 
 #include "DebugDefinitions.h"
 
@@ -37,6 +39,7 @@ bool MenuManager::initialize(Game& g)
 
 	mainMenuView	 = new MainMenuViewModel(g);
 	playerSelectView = new PlayerSelectMenuView(g);
+	resultsView		 = new ResultsMenuView(g);
 
 
 	//game->getModelManager()->add(*mainMenu);
@@ -227,11 +230,12 @@ void MenuManager::addPauseMenu(int requestPlayerNumber)
 	controlPlayer = requestPlayerNumber;
 	addMenu(pauseMenu);
 }
-void MenuManager::addResultsMenu()
+void MenuManager::addResultsMenu(std::vector<bool> s)
 {
 	if (MENU_DEBUG)
 		writeTextToConsole(L"RESULTS MENU ADDED");
 
+	resultsMenu->setSurvivors(s);
 	addMenu(resultsMenu);
 }
 void MenuManager::addControlsMenu()
@@ -283,6 +287,9 @@ void MenuManager::draw(Game& g)
 {
 	mainMenuView->Draw(mainMenu);
 	playerSelectView->Draw(playerSelectMenu);
+	resultsView->Draw(resultsMenu);
+
+
 	//g.getGraphics()->getD3D()->getSwapChain()->Present(0,0);
 }
 

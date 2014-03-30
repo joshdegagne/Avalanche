@@ -29,9 +29,10 @@ bool PlayerSelectMenuView::Draw(PlayerSelectMenu* menu)
 
 		
 		
-		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(200, 75), Colors::Purple);
+		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(200, 70), Colors::Purple); // 75?
 
-		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"players", XMFLOAT2(315, 155), Colors::Purple);
+		//game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"players", XMFLOAT2(315, 155), Colors::Purple);
+		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"players", XMFLOAT2(315, 150), Colors::Purple);
 
 		//spriteFontBig->DrawString(spriteBatch, L"1", XMFLOAT2(373, 200), Colors::Silver);
 		spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(367, 210), Colors::Silver);

@@ -76,17 +76,17 @@
     <Filter Include="Source Files\Menus">
       <UniqueIdentifier>{73be2edb-7460-4c1d-a5e8-8f6c1e5cfe49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Graphics\Texturing">
-      <UniqueIdentifier>{d0d6a34f-d08a-4fd9-a8b8-551a5c7cff10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Graphics\Texturing">
-      <UniqueIdentifier>{07aba99e-05f1-49ca-9b81-6db2adb7b7ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Menus\MenuViews">
       <UniqueIdentifier>{004ec601-2749-4d3f-814c-b75f0d212bff}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Menus\MenuViews">
       <UniqueIdentifier>{b6866bff-120f-481c-ac27-3ebf2b8eb4af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Textures">
+      <UniqueIdentifier>{07aba99e-05f1-49ca-9b81-6db2adb7b7ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\Textures">
+      <UniqueIdentifier>{d0d6a34f-d08a-4fd9-a8b8-551a5c7cff10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -232,16 +232,16 @@
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="SpriteTexture.cpp">
-      <Filter>Source Files\Graphics\Texturing</Filter>
+      <Filter>Source Files\Graphics\Textures</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Graphics\Texturing</Filter>
+      <Filter>Source Files\Graphics\Textures</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Graphics\Texturing</Filter>
+      <Filter>Source Files\Graphics\Textures</Filter>
     </ClCompile>
     <ClCompile Include="TextureShader.cpp">
-      <Filter>Source Files\Graphics\Texturing</Filter>
+      <Filter>Source Files\Graphics\Textures</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\Menus</Filter>
@@ -265,6 +265,9 @@
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSelectMenuView.cpp">
+      <Filter>Source Files\Menus\MenuViews</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultsMenuView.cpp">
       <Filter>Source Files\Menus\MenuViews</Filter>
     </ClCompile>
   </ItemGroup>
@@ -453,19 +456,19 @@
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
     <ClInclude Include="ITexture.h">
-      <Filter>Header Files\Graphics\Texturing</Filter>
+      <Filter>Header Files\Graphics\Textures</Filter>
     </ClInclude>
     <ClInclude Include="SpriteTexture.h">
-      <Filter>Header Files\Graphics\Texturing</Filter>
+      <Filter>Header Files\Graphics\Textures</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files\Graphics\Texturing</Filter>
+      <Filter>Header Files\Graphics\Textures</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Graphics\Texturing</Filter>
+      <Filter>Header Files\Graphics\Textures</Filter>
     </ClInclude>
     <ClInclude Include="TextureShader.h">
-      <Filter>Header Files\Graphics\Texturing</Filter>
+      <Filter>Header Files\Graphics\Textures</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Header Files\Menus</Filter>
@@ -489,6 +492,9 @@
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSelectMenuView.h">
+      <Filter>Header Files\Menus\MenuViews</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultsMenuView.h">
       <Filter>Header Files\Menus\MenuViews</Filter>
     </ClInclude>
   </ItemGroup>

@@ -405,8 +405,9 @@ void Game::HandleEndGameSignal(int numPlayers)
 	delete playfield;
 	playfield = 0;
 	writeTextToConsole(L"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	if (numPlayers > 0)
-		menuManager->addResultsMenu();
+
+	// For showing survivors in results
+	std::vector<bool> survivors(numPlayers);
 
 	//////////////////////////
 	for (int i = 0; i < numPlayers; ++i)
@@ -414,12 +415,23 @@ void Game::HandleEndGameSignal(int numPlayers)
 		writeTextToConsole(L"Player ", false);
 		writeNumToConsole(players->elementAt(i)->getPlayerNum(), false);
 		if (!players->elementAt(i)->isDead())
+		{
+			survivors.at(i) = true;
 			writeTextToConsole(L" survived!");
+		}
 		else
+		{
+			survivors.at(i) = false;
 			writeTextToConsole(L" died...");
+		}
 	}
 	writeTextToConsole(L"Game has ended!");
 	////////////////////////////
+
+	survivors.shrink_to_fit();
+
+	if (numPlayers > 0)
+		menuManager->addResultsMenu(survivors);
 
 	PAUSE_FLAG = false;
 }

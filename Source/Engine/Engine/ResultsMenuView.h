@@ -13,17 +13,14 @@
 #include "VertexTypes.h"
 
 class Game;
-class PlayerSelectMenu;
-class TextureManager;
+class ResultsMenu;
 
-using namespace DirectX;
-
-class PlayerSelectMenuView
+class ResultsMenuView
 {
 public:
-	PlayerSelectMenuView(Game& game); // Initialize SpriteBatch with device context (every menu ViewModel will do this)
-	~PlayerSelectMenuView();
-	bool Draw(PlayerSelectMenu*);
+	ResultsMenuView(Game& game); // Initialize SpriteBatch with device context (every menu ViewModel will do this)
+	~ResultsMenuView();
+	bool Draw(ResultsMenu*);
 
 private:
 	Game* game;

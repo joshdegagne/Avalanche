@@ -151,10 +151,7 @@ bool PlayerViewModel::InitializeVertexModels(ID3D11Device* d3dDevice)
 
 bool PlayerViewModel::InitializeTextures(TextureManager* texMan) 
 {
-	
-	//if (!(textures[0] = texMan->loadTexture(L"textures/player_red.dds")))
 	if (!(textures[0] = texMan->loadSpriteTexture(L"textures/player_red_running.png", 100)))
-	//	return false;
 		return false;
 
 	if (!(textures[1] = texMan->loadSpriteTexture(L"textures/player_purple_running.png", 100)))

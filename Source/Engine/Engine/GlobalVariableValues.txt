@@ -2,7 +2,7 @@ GLOBAL VARIABLE LIST (ORDER MATTERS):
 Use surrounding tildes to denote a value you wish to store.
 
 //Valid values: ON, OFF, any float value
-[NAME]				       [VALUE] 	  DEFAULT
+[NAME]			    [VALUE]     DEFAULT
 COLLISION_DEBUG             ~OFF~       OFF
 STATE_DEBUG                 ~OFF~       OFF
 AUDIO_DEBUG                 ~OFF~       OFF
@@ -19,13 +19,13 @@ OBSTACLE_SPAWN_RATE         ~1.0f~      1.0f
 GAME_PLAY_LENGTH            ~60.0f~     # secs
 GAME_END_ANIMATION_LENGTH   ~5.0f~      # secs
 
-PS_REGULAR_DURATION         ~-1.0f~	    -1.0f
+PS_REGULAR_DURATION         ~-1.0f~	-1.0f
 PS_INJURED_DURATION         ~800.0f~    800.0f
 PS_JUMP_DURATION            ~600.0f~    600.0f
 PS_JUMP_HEIGHT	            ~2.0f~      2.0f
-PS_FLOAT_TO_VICTORY	        ~OFF~       OFF (Although we prefer ON)
+PS_FLOAT_TO_VICTORY	    ~OFF~       OFF (Although we prefer ON)
 PS_ROLL_DURATION            ~100.0f~    100.0f
 PS_BUMP_DURATION            ~300.0f~    300.0f
 PS_BUMP_HEIGHT              ~0.75f~     0.75f
 
-SPRITE_UPDATE_SPEED         ~0.01f~     0.0075f
+SPRITE_UPDATE_SPEED         ~0.04f~     0.01f

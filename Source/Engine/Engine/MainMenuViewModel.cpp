@@ -92,7 +92,7 @@ bool MainMenuViewModel::Draw(MainMenu* menu)
 		sprites->Begin();
 
 		//font->DrawString(sprites, L"AVALANCHE", XMFLOAT2(278, 85), Colors::Purple);
-		game->getGraphics()->getSpriteFontBig()->DrawString(sprites, L"AVALANCHE", XMFLOAT2(200, 75), Colors::Purple);
+		game->getGraphics()->getSpriteFontBig()->DrawString(sprites, L"AVALANCHE", XMFLOAT2(200, 70), Colors::Purple);
 
 
 

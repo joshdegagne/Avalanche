@@ -6,6 +6,7 @@
 #include "IManager.h"
 #include "Menu.h"
 #include <stack>
+#include <vector>
 
 class MainMenu;
 class PlayerSelectMenu;
@@ -15,6 +16,7 @@ class ControlsMenu;
 class CreditsMenu;
 class MainMenuViewModel;
 class PlayerSelectMenuView;
+class ResultsMenuView;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Class Name: MenuManager
@@ -32,7 +34,7 @@ public:
 	void addMainMenu();
 	void addPlayerSelectMenu();
 	void addPauseMenu(int);
-	void addResultsMenu();
+	void addResultsMenu(std::vector<bool>);
 	void addControlsMenu();
 	void addCreditsMenu();
 
@@ -60,6 +62,7 @@ private:
 
 	MainMenuViewModel*		mainMenuView;
 	PlayerSelectMenuView*	playerSelectView;
+	ResultsMenuView*		resultsView;
 
 	int controlPlayer;
 	bool UP_FLAG, DOWN_FLAG, CONFIRM_FLAG, CLOSE_FLAG;
