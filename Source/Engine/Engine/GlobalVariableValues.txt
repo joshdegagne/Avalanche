@@ -30,5 +30,5 @@ PS_BUMP_HEIGHT              ~0.75f~     0.75f
 
 SPRITE_UPDATE_SPEED         ~0.04f~     0.01f
 
-MENU_TITLE_X				~200.0f~		200
+MENU_TITLE_X				~210.0f~		200
 MENU_TITLE_Y				~70.0f~		70
