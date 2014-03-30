@@ -133,6 +133,12 @@ void Playfield::update(float elapsed)
 						for (int i = 0; i < currentPlayer->getPlayerStates()->size(); ++i)
 							currentPlayer->getPlayerStates()->elementAt(i)->update(elapsed);
 				}
+
+				// if not roll to victory
+				if (currentPlayer->containsState(PlayerStateType::PST_ROLL))
+					for (int i = 0; i < currentPlayer->getPlayerStates()->size(); ++i)
+						currentPlayer->getPlayerStates()->elementAt(i)->update(elapsed);
+
 				currentPlayer->moveBy(XMFLOAT2(PLAYER_MOVEMENT_SPEED*elapsed, 0.0f));
 			}
 		}
