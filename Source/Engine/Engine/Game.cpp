@@ -411,12 +411,6 @@ void Game::HandleEndGameSignal(int numPlayers)
 
 	// For showing survivors in results
 	std::vector<bool> survivors(numPlayers);
-	/*
-	if (numPlayers > 0)
-	{
-		menuManager->addResultsMenu(survivors);
-	}*/
-
 
 	//////////////////////////
 	for (int i = 0; i < numPlayers; ++i)

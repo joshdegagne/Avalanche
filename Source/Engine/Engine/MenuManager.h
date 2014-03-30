@@ -46,9 +46,6 @@ public:
 	void sendEndProgramSignal();
 	void sendUnPauseSignal();
 
-	void shutdown();
-
-	//std::stack<Menu*> getMenuOrderStack();
 	void draw(Game&);
 
 private:
@@ -63,6 +60,7 @@ private:
 	ControlsMenu*		controlsMenu;
 	CreditsMenu*		creditsMenu;
 
+	// Menu screens
 	MainMenuView*			mainMenuView;
 	PlayerSelectMenuView*	playerSelectView;
 	ResultsMenuView*		resultsView;

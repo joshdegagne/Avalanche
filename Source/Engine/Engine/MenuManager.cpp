@@ -265,6 +265,7 @@ void MenuManager::addPauseMenu(int requestPlayerNumber)
 
 	controlPlayer = requestPlayerNumber;
 
+	// To indicate which player paused in the screen
 	pauseMenu->setPausedPlayer(requestPlayerNumber);
 
 	addMenu(pauseMenu);
@@ -312,6 +313,7 @@ void MenuManager::sendStartGameSignal(int numPlayers)
 }
 void MenuManager::sendEndGameSignal()
 {
+	// Pause additions here to fix exiting to main menu and not actually returning to it
 	bool wasPaused = false;
 
 	if (game->isPaused())
@@ -325,8 +327,6 @@ void MenuManager::sendEndGameSignal()
 		addMainMenu();
 	}
 
-	// from pause
-	//if (menuOrderStack.top()
 }
 void MenuManager::sendEndProgramSignal()
 {
@@ -341,16 +341,11 @@ void MenuManager::sendUnPauseSignal()
 
 void MenuManager::draw(Game& g)
 {
-	// can be refactored to use inheritance, but that'll be left for later
+	// Can be refactored to use inheritance, but that'll be left for later
 	mainMenuView->Draw(mainMenu);
 	playerSelectView->Draw(playerSelectMenu);
 	resultsView->Draw(resultsMenu);
 	pauseView->Draw(pauseMenu);
 	controlsView->Draw(controlsMenu);
 	creditsView->Draw(creditsMenu);
-}
-
-void MenuManager::shutdown()
-{
-	
 }
