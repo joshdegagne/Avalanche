@@ -149,7 +149,7 @@ void MenuManager::update(float elapsedTime)
 						removeCurrentMenu();
 						addMainMenu();
 					}
-					// 
+					// If B is pressed at pause, return to game (freezes otherwise)
 					else if (menuOrderStack.top() == pauseMenu)
 					{
 						sendUnPauseSignal();
