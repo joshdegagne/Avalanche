@@ -11,7 +11,7 @@ SpriteTexture::SpriteTexture()
 	maxFrame = 0;
 }
 
-SpriteTexture::SpriteTexture(std::vector<ID3D11ShaderResourceView*> t, int i, /*float f,*/ int m)
+SpriteTexture::SpriteTexture(std::vector<ID3D11ShaderResourceView*> t, float i, /*float f,*/ int m)
 {
 	textures = t;
 	index = i;

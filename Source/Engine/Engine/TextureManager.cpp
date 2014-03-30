@@ -157,7 +157,7 @@ SpriteTexture* TextureManager::loadSpriteTexture(WCHAR* filename, float spriteWi
 
 	frames.shrink_to_fit();
 	
-	SpriteTexture* spriteTex = new SpriteTexture(frames, 0, /*1,*/ numFrames);
+	SpriteTexture* spriteTex = new SpriteTexture(frames, 0.0f, /*1,*/ numFrames);
 
 	spriteTextures.push_back(spriteTex);
 

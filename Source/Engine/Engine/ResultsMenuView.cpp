@@ -31,20 +31,20 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(MENU_TITLE_X, MENU_TITLE_Y), Colors::Purple);
 
 
-		float x = 218.0f;
+		float x = 223.0f;
 		float x2 = 180.0f;
 
 
 		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"GAME OVER", XMFLOAT2(295.0f, 155.0f), Colors::Purple);
 
 
-		// terribly hardcoded for the final presentation, i'm sorry
+		// hardcoded for the final presentation
 		for(std::vector<bool>::size_type i = menu->getSurvivors().size() - 1; i != (std::vector<int>::size_type) -1; i--) 
 		{
 			if (i == 0)
 			{
 				if(menu->getSurvivors()[i])
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1 survived!", XMFLOAT2(x, 213.0f), Colors::DarkRed);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1 survived!", XMFLOAT2(x+5.0f, 213.0f), Colors::DarkRed);
 				else
 					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1  went missing", XMFLOAT2(x2, 213.0f), Colors::Silver);
 			}

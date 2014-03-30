@@ -17,7 +17,7 @@ class SpriteTexture : public ITexture
 {
 public:
 	SpriteTexture();
-	SpriteTexture(std::vector<ID3D11ShaderResourceView*>, int, /*float,*/ int);
+	SpriteTexture(std::vector<ID3D11ShaderResourceView*>, float, /*float,*/ int);
 	SpriteTexture(const SpriteTexture&);
 	~SpriteTexture();
 

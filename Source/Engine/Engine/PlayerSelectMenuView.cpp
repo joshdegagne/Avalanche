@@ -40,8 +40,8 @@ bool PlayerSelectMenuView::Draw(PlayerSelectMenu* menu)
 		spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(372, 270), Colors::Silver);
 		spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(372, 330), Colors::Silver);
 
-		spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(25, 450), Colors::Red);
-		spriteFontBig->DrawString(spriteBatch, L"1", XMFLOAT2(70, 500), Colors::Red);
+		spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(25, 450), Colors::DarkRed);
+		spriteFontBig->DrawString(spriteBatch, L"1", XMFLOAT2(70, 500), Colors::DarkRed);
 
 		switch(menu->getCurrentSelection())
 		{
