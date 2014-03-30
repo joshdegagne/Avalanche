@@ -40,9 +40,9 @@ bool ControlsMenuView::Draw(ControlsMenu* menu)
 		spriteFontNormal->DrawString(spriteBatch, L"2. tackle friends", XMFLOAT2(xPos, 263), Colors::MediumPurple);
 		spriteFontNormal->DrawString(spriteBatch, L"3. don't fall behind", XMFLOAT2(xPos, 313), Colors::MediumPurple);
 
-		spriteFontNormal->DrawString(spriteBatch, L"left analog to move", XMFLOAT2(xPos, 380), Colors::DarkGreen);
-		spriteFontNormal->DrawString(spriteBatch, L"left or right trigger to roll", XMFLOAT2(xPos, 430), Colors::DarkGreen);
-		spriteFontNormal->DrawString(spriteBatch, L"A button to jump", XMFLOAT2(xPos, 480), Colors::DarkGreen);
+		spriteFontNormal->DrawString(spriteBatch, L"move:  left analog stick", XMFLOAT2(xPos, 380), Colors::DarkGreen);
+		spriteFontNormal->DrawString(spriteBatch, L"roll:     left or right trigger", XMFLOAT2(xPos, 430), Colors::DarkGreen);
+		spriteFontNormal->DrawString(spriteBatch, L"jump:   A button", XMFLOAT2(xPos, 480), Colors::DarkGreen);
 
 		/*
 		spriteFontNormal->DrawString(spriteBatch, L"left analog to move", XMFLOAT2(195, 380), Colors::DarkGreen);
