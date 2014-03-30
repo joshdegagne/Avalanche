@@ -35,7 +35,7 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 		int x2 = 180;
 
 
-		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"GAME OVER", XMFLOAT2(295, 150), Colors::Purple);
+		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"GAME OVER", XMFLOAT2(295, 155), Colors::Purple);
 
 
 		// terribly hardcoded for the final presentation, i'm sorry

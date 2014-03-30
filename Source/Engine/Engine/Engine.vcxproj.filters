@@ -273,6 +273,9 @@
     <ClCompile Include="PauseMenuView.cpp">
       <Filter>Source Files\Menus\MenuViews</Filter>
     </ClCompile>
+    <ClCompile Include="ControlsMenuView.cpp">
+      <Filter>Source Files\Menus\MenuViews</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vertextype.h">
@@ -501,6 +504,9 @@
       <Filter>Header Files\Menus\MenuViews</Filter>
     </ClInclude>
     <ClInclude Include="PauseMenuView.h">
+      <Filter>Header Files\Menus\MenuViews</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlsMenuView.h">
       <Filter>Header Files\Menus\MenuViews</Filter>
     </ClInclude>
   </ItemGroup>

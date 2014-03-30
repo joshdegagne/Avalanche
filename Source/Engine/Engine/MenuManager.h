@@ -18,6 +18,7 @@ class MainMenuView;
 class PlayerSelectMenuView;
 class ResultsMenuView;
 class PauseMenuView;
+class ControlsMenuView;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Class Name: MenuManager
@@ -65,6 +66,7 @@ private:
 	PlayerSelectMenuView*	playerSelectView;
 	ResultsMenuView*		resultsView;
 	PauseMenuView*		pauseView;
+	ControlsMenuView*		controlsView;
 
 	int controlPlayer;
 	bool UP_FLAG, DOWN_FLAG, CONFIRM_FLAG, CLOSE_FLAG;

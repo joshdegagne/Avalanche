@@ -31,7 +31,7 @@ bool PlayerSelectMenuView::Draw(PlayerSelectMenu* menu)
 		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(MENU_TITLE_X, MENU_TITLE_Y), Colors::Purple); // 75?
 
 		//game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"players", XMFLOAT2(315, 155), Colors::Purple);
-		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"PLAYERS", XMFLOAT2(315, 150), Colors::Purple);
+		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"PLAYERS", XMFLOAT2(315, 153), Colors::Purple);
 
 		//spriteFontBig->DrawString(spriteBatch, L"1", XMFLOAT2(373, 200), Colors::Silver);
 		spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(367, 210), Colors::Silver);
@@ -40,9 +40,9 @@ bool PlayerSelectMenuView::Draw(PlayerSelectMenu* menu)
 
 		switch(menu->getCurrentSelection())
 		{
-		case 0: spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(367, 210), Colors::Purple); break;
-		case 1: spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(367, 270), Colors::Purple); break;
-		case 2: spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(367, 330), Colors::Purple); break;
+		case 0: spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(367, 210), Colors::MediumPurple); break;
+		case 1: spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(367, 270), Colors::MediumPurple); break;
+		case 2: spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(367, 330), Colors::MediumPurple); break;
 		}
 
 

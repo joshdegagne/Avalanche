@@ -14,6 +14,7 @@
 #include "PlayerSelectMenuView.h"
 #include "ResultsMenuView.h"
 #include "PauseMenuView.h"
+#include "ControlsMenuView.h"
 #include <vector>
 
 #include "DebugDefinitions.h"
@@ -49,6 +50,7 @@ bool MenuManager::initialize(Game& g)
 	playerSelectView = new PlayerSelectMenuView(g);
 	resultsView		 = new ResultsMenuView(g);
 	pauseView		 = new PauseMenuView(g);
+	controlsView	 = new ControlsMenuView(g);
 
 
 	//game->getModelManager()->add(*mainMenu);
@@ -324,11 +326,13 @@ void MenuManager::sendUnPauseSignal()
 
 void MenuManager::draw(Game& g)
 {
+	// can be easily refactored to use inheritance, but that can happen later
+
 	mainMenuView->Draw(mainMenu);
 	playerSelectView->Draw(playerSelectMenu);
 	resultsView->Draw(resultsMenu);
 	pauseView->Draw(pauseMenu);
-
+	controlsView->Draw(controlsMenu);
 
 	//g.getGraphics()->getD3D()->getSwapChain()->Present(0,0);
 }
