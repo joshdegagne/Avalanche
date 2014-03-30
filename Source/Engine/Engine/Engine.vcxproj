@@ -91,6 +91,7 @@
     <ClCompile Include="ControlsMenu.cpp" />
     <ClCompile Include="ControlsMenuView.cpp" />
     <ClCompile Include="CreditsMenu.cpp" />
+    <ClCompile Include="CreditsMenuView.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityBase.cpp" />
     <ClCompile Include="FinishLineObstacle.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="ControlsMenu.h" />
     <ClInclude Include="ControlsMenuView.h" />
     <ClInclude Include="CreditsMenu.h" />
+    <ClInclude Include="CreditsMenuView.h" />
     <ClInclude Include="DebugConsole.h" />
     <ClInclude Include="DebugDefinitions.h" />
     <ClInclude Include="Entity.h" />
