@@ -35,6 +35,9 @@ float PS_BUMP_HEIGHT;			//Height of player characters when bumped
 
 float SPRITE_UPDATE_SPEED;		//Rate at which sprite animations update
 
+float MENU_TITLE_X;				//X position of title
+float MENU_TITLE_Y;				//Y position of title
+
 #define TILDE 126
 #define TILDECHAR '~'
 
@@ -91,5 +94,7 @@ void setAllGlobalVars()
 		PS_BUMP_HEIGHT		= getNextFloat(varValueFile);
 
 		SPRITE_UPDATE_SPEED	= getNextFloat(varValueFile);
+		MENU_TITLE_X		= getNextFloat(varValueFile);
+		MENU_TITLE_Y		= getNextFloat(varValueFile);
 	}
 }

@@ -99,7 +99,7 @@
     <ClCompile Include="LogObstacle.cpp" />
     <ClCompile Include="LogViewModel.cpp" />
     <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="MainMenuViewModel.cpp" />
+    <ClCompile Include="MainMenuView.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="ModelManager.cpp" />
@@ -171,7 +171,7 @@
     <ClInclude Include="LogObstacle.h" />
     <ClInclude Include="LogViewModel.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="MainMenuViewModel.h" />
+    <ClInclude Include="MainMenuView.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="ModelManager-inl.h" />

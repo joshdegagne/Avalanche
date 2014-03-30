@@ -255,9 +255,6 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuViewModel.cpp">
-      <Filter>Source Files\Menus\MenuViews</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerSelectMenu.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
@@ -268,6 +265,9 @@
       <Filter>Source Files\Menus\MenuViews</Filter>
     </ClCompile>
     <ClCompile Include="ResultsMenuView.cpp">
+      <Filter>Source Files\Menus\MenuViews</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuView.cpp">
       <Filter>Source Files\Menus\MenuViews</Filter>
     </ClCompile>
   </ItemGroup>
@@ -482,9 +482,6 @@
     <ClInclude Include="CreditsMenu.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuViewModel.h">
-      <Filter>Header Files\Menus\MenuViews</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerSelectMenu.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
@@ -495,6 +492,9 @@
       <Filter>Header Files\Menus\MenuViews</Filter>
     </ClInclude>
     <ClInclude Include="ResultsMenuView.h">
+      <Filter>Header Files\Menus\MenuViews</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuView.h">
       <Filter>Header Files\Menus\MenuViews</Filter>
     </ClInclude>
   </ItemGroup>

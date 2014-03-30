@@ -23,9 +23,12 @@ PS_REGULAR_DURATION         ~-1.0f~	-1.0f
 PS_INJURED_DURATION         ~800.0f~    800.0f
 PS_JUMP_DURATION            ~600.0f~    600.0f
 PS_JUMP_HEIGHT	            ~2.0f~      2.0f
-PS_FLOAT_TO_VICTORY	    ~OFF~       OFF (Although we prefer ON)
+PS_FLOAT_TO_VICTORY			~OFF~       OFF (Although we prefer ON)
 PS_ROLL_DURATION            ~100.0f~    100.0f
 PS_BUMP_DURATION            ~300.0f~    300.0f
 PS_BUMP_HEIGHT              ~0.75f~     0.75f
 
 SPRITE_UPDATE_SPEED         ~0.04f~     0.01f
+
+MENU_TITLE_X				~200.0f~		200
+MENU_TITLE_Y				~70.0f~		70

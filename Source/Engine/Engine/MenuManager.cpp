@@ -10,7 +10,7 @@
 #include "ResultsMenu.h"
 #include "ControlsMenu.h"
 #include "CreditsMenu.h"
-#include "MainMenuViewModel.h"
+#include "MainMenuView.h"
 #include "PlayerSelectMenuView.h"
 #include "ResultsMenuView.h"
 #include <vector>
@@ -37,7 +37,7 @@ bool MenuManager::initialize(Game& g)
 	controlsMenu	 = new ControlsMenu(this);
 	creditsMenu		 = new CreditsMenu(this);
 
-	mainMenuView	 = new MainMenuViewModel(g);
+	mainMenuView	 = new MainMenuView(g);
 	playerSelectView = new PlayerSelectMenuView(g);
 	resultsView		 = new ResultsMenuView(g);
 

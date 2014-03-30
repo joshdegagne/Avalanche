@@ -11,7 +11,6 @@
 #include "PlayfieldViewModel.h"
 #include "FinishLineViewModel.h"
 #include "BoundViewModel.h"
-#include "MainMenuViewModel.h"
 
 #include "ModelManager.h"
 
@@ -52,7 +51,6 @@ bool ModelManager::initialize(Game& game)
 	models->add(new PlayfieldViewModel());
 	models->add(new FinishLineViewModel());
 
-	//models->add(new MainMenuViewModel(game));
 
 	if (COLLISION_DEBUG)
 	{
@@ -74,11 +72,7 @@ bool ModelManager::initialize(Game& game)
 		if(!success)
 			return false;		
 
-		//if (game.GetPlayers()->)
-		//{
-		//success = models->elementAt(i)->InitializeTextures(game.getTextureManager());
 		success = viewModel->InitializeTextures(game.getTextureManager());
-		//}
 
 		
 		if(!success)

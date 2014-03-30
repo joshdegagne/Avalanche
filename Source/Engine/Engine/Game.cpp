@@ -19,7 +19,7 @@
 #include "CollisionManager.h"
 #include "MenuManager.h"
 #include "AudioManager.h"
-#include "MainMenuViewModel.h"
+#include "MainMenuView.h"
 
 Game::Game()
 {

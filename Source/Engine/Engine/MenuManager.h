@@ -14,7 +14,7 @@ class PauseMenu;
 class ResultsMenu;
 class ControlsMenu;
 class CreditsMenu;
-class MainMenuViewModel;
+class MainMenuView;
 class PlayerSelectMenuView;
 class ResultsMenuView;
 
@@ -60,7 +60,7 @@ private:
 	ControlsMenu*		controlsMenu;
 	CreditsMenu*		creditsMenu;
 
-	MainMenuViewModel*		mainMenuView;
+	MainMenuView*		mainMenuView;
 	PlayerSelectMenuView*	playerSelectView;
 	ResultsMenuView*		resultsView;
 

@@ -1,4 +1,3 @@
-#include "MainMenuViewModel.h"
 #include "EntityType.h"
 #include "SmallRockObstacle.h"
 #include "SmallRockViewModel.h"
@@ -29,7 +28,7 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 		spriteBatch->Begin();
 
 
-		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(200, 70), Colors::Purple);
+		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(MENU_TITLE_X, MENU_TITLE_Y), Colors::Purple);
 
 
 		int x = 218;

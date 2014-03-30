@@ -28,6 +28,9 @@ extern float PS_BUMP_HEIGHT;			//Height of player characters when bumped
 
 extern float SPRITE_UPDATE_SPEED;		//Rate at which sprite animations update
 
+extern float MENU_TITLE_X;				//X position of title
+extern float MENU_TITLE_Y;				//Y position of title
+
 #define  STICK_MOVEMENT_THRESHOLD 0.3f
 #define  TRIGGER_ACTIVATION_THRESHOLD 0.3f
 
