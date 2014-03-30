@@ -65,7 +65,7 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 			else if (i == 3)
 			{
 				if(menu->getSurvivors()[i])
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 4 survived!", XMFLOAT2(x, 363), Colors::Pink);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 4 survived!", XMFLOAT2(x, 363), Colors::Purple);
 				else
 					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 4 went missing", XMFLOAT2(x2, 363), Colors::Silver);
 			}

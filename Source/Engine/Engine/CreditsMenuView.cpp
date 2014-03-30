@@ -39,7 +39,7 @@ bool CreditsMenuView::Draw(CreditsMenu* menu)
 		spriteFontNormal->DrawString(spriteBatch, L"max goad", XMFLOAT2(300, 213), Colors::Red);
 		spriteFontNormal->DrawString(spriteBatch, L"cameron davies", XMFLOAT2(240, 263), Colors::Blue);
 		spriteFontNormal->DrawString(spriteBatch, L"josh degagne", XMFLOAT2(270, 313), Colors::Green);
-		spriteFontNormal->DrawString(spriteBatch, L"richard huynh", XMFLOAT2(262, 363), Colors::HotPink);
+		spriteFontNormal->DrawString(spriteBatch, L"richard huynh", XMFLOAT2(262, 363), Colors::Purple);
 
 		/*
 		spriteFontNormal->DrawString(spriteBatch, L"left analog to move", XMFLOAT2(195, 380), Colors::DarkGreen);

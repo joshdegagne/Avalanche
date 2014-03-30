@@ -59,6 +59,12 @@ public:
 	void onStateStart(PlayerState&);
 	void onStateEnd(PlayerState&);
 
+	// Sound playback functions (initially made for menus)
+
+	void playRollSound();
+	void playInjuredSound();
+	void playJumpSound();
+
 private:
 	bool InitializeDirectSound(HWND);
 	void ShutdownDirectSound();

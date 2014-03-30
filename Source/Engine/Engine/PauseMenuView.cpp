@@ -50,9 +50,9 @@ bool PauseMenuView::Draw(PauseMenu* menu)
 
 		switch(menu->getCurrentSelection())
 		{
-		case 0: spriteFontNormal->DrawString(spriteBatch, L"resume game", XMFLOAT2(260, 213), Colors::MediumPurple); break;
-		case 1: spriteFontNormal->DrawString(spriteBatch, L"how to play", XMFLOAT2(275, 263), Colors::MediumPurple); break;
-		case 2: spriteFontNormal->DrawString(spriteBatch, L"exit to menu", XMFLOAT2(265, 313), Colors::MediumPurple); break;
+		case 0: spriteFontNormal->DrawString(spriteBatch, L"resume game", XMFLOAT2(260, 213), Colors::Purple); break;
+		case 1: spriteFontNormal->DrawString(spriteBatch, L"how to play", XMFLOAT2(275, 263), Colors::Purple); break;
+		case 2: spriteFontNormal->DrawString(spriteBatch, L"exit to menu", XMFLOAT2(265, 313), Colors::Purple); break;
 		}
 
 		spriteBatch->End();

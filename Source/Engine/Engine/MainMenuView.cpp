@@ -40,10 +40,10 @@ bool MainMenuView::Draw(MainMenu* menu)
 
 		switch(menu->getCurrentSelection())
 		{
-		case 0: spriteFontNormal->DrawString(spriteBatch, L"start game", XMFLOAT2(280, 200), Colors::MediumPurple); break;
-		case 1: spriteFontNormal->DrawString(spriteBatch, L"how to play", XMFLOAT2(278, 250), Colors::MediumPurple); break;
-		case 2: spriteFontNormal->DrawString(spriteBatch, L"view credits", XMFLOAT2(270, 300), Colors::MediumPurple); break;
-		case 3: spriteFontNormal->DrawString(spriteBatch, L"quit game", XMFLOAT2(297, 350), Colors::MediumPurple); break;
+		case 0: spriteFontNormal->DrawString(spriteBatch, L"start game", XMFLOAT2(280, 200), Colors::Purple); break;
+		case 1: spriteFontNormal->DrawString(spriteBatch, L"how to play", XMFLOAT2(278, 250), Colors::Purple); break;
+		case 2: spriteFontNormal->DrawString(spriteBatch, L"view credits", XMFLOAT2(270, 300), Colors::Purple); break;
+		case 3: spriteFontNormal->DrawString(spriteBatch, L"quit game", XMFLOAT2(297, 350), Colors::Purple); break;
 		}
 
 		spriteBatch->End();

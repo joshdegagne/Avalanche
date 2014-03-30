@@ -93,6 +93,7 @@ void MenuManager::update(float elapsedTime)
 
 				UP_FLAG = true;
 				menuOrderStack.top()->scrollUp();
+				game->getAudioManager()->playRollSound();
 			}
 		}
 		else
@@ -107,6 +108,7 @@ void MenuManager::update(float elapsedTime)
 
 				DOWN_FLAG = true;
 				menuOrderStack.top()->scrollDown();
+				game->getAudioManager()->playRollSound();
 			}
 		}
 		else
@@ -124,6 +126,7 @@ void MenuManager::update(float elapsedTime)
 
 				CONFIRM_FLAG = true;
 				menuOrderStack.top()->confirmSelection();
+				game->getAudioManager()->playJumpSound();
 			}
 		}
 		else
@@ -140,17 +143,21 @@ void MenuManager::update(float elapsedTime)
 
 				if (menuOrderStack.top() != mainMenu)
 				{
+					// Fix for game state freeze if B is pressed at results
 					if  (menuOrderStack.top() == resultsMenu)
 					{
 						removeCurrentMenu();
 						addMainMenu();
 					}
+					// 
 					else if (menuOrderStack.top() == pauseMenu)
 					{
 						sendUnPauseSignal();
 					}
 					else
 						removeCurrentMenu();
+					
+					game->getAudioManager()->playInjuredSound();
 				}
 			}
 		}
@@ -173,6 +180,7 @@ void MenuManager::update(float elapsedTime)
 
 					UP_FLAG = true;
 					menuOrderStack.top()->scrollUp();
+					game->getAudioManager()->playRollSound();
 				}
 			}
 			else
@@ -186,6 +194,7 @@ void MenuManager::update(float elapsedTime)
 
 					DOWN_FLAG = true;
 					menuOrderStack.top()->scrollDown();
+					game->getAudioManager()->playRollSound();
 				}
 			}
 			else
@@ -199,6 +208,7 @@ void MenuManager::update(float elapsedTime)
 
 					CONFIRM_FLAG = true;
 					menuOrderStack.top()->confirmSelection();
+					game->getAudioManager()->playJumpSound();
 				}
 			}
 			else
@@ -258,6 +268,8 @@ void MenuManager::addPauseMenu(int requestPlayerNumber)
 	pauseMenu->setPausedPlayer(requestPlayerNumber);
 
 	addMenu(pauseMenu);
+
+	game->getAudioManager()->playRollSound();
 }
 void MenuManager::addResultsMenu(std::vector<bool> s)
 {
@@ -265,6 +277,7 @@ void MenuManager::addResultsMenu(std::vector<bool> s)
 		writeTextToConsole(L"RESULTS MENU ADDED");
 
 	resultsMenu->setSurvivors(s);
+
 	addMenu(resultsMenu);
 }
 void MenuManager::addControlsMenu()

@@ -393,26 +393,41 @@ void AudioManager::onStateStart(PlayerState& state)
 	if (state.getStateType() == PlayerStateType::PST_JUMP)
 	{
 		if (AUDIO_DEBUG) writeTextToConsole(L"Jump!");
+
+		playJumpSound();
+
+		/*
 		IDirectSoundBuffer8* jumpSound;
 		LoadWaveFile(jumpSoundPath->c_str(), &jumpSound);
 		jumpSounds->add(jumpSound);
 		PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-1500);
+		*/
 	}
 	else if (state.getStateType() == PlayerStateType::PST_ROLL)
 	{
 		if (AUDIO_DEBUG) writeTextToConsole(L"Roll!");
+
+		playRollSound();
+
+		/*
 		IDirectSoundBuffer8* rollSound;
 		LoadWaveFile(rollSoundPath->c_str(), &rollSound);
 		rollSounds->add(rollSound);
 		PlayWave(rollSounds->elementAt(rollSounds->size()-1),-1500);
+		*/
 	}
 	else if (state.getStateType() == PlayerStateType::PST_INJURED)
 	{
 		if (AUDIO_DEBUG) writeTextToConsole(L"Injured!");
+
+		playInjuredSound();
+
+		/*
 		IDirectSoundBuffer8* injuredSound;
 		LoadWaveFile(injuredSoundPath->c_str(), &injuredSound);
 		injuredSounds->add(injuredSound);
 		PlayWave(injuredSounds->elementAt(injuredSounds->size()-1),-1100);
+		*/
 	}
 }
 
@@ -430,4 +445,32 @@ void AudioManager::onStateEnd(PlayerState& state)
 	{
 
 	}
+}
+
+// Functions below initially made for menus
+// Cut and pasted from the state functions you made
+
+void AudioManager::playRollSound()
+{		
+	IDirectSoundBuffer8* rollSound;
+	LoadWaveFile(rollSoundPath->c_str(), &rollSound);
+	rollSounds->add(rollSound);
+	PlayWave(rollSounds->elementAt(rollSounds->size()-1),-1500);
+
+}
+
+void AudioManager::playInjuredSound()
+{
+	IDirectSoundBuffer8* injuredSound;
+	LoadWaveFile(injuredSoundPath->c_str(), &injuredSound);
+	injuredSounds->add(injuredSound);
+	PlayWave(injuredSounds->elementAt(injuredSounds->size()-1),-1100);
+}
+
+void AudioManager::playJumpSound()
+{
+	IDirectSoundBuffer8* jumpSound;
+	LoadWaveFile(jumpSoundPath->c_str(), &jumpSound);
+	jumpSounds->add(jumpSound);
+	PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-1500);
 }
