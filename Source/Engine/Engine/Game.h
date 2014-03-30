@@ -61,6 +61,7 @@ class Game
 		Graphics*				  getGraphics()				{ return graphics; }
 
 		ArrayList<Player>* GetPlayers();
+		bool isPaused() { return PAUSE_FLAG; }
 
 		LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -99,7 +100,6 @@ class Game
 		ArrayList<IViewModel>*	gameModels; //container to hold all our game world models - change to be in modelmanager class?
 
 		bool PAUSE_FLAG, END_PROGRAM_FLAG;
-		bool isPaused() { return PAUSE_FLAG; }
 
 
 

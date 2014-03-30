@@ -11,6 +11,7 @@ PauseMenu::PauseMenu(MenuManager* menuMan, bool activity)
 	selection = 0;
 	numSelections = 3;
 	entityType = EntityType::MENU;
+	pausedPlayer = 0;
 }
 
 void PauseMenu::confirmSelection()
@@ -25,3 +26,6 @@ void PauseMenu::confirmSelection()
 			break;
 	}
 }
+
+int PauseMenu::getPausedPlayer() { return pausedPlayer; }
+void PauseMenu::setPausedPlayer(int p) { pausedPlayer = p; }

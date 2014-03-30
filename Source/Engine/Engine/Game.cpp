@@ -343,14 +343,17 @@ bool Game::Frame()
 	{
 		playfield->update(time);
 		textureManager->update(time);
+		result = graphics->Render(gameModels);
 	}
 	
 	menuManager->update(time); //Will not do anything if no menu is present
 
-	// Do the frame processing for the graphics object.
-	result = graphics->Render(gameModels);
-
-
+	//if (!playfield || !PAUSE_FLAG)
+	//{
+		
+		// Do the frame processing for the graphics object.
+		//result = graphics->Render(gameModels);
+	//}
 
 	//getContext()->ClearRenderTargetView(graphics.getD3D()->getRenderTargetView(), Colors::White);
 	getContext()->ClearRenderTargetView(graphics->getD3D()->getRenderTargetView(), Colors::White);
@@ -367,10 +370,10 @@ bool Game::Frame()
 	//MainMenuViewModel* mainMenuViewModel = new MainMenuViewModel(*this);
 	//mainMenuViewModel->RenderEntity(getContext(), nullptr, nullptr, nullptr, nullptr, menuManager->mainMenu);
 
-
+	/*
 	if(!result)
 		return false;
-
+	*/
 	return true;
 }
 
@@ -408,6 +411,12 @@ void Game::HandleEndGameSignal(int numPlayers)
 
 	// For showing survivors in results
 	std::vector<bool> survivors(numPlayers);
+	/*
+	if (numPlayers > 0)
+	{
+		menuManager->addResultsMenu(survivors);
+	}*/
+
 
 	//////////////////////////
 	for (int i = 0; i < numPlayers; ++i)
@@ -435,6 +444,7 @@ void Game::HandleEndGameSignal(int numPlayers)
 
 	PAUSE_FLAG = false;
 }
+
 void Game::HandleEndProgramSignal()
 {
 	END_PROGRAM_FLAG = true;

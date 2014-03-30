@@ -113,6 +113,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="PauseMenuView.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBumpState.cpp" />
     <ClCompile Include="PlayerInjuredState.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="KeyInput.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="PauseMenuView.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBumpState.h" />
     <ClInclude Include="PlayerInjuredState.h" />

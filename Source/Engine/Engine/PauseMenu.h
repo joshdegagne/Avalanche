@@ -12,4 +12,8 @@ class PauseMenu : public Menu
 public:
 	PauseMenu(MenuManager*, bool = false);
 	void confirmSelection();
+	int getPausedPlayer();
+	void setPausedPlayer(int);
+private:
+	int pausedPlayer;
 };

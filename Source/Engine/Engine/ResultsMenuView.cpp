@@ -35,7 +35,7 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 		int x2 = 180;
 
 
-		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"game over", XMFLOAT2(295, 150), Colors::Purple);
+		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"GAME OVER", XMFLOAT2(295, 150), Colors::Purple);
 
 
 		// terribly hardcoded for the final presentation, i'm sorry
@@ -46,7 +46,7 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 				if(menu->getSurvivors()[i])
 					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1 survived!", XMFLOAT2(x, 213), Colors::DarkRed);
 				else
-					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1 went missing", XMFLOAT2(x2, 213), Colors::Silver);
+					game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"player 1  went missing", XMFLOAT2(x2, 213), Colors::Silver);
 			}
 			else if (i == 1)
 			{
@@ -81,9 +81,11 @@ bool ResultsMenuView::Draw(ResultsMenu* menu)
 
 ResultsMenuView::~ResultsMenuView()
 {
+	/*
 	if (game)
 	{
 		delete game;
 		game = 0;
 	}
+	*/
 }

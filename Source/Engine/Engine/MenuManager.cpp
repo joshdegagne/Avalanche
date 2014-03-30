@@ -13,6 +13,7 @@
 #include "MainMenuView.h"
 #include "PlayerSelectMenuView.h"
 #include "ResultsMenuView.h"
+#include "PauseMenuView.h"
 #include <vector>
 
 #include "DebugDefinitions.h"
@@ -24,6 +25,13 @@ MenuManager::~MenuManager()
 	delete pauseMenu;
 	delete controlsMenu;
 	delete creditsMenu;
+	/*
+	delete mainMenuView;
+	delete playerSelectView;
+	if (resultsView)
+		delete resultsView;	
+	delete pauseView;
+	*/
 }
 
 bool MenuManager::initialize(Game& g)
@@ -40,6 +48,7 @@ bool MenuManager::initialize(Game& g)
 	mainMenuView	 = new MainMenuView(g);
 	playerSelectView = new PlayerSelectMenuView(g);
 	resultsView		 = new ResultsMenuView(g);
+	pauseView		 = new PauseMenuView(g);
 
 
 	//game->getModelManager()->add(*mainMenu);
@@ -124,8 +133,21 @@ void MenuManager::update(float elapsedTime)
 					writeTextToConsole(L"CLOSE!");
 
 				CLOSE_FLAG = true;
+
 				if (menuOrderStack.top() != mainMenu)
-					removeCurrentMenu();
+				{
+					if  (menuOrderStack.top() == resultsMenu)
+					{
+						removeCurrentMenu();
+						addMainMenu();
+					}
+					else if (menuOrderStack.top() == pauseMenu)
+					{
+						sendUnPauseSignal();
+					}
+					else
+						removeCurrentMenu();
+				}
 			}
 		}
 		else
@@ -228,6 +250,9 @@ void MenuManager::addPauseMenu(int requestPlayerNumber)
 		writeLabelToConsole(L"PAUSE MENU ADDED FOR PLAYER ", requestPlayerNumber);
 
 	controlPlayer = requestPlayerNumber;
+
+	pauseMenu->setPausedPlayer(requestPlayerNumber);
+
 	addMenu(pauseMenu);
 }
 void MenuManager::addResultsMenu(std::vector<bool> s)
@@ -270,7 +295,21 @@ void MenuManager::sendStartGameSignal(int numPlayers)
 }
 void MenuManager::sendEndGameSignal()
 {
+	bool wasPaused = false;
+
+	if (game->isPaused())
+		wasPaused = true;
+
 	game->HandleEndGameSignal(0);
+
+	if (wasPaused)
+	{
+		removeCurrentMenu();
+		addMainMenu();
+	}
+
+	// from pause
+	//if (menuOrderStack.top()
 }
 void MenuManager::sendEndProgramSignal()
 {
@@ -288,6 +327,7 @@ void MenuManager::draw(Game& g)
 	mainMenuView->Draw(mainMenu);
 	playerSelectView->Draw(playerSelectMenu);
 	resultsView->Draw(resultsMenu);
+	pauseView->Draw(pauseMenu);
 
 
 	//g.getGraphics()->getD3D()->getSwapChain()->Present(0,0);
