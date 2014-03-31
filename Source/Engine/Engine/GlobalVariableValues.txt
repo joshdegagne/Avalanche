@@ -2,11 +2,13 @@ GLOBAL VARIABLE LIST (ORDER MATTERS):
 Use surrounding tildes to denote a value you wish to store.
 
 //Valid values: ON, OFF, any float value
-[NAME]			    [VALUE]     DEFAULT
+[NAME]			           [VALUE]     DEFAULT
+DEBUG_CONSOLE               ~OFF~		OFF
+
 COLLISION_DEBUG             ~OFF~       OFF
 STATE_DEBUG                 ~OFF~       OFF
 AUDIO_DEBUG                 ~OFF~       OFF
-MENU_DEBUG                  ~ON~        OFF
+MENU_DEBUG                  ~OFF~       OFF
 PLAYER_DRAG                 ~ON~        ON
 PLAYER_COLLIDE_OBSTACLE	    ~ON~        ON
 PLAYER_NUMBER_OVERRIDE      ~OFF~       OFF (2.0f, 3.0f, 4.0f also valid)
@@ -19,7 +21,7 @@ OBSTACLE_SPAWN_RATE         ~1.0f~      1.0f
 GAME_PLAY_LENGTH            ~60.0f~     # secs
 GAME_END_ANIMATION_LENGTH   ~5.0f~      # secs
 
-PS_REGULAR_DURATION         ~-1.0f~	-1.0f
+PS_REGULAR_DURATION         ~-1.0f~	    -1.0f
 PS_INJURED_DURATION         ~800.0f~    800.0f
 PS_JUMP_DURATION            ~600.0f~    600.0f
 PS_JUMP_HEIGHT	            ~2.0f~      2.0f

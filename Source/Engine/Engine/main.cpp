@@ -50,9 +50,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	 There is also a wWinMain(...) version with the same arguments that passes unicode characters for
 	 the pScmdline argument rather than ANSI as WinMain does
 	*/
-
-	AllocConsole();
+	
 	setAllGlobalVars();
+	if (DEBUG_CONSOLE)
+		AllocConsole();
 
 	Game* game; //system class encapsulates our overall app
 	bool result;

@@ -8,6 +8,8 @@
 #include <string>
 using namespace std;
 
+float DEBUG_CONSOLE;			//Shows debug side-car when on
+
 float COLLISION_DEBUG;			//Shows bounding boxes when on
 float STATE_DEBUG;				//Prints state info when on
 float AUDIO_DEBUG;              //Prints audio info when on
@@ -46,21 +48,13 @@ float getNextFloat(ifstream& in)
 	string readline;
 	in.ignore(256, TILDE); 
 	getline(in, readline, TILDECHAR);
+
 	if (readline == "OFF")
-	{
-		writeStringToConsole(readline);
 		return 0.0f;
-	}
 	else if (readline == "ON")
-	{
-		writeStringToConsole(readline);
 		return 1.0f;
-	}
 	else
-	{
-		writeNumToConsole(stof(readline));
 		return stof(readline);
-	}
 }
 
 void setAllGlobalVars()
@@ -68,6 +62,8 @@ void setAllGlobalVars()
 	ifstream varValueFile("GlobalVariableValues.txt");
 	if (varValueFile.is_open())
 	{
+		DEBUG_CONSOLE			= getNextFloat(varValueFile);
+
 		COLLISION_DEBUG			= getNextFloat(varValueFile);
 		STATE_DEBUG				= getNextFloat(varValueFile);
 		AUDIO_DEBUG				= getNextFloat(varValueFile);
