@@ -25,14 +25,17 @@ MenuManager::~MenuManager()
 	delete mainMenu;
 	delete playerSelectMenu;
 	delete pauseMenu;
+	delete resultsMenu;
 	delete controlsMenu;
 	delete creditsMenu;
+
 	/*
 	delete mainMenuView;
 	delete playerSelectView;
-	if (resultsView)
-		delete resultsView;	
 	delete pauseView;
+	delete resultsView;
+	delete controlsView;
+	delete creditsView;	
 	*/
 }
 
@@ -49,17 +52,11 @@ bool MenuManager::initialize(Game& g)
 
 	mainMenuView	 = new MainMenuView(g);
 	playerSelectView = new PlayerSelectMenuView(g);
-	resultsView		 = new ResultsMenuView(g);
 	pauseView		 = new PauseMenuView(g);
+	resultsView		 = new ResultsMenuView(g);
 	controlsView	 = new ControlsMenuView(g);
 	creditsView		 = new CreditsMenuView(g);
-
-
-	//game->getModelManager()->add(*mainMenu);
-	//game->getModelManager()->add(*pauseMenu);
-	//game->getModelManager()->add(*controlsMenu);
-	//game->getModelManager()->add(*creditsMenu);
-
+	
 	controlPlayer = 0;
 	UP_FLAG = DOWN_FLAG = CONFIRM_FLAG = CLOSE_FLAG = false;
 
