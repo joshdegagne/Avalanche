@@ -27,64 +27,47 @@ bool PlayerSelectMenuView::Draw(PlayerSelectMenu* menu)
 		spriteBatch->Begin();
 
 		
+		// From the original 800x600 positions to 1366x768
+		// Can be refactored to use inheritance and be dynamic to whatever the screen dimensions are
+		float resolutionWidthOffset = 283.0f;
+		float resolutionHeightOffset = 84.0f;
 		
 		game->getGraphics()->getSpriteFontBig()->DrawString(game->getGraphics()->getSpriteBatch(), L"AVALANCHE", XMFLOAT2(MENU_TITLE_X, MENU_TITLE_Y), Colors::Purple); // 75?
 
 		//game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"players", XMFLOAT2(315, 155), Colors::Purple);
-		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"PLAYERS", XMFLOAT2(315, 153), Colors::Purple);
+		game->getGraphics()->getSpriteFontNormal()->DrawString(spriteBatch, L"PLAYERS", XMFLOAT2(315.0f + resolutionWidthOffset, 153.0f + resolutionHeightOffset), Colors::Purple);
 
 		//spriteFontBig->DrawString(spriteBatch, L"1", XMFLOAT2(373, 200), Colors::Silver);
 
 
-		spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(372, 210), Colors::Silver);
-		spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(372, 270), Colors::Silver);
-		spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(372, 330), Colors::Silver);
+		spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(372.0f + resolutionWidthOffset, 210.0f + resolutionHeightOffset), Colors::Silver);
+		spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(372.0f + resolutionWidthOffset, 270.0f + resolutionHeightOffset), Colors::Silver);
+		spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(372.0f + resolutionWidthOffset, 330.0f + resolutionHeightOffset), Colors::Silver);
 
-		spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(25, 450), Colors::DarkRed);
-		spriteFontBig->DrawString(spriteBatch, L"1", XMFLOAT2(70, 500), Colors::DarkRed);
-
-		switch(menu->getCurrentSelection())
-		{
-		case 0: spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(372, 210), Colors::Purple); 
-				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(225, 450), Colors::DarkSlateBlue);
-				spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(270, 500), Colors::DarkSlateBlue);
-				break;
-		case 1: spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(372, 270), Colors::Purple); 
-				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(225, 450), Colors::DarkSlateBlue);
-				spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(270, 500), Colors::DarkSlateBlue);
-				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(425, 450), Colors::DarkOliveGreen);
-				spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(470, 500), Colors::DarkOliveGreen);
-				break;
-		case 2: spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(372, 330), Colors::Purple); 
-				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(225, 450), Colors::DarkSlateBlue);
-				spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(270, 500), Colors::DarkSlateBlue);
-				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(425, 450), Colors::DarkOliveGreen);
-				spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(470, 500), Colors::DarkOliveGreen);
-				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(625, 450), Colors::Purple);
-				spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(670, 500), Colors::Purple);
-				break;
-		}
-
-
-		/*
-		game->getGraphics()->getSpriteFontNormal()->DrawString(game->getGraphics()->getSpriteBatch(), L"start game", XMFLOAT2(275, 200), Colors::Silver);
-		game->getGraphics()->getSpriteFontNormal()(game->getGraphics()->getSpriteBatch(), L"view controls", XMFLOAT2(255, 250), Colors::Silver);
-		game->getGraphics()->getSpriteFontNormal()(game->getGraphics()->getSpriteBatch(), L"view credits", XMFLOAT2(270, 300), Colors::Silver);
-		game->getGraphics()->getSpriteFontNormal()(game->getGraphics()->getSpriteBatch(), L"quit game", XMFLOAT2(293, 350), Colors::Silver);
-		*/
-		/*
-
-		//menu->getCurrentSelection();
+		spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(25.0f + resolutionWidthOffset, 450.0f + resolutionHeightOffset), Colors::DarkRed);
+		spriteFontBig->DrawString(spriteBatch, L"1", XMFLOAT2(70.0f + resolutionWidthOffset, 500.0f + resolutionHeightOffset), Colors::DarkRed);
 
 		switch(menu->getCurrentSelection())
 		{
-		case 0: font->DrawString(sprites, L"start game", XMFLOAT2(275, 200), Colors::Purple); break;
-		case 1: font->DrawString(sprites, L"view controls", XMFLOAT2(255, 250), Colors::Purple); break;
-		case 2: font->DrawString(sprites, L"view credits", XMFLOAT2(270, 300), Colors::Purple); break;
-		case 3: font->DrawString(sprites, L"quit game", XMFLOAT2(293, 350), Colors::Purple); break;
+		case 0: spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(372.0f + resolutionWidthOffset, 210.0f + resolutionHeightOffset), Colors::Purple); 
+				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(225.0f + resolutionWidthOffset, 450.0f + resolutionHeightOffset), Colors::DarkSlateBlue);
+				spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(270.0f + resolutionWidthOffset, 500.0f + resolutionHeightOffset), Colors::DarkSlateBlue);
+				break;
+		case 1: spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(372.0f + resolutionWidthOffset, 270.0f + resolutionHeightOffset), Colors::Purple); 
+				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(225.0f + resolutionWidthOffset, 450.0f + resolutionHeightOffset), Colors::DarkSlateBlue);
+				spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(270.0f + resolutionWidthOffset, 500.0f + resolutionHeightOffset), Colors::DarkSlateBlue);
+				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(425.0f + resolutionWidthOffset, 450.0f + resolutionHeightOffset), Colors::DarkOliveGreen);
+				spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(470.0f + resolutionWidthOffset, 500.0f + resolutionHeightOffset), Colors::DarkOliveGreen);
+				break;
+		case 2: spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(372.0f + resolutionWidthOffset, 330.0f + resolutionHeightOffset), Colors::Purple); 
+				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(225.0f + resolutionWidthOffset, 450.0f + resolutionHeightOffset), Colors::DarkSlateBlue);
+				spriteFontBig->DrawString(spriteBatch, L"2", XMFLOAT2(270.0f + resolutionWidthOffset, 500.0f + resolutionHeightOffset), Colors::DarkSlateBlue);
+				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(425.0f + resolutionWidthOffset, 450.0f + resolutionHeightOffset), Colors::DarkOliveGreen);
+				spriteFontBig->DrawString(spriteBatch, L"3", XMFLOAT2(470.0f + resolutionWidthOffset, 500.0f + resolutionHeightOffset), Colors::DarkOliveGreen);
+				spriteFontNormal->DrawString(spriteBatch, L"player", XMFLOAT2(625.0f + resolutionWidthOffset, 450.0f + resolutionHeightOffset), Colors::Purple);
+				spriteFontBig->DrawString(spriteBatch, L"4", XMFLOAT2(670.0f + resolutionWidthOffset, 500.0f + resolutionHeightOffset), Colors::Purple);
+				break;
 		}
-		*/
-
 
 		spriteBatch->End();
 
