@@ -43,7 +43,7 @@ void SpriteTexture::Shutdown()
 
 ID3D11ShaderResourceView* SpriteTexture::GetTexture()
 {
-	return textures[(int)index];
+	return textures.at((int)index);
 }
 
 void SpriteTexture::update(float elapsed)
@@ -51,7 +51,7 @@ void SpriteTexture::update(float elapsed)
 	// Can change SPRITE_UPDATE_SPEED via GlobalVariableValues.txt
 	index += elapsed * SPRITE_UPDATE_SPEED; 
 
-	while (index > maxFrame) 
+	while (index >= maxFrame) 
 	{
 		index -= maxFrame;
 	}
