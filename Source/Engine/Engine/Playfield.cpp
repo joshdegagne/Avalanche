@@ -9,6 +9,7 @@
 #include "ViewModel.cpp"
 #include "ModelManager.h"
 #include "ModelManager-inl.h"
+#include "AudioManager.h"
 ////////////////////////
 
 
@@ -43,6 +44,7 @@ void Playfield::initialize(Game* g, int numPlayers)
 {
 	game = g;
 	collisionManager = game->getCollisionManager();
+	audioManager     = game->getAudioManager();
 
 	playTimer.initialize(GAME_PLAY_LENGTH * 1000.0f, this);
 	endTimer.initialize(GAME_END_ANIMATION_LENGTH * 1000.0f, this);
@@ -260,6 +262,7 @@ void Playfield::checkPlayerBounds(Player* player)
 	else if (position.x - player->getBound()->getDimensions()->x <= 0)
 	{
 		kill(player);
+		audioManager->playDeathSound();
 	}
 	
 	

@@ -47,6 +47,7 @@ class Playfield : public ITimedObject
 		ObstacleBag*			obstacleBag;
 
 		CollisionManager*		collisionManager;
+		AudioManager*           audioManager;
 
 		float scrollAmount;
 

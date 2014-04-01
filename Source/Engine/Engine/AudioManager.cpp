@@ -8,12 +8,14 @@ AudioManager::AudioManager()
 {
 	directSound = 0;
 	primaryBuffer = 0;
-	jumpSoundPath = new string;
-	rollSoundPath = new string;
+	jumpSoundPath    = new string;
+	rollSoundPath    = new string;
 	injuredSoundPath = new string;
-	jumpSounds = new ArrayList<IDirectSoundBuffer8>;
-	rollSounds = new ArrayList<IDirectSoundBuffer8>;
+	deathSoundPath   = new string;
+	jumpSounds    = new ArrayList<IDirectSoundBuffer8>;
+	rollSounds    = new ArrayList<IDirectSoundBuffer8>;
 	injuredSounds = new ArrayList<IDirectSoundBuffer8>;
+	deathSounds   = new ArrayList<IDirectSoundBuffer8>;
 	
 }
  
@@ -25,6 +27,47 @@ AudioManager::AudioManager(const AudioManager& other)
  
 AudioManager::~AudioManager()
 {
+	if (jumpSoundPath)
+	{
+		delete jumpSoundPath;
+		jumpSoundPath = 0;
+	}
+	if (rollSoundPath)
+	{
+		delete rollSoundPath;
+		rollSoundPath = 0;
+	}
+	if (injuredSoundPath)
+	{
+		delete injuredSoundPath;
+		injuredSoundPath = 0;
+	}
+	if (deathSoundPath)
+	{
+		delete deathSoundPath;
+		deathSoundPath = 0;
+	}
+
+	if (jumpSounds)
+	{
+		delete jumpSounds;
+		jumpSounds = 0;
+	}
+	if (rollSounds)
+	{
+		delete rollSounds;
+		rollSoundPath = 0;
+	}
+	if (injuredSounds)
+	{
+		delete injuredSounds;
+		injuredSounds = 0;
+	}
+	if (deathSounds)
+	{
+		delete deathSounds;
+		deathSounds = 0;
+	}
 }
  
  
@@ -49,6 +92,7 @@ bool AudioManager::initialize(HWND hwnd)
 	*jumpSoundPath    = "audio/tempjump.wav";
 	*rollSoundPath    = "audio/roll.wav";
 	*injuredSoundPath = "audio/hit.wav";
+	*deathSoundPath   = "audio/wawawa.wav";
      
 	// Load a wave audio file onto a secondary buffer.
 	result = LoadWaveFile("audio/Avalanche.wav", &song01);
@@ -318,6 +362,52 @@ void AudioManager::ShutdownWaveFile(IDirectSoundBuffer8** secondaryBuffer)
 	return;
 }
 
+void AudioManager::update()
+{
+	IDirectSoundBuffer8* temp;
+	DWORD status;
+	for (int i = 0; i < jumpSounds->size(); i++)
+	{
+		jumpSounds->elementAt(i)->GetStatus(&status);
+		if (!(status & DSBSTATUS_PLAYING))
+		{
+			temp = jumpSounds->elementAt(i);
+			jumpSounds->remove(temp);
+			//delete temp;
+		}
+	}
+	for (int i = 0; i < rollSounds->size(); i++)
+	{
+		rollSounds->elementAt(i)->GetStatus(&status);
+		if (!(status & DSBSTATUS_PLAYING))
+		{
+			temp = rollSounds->elementAt(i);
+			rollSounds->remove(temp);
+			//delete temp;
+		}
+	}
+	for (int i = 0; i < injuredSounds->size(); i++)
+	{
+		injuredSounds->elementAt(i)->GetStatus(&status);
+		if (!(status & DSBSTATUS_PLAYING))
+		{
+			temp = injuredSounds->elementAt(i);
+			injuredSounds->remove(temp);
+			//delete temp;
+		}
+	}
+	for (int i = 0; i < deathSounds->size(); i++)
+	{
+		deathSounds->elementAt(i)->GetStatus(&status);
+		if (!(status & DSBSTATUS_PLAYING))
+		{
+			temp = deathSounds->elementAt(i);
+			deathSounds->remove(temp);
+			//delete temp;
+		}
+	}
+}
+
 bool AudioManager::PlaySong01()
 {
 	HRESULT result;
@@ -473,4 +563,12 @@ void AudioManager::playJumpSound()
 	LoadWaveFile(jumpSoundPath->c_str(), &jumpSound);
 	jumpSounds->add(jumpSound);
 	PlayWave(jumpSounds->elementAt(jumpSounds->size()-1),-1500);
+}
+
+void AudioManager::playDeathSound()
+{
+	IDirectSoundBuffer8* deathSound;
+	LoadWaveFile(deathSoundPath->c_str(), &deathSound);
+	deathSounds->add(deathSound);
+	PlayWave(deathSounds->elementAt(deathSounds->size()-1),-1500);
 }

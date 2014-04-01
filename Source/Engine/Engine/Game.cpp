@@ -337,6 +337,8 @@ bool Game::Frame()
 	if (keyInput->IsKeyDown(VK_ESCAPE) || END_PROGRAM_FLAG || conInput->getButtonBack(0))
 		return false;
 
+	audioManager->update();
+
 	float time = getElapsedTime();
 
 	if (playfield && !PAUSE_FLAG)

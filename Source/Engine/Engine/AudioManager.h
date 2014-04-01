@@ -56,6 +56,8 @@ public:
 	bool StopSong01();
 	void Shutdown();
 
+	void update();
+
 	void onStateStart(PlayerState&);
 	void onStateEnd(PlayerState&);
 
@@ -64,6 +66,7 @@ public:
 	void playRollSound();
 	void playInjuredSound();
 	void playJumpSound();
+	void playDeathSound();
 
 private:
 	bool InitializeDirectSound(HWND);
@@ -84,5 +87,6 @@ private:
 	ArrayList<IDirectSoundBuffer8>* rollSounds;
 	string* injuredSoundPath;
 	ArrayList<IDirectSoundBuffer8>* injuredSounds;
-	
+	string* deathSoundPath;
+	ArrayList<IDirectSoundBuffer8>* deathSounds;
 };
