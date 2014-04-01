@@ -254,6 +254,7 @@ bool Graphics::Render(ArrayList<IViewModel>* viewModels)
 	// Clear the buffers to begin the scene.
 	//d3D->BeginScene(1.0f, 1.0f, 1.0f, 0.5f); //R,G,B,A values for background 
 	d3D->BeginScene(185.0f/255.0f, 215.0f/255.0f, 230.0f/255.0f, 1.0f); //blue?
+	//d3D->BeginScene(100.0f, 30.0f, 100.0f, 0.5f); //R,G,B,A values for background 
 
 	// Generate the view matrix based on the camera's position.
 	camera->Render();

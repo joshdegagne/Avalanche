@@ -45,8 +45,8 @@ bool ControlsMenuView::Draw(ControlsMenu* menu)
 		spriteFontNormal->DrawString(spriteBatch, L"3.", XMFLOAT2(xPos, 313.0f + resolutionHeightOffset), Colors::MediumPurple);
 
 		spriteFontNormal->DrawString(spriteBatch, L"dodge obstacles", XMFLOAT2(xPos + 55.0f, 213.0f + resolutionHeightOffset), Colors::MediumPurple);
-		spriteFontNormal->DrawString(spriteBatch, L"tackle friends", XMFLOAT2(xPos + 55.0f, 263.0f + resolutionHeightOffset), Colors::MediumPurple);
-		spriteFontNormal->DrawString(spriteBatch, L"don't fall behind", XMFLOAT2(xPos + 55.0f, 313.0f + resolutionHeightOffset), Colors::MediumPurple);
+		spriteFontNormal->DrawString(spriteBatch, L"tackle people", XMFLOAT2(xPos + 55.0f, 263.0f + resolutionHeightOffset), Colors::MediumPurple);
+		spriteFontNormal->DrawString(spriteBatch, L"avoid the avalanche", XMFLOAT2(xPos + 55.0f, 313.0f + resolutionHeightOffset), Colors::MediumPurple);
 
 		spriteFontNormal->DrawString(spriteBatch, L"move:", XMFLOAT2(xPos, 380.0f + resolutionHeightOffset), Colors::DarkGreen);
 		spriteFontNormal->DrawString(spriteBatch, L"roll:", XMFLOAT2(xPos, 430.0f + resolutionHeightOffset), Colors::DarkGreen);
