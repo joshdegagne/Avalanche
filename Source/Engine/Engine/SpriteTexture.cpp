@@ -7,7 +7,7 @@
 SpriteTexture::SpriteTexture()
 {
 	index = 0;
-	//frameRate = 0;
+	frameRate = SPRITE_UPDATE_SPEED;
 	maxFrame = 0;
 }
 
@@ -15,7 +15,7 @@ SpriteTexture::SpriteTexture(std::vector<ID3D11ShaderResourceView*> t, float i, 
 {
 	textures = t;
 	index = i;
-	//frameRate = f;
+	frameRate = SPRITE_UPDATE_SPEED;
 	maxFrame = m;
 }
 
@@ -49,7 +49,7 @@ ID3D11ShaderResourceView* SpriteTexture::GetTexture()
 void SpriteTexture::update(float elapsed)
 {
 	// Can change SPRITE_UPDATE_SPEED via GlobalVariableValues.txt
-	index += elapsed * SPRITE_UPDATE_SPEED; 
+	index += elapsed * frameRate; 
 
 	while (index > maxFrame) 
 	{
@@ -58,4 +58,9 @@ void SpriteTexture::update(float elapsed)
 
 	if(index < 0)
 		index = 0;
+}
+
+void SpriteTexture::setFrameRate(float frameRate)
+{
+	this->frameRate = frameRate;
 }

@@ -22,4 +22,8 @@ protected:
 
 	Model*		fieldVertexModel;
 	ITexture*	fieldTexture;
+	Model*		avalancheVertexModel;
+	ITexture*	avalancheTexture;
+	Model*		avalancheSideVertexModel;
+	ITexture*	avalancheSideTexture;
 };

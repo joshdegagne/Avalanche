@@ -27,6 +27,8 @@ public:
 
 	void update(float); 
 
+	void setFrameRate(float);
+
 	ID3D11ShaderResourceView* GetTexture(); // Return current frame - called when rendering the current texture
 
 private:
@@ -34,4 +36,5 @@ private:
 	float index; // Current frame - cast to int
 	//float frameRate; // Unused?
 	int maxFrame; 
+	float frameRate;
 };
