@@ -570,5 +570,5 @@ void AudioManager::playDeathSound()
 	IDirectSoundBuffer8* deathSound;
 	LoadWaveFile(deathSoundPath->c_str(), &deathSound);
 	deathSounds->add(deathSound);
-	PlayWave(deathSounds->elementAt(deathSounds->size()-1),-1500);
+	PlayWave(deathSounds->elementAt(deathSounds->size()-1),-1700);
 }
