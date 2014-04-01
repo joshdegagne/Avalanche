@@ -48,16 +48,16 @@ bool PlayfieldViewModel::InitializeVertexModels(ID3D11Device* device)
 
 	//Quad Face
 	textureVertices[0].position = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	textureVertices[0].texture = XMFLOAT2(0.0f, 0.3f);
+	textureVertices[0].texture = XMFLOAT2(0.0f, 0.4f);
 	
 	textureVertices[1].position = XMFLOAT3(1.0f, 0.0f, 0.0f);
-	textureVertices[1].texture = XMFLOAT2(1.0f, 0.3f);
+	textureVertices[1].texture = XMFLOAT2(1.0f, 0.4f);
 
 	textureVertices[2].position = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	textureVertices[2].texture = XMFLOAT2(0.0f, 0.7f);
+	textureVertices[2].texture = XMFLOAT2(0.0f, 0.6f);
 	
 	textureVertices[3].position = XMFLOAT3(1.0f, 1.0f, 0.0f); 
-	textureVertices[3].texture = XMFLOAT2(1.0f, 0.7f);
+	textureVertices[3].texture = XMFLOAT2(1.0f, 0.6f);
 
 	//Quad Face
 	indices[0] = 0;  // Top left.
