@@ -1,6 +1,8 @@
 //Helper header for all debug statements. Comment out any you do not wish to use!
 #pragma once
 
+extern float DEBUG_CONSOLE;				//Shows debug side-car when on
+
 extern float COLLISION_DEBUG;			//Shows bounding boxes when on
 extern float STATE_DEBUG;				//Prints state info when on
 extern float AUDIO_DEBUG;               //Prints audio info when on
