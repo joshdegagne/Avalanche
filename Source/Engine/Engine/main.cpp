@@ -2,6 +2,7 @@
 // Filename: main.cpp
 ////////////////////////////////////////////////////////////////////////////////
 
+/*
 //Memory leak checkers//////
 #define DEBUG //Comment this to remove memory leak output
 
@@ -11,6 +12,7 @@
 #include <crtdbg.h>
 #endif
 ///////////////////////////
+*/
 
 #include <iostream>
 #include "GlobalDebugInitialization.h"
